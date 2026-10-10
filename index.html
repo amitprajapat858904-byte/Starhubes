@@ -1,41 +1,140 @@
+```html
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Hub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #eaf2ff;
-            padding: 40px 15px;
-        }
-        .box {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            margin: auto;
-        }
-        h1 { color: #155eef; }
-        button {
-            background: #155eef;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarHub - All in One</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #172554;
+}
+header {
+    background: linear-gradient(135deg, #142b70, #087de1);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+header p {
+    margin-bottom: 0;
+}
+.search {
+    width: 90%;
+    max-width: 600px;
+    padding: 13px;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid #cbd5e1;
+    border-radius: 25px;
+    font-size: 16px;
+}
+h2 {
+    text-align: center;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    max-width: 1100px;
+    margin: auto;
+}
+.card {
+    background: white;
+    padding: 22px 10px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px #00000012;
+    text-decoration: none;
+    color: #172554;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.card:hover {
+    background: #dbeafe;
+    transform: translateY(-3px);
+}
+.icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 10px;
+}
+footer {
+    background: #142b70;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 25px;
+}
+</style>
 </head>
+
 <body>
-    <div class="box">
-        <h1>Welcome to Star Hub!</h1>
-        <p>यह मेरी पहली वेबसाइट है।</p>
-        <button onclick="alert('Welcome to Star Hub!')">
-            Click Here
-        </button>
-    </div>
+
+<header>
+    <h1>🌐 StarHub</h1>
+    <p>Education • Jobs • News • Shopping • AI</p>
+</header>
+
+<input
+    type="search"
+    class="search"
+    id="search"
+    placeholder="अपनी सुविधा खोजें..."
+    oninput="searchCards()"
+>
+
+<h2>⭐ सभी सुविधाएँ</h2>
+
+<div class="container" id="cards">
+
+<a class="card" href="#education"><span class="icon">📚</span>Education</a>
+<a class="card" href="#test"><span class="icon">📝</span>Online Test</a>
+<a class="card" href="#pdf"><span class="icon">📄</span>PDF Download</a>
+<a class="card" href="#news"><span class="icon">📰</span>News</a>
+<a class="card" href="#games"><span class="icon">🎮</span>Games</a>
+<a class="card" href="#token"><span class="icon">🌾</span>अनाज टोकन</a>
+<a class="card" href="#exam"><span class="icon">🏛️</span>Government Exam</a>
+<a class="card" href="#forms"><span class="icon">📋</span>Exam Forms</a>
+<a class="card" href="#privatejobs"><span class="icon">🏢</span>Private Jobs</a>
+<a class="card" href="#onlinejobs"><span class="icon">💼</span>Online Jobs</a>
+<a class="card" href="#books"><span class="icon">📖</span>Books</a>
+<a class="card" href="#ai"><span class="icon">🤖</span>AI Assistant</a>
+<a class="card" href="#shopping"><span class="icon">🛍️</span>Online Shopping</a>
+<a class="card" href="#app"><span class="icon">📲</span>Download App</a>
+
+</div>
+
+<footer>
+    <p>© 2026 StarHub | All Rights Reserved</p>
+    <p>Education • Career • Technology</p>
+</footer>
+
+<script>
+function searchCards() {
+    const query = document.getElementById("search").value.toLowerCase();
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        card.style.display =
+            card.innerText.toLowerCase().includes(query)
+            ? ""
+            : "none";
+    });
+}
+</script>
+
 </body>
 </html>
+```
