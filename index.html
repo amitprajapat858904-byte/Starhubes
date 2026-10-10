@@ -3,458 +3,796 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHub - All in One</title>
+<title>StarHub - All Subjects Learning</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
-header{background:linear-gradient(120deg,#10245c,#087de1);color:white;text-align:center;padding:25px 12px}
-header h1{font-size:36px;margin:0}
-.toolbar{background:white;padding:12px;text-align:center}
-input,select,button{padding:11px;margin:5px;border-radius:8px;border:1px solid #ccc;font-size:15px}
-button{background:#123a8a;color:white;cursor:pointer;border:0}
-#search{width:min(90%,450px)}
-main{max-width:1000px;margin:auto;padding:15px}
-.panel{background:white;padding:18px;margin:15px 0;border-radius:13px;box-shadow:0 2px 8px #0001}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-.card{background:white;border:1px solid #ddd;padding:18px 8px;text-align:center;border-radius:12px;text-decoration:none;color:#172033;display:block}
-.card span{font-size:30px;display:block;margin-bottom:8px}
-.card:hover{background:#e2edff}
-.status{background:#f0f5ff;padding:12px;border-radius:8px;overflow-wrap:anywhere}
-footer{background:#10245c;color:white;text-align:center;padding:22px}
-.note{font-size:13px;color:#667085;line-height:1.6}
-.hidden{display:none!important}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, "Noto Sans Devanagari", sans-serif;
+    background: #f1f5f9;
+    color: #172033;
+}
+
+header {
+    background: linear-gradient(120deg, #172554, #2563eb);
+    color: white;
+    text-align: center;
+    padding: 25px 12px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+}
+
+header p {
+    margin: 5px;
+}
+
+nav {
+    background: #0f172a;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 7px;
+    display: inline-block;
+}
+
+.container {
+    width: 94%;
+    max-width: 1100px;
+    margin: 22px auto;
+}
+
+.panel, .card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px #0000000c;
+}
+
+h2 {
+    color: #1d4ed8;
+}
+
+input, select, button {
+    font: inherit;
+    padding: 11px;
+    border-radius: 7px;
+    border: 1px solid #cbd5e1;
+    margin: 5px 0;
+}
+
+input, select {
+    max-width: 100%;
+}
+
+.search {
+    width: 100%;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 13px;
+}
+
+.subject-card {
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.subject-card h3 {
+    margin-top: 0;
+    color: #1d4ed8;
+}
+
+.small {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.option {
+    display: block;
+    background: #f8fafc;
+    color: #172033;
+    border: 1px solid #cbd5e1;
+    width: 100%;
+    text-align: left;
+    margin: 9px 0;
+}
+
+.option:hover {
+    background: #dbeafe;
+    color: #172033;
+}
+
+.option.correct {
+    background: #dcfce7;
+    border-color: #16a34a;
+}
+
+.option.wrong {
+    background: #fee2e2;
+    border-color: #dc2626;
+}
+
+#feedback {
+    padding: 12px 0;
+    line-height: 1.7;
+}
+
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+.hidden {
+    display: none;
+}
+
+.badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 13px;
+    margin: 3px;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        width: 92%;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>🌐 StarHub</h1>
-<p id="tagline">आपकी दुनिया, एक ही जगह!</p>
+    <h1>🌟 StarHub</h1>
+    <p>Learn Anything • Practice Everything</p>
+    <p>स्कूल से प्रतियोगी परीक्षा तक — एक ही जगह</p>
 </header>
 
-<div class="toolbar">
-<label id="languageLabel" for="language">भाषा चुनें:</label>
-<select id="language">
-<option value="auto">🌍 Automatic</option>
-<option value="hi">हिन्दी</option>
-<option value="en">English</option>
-<option value="ta">தமிழ்</option>
-<option value="mr">मराठी</option>
-<option value="bn">বাংলা</option>
-<option value="gu">ગુજરાતી</option>
-<option value="pa">ਪੰਜਾਬੀ</option>
-<option value="te">తెలుగు</option>
-<option value="kn">ಕನ್ನಡ</option>
-<option value="ml">മലയാളം</option>
-<option value="ur">اردو</option>
-<option value="or">ଓଡ଼ିଆ</option>
-<option value="as">অসমীয়া</option>
-<option value="ne">नेपाली</option>
-</select>
-<br>
-<input id="search" placeholder="सेवाएँ खोजें...">
+<nav>
+    <a href="#home">Home</a>
+    <a href="#subjects">Subjects</a>
+    <a href="#test">Online Test</a>
+    <a href="#exams">Exams</a>
+    <a href="#about">About</a>
+</nav>
+
+<div class="container" id="home">
+
+    <section class="panel">
+        <h2>🔎 प्रश्न और विषय खोजें</h2>
+
+        <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="Subject खोजें: Physics, गणित, NEET, GK..."
+            oninput="renderSubjects()">
+
+        <br>
+
+        <label for="level">अपना स्तर चुनें:</label>
+        <select id="level" onchange="renderSubjects()">
+            <option value="all">सभी स्तर</option>
+            <option value="school">कक्षा 1–10</option>
+            <option value="11-12">कक्षा 11–12</option>
+            <option value="college">कॉलेज</option>
+            <option value="medical">NEET</option>
+            <option value="engineering">JEE</option>
+            <option value="government">सरकारी नौकरी</option>
+            <option value="computer">कंप्यूटर और Coding</option>
+        </select>
+
+        <button onclick="resetFilters()">सभी विषय दिखाएँ</button>
+    </section>
+
+    <section class="panel" id="subjects">
+        <h2>📚 सभी विषय</h2>
+        <p class="small">
+            विषय चुनकर उपलब्ध अभ्यास प्रश्न देख सकते हो।
+        </p>
+
+        <div class="grid" id="subjectList"></div>
+    </section>
+
+    <section class="panel" id="test">
+        <h2>📝 Online MCQ Test</h2>
+
+        <p id="selectedSubject">
+            सभी उपलब्ध अभ्यास प्रश्नों का टेस्ट
+        </p>
+
+        <p id="progress">प्रश्न शुरू करने के लिए नीचे क्लिक करो।</p>
+
+        <button onclick="startTest()">टेस्ट शुरू करें</button>
+
+        <div id="quizArea" class="hidden">
+            <h3 id="question"></h3>
+            <div id="options"></div>
+            <div id="feedback"></div>
+            <button id="nextBtn" class="hidden" onclick="nextQuestion()">
+                अगला प्रश्न →
+            </button>
+        </div>
+
+        <div id="result" class="hidden"></div>
+    </section>
+
+    <section class="panel" id="exams">
+        <h2>🎯 प्रतियोगी परीक्षाएँ</h2>
+
+        <div class="grid">
+            <div class="subject-card">
+                <h3>NEET</h3>
+                <p>Physics, Chemistry और Biology के अभ्यास प्रश्न।</p>
+                <button onclick="chooseSubject('NEET')">NEET प्रश्न</button>
+            </div>
+
+            <div class="subject-card">
+                <h3>JEE Main</h3>
+                <p>गणित, Physics और Chemistry का अभ्यास।</p>
+                <button onclick="chooseSubject('JEE')">JEE प्रश्न</button>
+            </div>
+
+            <div class="subject-card">
+                <h3>SSC और रेलवे</h3>
+                <p>GK, Reasoning, गणित और सामान्य विज्ञान।</p>
+                <button onclick="chooseSubject('सरकारी नौकरी')">प्रश्न देखें</button>
+            </div>
+
+            <div class="subject-card">
+                <h3>कंप्यूटर</h3>
+                <p>Computer Fundamentals और Coding।</p>
+                <button onclick="chooseSubject('कंप्यूटर')">कंप्यूटर प्रश्न</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel" id="about">
+        <h2>ℹ️ StarHub के बारे में</h2>
+        <p>
+            StarHub एक शैक्षणिक वेबसाइट का शुरुआती संस्करण है।
+            इसमें कक्षा, विषय और प्रतियोगी परीक्षाओं के अनुसार
+            अभ्यास प्रश्न जोड़े जा सकते हैं।
+        </p>
+
+        <p>
+            अभी वेबसाइट में नमूना प्रश्न दिए गए हैं।
+            सभी किताबों और इंटरनेट पर उपलब्ध प्रश्न इसमें अपने-आप
+            नहीं आते। बड़े प्रश्न-संग्रह के लिए अलग डेटाबेस और
+            वैध शैक्षणिक स्रोत जोड़ने होंगे।
+        </p>
+    </section>
+
 </div>
-
-<main>
-
-<section class="panel">
-<h2 id="newsTitle">📰 AI Voice News</h2>
-<p id="newsPrompt">आप किस जगह की खबरें सुनना चाहते हैं?</p>
-
-<input id="place" placeholder="गाँव, शहर, जिला, राज्य या देश लिखें">
-
-<br>
-<button id="speakButton">🔊 सवाल सुनें</button>
-<button id="listenButton">🎙️ बोलकर जगह बताएँ</button>
-<button id="locationButton">📍 मेरी लोकेशन</button>
-<button id="newsButton">📰 खबरें खोजें</button>
-
-<p id="newsStatus" class="status">
-अपनी जगह लिखें या बोलें। लाइव खबरों के लिए News API जोड़ना बाकी है।
-</p>
-
-<p class="note">
-ध्यान दें: यह शुरुआती वेबसाइट है। असली ताज़ा खबरें दिखाने के लिए News API या RSS सेवा चाहिए।
-</p>
-</section>
-
-<section class="panel">
-<h2 id="servicesTitle">⭐ सभी सेवाएँ</h2>
-
-<div class="grid" id="serviceGrid">
-
-<a class="card" href="#education" data-search="पढ़ाई education">
-<span>📚</span><b data-key="education">पढ़ाई</b>
-</a>
-
-<a class="card" href="#test" data-search="online test neet">
-<span>📝</span><b data-key="test">ऑनलाइन टेस्ट</b>
-</a>
-
-<a class="card" href="#pdf" data-search="pdf books">
-<span>📄</span><b data-key="pdf">PDF और किताबें</b>
-</a>
-
-<a class="card" href="#newsTitle" data-search="news खबरें">
-<span>🌍</span><b data-key="news">दुनिया की खबरें</b>
-</a>
-
-<a class="card" href="#games" data-search="games">
-<span>🎮</span><b data-key="games">गेम्स</b>
-</a>
-
-<a class="card" href="#jobs" data-search="government jobs">
-<span>💼</span><b data-key="jobs">सरकारी नौकरियाँ</b>
-</a>
-
-<a class="card" href="#forms" data-search="exam forms">
-<span>📋</span><b data-key="forms">परीक्षा फॉर्म</b>
-</a>
-
-<a class="card" href="#private" data-search="private online jobs">
-<span>🏢</span><b data-key="private">प्राइवेट जॉब</b>
-</a>
-
-<a class="card" href="#ai" data-search="ai assistant">
-<span>🤖</span><b data-key="ai">AI असिस्टेंट</b>
-</a>
-
-<a class="card" href="#shopping" data-search="shopping">
-<span>🛍️</span><b data-key="shopping">ऑनलाइन शॉपिंग</b>
-</a>
-
-<a class="card" href="#agriculture" data-search="anaj agriculture">
-<span>🌾</span><b data-key="agriculture">अनाज और कृषि</b>
-</a>
-
-<a class="card" href="#downloads" data-search="download app">
-<span>📲</span><b data-key="downloads">ऐप डाउनलोड</b>
-</a>
-
-</div>
-</section>
-
-<section class="panel" id="test">
-<h2>🧪 नमूना ऑनलाइन टेस्ट</h2>
-<p>प्रकाश संश्लेषण मुख्य रूप से पौधे के किस भाग में होता है?</p>
-
-<label><input type="radio" name="answer" value="a"> जड़</label><br>
-<label><input type="radio" name="answer" value="b"> पत्ती</label><br>
-<label><input type="radio" name="answer" value="c"> फूल</label><br>
-
-<button id="checkAnswer">उत्तर जाँचें</button>
-<p id="testResult" class="status"></p>
-</section>
-
-<section class="panel" id="education">
-<h2>📚 पढ़ाई</h2>
-<p>यहाँ NEET और अन्य परीक्षाओं के नोट्स, प्रश्न और उत्तर जोड़े जा सकते हैं।</p>
-</section>
-
-<section class="panel" id="pdf">
-<h2>📄 PDF और किताबें</h2>
-<p>यहाँ साझा करने की अनुमति वाली अध्ययन सामग्री जोड़ी जा सकती है।</p>
-</section>
-
-<section class="panel" id="jobs">
-<h2>💼 सरकारी नौकरियाँ</h2>
-<p>सरकारी भर्ती और आधिकारिक नोटिस की जानकारी यहाँ जोड़ी जा सकती है।</p>
-</section>
-
-<section class="panel" id="forms">
-<h2>📋 परीक्षा फॉर्म</h2>
-<p>परीक्षा फॉर्म और अंतिम तारीखों की जानकारी यहाँ जोड़ी जा सकती है।</p>
-</section>
-
-<section class="panel" id="private">
-<h2>🏢 प्राइवेट और ऑनलाइन जॉब</h2>
-<p>नौकरी की जानकारी प्रकाशित करने से पहले उसकी सत्यता जाँचें।</p>
-</section>
-
-<section class="panel" id="games">
-<h2>🎮 गेम्स</h2>
-<p>यहाँ ब्राउज़र में चलने वाले गेम जोड़े जा सकते हैं।</p>
-</section>
-
-<section class="panel" id="ai">
-<h2>🤖 AI असिस्टेंट</h2>
-<p>वास्तविक AI जोड़ने के लिए सुरक्षित सर्वर और AI सेवा की जरूरत होगी।</p>
-</section>
-
-<section class="panel" id="shopping">
-<h2>🛍️ ऑनलाइन शॉपिंग</h2>
-<p>ऑर्डर, भुगतान और विक्रेता खाते जोड़ने के लिए सुरक्षित सर्वर चाहिए।</p>
-</section>
-
-<section class="panel" id="agriculture">
-<h2>🌾 अनाज और कृषि</h2>
-<p>यहाँ मंडी भाव और कृषि योजनाओं की जानकारी जोड़ी जा सकती है।</p>
-</section>
-
-<section class="panel" id="downloads">
-<h2>📲 ऐप डाउनलोड</h2>
-<p>Android ऐप तैयार होने के बाद उसका डाउनलोड लिंक यहाँ जोड़ें।</p>
-</section>
-
-</main>
 
 <footer>
-<h3>🌐 StarHub</h3>
-<p id="footerText">एक वेबसाइट, अनेक भाषाएँ।</p>
+    <h3>🌟 StarHub</h3>
+    <p>Study • Practice • Improve</p>
+    <p>© StarHub</p>
 </footer>
 
 <script>
-const languages = {
-hi:{
-tagline:"आपकी दुनिया, एक ही जगह!",
-languageLabel:"भाषा चुनें:",
-newsTitle:"📰 AI Voice News",
-newsPrompt:"आप किस जगह की खबरें सुनना चाहते हैं?",
-search:"सेवाएँ खोजें...",
-servicesTitle:"⭐ सभी सेवाएँ",
-education:"पढ़ाई",test:"ऑनलाइन टेस्ट",pdf:"PDF और किताबें",
-news:"दुनिया की खबरें",games:"गेम्स",jobs:"सरकारी नौकरियाँ",
-forms:"परीक्षा फॉर्म",private:"प्राइवेट जॉब",
-ai:"AI असिस्टेंट",shopping:"ऑनलाइन शॉपिंग",
-agriculture:"अनाज और कृषि",downloads:"ऐप डाउनलोड",
-footerText:"एक वेबसाइट, अनेक भाषाएँ।"
+const subjects = [
+    {name:"हिंदी", level:"school", category:"भाषा", icon:"📖"},
+    {name:"English", level:"school", category:"भाषा", icon:"🔤"},
+    {name:"गणित", level:"school", category:"गणित", icon:"➗"},
+    {name:"पर्यावरण अध्ययन", level:"school", category:"EVS", icon:"🌱"},
+    {name:"विज्ञान", level:"school", category:"Science", icon:"🔬"},
+    {name:"Physics", level:"11-12", category:"Science", icon:"⚡"},
+    {name:"Chemistry", level:"11-12", category:"Science", icon:"🧪"},
+    {name:"Biology", level:"11-12", category:"Science", icon:"🧬"},
+    {name:"Mathematics", level:"11-12", category:"गणित", icon:"📐"},
+    {name:"Computer Science", level:"11-12", category:"कंप्यूटर", icon:"💻"},
+    {name:"History", level:"school", category:"Social Science", icon:"🏛️"},
+    {name:"Geography", level:"school", category:"Social Science", icon:"🌍"},
+    {name:"Political Science", level:"11-12", category:"Arts", icon:"⚖️"},
+    {name:"Economics", level:"11-12", category:"Commerce", icon:"📈"},
+    {name:"Accountancy", level:"11-12", category:"Commerce", icon:"🧾"},
+    {name:"Business Studies", level:"11-12", category:"Commerce", icon:"🏢"},
+    {name:"Sociology", level:"college", category:"Arts", icon:"👥"},
+    {name:"Psychology", level:"college", category:"Arts", icon:"🧠"},
+    {name:"NEET", level:"medical", category:"Medical Entrance", icon:"🩺"},
+    {name:"JEE", level:"engineering", category:"Engineering Entrance", icon:"⚙️"},
+    {name:"सामान्य ज्ञान (GK)", level:"government", category:"प्रतियोगी परीक्षा", icon:"🌏"},
+    {name:"Reasoning", level:"government", category:"प्रतियोगी परीक्षा", icon:"🧩"},
+    {name:"हिंदी व्याकरण", level:"government", category:"प्रतियोगी परीक्षा", icon:"✍️"},
+    {name:"English Grammar", level:"government", category:"प्रतियोगी परीक्षा", icon:"📝"},
+    {name:"करंट अफेयर्स", level:"government", category:"प्रतियोगी परीक्षा", icon:"📰"},
+    {name:"Computer Fundamentals", level:"computer", category:"कंप्यूटर", icon:"🖥️"},
+    {name:"Coding", level:"computer", category:"कंप्यूटर", icon:"👨‍💻"}
+];
+
+const questions = [
+{
+subject:"गणित", level:"school",
+q:"12 × 8 का मान कितना है?",
+options:["86","96","108","88"],
+answer:1,
+explanation:"12 × 8 = 96।"
 },
-en:{
-tagline:"Your world, all in one place!",
-languageLabel:"Choose language:",
-newsTitle:"📰 AI Voice News",
-newsPrompt:"Which location's news would you like to hear?",
-search:"Search services...",
-servicesTitle:"⭐ All Services",
-education:"Education",test:"Online Test",pdf:"PDF & Books",
-news:"World News",games:"Games",jobs:"Government Jobs",
-forms:"Exam Forms",private:"Private Jobs",
-ai:"AI Assistant",shopping:"Online Shopping",
-agriculture:"Agriculture",downloads:"Download App",
-footerText:"One website, many languages."
+{
+subject:"गणित", level:"school",
+q:"एक त्रिभुज के तीनों कोणों का योग कितना होता है?",
+options:["90°","180°","270°","360°"],
+answer:1,
+explanation:"किसी समतलीय त्रिभुज के तीनों आंतरिक कोणों का योग 180° होता है।"
 },
-ta:{
-tagline:"உங்கள் உலகம் ஒரே இடத்தில்!",
-languageLabel:"மொழியைத் தேர்ந்தெடுக்கவும்:",
-newsTitle:"📰 AI குரல் செய்திகள்",
-newsPrompt:"எந்த இடத்தின் செய்திகளைக் கேட்க விரும்புகிறீர்கள்?",
-search:"சேவைகளைத் தேடுங்கள்...",
-servicesTitle:"⭐ அனைத்து சேவைகள்",
-education:"கல்வி",test:"ஆன்லைன் தேர்வு",pdf:"PDF மற்றும் புத்தகங்கள்",
-news:"உலகச் செய்திகள்",games:"விளையாட்டுகள்",jobs:"அரசு வேலைகள்",
-forms:"தேர்வு விண்ணப்பங்கள்",private:"தனியார் வேலைகள்",
-ai:"AI உதவியாளர்",shopping:"ஆன்லைன் ஷாப்பிங்",
-agriculture:"விவசாயம்",downloads:"செயலி பதிவிறக்கம்",
-footerText:"ஒரு இணையதளம், பல மொழிகள்."
+{
+subject:"विज्ञान", level:"school",
+q:"पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?",
+options:["श्वसन","प्रकाश संश्लेषण","पाचन","वाष्पीकरण"],
+answer:1,
+explanation:"हरे पौधे सूर्य के प्रकाश की मदद से प्रकाश संश्लेषण करते हैं।"
 },
-mr:{
-tagline:"तुमचे जग, एकाच ठिकाणी!",
-languageLabel:"भाषा निवडा:",
-newsTitle:"📰 AI आवाजातील बातम्या",
-newsPrompt:"तुम्हाला कोणत्या ठिकाणच्या बातम्या ऐकायच्या आहेत?",
-search:"सेवा शोधा...",
-servicesTitle:"⭐ सर्व सेवा",
-education:"शिक्षण",test:"ऑनलाइन चाचणी",pdf:"PDF आणि पुस्तके",
-news:"जगातील बातम्या",games:"खेळ",jobs:"सरकारी नोकऱ्या",
-forms:"परीक्षा फॉर्म",private:"खासगी नोकऱ्या",
-ai:"AI सहाय्यक",shopping:"ऑनलाइन खरेदी",
-agriculture:"शेती",downloads:"अॅप डाउनलोड",
-footerText:"एक वेबसाइट, अनेक भाषा."
+{
+subject:"विज्ञान", level:"school",
+q:"पानी का रासायनिक सूत्र क्या है?",
+options:["CO2","O2","H2O","NaCl"],
+answer:2,
+explanation:"पानी के एक अणु में दो हाइड्रोजन और एक ऑक्सीजन परमाणु होता है।"
 },
-bn:{
-tagline:"আপনার পৃথিবী, এক জায়গায়!",
-languageLabel:"ভাষা নির্বাচন করুন:",
-newsTitle:"📰 AI কণ্ঠের খবর",
-newsPrompt:"আপনি কোন এলাকার খবর শুনতে চান?",
-search:"পরিষেবা খুঁজুন...",
-servicesTitle:"⭐ সব পরিষেবা",
-education:"পড়াশোনা",test:"অনলাইন পরীক্ষা",pdf:"PDF ও বই",
-news:"বিশ্ব সংবাদ",games:"গেম",jobs:"সরকারি চাকরি",
-forms:"পরীক্ষার ফর্ম",private:"বেসরকারি চাকরি",
-ai:"AI সহকারী",shopping:"অনলাইন কেনাকাটা",
-agriculture:"কৃষি",downloads:"অ্যাপ ডাউনলোড",
-footerText:"একটি ওয়েবসাইট, অনেক ভাষা."
+{
+subject:"हिंदी", level:"school",
+q:"'सूर्य' का एक पर्यायवाची शब्द कौन-सा है?",
+options:["रवि","रात्रि","पवन","नीर"],
+answer:0,
+explanation:"रवि, सूर्य का पर्यायवाची शब्द है।"
 },
-gu:{
-tagline:"તમારી દુનિયા, એક જ જગ્યાએ!",
-languageLabel:"ભાષા પસંદ કરો:",
-newsTitle:"📰 AI અવાજ સમાચાર",
-newsPrompt:"તમે કયા સ્થળના સમાચાર સાંભળવા માંગો છો?",
-search:"સેવાઓ શોધો...",
-servicesTitle:"⭐ બધી સેવાઓ",
-education:"અભ્યાસ",test:"ઓનલાઇન ટેસ્ટ",pdf:"PDF અને પુસ્તકો",
-news:"વિશ્વ સમાચાર",games:"રમતો",jobs:"સરકારી નોકરીઓ",
-forms:"પરીક્ષા ફોર્મ",private:"ખાનગી નોકરીઓ",
-ai:"AI સહાયક",shopping:"ઓનલાઇન ખરીદી",
-agriculture:"ખેતી",downloads:"એપ ડાઉનલોડ",
-footerText:"એક વેબસાઇટ, ઘણી ભાષાઓ."
+{
+subject:"English", level:"school",
+q:"What is the plural of 'child'?",
+options:["Childs","Childes","Children","Childrens"],
+answer:2,
+explanation:"The correct plural form is children."
 },
-pa:{
-tagline:"ਤੁਹਾਡੀ ਦੁਨੀਆ, ਇੱਕ ਥਾਂ ਤੇ!",
-languageLabel:"ਭਾਸ਼ਾ ਚੁਣੋ:",
-newsTitle:"📰 AI ਆਵਾਜ਼ ਖ਼ਬਰਾਂ",
-newsPrompt:"ਤੁਸੀਂ ਕਿਸ ਥਾਂ ਦੀਆਂ ਖ਼ਬਰਾਂ ਸੁਣਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
-search:"ਸੇਵਾਵਾਂ ਖੋਜੋ...",
-servicesTitle:"⭐ ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ",
-education:"ਪੜ੍ਹਾਈ",test:"ਆਨਲਾਈਨ ਟੈਸਟ",pdf:"PDF ਅਤੇ ਕਿਤਾਬਾਂ",
-news:"ਦੁਨੀਆ ਦੀਆਂ ਖ਼ਬਰਾਂ",games:"ਖੇਡਾਂ",jobs:"ਸਰਕਾਰੀ ਨੌਕਰੀਆਂ",
-forms:"ਪ੍ਰੀਖਿਆ ਫਾਰਮ",private:"ਨਿੱਜੀ ਨੌਕਰੀਆਂ",
-ai:"AI ਸਹਾਇਕ",shopping:"ਆਨਲਾਈਨ ਖਰੀਦਦਾਰੀ",
-agriculture:"ਖੇਤੀਬਾੜੀ",downloads:"ਐਪ ਡਾਊਨਲੋਡ",
-footerText:"ਇੱਕ ਵੈੱਬਸਾਈਟ, ਕਈ ਭਾਸ਼ਾਵਾਂ."
+{
+subject:"History", level:"school",
+q:"भारत को स्वतंत्रता किस वर्ष मिली?",
+options:["1942","1945","1947","1950"],
+answer:2,
+explanation:"भारत 15 अगस्त 1947 को स्वतंत्र हुआ।"
+},
+{
+subject:"Geography", level:"school",
+q:"भारत की राजधानी कौन-सी है?",
+options:["मुंबई","नई दिल्ली","जयपुर","लखनऊ"],
+answer:1,
+explanation:"भारत की राजधानी नई दिल्ली है।"
+},
+{
+subject:"Physics", level:"11-12",
+q:"बल की SI इकाई क्या है?",
+options:["जूल","वाट","न्यूटन","पास्कल"],
+answer:2,
+explanation:"बल की SI इकाई न्यूटन (N) है।"
+},
+{
+subject:"Physics", level:"11-12",
+q:"निर्वात में प्रकाश की चाल लगभग कितनी होती है?",
+options:["3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10⁵ m/s","300 m/s"],
+answer:1,
+explanation:"निर्वात में प्रकाश की चाल लगभग 3 × 10⁸ मीटर प्रति सेकंड होती है।"
+},
+{
+subject:"Chemistry", level:"11-12",
+q:"ऑक्सीजन का परमाणु क्रमांक क्या है?",
+options:["6","7","8","16"],
+answer:2,
+explanation:"ऑक्सीजन का परमाणु क्रमांक 8 है।"
+},
+{
+subject:"Chemistry", level:"11-12",
+q:"pH का मान 7 होने पर 25°C पर शुद्ध पानी कैसा होता है?",
+options:["अम्लीय","क्षारीय","उदासीन","अत्यधिक अम्लीय"],
+answer:2,
+explanation:"25°C पर शुद्ध पानी का pH लगभग 7 होता है, इसलिए इसे उदासीन माना जाता है।"
+},
+{
+subject:"Biology", level:"11-12",
+q:"कोशिका का पावरहाउस किसे कहा जाता है?",
+options:["केंद्रक","माइटोकॉन्ड्रिया","राइबोसोम","गॉल्जी तंत्र"],
+answer:1,
+explanation:"माइटोकॉन्ड्रिया कोशिका में ऊर्जा उत्पादन में महत्वपूर्ण भूमिका निभाता है।"
+},
+{
+subject:"Biology", level:"11-12",
+q:"मानव रक्त में ऑक्सीजन का परिवहन मुख्यतः कौन करता है?",
+options:["प्लेटलेट्स","हीमोग्लोबिन","प्लाज्मा प्रोटीन","इंसुलिन"],
+answer:1,
+explanation:"लाल रक्त कोशिकाओं में मौजूद हीमोग्लोबिन ऑक्सीजन का परिवहन करता है।"
+},
+{
+subject:"Mathematics", level:"11-12",
+q:"यदि x + 5 = 12, तो x का मान क्या होगा?",
+options:["5","6","7","17"],
+answer:2,
+explanation:"दोनों तरफ से 5 घटाने पर x = 12 − 5 = 7।"
+},
+{
+subject:"Computer Fundamentals", level:"computer",
+q:"CPU का पूरा नाम क्या है?",
+options:[
+"Central Processing Unit",
+"Computer Personal Unit",
+"Central Program Utility",
+"Control Power Unit"
+],
+answer:0,
+explanation:"CPU का पूरा नाम Central Processing Unit है।"
+},
+{
+subject:"Coding", level:"computer",
+q:"HTML का मुख्य उपयोग क्या है?",
+options:[
+"वेब पेज की संरचना बनाना",
+"केवल वीडियो एडिटिंग",
+"कंप्यूटर की RAM बढ़ाना",
+"ऑपरेटिंग सिस्टम हटाना"
+],
+answer:0,
+explanation:"HTML का उपयोग वेब पेज की संरचना बनाने के लिए होता है।"
+},
+{
+subject:"सामान्य ज्ञान (GK)", level:"government",
+q:"भारत का संविधान कब लागू हुआ?",
+options:["15 अगस्त 1947","26 जनवरी 1950","2 अक्टूबर 1950","26 नवंबर 1949"],
+answer:1,
+explanation:"भारतीय संविधान 26 जनवरी 1950 को लागू हुआ।"
+},
+{
+subject:"Reasoning", level:"government",
+q:"श्रृंखला पूरी करें: 2, 4, 6, 8, __",
+options:["9","10","11","12"],
+answer:1,
+explanation:"हर बार 2 जोड़ा जा रहा है। अगली संख्या 10 है।"
+},
+{
+subject:"English Grammar", level:"government",
+q:"Choose the correct past tense of 'go'.",
+options:["Goed","Gone","Went","Going"],
+answer:2,
+explanation:"'Go' का simple past tense 'went' है।"
+},
+{
+subject:"NEET", level:"medical",
+q:"मानव हृदय में सामान्यतः कितने कक्ष होते हैं?",
+options:["2","3","4","5"],
+answer:2,
+explanation:"मानव हृदय में दो आलिंद और दो निलय होते हैं, कुल चार कक्ष।"
+},
+{
+subject:"NEET", level:"medical",
+q:"प्रकाश संश्लेषण में पौधे मुख्यतः कौन-सी गैस लेते हैं?",
+options:["ऑक्सीजन","कार्बन डाइऑक्साइड","नाइट्रोजन","हाइड्रोजन"],
+answer:1,
+explanation:"प्रकाश संश्लेषण के दौरान पौधे कार्बन डाइऑक्साइड का उपयोग करते हैं।"
+},
+{
+subject:"JEE", level:"engineering",
+q:"यदि किसी वस्तु का वेग स्थिर है, तो उसका त्वरण क्या होगा?",
+options:["शून्य","अनंत","हमेशा 9.8 m/s²","हमेशा 1 m/s²"],
+answer:0,
+explanation:"स्थिर वेग के लिए त्वरण शून्य होता है।"
+},
+{
+subject:"Economics", level:"11-12",
+q:"वस्तुओं और सेवाओं की कीमतों के सामान्य स्तर में लगातार वृद्धि क्या कहलाती है?",
+options:["मुद्रास्फीति","मंदी","बचत","निर्यात"],
+answer:0,
+explanation:"कीमतों के सामान्य स्तर में लगातार वृद्धि को मुद्रास्फीति कहते हैं।"
+},
+{
+subject:"Accountancy", level:"11-12",
+q:"लेखांकन का मूल समीकरण क्या है?",
+options:[
+"Assets = Liabilities + Capital",
+"Assets = Expenses − Income",
+"Capital = Assets + Liabilities",
+"Income = Assets + Expenses"
+],
+answer:0,
+explanation:"लेखांकन का मूल समीकरण: Assets = Liabilities + Capital।"
+},
+{
+subject:"करंट अफेयर्स", level:"government",
+q:"करंट अफेयर्स की तैयारी के लिए सबसे उपयोगी तरीका कौन-सा है?",
+options:[
+"केवल पुराने प्रश्न पढ़ना",
+"नियमित समाचार और विश्वसनीय मासिक समीक्षा पढ़ना",
+"केवल गणित पढ़ना",
+"कोई तैयारी न करना"
+],
+answer:1,
+explanation:"नियमित समाचार और विश्वसनीय मासिक समीक्षा से समसामयिक घटनाओं की तैयारी में मदद मिलती है।"
 }
-};
+];
 
-const voiceLanguages={
-hi:"hi-IN",en:"en-US",ta:"ta-IN",mr:"mr-IN",
-bn:"bn-IN",gu:"gu-IN",pa:"pa-IN",te:"te-IN",
-kn:"kn-IN",ml:"ml-IN",ur:"ur-PK",or:"or-IN",
-as:"as-IN",ne:"ne-NP"
-};
+let activeQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let currentSubject = "";
 
-let currentLanguage="hi";
+function renderSubjects() {
+    const search = document.getElementById("search").value.toLowerCase().trim();
+    const level = document.getElementById("level").value;
+    const list = document.getElementById("subjectList");
 
-function detectLanguage(){
- const lang=(navigator.language||"hi-IN").split("-")[0].toLowerCase();
- return languages[lang]?lang:"hi";
+    list.innerHTML = "";
+
+    const filtered = subjects.filter(s => {
+        const matchesSearch =
+            (s.name + " " + s.category).toLowerCase().includes(search);
+
+        let matchesLevel = level === "all";
+
+        if (level === "school") {
+            matchesLevel = s.level === "school";
+        } else if (level === "11-12") {
+            matchesLevel = s.level === "11-12";
+        } else if (level === "college") {
+            matchesLevel = s.level === "college";
+        } else if (level === "medical") {
+            matchesLevel = s.level === "medical" ||
+                s.name === "Biology" ||
+                s.name === "Physics" ||
+                s.name === "Chemistry";
+        } else if (level === "engineering") {
+            matchesLevel = s.level === "engineering" ||
+                s.name === "Physics" ||
+                s.name === "Chemistry" ||
+                s.name === "Mathematics";
+        } else if (level === "government") {
+            matchesLevel = s.level === "government";
+        } else if (level === "computer") {
+            matchesLevel = s.level === "computer";
+        }
+
+        return matchesSearch && matchesLevel;
+    });
+
+    if (filtered.length === 0) {
+        list.innerHTML = "<p>इस खोज में कोई विषय नहीं मिला।</p>";
+        return;
+    }
+
+    filtered.forEach(s => {
+        const count = questions.filter(q =>
+            q.subject === s.name ||
+            (s.name === "NEET" && q.level === "medical") ||
+            (s.name === "JEE" && q.level === "engineering")
+        ).length;
+
+        const card = document.createElement("div");
+        card.className = "subject-card";
+
+        const title = document.createElement("h3");
+        title.textContent = s.icon + " " + s.name;
+
+        const category = document.createElement("p");
+        category.textContent = s.category;
+
+        const countText = document.createElement("p");
+        countText.className = "small";
+        countText.textContent = count + " नमूना प्रश्न उपलब्ध";
+
+        const btn = document.createElement("button");
+        btn.textContent = "प्रश्न हल करें";
+        btn.onclick = () => chooseSubject(s.name);
+
+        card.append(title, category, countText, btn);
+        list.appendChild(card);
+    });
 }
 
-function changeLanguage(value){
- currentLanguage=value==="auto"?detectLanguage():value;
- const t=languages[currentLanguage]||languages.hi;
-
- document.documentElement.lang=currentLanguage;
-
- Object.keys(t).forEach(key=>{
-  const element=document.getElementById(key);
-  if(element)element.textContent=t[key];
- });
-
- document.getElementById("search").placeholder=t.search;
-
- document.querySelectorAll("[data-key]").forEach(element=>{
-  const key=element.dataset.key;
-  if(t[key])element.textContent=t[key];
- });
-
- localStorage.setItem("starhub-language",value);
+function resetFilters() {
+    document.getElementById("search").value = "";
+    document.getElementById("level").value = "all";
+    renderSubjects();
 }
 
-function speak(text){
- if(!("speechSynthesis" in window)){
-  document.getElementById("newsStatus").textContent=
-  "इस ब्राउज़र में आवाज़ की सुविधा उपलब्ध नहीं है।";
-  return;
- }
- speechSynthesis.cancel();
- const speech=new SpeechSynthesisUtterance(text);
- speech.lang=voiceLanguages[currentLanguage]||"hi-IN";
- speechSynthesis.speak(speech);
+function chooseSubject(name) {
+    currentSubject = name;
+    document.getElementById("selectedSubject").textContent =
+        "चुना गया विषय: " + name;
+
+    document.getElementById("test").scrollIntoView({
+        behavior: "smooth"
+    });
 }
 
-document.getElementById("language").addEventListener("change",e=>{
- changeLanguage(e.target.value);
-});
+function startTest() {
+    if (currentSubject === "NEET") {
+        activeQuestions = questions.filter(q =>
+            q.level === "medical" ||
+            ["Physics", "Chemistry", "Biology"].includes(q.subject)
+        );
+    } else if (currentSubject === "JEE") {
+        activeQuestions = questions.filter(q =>
+            q.level === "engineering" ||
+            ["Physics", "Chemistry", "Mathematics"].includes(q.subject)
+        );
+    } else if (currentSubject === "सरकारी नौकरी") {
+        activeQuestions = questions.filter(q =>
+            q.level === "government"
+        );
+    } else if (currentSubject === "कंप्यूटर") {
+        activeQuestions = questions.filter(q =>
+            q.level === "computer"
+        );
+    } else if (currentSubject) {
+        activeQuestions = questions.filter(q =>
+            q.subject === currentSubject
+        );
+    } else {
+        activeQuestions = [...questions];
+    }
 
-document.getElementById("search").addEventListener("input",()=>{
- const query=document.getElementById("search").value.toLowerCase();
- document.querySelectorAll(".card").forEach(card=>{
-  card.classList.toggle("hidden",
-   !card.textContent.toLowerCase().includes(query)&&
-   !card.dataset.search.toLowerCase().includes(query));
- });
-});
+    if (activeQuestions.length === 0) {
+        alert("इस विषय के प्रश्न अभी नहीं जोड़े गए हैं।");
+        return;
+    }
 
-document.getElementById("speakButton").addEventListener("click",()=>{
- speak(languages[currentLanguage].newsPrompt);
-});
+    currentIndex = 0;
+    score = 0;
+    answered = false;
 
-document.getElementById("listenButton").addEventListener("click",()=>{
- const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
- const status=document.getElementById("newsStatus");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quizArea").classList.remove("hidden");
 
- if(!Recognition){
-  status.textContent="इस ब्राउज़र में आवाज़ पहचान उपलब्ध नहीं है। नीचे जगह लिखें।";
-  return;
- }
+    showQuestion();
+}
 
- const recognition=new Recognition();
- recognition.lang=voiceLanguages[currentLanguage]||"hi-IN";
- status.textContent="सुन रहा है... अब जगह का नाम बोलें।";
+function showQuestion() {
+    answered = false;
 
- recognition.onresult=e=>{
-  document.getElementById("place").value=e.results[0][0].transcript;
-  status.textContent="जगह दर्ज हो गई। लाइव खबरों के लिए News API जोड़ना बाकी है।";
- };
+    const q = activeQuestions[currentIndex];
 
- recognition.onerror=()=>{
-  status.textContent="आवाज़ समझ नहीं आई। जगह लिखकर कोशिश करें।";
- };
+    document.getElementById("progress").textContent =
+        "प्रश्न " + (currentIndex + 1) +
+        " / " + activeQuestions.length +
+        " | स्कोर: " + score;
 
- recognition.start();
-});
+    document.getElementById("question").textContent =
+        q.q;
 
-document.getElementById("locationButton").addEventListener("click",()=>{
- const status=document.getElementById("newsStatus");
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("nextBtn").classList.add("hidden");
 
- if(!navigator.geolocation){
-  status.textContent="लोकेशन उपलब्ध नहीं है। जगह खुद लिखें।";
-  return;
- }
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
 
- status.textContent="लोकेशन की अनुमति की प्रतीक्षा है...";
+    q.options.forEach((option, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = String.fromCharCode(65 + i) + ". " + option;
+        btn.onclick = () => checkAnswer(i, btn);
+        optionsDiv.appendChild(btn);
+    });
+}
 
- navigator.geolocation.getCurrentPosition(
-  position=>{
-   status.textContent="लोकेशन मिली। अक्षांश: "+
-   position.coords.latitude.toFixed(3)+", देशांतर: "+
-   position.coords.longitude.toFixed(3)+
-   "। शहर का नाम और लाइव खबरें दिखाने के लिए अतिरिक्त सेवा चाहिए।";
-  },
-  ()=>{
-   status.textContent="लोकेशन की अनुमति नहीं मिली। जगह खुद लिख सकते हैं।";
-  }
- );
-});
+function checkAnswer(selected, selectedButton) {
+    if (answered) return;
+    answered = true;
 
-document.getElementById("newsButton").addEventListener("click",()=>{
- const place=document.getElementById("place").value.trim();
- const status=document.getElementById("newsStatus");
+    const q = activeQuestions[currentIndex];
+    const buttons = document.querySelectorAll(".option");
 
- if(!place){
-  status.textContent="पहले गाँव, शहर, जिला, राज्य या देश का नाम लिखें या बोलें।";
-  return;
- }
+    buttons.forEach((btn, i) => {
+        btn.disabled = true;
 
- status.textContent="आपने चुना: "+place+
- "। वास्तविक ताज़ा खबरें दिखाने के लिए News API या RSS सेवा जोड़ना बाकी है।";
-});
+        if (i === q.answer) {
+            btn.classList.add("correct");
+        }
+    });
 
-document.getElementById("checkAnswer").addEventListener("click",()=>{
- const answer=document.querySelector('input[name="answer"]:checked');
- const result=document.getElementById("testResult");
+    if (selected === q.answer) {
+        score++;
+        document.getElementById("feedback").textContent =
+            "✅ सही उत्तर! " + q.explanation;
+    } else {
+        selectedButton.classList.add("wrong");
+        document.getElementById("feedback").textContent =
+            "❌ गलत उत्तर। सही उत्तर: " +
+            q.options[q.answer] + ". " + q.explanation;
+    }
 
- if(!answer){
-  result.textContent="कृपया एक उत्तर चुनें।";
- }else if(answer.value==="b"){
-  result.textContent="सही उत्तर! प्रकाश संश्लेषण मुख्य रूप से पत्तियों में होता है।";
- }else{
-  result.textContent="गलत उत्तर। सही उत्तर है: पत्ती।";
- }
-});
+    document.getElementById("progress").textContent =
+        "प्रश्न " + (currentIndex + 1) +
+        " / " + activeQuestions.length +
+        " | स्कोर: " + score;
 
-const savedLanguage=localStorage.getItem("starhub-language")||"auto";
-document.getElementById("language").value=savedLanguage;
-changeLanguage(savedLanguage);
+    const next = document.getElementById("nextBtn");
+    next.classList.remove("hidden");
+    next.textContent =
+        currentIndex === activeQuestions.length - 1
+            ? "रिजल्ट देखें"
+            : "अगला प्रश्न →";
+}
 
-// ब्राउज़र ऑटो आवाज़ को रोक सकता है। ऐसी स्थिति में सवाल सुनें बटन दबाएँ।
-window.addEventListener("load",()=>{
- setTimeout(()=>{
-  try{speak(languages[currentLanguage].newsPrompt)}catch(error){}
- },1000);
-});
+function nextQuestion() {
+    currentIndex++;
+
+    if (currentIndex < activeQuestions.length) {
+        showQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    document.getElementById("quizArea").classList.add("hidden");
+
+    const result = document.getElementById("result");
+    result.classList.remove("hidden");
+
+    const percentage = Math.round(
+        score / activeQuestions.length * 100
+    );
+
+    result.innerHTML = "";
+
+    const title = document.createElement("h2");
+    title.textContent = "🎉 टेस्ट पूरा हुआ!";
+
+    const scoreText = document.createElement("p");
+    scoreText.textContent =
+        "आपका स्कोर: " + score + " / " + activeQuestions.length;
+
+    const percentText = document.createElement("p");
+    percentText.textContent = "प्रतिशत: " + percentage + "%";
+
+    const message = document.createElement("p");
+    message.textContent =
+        percentage >= 80 ? "बहुत अच्छा! अभ्यास जारी रखें।" :
+        percentage >= 50 ? "अच्छा प्रयास! और अभ्यास करें।" :
+        "कोई बात नहीं। उत्तरों को समझें और फिर कोशिश करें।";
+
+    const retry = document.createElement("button");
+    retry.textContent = "दोबारा टेस्ट दें";
+    retry.onclick = startTest;
+
+    result.append(title, scoreText, percentText, message, retry);
+}
+
+renderSubjects();
 </script>
 
 </body>
