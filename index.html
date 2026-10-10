@@ -3,176 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHub - All Subjects Learning</title>
+<title>StarHub - News, Education, Stories & More</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, "Noto Sans Devanagari", sans-serif;
-    background: #f1f5f9;
-    color: #172033;
-}
-
-header {
-    background: linear-gradient(120deg, #172554, #2563eb);
-    color: white;
-    text-align: center;
-    padding: 25px 12px;
-}
-
-header h1 {
-    margin: 0 0 8px;
-    font-size: 34px;
-}
-
-header p {
-    margin: 5px;
-}
-
-nav {
-    background: #0f172a;
-    padding: 12px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 7px;
-    display: inline-block;
-}
-
-.container {
-    width: 94%;
-    max-width: 1100px;
-    margin: 22px auto;
-}
-
-.panel, .card {
-    background: white;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 3px 12px #0000000c;
-}
-
-h2 {
-    color: #1d4ed8;
-}
-
-input, select, button {
-    font: inherit;
-    padding: 11px;
-    border-radius: 7px;
-    border: 1px solid #cbd5e1;
-    margin: 5px 0;
-}
-
-input, select {
-    max-width: 100%;
-}
-
-.search {
-    width: 100%;
-}
-
-button {
-    background: #2563eb;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 13px;
-}
-
-.subject-card {
-    background: #eff6ff;
-    border: 1px solid #dbeafe;
-    padding: 16px;
-    border-radius: 10px;
-}
-
-.subject-card h3 {
-    margin-top: 0;
-    color: #1d4ed8;
-}
-
-.small {
-    color: #64748b;
-    font-size: 14px;
-}
-
-.option {
-    display: block;
-    background: #f8fafc;
-    color: #172033;
-    border: 1px solid #cbd5e1;
-    width: 100%;
-    text-align: left;
-    margin: 9px 0;
-}
-
-.option:hover {
-    background: #dbeafe;
-    color: #172033;
-}
-
-.option.correct {
-    background: #dcfce7;
-    border-color: #16a34a;
-}
-
-.option.wrong {
-    background: #fee2e2;
-    border-color: #dc2626;
-}
-
-#feedback {
-    padding: 12px 0;
-    line-height: 1.7;
-}
-
-footer {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 22px;
-}
-
-.hidden {
-    display: none;
-}
-
-.badge {
-    display: inline-block;
-    background: #dbeafe;
-    color: #1e40af;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 13px;
-    margin: 3px;
-}
-
-@media(max-width:600px) {
-    header h1 {
-        font-size: 28px;
-    }
-
-    .container {
-        width: 92%;
-    }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+header{background:linear-gradient(120deg,#172554,#2563eb);color:white;padding:18px;text-align:center}
+header h1{margin:5px;font-size:34px}
+header p{margin:7px}
+.topbar{background:#0f172a;color:white;padding:10px 12px;position:sticky;top:0;z-index:10}
+.brandrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-weight:bold;font-size:22px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+nav a{color:white;text-decoration:none;padding:9px 11px;border-radius:7px;background:#1e293b}
+nav a:hover{background:#2563eb}
+.container{width:94%;max-width:1150px;margin:20px auto}
+.panel{background:white;padding:18px;border-radius:12px;margin-bottom:20px;box-shadow:0 3px 12px #0000000c}
+h2{color:#1d4ed8;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:15px}
+.card h3{margin-top:0}
+button,select,input{font:inherit;padding:10px;border-radius:7px;border:1px solid #cbd5e1;max-width:100%}
+button{background:#2563eb;color:white;border:none;cursor:pointer}
+button:hover{background:#1d4ed8}
+input{width:100%}
+.hero{background:linear-gradient(120deg,#dbeafe,#eff6ff);padding:20px;border-radius:12px}
+.badge{display:inline-block;background:#dbeafe;color:#1e40af;padding:5px 9px;border-radius:15px;margin:3px;font-size:13px}
+.story{border-left:4px solid #2563eb}
+.muted{color:#64748b;font-size:14px}
+.answer{padding:10px;margin:7px 0;background:#eff6ff;color:#172033;text-align:left;width:100%;border:1px solid #dbeafe}
+.answer.correct{background:#dcfce7;border-color:#16a34a}
+.answer.wrong{background:#fee2e2;border-color:#dc2626}
+.hidden{display:none}
+footer{background:#0f172a;color:white;text-align:center;padding:25px}
+section{scroll-margin-top:125px}
+@media(max-width:600px){
+ header h1{font-size:28px}
+ nav a{font-size:13px;padding:8px}
+ .container{width:92%}
 }
 </style>
 </head>
@@ -180,616 +49,391 @@ footer {
 <body>
 
 <header>
-    <h1>🌟 StarHub</h1>
-    <p>Learn Anything • Practice Everything</p>
-    <p>स्कूल से प्रतियोगी परीक्षा तक — एक ही जगह</p>
+<h1>🌟 StarHub</h1>
+<p>News • Education • Stories • Jobs • Shopping</p>
+<p>आपकी दुनिया, एक ही वेबसाइट पर!</p>
 </header>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#subjects">Subjects</a>
-    <a href="#test">Online Test</a>
-    <a href="#exams">Exams</a>
-    <a href="#about">About</a>
-</nav>
-
-<div class="container" id="home">
-
-    <section class="panel">
-        <h2>🔎 प्रश्न और विषय खोजें</h2>
-
-        <input
-            id="search"
-            class="search"
-            type="search"
-            placeholder="Subject खोजें: Physics, गणित, NEET, GK..."
-            oninput="renderSubjects()">
-
-        <br>
-
-        <label for="level">अपना स्तर चुनें:</label>
-        <select id="level" onchange="renderSubjects()">
-            <option value="all">सभी स्तर</option>
-            <option value="school">कक्षा 1–10</option>
-            <option value="11-12">कक्षा 11–12</option>
-            <option value="college">कॉलेज</option>
-            <option value="medical">NEET</option>
-            <option value="engineering">JEE</option>
-            <option value="government">सरकारी नौकरी</option>
-            <option value="computer">कंप्यूटर और Coding</option>
-        </select>
-
-        <button onclick="resetFilters()">सभी विषय दिखाएँ</button>
-    </section>
-
-    <section class="panel" id="subjects">
-        <h2>📚 सभी विषय</h2>
-        <p class="small">
-            विषय चुनकर उपलब्ध अभ्यास प्रश्न देख सकते हो।
-        </p>
-
-        <div class="grid" id="subjectList"></div>
-    </section>
-
-    <section class="panel" id="test">
-        <h2>📝 Online MCQ Test</h2>
-
-        <p id="selectedSubject">
-            सभी उपलब्ध अभ्यास प्रश्नों का टेस्ट
-        </p>
-
-        <p id="progress">प्रश्न शुरू करने के लिए नीचे क्लिक करो।</p>
-
-        <button onclick="startTest()">टेस्ट शुरू करें</button>
-
-        <div id="quizArea" class="hidden">
-            <h3 id="question"></h3>
-            <div id="options"></div>
-            <div id="feedback"></div>
-            <button id="nextBtn" class="hidden" onclick="nextQuestion()">
-                अगला प्रश्न →
-            </button>
-        </div>
-
-        <div id="result" class="hidden"></div>
-    </section>
-
-    <section class="panel" id="exams">
-        <h2>🎯 प्रतियोगी परीक्षाएँ</h2>
-
-        <div class="grid">
-            <div class="subject-card">
-                <h3>NEET</h3>
-                <p>Physics, Chemistry और Biology के अभ्यास प्रश्न।</p>
-                <button onclick="chooseSubject('NEET')">NEET प्रश्न</button>
-            </div>
-
-            <div class="subject-card">
-                <h3>JEE Main</h3>
-                <p>गणित, Physics और Chemistry का अभ्यास।</p>
-                <button onclick="chooseSubject('JEE')">JEE प्रश्न</button>
-            </div>
-
-            <div class="subject-card">
-                <h3>SSC और रेलवे</h3>
-                <p>GK, Reasoning, गणित और सामान्य विज्ञान।</p>
-                <button onclick="chooseSubject('सरकारी नौकरी')">प्रश्न देखें</button>
-            </div>
-
-            <div class="subject-card">
-                <h3>कंप्यूटर</h3>
-                <p>Computer Fundamentals और Coding।</p>
-                <button onclick="chooseSubject('कंप्यूटर')">कंप्यूटर प्रश्न</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="panel" id="about">
-        <h2>ℹ️ StarHub के बारे में</h2>
-        <p>
-            StarHub एक शैक्षणिक वेबसाइट का शुरुआती संस्करण है।
-            इसमें कक्षा, विषय और प्रतियोगी परीक्षाओं के अनुसार
-            अभ्यास प्रश्न जोड़े जा सकते हैं।
-        </p>
-
-        <p>
-            अभी वेबसाइट में नमूना प्रश्न दिए गए हैं।
-            सभी किताबों और इंटरनेट पर उपलब्ध प्रश्न इसमें अपने-आप
-            नहीं आते। बड़े प्रश्न-संग्रह के लिए अलग डेटाबेस और
-            वैध शैक्षणिक स्रोत जोड़ने होंगे।
-        </p>
-    </section>
-
+<div class="topbar">
+<div class="brandrow">
+<div class="brand">🌟 StarHub</div>
+<select id="language" onchange="changeLanguage()">
+<option value="hi">हिंदी</option>
+<option value="en">English</option>
+</select>
 </div>
 
+<nav>
+<a href="#home">🏠 Home</a>
+<a href="#news">📰 News</a>
+<a href="#stories">📖 Story</a>
+<a href="#education">📚 Study</a>
+<a href="#exams">🎯 Exams</a>
+<a href="#test">📝 Test</a>
+<a href="#jobs">💼 Jobs</a>
+<a href="#ai">🤖 AI</a>
+<a href="#games">🎮 Games</a>
+<a href="#shopping">🛒 Shopping</a>
+</nav>
+</div>
+
+<main class="container">
+
+<section id="home" class="panel">
+<div class="hero">
+<h2>🏠 StarHub Home</h2>
+<h3>स्वागत है! Welcome to StarHub</h3>
+<p>समाचार पढ़ें, कहानियाँ पढ़ें, पढ़ाई करें और अभ्यास टेस्ट दें।</p>
+<input id="globalSearch" placeholder="🔎 विषय, कहानी या सेवा खोजें..." oninput="searchWebsite()">
+<p class="muted">नीचे आज की खबरों, कहानियों और पढ़ाई के विकल्पों को देखें।</p>
+</div>
+</section>
+
+<section id="news" class="panel">
+<h2>📰 आज की खबरें | Latest News</h2>
+<p class="muted">यहाँ अभी नमूना खबरें हैं। लाइव समाचार के लिए समाचार API या विश्वसनीय समाचार फ़ीड जोड़ना बाकी है।</p>
+<div class="grid" id="newsList">
+<div class="card searchable">
+<span class="badge">भारत</span>
+<h3>भारत की खबरें</h3>
+<p>देश से जुड़ी खबरें पढ़ने के लिए इस सेक्शन का उपयोग करें।</p>
+<p class="muted">नमूना सेक्शन — लाइव अपडेट नहीं।</p>
+</div>
+<div class="card searchable">
+<span class="badge">दुनिया</span>
+<h3>विश्व समाचार</h3>
+<p>दुनिया भर की प्रमुख खबरों के लिए अलग सेक्शन।</p>
+<p class="muted">नमूना सेक्शन — लाइव अपडेट नहीं।</p>
+</div>
+<div class="card searchable">
+<span class="badge">स्थानीय</span>
+<h3>राज्य, जिला और गाँव</h3>
+<p>अपने राज्य, जिले या शहर की खबरें देखने का सेक्शन।</p>
+<button onclick="askLocation()">📍 स्थान चुनें</button>
+<p id="locationResult" class="muted"></p>
+</div>
+</div>
+</section>
+
+<section id="stories" class="panel">
+<h2>📖 कहानी | Stories</h2>
+<p>छोटी कहानियाँ पढ़ें और उनसे सीखें।</p>
+<div class="grid">
+<article class="card story searchable">
+<h3>🐜 चींटी और मेहनत</h3>
+<p>एक चींटी रोज़ मेहनत से भोजन जमा करती थी। दूसरी ओर एक टिड्डा अपना समय खेल में बिताता था। मौसम बदलने पर चींटी के पास भोजन था।</p>
+<p><b>सीख:</b> मेहनत और तैयारी भविष्य में काम आती है।</p>
+</article>
+<article class="card story searchable">
+<h3>🪴 छोटा पौधा</h3>
+<p>एक बच्चे ने छोटा पौधा लगाया। वह रोज़ उसे पानी देता और उसकी देखभाल करता। कुछ समय बाद पौधा बड़ा हो गया।</p>
+<p><b>सीख:</b> धैर्य और नियमित प्रयास से प्रगति होती है।</p>
+</article>
+<article class="card story searchable">
+<h3>🤝 सच्ची मदद</h3>
+<p>एक विद्यार्थी ने अपने सहपाठी को कठिन सवाल समझने में मदद की। दोनों ने साथ अभ्यास किया और विषय को बेहतर समझ लिया।</p>
+<p><b>सीख:</b> ज्ञान बाँटने से सभी को लाभ होता है।</p>
+</article>
+</div>
+</section>
+
+<section id="education" class="panel">
+<h2>📚 Education | सभी विषय</h2>
+<p>अपनी कक्षा या विषय खोजें। अभी विषयों की सूची और नमूना प्रश्न दिए गए हैं।</p>
+<input id="subjectSearch" placeholder="विषय खोजें..." oninput="renderSubjects()">
+<br><br>
+<select id="classLevel" onchange="renderSubjects()">
+<option value="all">सभी स्तर</option>
+<option value="school">कक्षा 1–10</option>
+<option value="senior">कक्षा 11–12</option>
+<option value="college">कॉलेज</option>
+<option value="competitive">प्रतियोगी परीक्षाएँ</option>
+<option value="computer">कंप्यूटर और Coding</option>
+</select>
+<div class="grid" id="subjectList" style="margin-top:15px"></div>
+</section>
+
+<section id="exams" class="panel">
+<h2>🎯 Competitive Exams</h2>
+<div class="grid">
+<div class="card searchable"><h3>NEET</h3><p>Physics, Chemistry और Biology।</p><button onclick="selectSubject('NEET')">प्रश्न हल करें</button></div>
+<div class="card searchable"><h3>JEE Main</h3><p>गणित, Physics और Chemistry।</p><button onclick="selectSubject('JEE')">प्रश्न हल करें</button></div>
+<div class="card searchable"><h3>SSC / रेलवे</h3><p>GK, Reasoning, गणित और सामान्य विज्ञान।</p><button onclick="selectSubject('सरकारी नौकरी')">प्रश्न हल करें</button></div>
+<div class="card searchable"><h3>CUET / CET</h3><p>प्रवेश परीक्षाओं की तैयारी के लिए सेक्शन।</p><button onclick="selectSubject('सामान्य ज्ञान (GK)')">GK प्रश्न हल करें</button></div>
+</div>
+</section>
+
+<section id="test" class="panel">
+<h2>📝 Online Test</h2>
+<p id="testSubject">सभी उपलब्ध नमूना प्रश्नों का टेस्ट।</p>
+<p id="testProgress">टेस्ट शुरू करने के लिए बटन दबाएँ।</p>
+<button onclick="startTest()">टेस्ट शुरू करें</button>
+<div id="quizArea" class="hidden">
+<h3 id="question"></h3>
+<div id="options"></div>
+<p id="feedback"></p>
+<button id="nextBtn" class="hidden" onclick="nextQuestion()">अगला प्रश्न</button>
+</div>
+<div id="result" class="hidden"></div>
+</section>
+
+<section id="jobs" class="panel">
+<h2>💼 Jobs | नौकरी</h2>
+<div class="grid">
+<div class="card searchable"><h3>सरकारी नौकरी</h3><p>SSC, रेलवे, पुलिस और अन्य भर्ती की जानकारी के लिए सेक्शन।</p></div>
+<div class="card searchable"><h3>प्राइवेट नौकरी</h3><p>निजी कंपनियों की नौकरियों के अवसरों के लिए सेक्शन।</p></div>
+<div class="card searchable"><h3>ऑनलाइन काम</h3><p>कौशल सीखने और वैध ऑनलाइन काम की जानकारी।</p></div>
+</div>
+<p class="muted">अभी लाइव नौकरी की सूची और आवेदन लिंक नहीं जुड़े हैं।</p>
+</section>
+
+<section id="ai" class="panel">
+<h2>🤖 AI Assistant</h2>
+<p>यह AI सुविधा के लिए शुरुआती सेक्शन है।</p>
+<input id="aiQuestion" placeholder="अपना सवाल लिखें...">
+<button onclick="askAI()">सवाल भेजें</button>
+<p id="aiAnswer"></p>
+<p class="muted">अभी असली AI सेवा कनेक्ट नहीं है। इसके लिए सुरक्षित सर्वर और AI API की आवश्यकता होगी।</p>
+</section>
+
+<section id="games" class="panel">
+<h2>🎮 Learning Games</h2>
+<div class="card">
+<h3>🔢 संख्या पहचानो</h3>
+<p>10 + 5 का उत्तर क्या है?</p>
+<button onclick="gameAnswer(10)">10</button>
+<button onclick="gameAnswer(15)">15</button>
+<button onclick="gameAnswer(20)">20</button>
+<p id="gameResult"></p>
+</div>
+</section>
+
+<section id="shopping" class="panel">
+<h2>🛒 Shopping / Marketplace</h2>
+<div class="grid">
+<div class="card searchable"><h3>📚 Books</h3><p>शैक्षणिक किताबों का सेक्शन।</p></div>
+<div class="card searchable"><h3>💻 Electronics</h3><p>कंप्यूटर और इलेक्ट्रॉनिक्स का सेक्शन।</p></div>
+<div class="card searchable"><h3>🛍️ Other Products</h3><p>अन्य सामान के लिए मार्केटप्लेस सेक्शन।</p></div>
+</div>
+<p class="muted">अभी वास्तविक उत्पाद, विक्रेता खाते, भुगतान और ऑर्डर सिस्टम नहीं जुड़े हैं।</p>
+</section>
+
+<section class="panel">
+<h2>📌 जरूरी सूचना</h2>
+<p>StarHub का यह प्रारंभिक संस्करण है। कुछ सेक्शन नमूना रूप में हैं। लाइव समाचार, विस्तृत प्रश्न बैंक, AI, नौकरी अपडेट और खरीदारी के लिए आगे अलग सेवाएँ जोड़नी होंगी।</p>
+</section>
+
+</main>
+
 <footer>
-    <h3>🌟 StarHub</h3>
-    <p>Study • Practice • Improve</p>
-    <p>© StarHub</p>
+<h3>🌟 StarHub</h3>
+<p>Learn • Read • Practice • Explore</p>
+<p>© StarHub</p>
 </footer>
 
 <script>
-const subjects = [
-    {name:"हिंदी", level:"school", category:"भाषा", icon:"📖"},
-    {name:"English", level:"school", category:"भाषा", icon:"🔤"},
-    {name:"गणित", level:"school", category:"गणित", icon:"➗"},
-    {name:"पर्यावरण अध्ययन", level:"school", category:"EVS", icon:"🌱"},
-    {name:"विज्ञान", level:"school", category:"Science", icon:"🔬"},
-    {name:"Physics", level:"11-12", category:"Science", icon:"⚡"},
-    {name:"Chemistry", level:"11-12", category:"Science", icon:"🧪"},
-    {name:"Biology", level:"11-12", category:"Science", icon:"🧬"},
-    {name:"Mathematics", level:"11-12", category:"गणित", icon:"📐"},
-    {name:"Computer Science", level:"11-12", category:"कंप्यूटर", icon:"💻"},
-    {name:"History", level:"school", category:"Social Science", icon:"🏛️"},
-    {name:"Geography", level:"school", category:"Social Science", icon:"🌍"},
-    {name:"Political Science", level:"11-12", category:"Arts", icon:"⚖️"},
-    {name:"Economics", level:"11-12", category:"Commerce", icon:"📈"},
-    {name:"Accountancy", level:"11-12", category:"Commerce", icon:"🧾"},
-    {name:"Business Studies", level:"11-12", category:"Commerce", icon:"🏢"},
-    {name:"Sociology", level:"college", category:"Arts", icon:"👥"},
-    {name:"Psychology", level:"college", category:"Arts", icon:"🧠"},
-    {name:"NEET", level:"medical", category:"Medical Entrance", icon:"🩺"},
-    {name:"JEE", level:"engineering", category:"Engineering Entrance", icon:"⚙️"},
-    {name:"सामान्य ज्ञान (GK)", level:"government", category:"प्रतियोगी परीक्षा", icon:"🌏"},
-    {name:"Reasoning", level:"government", category:"प्रतियोगी परीक्षा", icon:"🧩"},
-    {name:"हिंदी व्याकरण", level:"government", category:"प्रतियोगी परीक्षा", icon:"✍️"},
-    {name:"English Grammar", level:"government", category:"प्रतियोगी परीक्षा", icon:"📝"},
-    {name:"करंट अफेयर्स", level:"government", category:"प्रतियोगी परीक्षा", icon:"📰"},
-    {name:"Computer Fundamentals", level:"computer", category:"कंप्यूटर", icon:"🖥️"},
-    {name:"Coding", level:"computer", category:"कंप्यूटर", icon:"👨‍💻"}
+const subjects=[
+{name:"हिंदी",level:"school",icon:"📖"},
+{name:"English",level:"school",icon:"🔤"},
+{name:"गणित",level:"school",icon:"➗"},
+{name:"विज्ञान",level:"school",icon:"🔬"},
+{name:"सामाजिक विज्ञान",level:"school",icon:"🌍"},
+{name:"Physics",level:"senior",icon:"⚡"},
+{name:"Chemistry",level:"senior",icon:"🧪"},
+{name:"Biology",level:"senior",icon:"🧬"},
+{name:"Mathematics",level:"senior",icon:"📐"},
+{name:"Computer Science",level:"senior",icon:"💻"},
+{name:"Accountancy",level:"senior",icon:"🧾"},
+{name:"Business Studies",level:"senior",icon:"🏢"},
+{name:"Economics",level:"senior",icon:"📈"},
+{name:"History",level:"senior",icon:"🏛️"},
+{name:"Geography",level:"senior",icon:"🌏"},
+{name:"Political Science",level:"senior",icon:"⚖️"},
+{name:"Psychology",level:"college",icon:"🧠"},
+{name:"Sociology",level:"college",icon:"👥"},
+{name:"NEET",level:"competitive",icon:"🩺"},
+{name:"JEE",level:"competitive",icon:"⚙️"},
+{name:"सामान्य ज्ञान (GK)",level:"competitive",icon:"🌐"},
+{name:"Reasoning",level:"competitive",icon:"🧩"},
+{name:"करंट अफेयर्स",level:"competitive",icon:"📰"},
+{name:"English Grammar",level:"competitive",icon:"✍️"},
+{name:"हिंदी व्याकरण",level:"competitive",icon:"📝"},
+{name:"Computer Fundamentals",level:"computer",icon:"🖥️"},
+{name:"Coding",level:"computer",icon:"👨‍💻"}
 ];
 
-const questions = [
-{
-subject:"गणित", level:"school",
-q:"12 × 8 का मान कितना है?",
-options:["86","96","108","88"],
-answer:1,
-explanation:"12 × 8 = 96।"
-},
-{
-subject:"गणित", level:"school",
-q:"एक त्रिभुज के तीनों कोणों का योग कितना होता है?",
-options:["90°","180°","270°","360°"],
-answer:1,
-explanation:"किसी समतलीय त्रिभुज के तीनों आंतरिक कोणों का योग 180° होता है।"
-},
-{
-subject:"विज्ञान", level:"school",
-q:"पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?",
-options:["श्वसन","प्रकाश संश्लेषण","पाचन","वाष्पीकरण"],
-answer:1,
-explanation:"हरे पौधे सूर्य के प्रकाश की मदद से प्रकाश संश्लेषण करते हैं।"
-},
-{
-subject:"विज्ञान", level:"school",
-q:"पानी का रासायनिक सूत्र क्या है?",
-options:["CO2","O2","H2O","NaCl"],
-answer:2,
-explanation:"पानी के एक अणु में दो हाइड्रोजन और एक ऑक्सीजन परमाणु होता है।"
-},
-{
-subject:"हिंदी", level:"school",
-q:"'सूर्य' का एक पर्यायवाची शब्द कौन-सा है?",
-options:["रवि","रात्रि","पवन","नीर"],
-answer:0,
-explanation:"रवि, सूर्य का पर्यायवाची शब्द है।"
-},
-{
-subject:"English", level:"school",
-q:"What is the plural of 'child'?",
-options:["Childs","Childes","Children","Childrens"],
-answer:2,
-explanation:"The correct plural form is children."
-},
-{
-subject:"History", level:"school",
-q:"भारत को स्वतंत्रता किस वर्ष मिली?",
-options:["1942","1945","1947","1950"],
-answer:2,
-explanation:"भारत 15 अगस्त 1947 को स्वतंत्र हुआ।"
-},
-{
-subject:"Geography", level:"school",
-q:"भारत की राजधानी कौन-सी है?",
-options:["मुंबई","नई दिल्ली","जयपुर","लखनऊ"],
-answer:1,
-explanation:"भारत की राजधानी नई दिल्ली है।"
-},
-{
-subject:"Physics", level:"11-12",
-q:"बल की SI इकाई क्या है?",
-options:["जूल","वाट","न्यूटन","पास्कल"],
-answer:2,
-explanation:"बल की SI इकाई न्यूटन (N) है।"
-},
-{
-subject:"Physics", level:"11-12",
-q:"निर्वात में प्रकाश की चाल लगभग कितनी होती है?",
-options:["3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10⁵ m/s","300 m/s"],
-answer:1,
-explanation:"निर्वात में प्रकाश की चाल लगभग 3 × 10⁸ मीटर प्रति सेकंड होती है।"
-},
-{
-subject:"Chemistry", level:"11-12",
-q:"ऑक्सीजन का परमाणु क्रमांक क्या है?",
-options:["6","7","8","16"],
-answer:2,
-explanation:"ऑक्सीजन का परमाणु क्रमांक 8 है।"
-},
-{
-subject:"Chemistry", level:"11-12",
-q:"pH का मान 7 होने पर 25°C पर शुद्ध पानी कैसा होता है?",
-options:["अम्लीय","क्षारीय","उदासीन","अत्यधिक अम्लीय"],
-answer:2,
-explanation:"25°C पर शुद्ध पानी का pH लगभग 7 होता है, इसलिए इसे उदासीन माना जाता है।"
-},
-{
-subject:"Biology", level:"11-12",
-q:"कोशिका का पावरहाउस किसे कहा जाता है?",
-options:["केंद्रक","माइटोकॉन्ड्रिया","राइबोसोम","गॉल्जी तंत्र"],
-answer:1,
-explanation:"माइटोकॉन्ड्रिया कोशिका में ऊर्जा उत्पादन में महत्वपूर्ण भूमिका निभाता है।"
-},
-{
-subject:"Biology", level:"11-12",
-q:"मानव रक्त में ऑक्सीजन का परिवहन मुख्यतः कौन करता है?",
-options:["प्लेटलेट्स","हीमोग्लोबिन","प्लाज्मा प्रोटीन","इंसुलिन"],
-answer:1,
-explanation:"लाल रक्त कोशिकाओं में मौजूद हीमोग्लोबिन ऑक्सीजन का परिवहन करता है।"
-},
-{
-subject:"Mathematics", level:"11-12",
-q:"यदि x + 5 = 12, तो x का मान क्या होगा?",
-options:["5","6","7","17"],
-answer:2,
-explanation:"दोनों तरफ से 5 घटाने पर x = 12 − 5 = 7।"
-},
-{
-subject:"Computer Fundamentals", level:"computer",
-q:"CPU का पूरा नाम क्या है?",
-options:[
-"Central Processing Unit",
-"Computer Personal Unit",
-"Central Program Utility",
-"Control Power Unit"
-],
-answer:0,
-explanation:"CPU का पूरा नाम Central Processing Unit है।"
-},
-{
-subject:"Coding", level:"computer",
-q:"HTML का मुख्य उपयोग क्या है?",
-options:[
-"वेब पेज की संरचना बनाना",
-"केवल वीडियो एडिटिंग",
-"कंप्यूटर की RAM बढ़ाना",
-"ऑपरेटिंग सिस्टम हटाना"
-],
-answer:0,
-explanation:"HTML का उपयोग वेब पेज की संरचना बनाने के लिए होता है।"
-},
-{
-subject:"सामान्य ज्ञान (GK)", level:"government",
-q:"भारत का संविधान कब लागू हुआ?",
-options:["15 अगस्त 1947","26 जनवरी 1950","2 अक्टूबर 1950","26 नवंबर 1949"],
-answer:1,
-explanation:"भारतीय संविधान 26 जनवरी 1950 को लागू हुआ।"
-},
-{
-subject:"Reasoning", level:"government",
-q:"श्रृंखला पूरी करें: 2, 4, 6, 8, __",
-options:["9","10","11","12"],
-answer:1,
-explanation:"हर बार 2 जोड़ा जा रहा है। अगली संख्या 10 है।"
-},
-{
-subject:"English Grammar", level:"government",
-q:"Choose the correct past tense of 'go'.",
-options:["Goed","Gone","Went","Going"],
-answer:2,
-explanation:"'Go' का simple past tense 'went' है।"
-},
-{
-subject:"NEET", level:"medical",
-q:"मानव हृदय में सामान्यतः कितने कक्ष होते हैं?",
-options:["2","3","4","5"],
-answer:2,
-explanation:"मानव हृदय में दो आलिंद और दो निलय होते हैं, कुल चार कक्ष।"
-},
-{
-subject:"NEET", level:"medical",
-q:"प्रकाश संश्लेषण में पौधे मुख्यतः कौन-सी गैस लेते हैं?",
-options:["ऑक्सीजन","कार्बन डाइऑक्साइड","नाइट्रोजन","हाइड्रोजन"],
-answer:1,
-explanation:"प्रकाश संश्लेषण के दौरान पौधे कार्बन डाइऑक्साइड का उपयोग करते हैं।"
-},
-{
-subject:"JEE", level:"engineering",
-q:"यदि किसी वस्तु का वेग स्थिर है, तो उसका त्वरण क्या होगा?",
-options:["शून्य","अनंत","हमेशा 9.8 m/s²","हमेशा 1 m/s²"],
-answer:0,
-explanation:"स्थिर वेग के लिए त्वरण शून्य होता है।"
-},
-{
-subject:"Economics", level:"11-12",
-q:"वस्तुओं और सेवाओं की कीमतों के सामान्य स्तर में लगातार वृद्धि क्या कहलाती है?",
-options:["मुद्रास्फीति","मंदी","बचत","निर्यात"],
-answer:0,
-explanation:"कीमतों के सामान्य स्तर में लगातार वृद्धि को मुद्रास्फीति कहते हैं।"
-},
-{
-subject:"Accountancy", level:"11-12",
-q:"लेखांकन का मूल समीकरण क्या है?",
-options:[
-"Assets = Liabilities + Capital",
-"Assets = Expenses − Income",
-"Capital = Assets + Liabilities",
-"Income = Assets + Expenses"
-],
-answer:0,
-explanation:"लेखांकन का मूल समीकरण: Assets = Liabilities + Capital।"
-},
-{
-subject:"करंट अफेयर्स", level:"government",
-q:"करंट अफेयर्स की तैयारी के लिए सबसे उपयोगी तरीका कौन-सा है?",
-options:[
-"केवल पुराने प्रश्न पढ़ना",
-"नियमित समाचार और विश्वसनीय मासिक समीक्षा पढ़ना",
-"केवल गणित पढ़ना",
-"कोई तैयारी न करना"
-],
-answer:1,
-explanation:"नियमित समाचार और विश्वसनीय मासिक समीक्षा से समसामयिक घटनाओं की तैयारी में मदद मिलती है।"
-}
+const questions=[
+{subject:"गणित",q:"12 × 8 = ?",en:"What is 12 × 8?",opts:["86","96","108","88"],ans:1,ex:"12 × 8 = 96। | 12 × 8 = 96."},
+{subject:"विज्ञान",q:"पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?",en:"How do plants make food?",opts:["श्वसन / Respiration","प्रकाश संश्लेषण / Photosynthesis","पाचन / Digestion","वाष्पीकरण / Evaporation"],ans:1,ex:"पौधे प्रकाश संश्लेषण द्वारा भोजन बनाते हैं। | Plants make food through photosynthesis."},
+{subject:"हिंदी",q:"'सूर्य' का पर्यायवाची शब्द कौन-सा है?",en:"Which word is a synonym of Surya (Sun)?",opts:["रवि","रात्रि","पवन","नीर"],ans:0,ex:"रवि, सूर्य का पर्यायवाची शब्द है। | Ravi is a synonym for the Sun."},
+{subject:"English",q:"What is the plural of 'child'?",en:"What is the plural of 'child'?",opts:["Childs","Childes","Children","Childrens"],ans:2,ex:"The correct plural is children."},
+{subject:"Physics",q:"बल की SI इकाई क्या है?",en:"What is the SI unit of force?",opts:["Joule","Watt","Newton","Pascal"],ans:2,ex:"बल की SI इकाई न्यूटन है। | The SI unit of force is the newton."},
+{subject:"Chemistry",q:"ऑक्सीजन का परमाणु क्रमांक क्या है?",en:"What is the atomic number of oxygen?",opts:["6","7","8","16"],ans:2,ex:"ऑक्सीजन का परमाणु क्रमांक 8 है। | Oxygen's atomic number is 8."},
+{subject:"Biology",q:"कोशिका का पावरहाउस किसे कहते हैं?",en:"Which organelle is called the powerhouse of the cell?",opts:["केंद्रक / Nucleus","माइटोकॉन्ड्रिया / Mitochondria","राइबोसोम / Ribosome","गॉल्जी तंत्र / Golgi apparatus"],ans:1,ex:"माइटोकॉन्ड्रिया ऊर्जा उत्पादन में महत्वपूर्ण है। | Mitochondria play a key role in energy production."},
+{subject:"Mathematics",q:"If x + 5 = 12, what is x?",en:"If x + 5 = 12, what is x?",opts:["5","6","7","17"],ans:2,ex:"x = 12 − 5 = 7."},
+{subject:"Computer Fundamentals",q:"CPU का पूरा नाम क्या है?",en:"What does CPU stand for?",opts:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Control Power Unit"],ans:0,ex:"CPU का पूरा नाम Central Processing Unit है।"},
+{subject:"सामान्य ज्ञान (GK)",q:"भारत का संविधान कब लागू हुआ?",en:"When did the Constitution of India come into effect?",opts:["15 अगस्त 1947","26 जनवरी 1950","2 अक्टूबर 1950","26 नवंबर 1949"],ans:1,ex:"संविधान 26 जनवरी 1950 को लागू हुआ। | It came into effect on 26 January 1950."},
+{subject:"Reasoning",q:"श्रृंखला पूरी करें: 2, 4, 6, 8, __",en:"Complete the series: 2, 4, 6, 8, __",opts:["9","10","11","12"],ans:1,ex:"हर बार 2 जुड़ता है। | Add 2 each time."},
+{subject:"NEET",q:"मानव हृदय में कितने कक्ष होते हैं?",en:"How many chambers are in the human heart?",opts:["2","3","4","5"],ans:2,ex:"मानव हृदय में चार कक्ष होते हैं। | The human heart has four chambers."},
+{subject:"JEE",q:"स्थिर वेग होने पर त्वरण कितना होता है?",en:"What is acceleration when velocity is constant?",opts:["शून्य / Zero","अनंत / Infinite","9.8 m/s²","1 m/s²"],ans:0,ex:"स्थिर वेग का अर्थ शून्य त्वरण है। | Constant velocity means zero acceleration."}
 ];
 
-let activeQuestions = [];
-let currentIndex = 0;
-let score = 0;
-let answered = false;
-let currentSubject = "";
+let currentSubject="";
+let activeQuestions=[];
+let index=0;
+let score=0;
+let answered=false;
 
-function renderSubjects() {
-    const search = document.getElementById("search").value.toLowerCase().trim();
-    const level = document.getElementById("level").value;
-    const list = document.getElementById("subjectList");
-
-    list.innerHTML = "";
-
-    const filtered = subjects.filter(s => {
-        const matchesSearch =
-            (s.name + " " + s.category).toLowerCase().includes(search);
-
-        let matchesLevel = level === "all";
-
-        if (level === "school") {
-            matchesLevel = s.level === "school";
-        } else if (level === "11-12") {
-            matchesLevel = s.level === "11-12";
-        } else if (level === "college") {
-            matchesLevel = s.level === "college";
-        } else if (level === "medical") {
-            matchesLevel = s.level === "medical" ||
-                s.name === "Biology" ||
-                s.name === "Physics" ||
-                s.name === "Chemistry";
-        } else if (level === "engineering") {
-            matchesLevel = s.level === "engineering" ||
-                s.name === "Physics" ||
-                s.name === "Chemistry" ||
-                s.name === "Mathematics";
-        } else if (level === "government") {
-            matchesLevel = s.level === "government";
-        } else if (level === "computer") {
-            matchesLevel = s.level === "computer";
-        }
-
-        return matchesSearch && matchesLevel;
-    });
-
-    if (filtered.length === 0) {
-        list.innerHTML = "<p>इस खोज में कोई विषय नहीं मिला।</p>";
-        return;
-    }
-
-    filtered.forEach(s => {
-        const count = questions.filter(q =>
-            q.subject === s.name ||
-            (s.name === "NEET" && q.level === "medical") ||
-            (s.name === "JEE" && q.level === "engineering")
-        ).length;
-
-        const card = document.createElement("div");
-        card.className = "subject-card";
-
-        const title = document.createElement("h3");
-        title.textContent = s.icon + " " + s.name;
-
-        const category = document.createElement("p");
-        category.textContent = s.category;
-
-        const countText = document.createElement("p");
-        countText.className = "small";
-        countText.textContent = count + " नमूना प्रश्न उपलब्ध";
-
-        const btn = document.createElement("button");
-        btn.textContent = "प्रश्न हल करें";
-        btn.onclick = () => chooseSubject(s.name);
-
-        card.append(title, category, countText, btn);
-        list.appendChild(card);
-    });
+function renderSubjects(){
+ const query=document.getElementById("subjectSearch").value.toLowerCase().trim();
+ const level=document.getElementById("classLevel").value;
+ const list=document.getElementById("subjectList");
+ list.innerHTML="";
+ const filtered=subjects.filter(s=>
+  (s.name.toLowerCase().includes(query)) &&
+  (level==="all" || s.level===level)
+ );
+ if(!filtered.length){list.textContent="कोई विषय नहीं मिला।";return}
+ filtered.forEach(s=>{
+  const card=document.createElement("div");
+  card.className="card searchable";
+  const h=document.createElement("h3");
+  h.textContent=s.icon+" "+s.name;
+  const p=document.createElement("p");
+  const btn=document.createElement("button");
+  btn.textContent="प्रश्न हल करें";
+  btn.onclick=()=>selectSubject(s.name);
+  card.append(h,p,btn);
+  list.appendChild(card);
+ });
 }
 
-function resetFilters() {
-    document.getElementById("search").value = "";
-    document.getElementById("level").value = "all";
-    renderSubjects();
+function selectSubject(name){
+ currentSubject=name;
+ document.getElementById("testSubject").textContent="चुना गया विषय: "+name;
+ document.getElementById("test").scrollIntoView({behavior:"smooth"});
 }
 
-function chooseSubject(name) {
-    currentSubject = name;
-    document.getElementById("selectedSubject").textContent =
-        "चुना गया विषय: " + name;
-
-    document.getElementById("test").scrollIntoView({
-        behavior: "smooth"
-    });
+function startTest(){
+ if(currentSubject==="NEET"){
+  activeQuestions=questions.filter(q=>["NEET","Physics","Chemistry","Biology"].includes(q.subject));
+ }else if(currentSubject==="JEE"){
+  activeQuestions=questions.filter(q=>["JEE","Physics","Chemistry","Mathematics"].includes(q.subject));
+ }else if(currentSubject==="सरकारी नौकरी"){
+  activeQuestions=questions.filter(q=>["सामान्य ज्ञान (GK)","Reasoning"].includes(q.subject));
+ }else if(currentSubject){
+  activeQuestions=questions.filter(q=>q.subject===currentSubject);
+ }else{
+  activeQuestions=[...questions];
+ }
+ if(!activeQuestions.length){
+  alert("इस विषय के नमूना प्रश्न अभी नहीं जोड़े गए हैं।");
+  return;
+ }
+ index=0;score=0;
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("quizArea").classList.remove("hidden");
+ showQuestion();
 }
 
-function startTest() {
-    if (currentSubject === "NEET") {
-        activeQuestions = questions.filter(q =>
-            q.level === "medical" ||
-            ["Physics", "Chemistry", "Biology"].includes(q.subject)
-        );
-    } else if (currentSubject === "JEE") {
-        activeQuestions = questions.filter(q =>
-            q.level === "engineering" ||
-            ["Physics", "Chemistry", "Mathematics"].includes(q.subject)
-        );
-    } else if (currentSubject === "सरकारी नौकरी") {
-        activeQuestions = questions.filter(q =>
-            q.level === "government"
-        );
-    } else if (currentSubject === "कंप्यूटर") {
-        activeQuestions = questions.filter(q =>
-            q.level === "computer"
-        );
-    } else if (currentSubject) {
-        activeQuestions = questions.filter(q =>
-            q.subject === currentSubject
-        );
-    } else {
-        activeQuestions = [...questions];
-    }
-
-    if (activeQuestions.length === 0) {
-        alert("इस विषय के प्रश्न अभी नहीं जोड़े गए हैं।");
-        return;
-    }
-
-    currentIndex = 0;
-    score = 0;
-    answered = false;
-
-    document.getElementById("result").classList.add("hidden");
-    document.getElementById("quizArea").classList.remove("hidden");
-
-    showQuestion();
+function showQuestion(){
+ answered=false;
+ const q=activeQuestions[index];
+ document.getElementById("testProgress").textContent=
+ "Question "+(index+1)+" / "+activeQuestions.length+" | Score: "+score;
+ document.getElementById("question").textContent=q.q+" / "+q.en;
+ document.getElementById("feedback").textContent="";
+ document.getElementById("nextBtn").classList.add("hidden");
+ const box=document.getElementById("options");
+ box.innerHTML="";
+ q.opts.forEach((op,i)=>{
+  const b=document.createElement("button");
+  b.className="answer";
+  b.textContent=String.fromCharCode(65+i)+". "+op;
+  b.onclick=()=>checkAnswer(i,b);
+  box.appendChild(b);
+ });
 }
 
-function showQuestion() {
-    answered = false;
-
-    const q = activeQuestions[currentIndex];
-
-    document.getElementById("progress").textContent =
-        "प्रश्न " + (currentIndex + 1) +
-        " / " + activeQuestions.length +
-        " | स्कोर: " + score;
-
-    document.getElementById("question").textContent =
-        q.q;
-
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("nextBtn").classList.add("hidden");
-
-    const optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
-
-    q.options.forEach((option, i) => {
-        const btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = String.fromCharCode(65 + i) + ". " + option;
-        btn.onclick = () => checkAnswer(i, btn);
-        optionsDiv.appendChild(btn);
-    });
+function checkAnswer(choice,button){
+ if(answered)return;
+ answered=true;
+ const q=activeQuestions[index];
+ document.querySelectorAll(".answer").forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.ans)b.classList.add("correct");
+ });
+ if(choice===q.ans){
+  score++;
+  document.getElementById("feedback").textContent="✅ सही उत्तर! / Correct! "+q.ex;
+ }else{
+  button.classList.add("wrong");
+  document.getElementById("feedback").textContent="❌ सही उत्तर / Correct answer: "+q.opts[q.ans]+". "+q.ex;
+ }
+ document.getElementById("testProgress").textContent=
+ "Question "+(index+1)+" / "+activeQuestions.length+" | Score: "+score;
+ const next=document.getElementById("nextBtn");
+ next.classList.remove("hidden");
+ next.textContent=index===activeQuestions.length-1?"रिजल्ट / Results":"अगला प्रश्न / Next";
 }
 
-function checkAnswer(selected, selectedButton) {
-    if (answered) return;
-    answered = true;
-
-    const q = activeQuestions[currentIndex];
-    const buttons = document.querySelectorAll(".option");
-
-    buttons.forEach((btn, i) => {
-        btn.disabled = true;
-
-        if (i === q.answer) {
-            btn.classList.add("correct");
-        }
-    });
-
-    if (selected === q.answer) {
-        score++;
-        document.getElementById("feedback").textContent =
-            "✅ सही उत्तर! " + q.explanation;
-    } else {
-        selectedButton.classList.add("wrong");
-        document.getElementById("feedback").textContent =
-            "❌ गलत उत्तर। सही उत्तर: " +
-            q.options[q.answer] + ". " + q.explanation;
-    }
-
-    document.getElementById("progress").textContent =
-        "प्रश्न " + (currentIndex + 1) +
-        " / " + activeQuestions.length +
-        " | स्कोर: " + score;
-
-    const next = document.getElementById("nextBtn");
-    next.classList.remove("hidden");
-    next.textContent =
-        currentIndex === activeQuestions.length - 1
-            ? "रिजल्ट देखें"
-            : "अगला प्रश्न →";
+function nextQuestion(){
+ index++;
+ if(index<activeQuestions.length)showQuestion();
+ else{
+  document.getElementById("quizArea").classList.add("hidden");
+  const r=document.getElementById("result");
+  r.classList.remove("hidden");
+  r.innerHTML="";
+  const h=document.createElement("h3");
+  h.textContent="टेस्ट पूरा हुआ! / Test complete!";
+  const p=document.createElement("p");
+  p.textContent="Score: "+score+" / "+activeQuestions.length+
+   " ("+Math.round(score/activeQuestions.length*100)+"%)";
+  const b=document.createElement("button");
+  b.textContent="दोबारा टेस्ट दें / Retry";
+  b.onclick=startTest;
+  r.append(h,p,b);
+ }
 }
 
-function nextQuestion() {
-    currentIndex++;
-
-    if (currentIndex < activeQuestions.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
+function searchWebsite(){
+ const query=document.getElementById("globalSearch").value.toLowerCase().trim();
+ document.querySelectorAll(".searchable").forEach(el=>{
+  el.style.display=el.textContent.toLowerCase().includes(query)?"":"none";
+ });
 }
 
-function showResult() {
-    document.getElementById("quizArea").classList.add("hidden");
+function gameAnswer(n){
+ document.getElementById("gameResult").textContent=
+ n===15?"✅ सही जवाब! / Correct!":"❌ फिर से कोशिश करो। / Try again.";
+}
 
-    const result = document.getElementById("result");
-    result.classList.remove("hidden");
+function askAI(){
+ const q=document.getElementById("aiQuestion").value.trim();
+ document.getElementById("aiAnswer").textContent=q
+  ?"अभी AI सेवा कनेक्ट नहीं है। / AI is not connected yet."
+  :"पहले अपना सवाल लिखें। / Please type your question first.";
+}
 
-    const percentage = Math.round(
-        score / activeQuestions.length * 100
-    );
+function askLocation(){
+ const out=document.getElementById("locationResult");
+ if(!navigator.geolocation){
+  out.textContent="इस ब्राउज़र में स्थान की सुविधा उपलब्ध नहीं है।";
+  return;
+ }
+ out.textContent="स्थान की अनुमति माँगी जा रही है...";
+ navigator.geolocation.getCurrentPosition(
+  pos=>out.textContent="स्थान मिल गया। अभी लाइव स्थानीय समाचार सेवा कनेक्ट नहीं है।",
+  ()=>out.textContent="स्थान नहीं मिला। आप राज्य या जिला मैन्युअल रूप से चुन सकते हैं।"
+ );
+}
 
-    result.innerHTML = "";
-
-    const title = document.createElement("h2");
-    title.textContent = "🎉 टेस्ट पूरा हुआ!";
-
-    const scoreText = document.createElement("p");
-    scoreText.textContent =
-        "आपका स्कोर: " + score + " / " + activeQuestions.length;
-
-    const percentText = document.createElement("p");
-    percentText.textContent = "प्रतिशत: " + percentage + "%";
-
-    const message = document.createElement("p");
-    message.textContent =
-        percentage >= 80 ? "बहुत अच्छा! अभ्यास जारी रखें।" :
-        percentage >= 50 ? "अच्छा प्रयास! और अभ्यास करें।" :
-        "कोई बात नहीं। उत्तरों को समझें और फिर कोशिश करें।";
-
-    const retry = document.createElement("button");
-    retry.textContent = "दोबारा टेस्ट दें";
-    retry.onclick = startTest;
-
-    result.append(title, scoreText, percentText, message, retry);
+function changeLanguage(){
+ const lang=document.getElementById("language").value;
+ alert(lang==="en"
+  ?"Some questions and explanations include English. The full interface translation is not connected yet."
+  :"कुछ प्रश्न और व्याख्याएँ English में भी हैं। पूरे इंटरफेस का अनुवाद अभी नहीं जुड़ा है।");
 }
 
 renderSubjects();
