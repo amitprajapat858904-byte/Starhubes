@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -7,134 +6,456 @@
 <title>StarHub - All in One</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5f9;
-    color: #172554;
-}
-header {
-    background: linear-gradient(135deg, #142b70, #087de1);
-    color: white;
-    padding: 25px 15px;
-    text-align: center;
-}
-header h1 {
-    margin: 0;
-    font-size: 32px;
-}
-header p {
-    margin-bottom: 0;
-}
-.search {
-    width: 90%;
-    max-width: 600px;
-    padding: 13px;
-    margin: 20px auto;
-    display: block;
-    border: 1px solid #cbd5e1;
-    border-radius: 25px;
-    font-size: 16px;
-}
-h2 {
-    text-align: center;
-}
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-    gap: 15px;
-    padding: 15px;
-    max-width: 1100px;
-    margin: auto;
-}
-.card {
-    background: white;
-    padding: 22px 10px;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px #00000012;
-    text-decoration: none;
-    color: #172554;
-    font-weight: bold;
-    transition: 0.2s;
-}
-.card:hover {
-    background: #dbeafe;
-    transform: translateY(-3px);
-}
-.icon {
-    font-size: 32px;
-    display: block;
-    margin-bottom: 10px;
-}
-footer {
-    background: #142b70;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 25px;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+header{background:linear-gradient(120deg,#10245c,#087de1);color:white;text-align:center;padding:25px 12px}
+header h1{font-size:36px;margin:0}
+.toolbar{background:white;padding:12px;text-align:center}
+input,select,button{padding:11px;margin:5px;border-radius:8px;border:1px solid #ccc;font-size:15px}
+button{background:#123a8a;color:white;cursor:pointer;border:0}
+#search{width:min(90%,450px)}
+main{max-width:1000px;margin:auto;padding:15px}
+.panel{background:white;padding:18px;margin:15px 0;border-radius:13px;box-shadow:0 2px 8px #0001}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.card{background:white;border:1px solid #ddd;padding:18px 8px;text-align:center;border-radius:12px;text-decoration:none;color:#172033;display:block}
+.card span{font-size:30px;display:block;margin-bottom:8px}
+.card:hover{background:#e2edff}
+.status{background:#f0f5ff;padding:12px;border-radius:8px;overflow-wrap:anywhere}
+footer{background:#10245c;color:white;text-align:center;padding:22px}
+.note{font-size:13px;color:#667085;line-height:1.6}
+.hidden{display:none!important}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>🌐 StarHub</h1>
-    <p>Education • Jobs • News • Shopping • AI</p>
+<h1>🌐 StarHub</h1>
+<p id="tagline">आपकी दुनिया, एक ही जगह!</p>
 </header>
 
-<input
-    type="search"
-    class="search"
-    id="search"
-    placeholder="अपनी सुविधा खोजें..."
-    oninput="searchCards()"
->
-
-<h2>⭐ सभी सुविधाएँ</h2>
-
-<div class="container" id="cards">
-
-<a class="card" href="#education"><span class="icon">📚</span>Education</a>
-<a class="card" href="#test"><span class="icon">📝</span>Online Test</a>
-<a class="card" href="#pdf"><span class="icon">📄</span>PDF Download</a>
-<a class="card" href="#news"><span class="icon">📰</span>News</a>
-<a class="card" href="#games"><span class="icon">🎮</span>Games</a>
-<a class="card" href="#token"><span class="icon">🌾</span>अनाज टोकन</a>
-<a class="card" href="#exam"><span class="icon">🏛️</span>Government Exam</a>
-<a class="card" href="#forms"><span class="icon">📋</span>Exam Forms</a>
-<a class="card" href="#privatejobs"><span class="icon">🏢</span>Private Jobs</a>
-<a class="card" href="#onlinejobs"><span class="icon">💼</span>Online Jobs</a>
-<a class="card" href="#books"><span class="icon">📖</span>Books</a>
-<a class="card" href="#ai"><span class="icon">🤖</span>AI Assistant</a>
-<a class="card" href="#shopping"><span class="icon">🛍️</span>Online Shopping</a>
-<a class="card" href="#app"><span class="icon">📲</span>Download App</a>
-
+<div class="toolbar">
+<label id="languageLabel" for="language">भाषा चुनें:</label>
+<select id="language">
+<option value="auto">🌍 Automatic</option>
+<option value="hi">हिन्दी</option>
+<option value="en">English</option>
+<option value="ta">தமிழ்</option>
+<option value="mr">मराठी</option>
+<option value="bn">বাংলা</option>
+<option value="gu">ગુજરાતી</option>
+<option value="pa">ਪੰਜਾਬੀ</option>
+<option value="te">తెలుగు</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="ml">മലയാളം</option>
+<option value="ur">اردو</option>
+<option value="or">ଓଡ଼ିଆ</option>
+<option value="as">অসমীয়া</option>
+<option value="ne">नेपाली</option>
+</select>
+<br>
+<input id="search" placeholder="सेवाएँ खोजें...">
 </div>
 
+<main>
+
+<section class="panel">
+<h2 id="newsTitle">📰 AI Voice News</h2>
+<p id="newsPrompt">आप किस जगह की खबरें सुनना चाहते हैं?</p>
+
+<input id="place" placeholder="गाँव, शहर, जिला, राज्य या देश लिखें">
+
+<br>
+<button id="speakButton">🔊 सवाल सुनें</button>
+<button id="listenButton">🎙️ बोलकर जगह बताएँ</button>
+<button id="locationButton">📍 मेरी लोकेशन</button>
+<button id="newsButton">📰 खबरें खोजें</button>
+
+<p id="newsStatus" class="status">
+अपनी जगह लिखें या बोलें। लाइव खबरों के लिए News API जोड़ना बाकी है।
+</p>
+
+<p class="note">
+ध्यान दें: यह शुरुआती वेबसाइट है। असली ताज़ा खबरें दिखाने के लिए News API या RSS सेवा चाहिए।
+</p>
+</section>
+
+<section class="panel">
+<h2 id="servicesTitle">⭐ सभी सेवाएँ</h2>
+
+<div class="grid" id="serviceGrid">
+
+<a class="card" href="#education" data-search="पढ़ाई education">
+<span>📚</span><b data-key="education">पढ़ाई</b>
+</a>
+
+<a class="card" href="#test" data-search="online test neet">
+<span>📝</span><b data-key="test">ऑनलाइन टेस्ट</b>
+</a>
+
+<a class="card" href="#pdf" data-search="pdf books">
+<span>📄</span><b data-key="pdf">PDF और किताबें</b>
+</a>
+
+<a class="card" href="#newsTitle" data-search="news खबरें">
+<span>🌍</span><b data-key="news">दुनिया की खबरें</b>
+</a>
+
+<a class="card" href="#games" data-search="games">
+<span>🎮</span><b data-key="games">गेम्स</b>
+</a>
+
+<a class="card" href="#jobs" data-search="government jobs">
+<span>💼</span><b data-key="jobs">सरकारी नौकरियाँ</b>
+</a>
+
+<a class="card" href="#forms" data-search="exam forms">
+<span>📋</span><b data-key="forms">परीक्षा फॉर्म</b>
+</a>
+
+<a class="card" href="#private" data-search="private online jobs">
+<span>🏢</span><b data-key="private">प्राइवेट जॉब</b>
+</a>
+
+<a class="card" href="#ai" data-search="ai assistant">
+<span>🤖</span><b data-key="ai">AI असिस्टेंट</b>
+</a>
+
+<a class="card" href="#shopping" data-search="shopping">
+<span>🛍️</span><b data-key="shopping">ऑनलाइन शॉपिंग</b>
+</a>
+
+<a class="card" href="#agriculture" data-search="anaj agriculture">
+<span>🌾</span><b data-key="agriculture">अनाज और कृषि</b>
+</a>
+
+<a class="card" href="#downloads" data-search="download app">
+<span>📲</span><b data-key="downloads">ऐप डाउनलोड</b>
+</a>
+
+</div>
+</section>
+
+<section class="panel" id="test">
+<h2>🧪 नमूना ऑनलाइन टेस्ट</h2>
+<p>प्रकाश संश्लेषण मुख्य रूप से पौधे के किस भाग में होता है?</p>
+
+<label><input type="radio" name="answer" value="a"> जड़</label><br>
+<label><input type="radio" name="answer" value="b"> पत्ती</label><br>
+<label><input type="radio" name="answer" value="c"> फूल</label><br>
+
+<button id="checkAnswer">उत्तर जाँचें</button>
+<p id="testResult" class="status"></p>
+</section>
+
+<section class="panel" id="education">
+<h2>📚 पढ़ाई</h2>
+<p>यहाँ NEET और अन्य परीक्षाओं के नोट्स, प्रश्न और उत्तर जोड़े जा सकते हैं।</p>
+</section>
+
+<section class="panel" id="pdf">
+<h2>📄 PDF और किताबें</h2>
+<p>यहाँ साझा करने की अनुमति वाली अध्ययन सामग्री जोड़ी जा सकती है।</p>
+</section>
+
+<section class="panel" id="jobs">
+<h2>💼 सरकारी नौकरियाँ</h2>
+<p>सरकारी भर्ती और आधिकारिक नोटिस की जानकारी यहाँ जोड़ी जा सकती है।</p>
+</section>
+
+<section class="panel" id="forms">
+<h2>📋 परीक्षा फॉर्म</h2>
+<p>परीक्षा फॉर्म और अंतिम तारीखों की जानकारी यहाँ जोड़ी जा सकती है।</p>
+</section>
+
+<section class="panel" id="private">
+<h2>🏢 प्राइवेट और ऑनलाइन जॉब</h2>
+<p>नौकरी की जानकारी प्रकाशित करने से पहले उसकी सत्यता जाँचें।</p>
+</section>
+
+<section class="panel" id="games">
+<h2>🎮 गेम्स</h2>
+<p>यहाँ ब्राउज़र में चलने वाले गेम जोड़े जा सकते हैं।</p>
+</section>
+
+<section class="panel" id="ai">
+<h2>🤖 AI असिस्टेंट</h2>
+<p>वास्तविक AI जोड़ने के लिए सुरक्षित सर्वर और AI सेवा की जरूरत होगी।</p>
+</section>
+
+<section class="panel" id="shopping">
+<h2>🛍️ ऑनलाइन शॉपिंग</h2>
+<p>ऑर्डर, भुगतान और विक्रेता खाते जोड़ने के लिए सुरक्षित सर्वर चाहिए।</p>
+</section>
+
+<section class="panel" id="agriculture">
+<h2>🌾 अनाज और कृषि</h2>
+<p>यहाँ मंडी भाव और कृषि योजनाओं की जानकारी जोड़ी जा सकती है।</p>
+</section>
+
+<section class="panel" id="downloads">
+<h2>📲 ऐप डाउनलोड</h2>
+<p>Android ऐप तैयार होने के बाद उसका डाउनलोड लिंक यहाँ जोड़ें।</p>
+</section>
+
+</main>
+
 <footer>
-    <p>© 2026 StarHub | All Rights Reserved</p>
-    <p>Education • Career • Technology</p>
+<h3>🌐 StarHub</h3>
+<p id="footerText">एक वेबसाइट, अनेक भाषाएँ।</p>
 </footer>
 
 <script>
-function searchCards() {
-    const query = document.getElementById("search").value.toLowerCase();
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-        card.style.display =
-            card.innerText.toLowerCase().includes(query)
-            ? ""
-            : "none";
-    });
+const languages = {
+hi:{
+tagline:"आपकी दुनिया, एक ही जगह!",
+languageLabel:"भाषा चुनें:",
+newsTitle:"📰 AI Voice News",
+newsPrompt:"आप किस जगह की खबरें सुनना चाहते हैं?",
+search:"सेवाएँ खोजें...",
+servicesTitle:"⭐ सभी सेवाएँ",
+education:"पढ़ाई",test:"ऑनलाइन टेस्ट",pdf:"PDF और किताबें",
+news:"दुनिया की खबरें",games:"गेम्स",jobs:"सरकारी नौकरियाँ",
+forms:"परीक्षा फॉर्म",private:"प्राइवेट जॉब",
+ai:"AI असिस्टेंट",shopping:"ऑनलाइन शॉपिंग",
+agriculture:"अनाज और कृषि",downloads:"ऐप डाउनलोड",
+footerText:"एक वेबसाइट, अनेक भाषाएँ।"
+},
+en:{
+tagline:"Your world, all in one place!",
+languageLabel:"Choose language:",
+newsTitle:"📰 AI Voice News",
+newsPrompt:"Which location's news would you like to hear?",
+search:"Search services...",
+servicesTitle:"⭐ All Services",
+education:"Education",test:"Online Test",pdf:"PDF & Books",
+news:"World News",games:"Games",jobs:"Government Jobs",
+forms:"Exam Forms",private:"Private Jobs",
+ai:"AI Assistant",shopping:"Online Shopping",
+agriculture:"Agriculture",downloads:"Download App",
+footerText:"One website, many languages."
+},
+ta:{
+tagline:"உங்கள் உலகம் ஒரே இடத்தில்!",
+languageLabel:"மொழியைத் தேர்ந்தெடுக்கவும்:",
+newsTitle:"📰 AI குரல் செய்திகள்",
+newsPrompt:"எந்த இடத்தின் செய்திகளைக் கேட்க விரும்புகிறீர்கள்?",
+search:"சேவைகளைத் தேடுங்கள்...",
+servicesTitle:"⭐ அனைத்து சேவைகள்",
+education:"கல்வி",test:"ஆன்லைன் தேர்வு",pdf:"PDF மற்றும் புத்தகங்கள்",
+news:"உலகச் செய்திகள்",games:"விளையாட்டுகள்",jobs:"அரசு வேலைகள்",
+forms:"தேர்வு விண்ணப்பங்கள்",private:"தனியார் வேலைகள்",
+ai:"AI உதவியாளர்",shopping:"ஆன்லைன் ஷாப்பிங்",
+agriculture:"விவசாயம்",downloads:"செயலி பதிவிறக்கம்",
+footerText:"ஒரு இணையதளம், பல மொழிகள்."
+},
+mr:{
+tagline:"तुमचे जग, एकाच ठिकाणी!",
+languageLabel:"भाषा निवडा:",
+newsTitle:"📰 AI आवाजातील बातम्या",
+newsPrompt:"तुम्हाला कोणत्या ठिकाणच्या बातम्या ऐकायच्या आहेत?",
+search:"सेवा शोधा...",
+servicesTitle:"⭐ सर्व सेवा",
+education:"शिक्षण",test:"ऑनलाइन चाचणी",pdf:"PDF आणि पुस्तके",
+news:"जगातील बातम्या",games:"खेळ",jobs:"सरकारी नोकऱ्या",
+forms:"परीक्षा फॉर्म",private:"खासगी नोकऱ्या",
+ai:"AI सहाय्यक",shopping:"ऑनलाइन खरेदी",
+agriculture:"शेती",downloads:"अॅप डाउनलोड",
+footerText:"एक वेबसाइट, अनेक भाषा."
+},
+bn:{
+tagline:"আপনার পৃথিবী, এক জায়গায়!",
+languageLabel:"ভাষা নির্বাচন করুন:",
+newsTitle:"📰 AI কণ্ঠের খবর",
+newsPrompt:"আপনি কোন এলাকার খবর শুনতে চান?",
+search:"পরিষেবা খুঁজুন...",
+servicesTitle:"⭐ সব পরিষেবা",
+education:"পড়াশোনা",test:"অনলাইন পরীক্ষা",pdf:"PDF ও বই",
+news:"বিশ্ব সংবাদ",games:"গেম",jobs:"সরকারি চাকরি",
+forms:"পরীক্ষার ফর্ম",private:"বেসরকারি চাকরি",
+ai:"AI সহকারী",shopping:"অনলাইন কেনাকাটা",
+agriculture:"কৃষি",downloads:"অ্যাপ ডাউনলোড",
+footerText:"একটি ওয়েবসাইট, অনেক ভাষা."
+},
+gu:{
+tagline:"તમારી દુનિયા, એક જ જગ્યાએ!",
+languageLabel:"ભાષા પસંદ કરો:",
+newsTitle:"📰 AI અવાજ સમાચાર",
+newsPrompt:"તમે કયા સ્થળના સમાચાર સાંભળવા માંગો છો?",
+search:"સેવાઓ શોધો...",
+servicesTitle:"⭐ બધી સેવાઓ",
+education:"અભ્યાસ",test:"ઓનલાઇન ટેસ્ટ",pdf:"PDF અને પુસ્તકો",
+news:"વિશ્વ સમાચાર",games:"રમતો",jobs:"સરકારી નોકરીઓ",
+forms:"પરીક્ષા ફોર્મ",private:"ખાનગી નોકરીઓ",
+ai:"AI સહાયક",shopping:"ઓનલાઇન ખરીદી",
+agriculture:"ખેતી",downloads:"એપ ડાઉનલોડ",
+footerText:"એક વેબસાઇટ, ઘણી ભાષાઓ."
+},
+pa:{
+tagline:"ਤੁਹਾਡੀ ਦੁਨੀਆ, ਇੱਕ ਥਾਂ ਤੇ!",
+languageLabel:"ਭਾਸ਼ਾ ਚੁਣੋ:",
+newsTitle:"📰 AI ਆਵਾਜ਼ ਖ਼ਬਰਾਂ",
+newsPrompt:"ਤੁਸੀਂ ਕਿਸ ਥਾਂ ਦੀਆਂ ਖ਼ਬਰਾਂ ਸੁਣਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
+search:"ਸੇਵਾਵਾਂ ਖੋਜੋ...",
+servicesTitle:"⭐ ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ",
+education:"ਪੜ੍ਹਾਈ",test:"ਆਨਲਾਈਨ ਟੈਸਟ",pdf:"PDF ਅਤੇ ਕਿਤਾਬਾਂ",
+news:"ਦੁਨੀਆ ਦੀਆਂ ਖ਼ਬਰਾਂ",games:"ਖੇਡਾਂ",jobs:"ਸਰਕਾਰੀ ਨੌਕਰੀਆਂ",
+forms:"ਪ੍ਰੀਖਿਆ ਫਾਰਮ",private:"ਨਿੱਜੀ ਨੌਕਰੀਆਂ",
+ai:"AI ਸਹਾਇਕ",shopping:"ਆਨਲਾਈਨ ਖਰੀਦਦਾਰੀ",
+agriculture:"ਖੇਤੀਬਾੜੀ",downloads:"ਐਪ ਡਾਊਨਲੋਡ",
+footerText:"ਇੱਕ ਵੈੱਬਸਾਈਟ, ਕਈ ਭਾਸ਼ਾਵਾਂ."
 }
+};
+
+const voiceLanguages={
+hi:"hi-IN",en:"en-US",ta:"ta-IN",mr:"mr-IN",
+bn:"bn-IN",gu:"gu-IN",pa:"pa-IN",te:"te-IN",
+kn:"kn-IN",ml:"ml-IN",ur:"ur-PK",or:"or-IN",
+as:"as-IN",ne:"ne-NP"
+};
+
+let currentLanguage="hi";
+
+function detectLanguage(){
+ const lang=(navigator.language||"hi-IN").split("-")[0].toLowerCase();
+ return languages[lang]?lang:"hi";
+}
+
+function changeLanguage(value){
+ currentLanguage=value==="auto"?detectLanguage():value;
+ const t=languages[currentLanguage]||languages.hi;
+
+ document.documentElement.lang=currentLanguage;
+
+ Object.keys(t).forEach(key=>{
+  const element=document.getElementById(key);
+  if(element)element.textContent=t[key];
+ });
+
+ document.getElementById("search").placeholder=t.search;
+
+ document.querySelectorAll("[data-key]").forEach(element=>{
+  const key=element.dataset.key;
+  if(t[key])element.textContent=t[key];
+ });
+
+ localStorage.setItem("starhub-language",value);
+}
+
+function speak(text){
+ if(!("speechSynthesis" in window)){
+  document.getElementById("newsStatus").textContent=
+  "इस ब्राउज़र में आवाज़ की सुविधा उपलब्ध नहीं है।";
+  return;
+ }
+ speechSynthesis.cancel();
+ const speech=new SpeechSynthesisUtterance(text);
+ speech.lang=voiceLanguages[currentLanguage]||"hi-IN";
+ speechSynthesis.speak(speech);
+}
+
+document.getElementById("language").addEventListener("change",e=>{
+ changeLanguage(e.target.value);
+});
+
+document.getElementById("search").addEventListener("input",()=>{
+ const query=document.getElementById("search").value.toLowerCase();
+ document.querySelectorAll(".card").forEach(card=>{
+  card.classList.toggle("hidden",
+   !card.textContent.toLowerCase().includes(query)&&
+   !card.dataset.search.toLowerCase().includes(query));
+ });
+});
+
+document.getElementById("speakButton").addEventListener("click",()=>{
+ speak(languages[currentLanguage].newsPrompt);
+});
+
+document.getElementById("listenButton").addEventListener("click",()=>{
+ const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const status=document.getElementById("newsStatus");
+
+ if(!Recognition){
+  status.textContent="इस ब्राउज़र में आवाज़ पहचान उपलब्ध नहीं है। नीचे जगह लिखें।";
+  return;
+ }
+
+ const recognition=new Recognition();
+ recognition.lang=voiceLanguages[currentLanguage]||"hi-IN";
+ status.textContent="सुन रहा है... अब जगह का नाम बोलें।";
+
+ recognition.onresult=e=>{
+  document.getElementById("place").value=e.results[0][0].transcript;
+  status.textContent="जगह दर्ज हो गई। लाइव खबरों के लिए News API जोड़ना बाकी है।";
+ };
+
+ recognition.onerror=()=>{
+  status.textContent="आवाज़ समझ नहीं आई। जगह लिखकर कोशिश करें।";
+ };
+
+ recognition.start();
+});
+
+document.getElementById("locationButton").addEventListener("click",()=>{
+ const status=document.getElementById("newsStatus");
+
+ if(!navigator.geolocation){
+  status.textContent="लोकेशन उपलब्ध नहीं है। जगह खुद लिखें।";
+  return;
+ }
+
+ status.textContent="लोकेशन की अनुमति की प्रतीक्षा है...";
+
+ navigator.geolocation.getCurrentPosition(
+  position=>{
+   status.textContent="लोकेशन मिली। अक्षांश: "+
+   position.coords.latitude.toFixed(3)+", देशांतर: "+
+   position.coords.longitude.toFixed(3)+
+   "। शहर का नाम और लाइव खबरें दिखाने के लिए अतिरिक्त सेवा चाहिए।";
+  },
+  ()=>{
+   status.textContent="लोकेशन की अनुमति नहीं मिली। जगह खुद लिख सकते हैं।";
+  }
+ );
+});
+
+document.getElementById("newsButton").addEventListener("click",()=>{
+ const place=document.getElementById("place").value.trim();
+ const status=document.getElementById("newsStatus");
+
+ if(!place){
+  status.textContent="पहले गाँव, शहर, जिला, राज्य या देश का नाम लिखें या बोलें।";
+  return;
+ }
+
+ status.textContent="आपने चुना: "+place+
+ "। वास्तविक ताज़ा खबरें दिखाने के लिए News API या RSS सेवा जोड़ना बाकी है।";
+});
+
+document.getElementById("checkAnswer").addEventListener("click",()=>{
+ const answer=document.querySelector('input[name="answer"]:checked');
+ const result=document.getElementById("testResult");
+
+ if(!answer){
+  result.textContent="कृपया एक उत्तर चुनें।";
+ }else if(answer.value==="b"){
+  result.textContent="सही उत्तर! प्रकाश संश्लेषण मुख्य रूप से पत्तियों में होता है।";
+ }else{
+  result.textContent="गलत उत्तर। सही उत्तर है: पत्ती।";
+ }
+});
+
+const savedLanguage=localStorage.getItem("starhub-language")||"auto";
+document.getElementById("language").value=savedLanguage;
+changeLanguage(savedLanguage);
+
+// ब्राउज़र ऑटो आवाज़ को रोक सकता है। ऐसी स्थिति में सवाल सुनें बटन दबाएँ।
+window.addEventListener("load",()=>{
+ setTimeout(()=>{
+  try{speak(languages[currentLanguage].newsPrompt)}catch(error){}
+ },1000);
+});
 </script>
 
 </body>
 </html>
-```
