@@ -1,678 +1,396 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHub News - News, Study, Jobs & More</title>
-<meta name="description" content="StarHub पर समाचार, शिक्षा, परीक्षा, नौकरी और कहानियाँ देखें।">
-
+<title>StarHubes — News, Jobs, Learning & Community</title>
+<meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories and community.">
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:110px}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
-header{background:#101827;color:#fff;padding:14px 4%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-size:27px;font-weight:bold}
-.logo span{color:#facc15}
-.header-right{font-size:13px;color:#dbeafe}
-.topbar{background:#172033;color:#fff;padding:10px 4%;position:sticky;top:0;z-index:20}
-nav{display:flex;gap:7px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;background:#273449;padding:9px 11px;border-radius:6px;font-size:14px}
-nav a:hover{background:#2563eb}
-.breaking{display:flex;align-items:center;background:#b91c1c;color:white;overflow:hidden}
-.breaking-label{background:#7f1d1d;font-weight:bold;padding:13px;white-space:nowrap}
-.ticker-window{overflow:hidden;flex:1}
-.ticker-track{display:flex;width:max-content;animation:scrollNews 32s linear infinite}
-.ticker-track span{padding:12px 28px;white-space:nowrap}
-.ticker-window:hover .ticker-track{animation-play-state:paused}
-@keyframes scrollNews{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.container{width:94%;max-width:1200px;margin:18px auto}
-.panel{background:white;padding:18px;border-radius:12px;margin-bottom:20px;box-shadow:0 3px 12px #0000000b}
-h2{margin-top:0;color:#1d4ed8}
-.news-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.live{background:#dc2626;color:white;padding:5px 9px;border-radius:5px;font-size:12px;font-weight:bold}
-.news-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
-.news-feature{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
-.news-feature img{width:100%;height:310px;object-fit:cover;display:block;background:#e2e8f0}
-.news-feature .news-body{padding:16px}
-.news-feature h3{font-size:25px;line-height:1.35;margin:8px 0}
-.side-news{display:grid;gap:12px;align-content:start}
-.news-card{display:grid;grid-template-columns:115px 1fr;gap:12px;border:1px solid #e2e8f0;border-radius:9px;padding:10px;min-width:0}
-.news-card img{width:115px;height:95px;object-fit:cover;border-radius:6px;background:#e2e8f0}
-.news-card h3{font-size:16px;margin:3px 0 8px;line-height:1.35}
-.news-card p{font-size:13px;margin:5px 0}
-.news-card a,.news-feature a{color:#1d4ed8;font-weight:bold;text-decoration:none}
-.news-card a:hover,.news-feature a:hover{text-decoration:underline}
-.muted{color:#64748b;font-size:13px}
-.badge{display:inline-block;background:#dbeafe;color:#1e40af;padding:5px 9px;border-radius:14px;font-size:12px}
-.news-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-button,select,input{font:inherit;padding:10px;border-radius:7px;border:1px solid #cbd5e1;max-width:100%}
-button{background:#2563eb;color:white;border:0;cursor:pointer}
-button:hover{background:#1d4ed8}
-input{width:100%}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:15px;min-width:0}
-.card h3{margin-top:0}
-.card img{max-width:100%}
-.hero{background:linear-gradient(120deg,#dbeafe,#eff6ff);padding:20px;border-radius:12px}
-.story{border-left:4px solid #2563eb}
-.answer{display:block;width:100%;margin:8px 0;text-align:left;background:#eff6ff;color:#172033;border:1px solid #dbeafe}
-.answer.correct{background:#dcfce7;border-color:#16a34a}
-.answer.wrong{background:#fee2e2;border-color:#dc2626}
-.hidden{display:none}
-section{scroll-margin-top:110px}
-footer{background:#101827;color:white;text-align:center;padding:25px}
-footer p{color:#cbd5e1}
-@media(max-width:700px){
- header{align-items:flex-start}
- .logo{font-size:23px}
- nav a{font-size:12px;padding:8px}
- .container{width:94%}
- .news-layout{grid-template-columns:1fr}
- .news-feature img{height:230px}
- .news-feature h3{font-size:21px}
- .news-card{grid-template-columns:95px 1fr}
- .news-card img{width:95px;height:85px}
- .panel{padding:13px}
-}
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--brand:#3157d5;--brand2:#6d49d8;--line:#e7eaf2;--green:#11875d;--orange:#f59e0b;--shadow:0 10px 28px rgba(26,38,75,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.primary{background:var(--brand);color:white}.secondary{background:#eef1ff;color:#2d49bb}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,var(--brand),var(--brand2));font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid var(--line);background:#f7f8fc;border-radius:12px;padding:12px 14px;outline:none}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:#e7eaff;color:#2846b9;display:grid;place-items:center;font-weight:800}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#344054;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0}.navbtn.active,.navbtn:hover{background:#eef1ff;color:#2846b9}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:white;border:1px solid var(--line);padding:8px 12px;border-radius:99px;color:#475467;font-size:13px}.chip.active{background:#e9edff;color:#2846b9;border-color:#ccd5ff}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#eef1ff;color:#304ec5}.tag.green{background:#e5f8ef;color:#087443}.tag.orange{background:#fff3dc;color:#9a5b00}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid var(--line);border-radius:15px;background:white}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#eef1ff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#475467}.field input,.field textarea,.field select{border:1px solid #dfe3ed;border-radius:10px;padding:11px;width:100%;background:white}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#f2f4f7;font-size:13px;margin:10px 0}.status.ok{background:#e7f8ef;color:#067647}.status.err{background:#fff0f0;color:#b42318}.modal{position:fixed;inset:0;z-index:30;background:rgba(12,18,38,.55);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:white;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0003}.modalbox h2{margin:0 0 4px}.modalbox .field{margin:12px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px dashed #9caaf1;background:#f7f8ff;border-radius:14px;padding:14px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid var(--line)}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;background:#fff}.mobileNav{display:none}
+@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2,.grid3{grid-template-columns:1fr}.sectionHead{margin-top:22px}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:white;border-top:1px solid var(--line);justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#475467}.mobileNav button.active{color:var(--brand)}.fields{grid-template-columns:1fr}.topActions{gap:5px}.topActions button{padding:8px 10px}}
 </style>
 </head>
-
 <body>
-
 <header>
-  <div class="logo">🌟 Star<span>Hub</span> NEWS</div>
-  <div class="header-right">समाचार • शिक्षा • नौकरी • ज्ञान</div>
+  <div class="top">
+    <div class="logo"><div class="logoMark">S</div><span>StarHubes</span></div>
+    <div class="search"><input id="searchInput" placeholder="News, jobs, books, tests खोजें..." oninput="filterVisible(this.value)"></div>
+    <div class="topActions">
+      <button class="ghost small desktop" onclick="showSection('jobs')">Find Jobs</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Login / Join</button>
+      <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
+      <div class="avatar" id="userAvatar">S</div>
+    </div>
+  </div>
 </header>
 
-<div class="topbar">
-<nav>
-  <a href="#news">📰 News</a>
-  <a href="#home">🏠 Home</a>
-  <a href="#stories">📖 Stories</a>
-  <a href="#education">📚 Study</a>
-  <a href="#exams">🎯 Exams</a>
-  <a href="#test">📝 Test</a>
-  <a href="#jobs">💼 Jobs</a>
-  <a href="#ai">🤖 AI</a>
-  <a href="#games">🎮 Games</a>
-  <a href="#shopping">🛒 Shopping</a>
-</nav>
-</div>
-
-<!-- TV-style moving headline strip -->
-<div class="breaking">
-  <div class="breaking-label">🔴 BREAKING NEWS</div>
-  <div class="ticker-window">
-    <div class="ticker-track" id="tickerTrack">
-      <span>StarHub News में आपका स्वागत है...</span>
-      <span>ताज़ा खबरें पढ़ने के लिए नीचे देखें।</span>
-      <span>अपनी पसंद का देश चुनें।</span>
-      <span>StarHub News में आपका स्वागत है...</span>
-      <span>ताज़ा खबरें पढ़ने के लिए नीचे देखें।</span>
-      <span>अपनी पसंद का देश चुनें।</span>
+<div class="layout">
+  <aside class="side">
+    <div class="navbox">
+      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home</button>
+      <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed</button>
+      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Government & Private Jobs</button>
+      <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning & Tests</button>
+      <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books & PDFs</button>
+      <button class="navbtn" data-section="games" onclick="showSection('games')"><span class="navicon">🎮</span> Games</button>
+      <button class="navbtn" data-section="stories" onclick="showSection('stories')"><span class="navicon">📖</span> Stories</button>
+      <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Local Community News</button>
+      <div class="sideLabel">YOUR SPACE</div>
+      <button class="navbtn" onclick="openAuth()"><span class="navicon">👤</span> Profile & Login</button>
+      <button class="navbtn" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Admin Panel</button>
     </div>
-  </div>
-</div>
+    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status" id="connectionStatus">…</div></div>
+  </aside>
 
-<main class="container">
+  <main class="main">
+    <section id="section-home">
+      <div class="hero">
+        <span class="pill">NEWS • JOBS • LEARNING • COMMUNITY</span>
+        <h1>आपकी दुनिया की खबरें,<br>आपके भविष्य की तैयारी।</h1>
+        <p>ताज़ा खबरें, सरकारी और प्राइवेट नौकरियाँ, पढ़ाई, टेस्ट, किताबें और अपने क्षेत्र की जानकारी—एक ही जगह।</p>
+        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">आज की खबरें देखें →</button>
+        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('jobs')">नौकरियाँ खोजें</button>
+      </div>
+      <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs & Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('community')">📍 Local News</button></div>
+      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>Firebase से प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="homeNews" class="grid2"><div class="empty">खबरें लोड हो रही हैं…</div></div>
+      <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
+      <div class="grid3">
+        <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs & Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('learning')"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>वीडियो थ्योरी और ABCD विकल्पों वाले अभ्यास प्रश्नों के लिए खोलें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('learning')"><div class="featureIcon">🧩</div><h3>ABCD Options</h3><p>हर सवाल के लिए A, B, C और D विकल्प चुनें और सही उत्तर देखें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('books')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('books')"><div class="featureIcon">📚</div><h3>Books & eBooks</h3><p>अध्याय, PDF और ई-बुक लिंक—उपलब्ध सामग्री के अनुसार।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('games')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('games')"><div class="featureIcon">🎮</div><h3>Games</h3><p>नंबर गेस और ब्रेन टीज़र गेम खेलने के लिए खोलें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('community')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('community')"><div class="featureIcon">🫶</div><h3>Community</h3><p>अपने क्षेत्र की खबर सबमिट करें; प्रकाशित होने से पहले समीक्षा की जा सकती है।</p></div>
+      </div>
+    </section>
 
-<!-- NEWS FIRST -->
-<section id="news" class="panel">
-  <div class="news-heading">
-    <h2>📰 ताज़ा समाचार | Latest News</h2>
-    <span class="live">● LIVE NEWS</span>
-  </div>
+    <section id="section-news" class="hidden">
+      <div class="sectionHead"><div><h2>📰 News Feed</h2><p>सिर्फ़ प्रकाशित खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="chips"><button class="chip active">All News</button><button class="chip">Government</button><button class="chip">Education</button><button class="chip">Local</button></div>
+      <div id="allNews" class="grid2"><div class="empty">खबरें लोड हो रही हैं…</div></div>
+    </section>
 
-  <div class="news-actions">
-    <label for="newsCountry">देश:</label>
-    <select id="newsCountry">
-      <option value="in">भारत 🇮🇳</option>
-      <option value="us">अमेरिका 🇺🇸</option>
-      <option value="gb">ब्रिटेन 🇬🇧</option>
-      <option value="ca">कनाडा 🇨🇦</option>
-      <option value="au">ऑस्ट्रेलिया 🇦🇺</option>
-      <option value="jp">जापान 🇯🇵</option>
-      <option value="de">जर्मनी 🇩🇪</option>
-      <option value="fr">फ्रांस 🇫🇷</option>
-    </select>
-    <button id="refreshNews" onclick="loadNews()">↻ खबरें अपडेट करें</button>
-  </div>
+    <section id="section-jobs" class="hidden">
+      <div class="sectionHead"><div><h2>💼 Government & Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="chips"><button class="chip active">All Jobs</button><button class="chip">Government</button><button class="chip">Private</button><button class="chip">Work from home</button></div>
+      <div id="allJobs" class="grid2"><div class="empty">Jobs लोड हो रही हैं…</div></div>
+      <div class="status">सुरक्षा नोट: नौकरी का आवेदन केवल आधिकारिक वेबसाइट पर करें। StarHubes पर प्रकाशित हर vacancy की जानकारी जाँचें।</div>
+    </section>
 
-  <p id="newsStatus" class="muted" aria-live="polite">
-    खबरें लोड हो रही हैं...
-  </p>
+    <section id="section-learning" class="hidden">
+      <div class="sectionHead"><div><h2>🎓 Learning, Video Theory & ABCD Options</h2><p>अध्याय समझें, वीडियो देखें और A/B/C/D विकल्पों से सवालों का अभ्यास करें</p></div></div>
+      <div class="grid2">
+        <div class="card"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>यहाँ विषय के अनुसार वीडियो एम्बेड/लिंक जोड़े जाएँगे।</p><div class="cardActions"><button class="secondary small" onclick="showToast('वीडियो मॉड्यूल अगले चरण में जोड़ा जाएगा।')">वीडियो देखें</button></div></div>
+        <div class="card"><div class="featureIcon">🧊</div><h3>3D Explanation</h3><p>कठिन सवालों और किताब के अध्यायों को 3D एनीमेशन से समझाने के लिए जगह। 3D वीडियो सामग्री अलग से जोड़नी होगी।</p><div class="cardActions"><button class="secondary small" onclick="showToast('3D वीडियो लिंक Admin Panel से जोड़े जा सकते हैं।')">3D लेसन</button></div></div>
+      </div>
+      <div class="sectionHead"><div><h2>ABCD Options — Practice Question</h2><p>सवाल पढ़ें और चार विकल्पों में से एक चुनें</p></div></div>
+      <div class="card" id="sampleQuiz"><span class="tag">ABCD OPTIONS DEMO</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
+    </section>
 
-  <div class="news-layout">
-    <div id="featuredNews">
-      <article class="news-feature">
-        <div class="news-body">
-          <h3>StarHub News</h3>
-          <p>ताज़ा खबरें लोड की जा रही हैं...</p>
+    <section id="section-books" class="hidden">
+      <div class="sectionHead"><div><h2>📚 Books, PDF & eBooks</h2><p>पढ़ाई की सामग्री और अध्यायवार लेसन</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">Books लोड हो रही हैं…</div></div>
+      <div class="status">केवल वही PDF/ई-बुक शेयर करें जिन्हें साझा करने की अनुमति हो या जो सार्वजनिक रूप से उपलब्ध हों।</div>
+    </section>
+
+    <section id="section-games" class="hidden">
+      <div class="sectionHead"><div><h2>🎮 Games Zone</h2><p>हल्के ब्राउज़र गेम और learning games</p></div></div>
+      <div class="grid2">
+        <div class="card"><div class="featureIcon">🔢</div><h3>Number Guess</h3><p>1 से 10 के बीच नंबर का अनुमान लगाएँ।</p><div class="fields"><div class="field"><label>आपका अनुमान</label><input id="guessInput" type="number" min="1" max="10" placeholder="1-10"></div><div class="field" style="justify-content:end"><button class="primary" onclick="guessNumber()">Check</button></div></div><p id="guessResult"></p></div>
+        <div class="card"><div class="featureIcon">🧠</div><h3>Quick Brain Teaser</h3><p>2, 4, 8, 16, ?</p><button class="secondary small" onclick="showToast('सही उत्तर: 32')">उत्तर देखें</button></div>
+      </div>
+    </section>
+
+    <section id="section-stories" class="hidden">
+      <div class="sectionHead"><div><h2>📖 Stories</h2><p>कहानियाँ और पाठकों की रचनाएँ</p></div></div>
+      <div id="allStories" class="grid2"><div class="empty">Stories लोड हो रही हैं…</div></div>
+    </section>
+
+    <section id="section-community" class="hidden">
+      <div class="sectionHead"><div><h2>📍 Local Community News</h2><p>अपने क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
+      <div class="composer"><div class="composerTop"><div class="avatar">✍️</div><div><strong>अपने क्षेत्र की खबर लिखें</strong><div class="muted tiny">भेजी गई खबर समीक्षा के बाद प्रकाशित की जा सकती है।</div></div></div>
+        <div class="field"><label>खबर का शीर्षक</label><input id="localTitle" maxlength="200" placeholder="उदाहरण: हमारे क्षेत्र में नया पुस्तकालय खुला"></div>
+        <div class="fields"><div class="field"><label>क्षेत्र / शहर</label><input id="localArea" placeholder="आपका क्षेत्र"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option><option>Community</option><option>Public Notice</option></select></div></div>
+        <div class="field"><label>विवरण</label><textarea id="localBody" maxlength="2000" placeholder="तथ्यात्मक जानकारी लिखें…"></textarea></div>
+        <button class="primary" onclick="submitLocalNews()">खबर भेजें</button><div id="localStatus" class="status hidden"></div>
+      </div>
+      <div class="sectionHead"><div><h2>समुदाय की प्रकाशित खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">अभी कोई प्रकाशित स्थानीय खबर नहीं है।</div></div>
+    </section>
+
+    <section id="section-admin" class="hidden">
+      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>केवल अधिकृत मालिक/स्टाफ के लिए</p></div><span class="tag green" id="adminBadge">Access check</span></div>
+      <div id="adminGate" class="status">Admin access जाँचा जा रहा है…</div>
+      <div id="adminContent" class="hidden">
+        <div class="grid3">
+          <div class="feature"><div class="featureIcon">📰</div><h3>News Manager</h3><p>News draft या publish करें</p></div>
+          <div class="feature"><div class="featureIcon">💼</div><h3>Jobs Manager</h3><p>Vacancy और apply link जोड़ें</p></div>
+          <div class="feature"><div class="featureIcon">📚</div><h3>Learning Manager</h3><p>Books, videos, tests, stories</p></div>
         </div>
-      </article>
+        <div class="adminBox">
+          <h3>➕ नया कंटेंट जोड़ें</h3>
+          <div class="fields">
+            <div class="field"><label>Content Type</label><select id="postType"><option value="news">News</option><option value="jobs">Government / Private Job</option><option value="books">Book / PDF / eBook</option><option value="videos">Theory / 3D Video</option><option value="tests">Test / MCQ</option><option value="stories">Story</option></select></div>
+            <div class="field"><label>Status</label><select id="postStatus"><option value="draft">Draft</option><option value="published">Publish now</option></select></div>
+          </div>
+          <div class="field"><label>Title</label><input id="postTitle" maxlength="200" placeholder="कंटेंट का शीर्षक"></div>
+          <div class="field"><label>Short description</label><textarea id="postDescription" maxlength="3000" placeholder="विवरण, योग्यता, अध्याय या मुख्य जानकारी"></textarea></div>
+          <div class="fields">
+            <div class="field"><label>Official / Content URL (optional)</label><input id="postUrl" type="url" placeholder="https://..."></div>
+            <div class="field"><label>Category (optional)</label><input id="postCategory" placeholder="Education, Govt Job, 3D..."></div>
+          </div>
+          <button class="primary" onclick="publishPost()">Save content</button><div id="adminStatus" class="status hidden"></div>
+        </div>
+        <div class="adminBox"><h3>Latest content (as permitted by Rules)</h3><div id="adminList"></div></div>
+      </div>
+    </section>
+    <div class="footer">© <span id="year"></span> StarHubes · News • Jobs • Learn • Share<br><span class="tiny">यह शुरुआती वेब ऐप है। प्रकाशित करने से पहले स्रोतों और आवेदन लिंक की पुष्टि करें।</span></div>
+  </main>
+
+  <aside class="rightSide">
+    <div class="panel"><h3>🔥 Explore StarHubes</h3>
+      <div class="trend"><div class="trendNum">01</div><div><strong>Government Jobs</strong><span>Vacancy, eligibility, deadline</span></div></div>
+      <div class="trend"><div class="trendNum">02</div><div><strong>Exam Preparation</strong><span>Video theory + MCQ</span></div></div>
+      <div class="trend"><div class="trendNum">03</div><div><strong>Local News</strong><span>अपनी community से जुड़ें</span></div></div>
     </div>
-    <div id="sideNews" class="side-news"></div>
+    <div class="panel"><h3>🔐 Safe Community</h3><p class="muted tiny">गलत जानकारी, निजी जानकारी या अपुष्ट आरोप साझा न करें। पोस्ट की समीक्षा करें और आधिकारिक स्रोत देखें।</p></div>
+    <div class="panel"><h3>Firebase Status</h3><p id="rightStatus" class="muted tiny">Connecting…</p><button class="secondary small" onclick="refreshContent()">Reconnect / Refresh</button></div>
+  </aside>
+</div>
+
+<nav class="mobileNav">
+  <button class="active" onclick="showSection('home')">🏠<br>Home</button>
+  <button onclick="showSection('news')">📰<br>News</button>
+  <button onclick="showSection('jobs')">💼<br>Jobs</button>
+  <button onclick="showSection('learning')">🎓<br>Learn</button>
+  <button onclick="showSection('community')">📍<br>Local</button>
+</nav>
+
+<div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
+  <div class="modalbox">
+    <div class="modalhead"><div><h2 id="authTitle">Welcome to StarHubes</h2><p class="muted tiny" id="authSubtitle">Login करके community से जुड़ें</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
+    <div class="field"><label>Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="कम से कम 6 अक्षर"></div>
+    <button class="primary" id="authSubmit" style="width:100%" onclick="submitAuth()">Login</button>
+    <button class="ghost" id="authSwitch" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">नया अकाउंट बनाएँ</button>
+    <div id="authStatus" class="status hidden"></div>
+    <p class="tiny muted">अपना पासवर्ड किसी के साथ साझा न करें।</p>
   </div>
+</div>
+<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
-  <p class="muted">
-    खबर का पूरा लेख पढ़ने के लिए संबंधित समाचार स्रोत के लिंक पर जाएँ।
-    खबरों का समय और उपलब्धता स्रोत पर निर्भर है।
-  </p>
-</section>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, limit } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
-<section id="home" class="panel">
-  <div class="hero">
-    <h2>🌟 StarHub में आपका स्वागत है!</h2>
-    <p>समाचार पढ़ें, नई चीज़ें सीखें और अभ्यास टेस्ट दें।</p>
-    <input id="globalSearch" placeholder="🔎 वेबसाइट पर खोजें..." oninput="searchWebsite()">
-  </div>
-</section>
+const firebaseConfig = {
+  apiKey: "AIzaSyA9fjYco8whexk24zckH19z9eSagkwM8CY",
+  authDomain: "starhubes.firebaseapp.com",
+  projectId: "starhubes",
+  storageBucket: "starhubes.firebasestorage.app",
+  messagingSenderId: "990161967891",
+  appId: "1:990161967891:web:57ada1bb5cadf5247118e6",
+  measurementId: "G-WM4ZRPWVW6"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+let currentUser = null;
+let authMode = "login";
+let isAdmin = false;
+const collections = ["news","jobs","books","videos","tests","stories"];
 
-<section id="stories" class="panel">
-  <h2>📖 कहानियाँ | Stories</h2>
-  <div class="grid">
-    <article class="card story searchable">
-      <h3>🐜 चींटी और मेहनत</h3>
-      <p>एक चींटी रोज़ मेहनत से भोजन जमा करती थी। मौसम बदलने पर उसकी तैयारी काम आई।</p>
-      <b>सीख:</b> मेहनत और तैयारी भविष्य में काम आती है।
-    </article>
-    <article class="card story searchable">
-      <h3>🌱 छोटा पौधा</h3>
-      <p>एक बच्चे ने पौधा लगाया और रोज़ उसकी देखभाल की। समय के साथ पौधा बड़ा हो गया।</p>
-      <b>सीख:</b> धैर्य और नियमित प्रयास से प्रगति होती है।
-    </article>
-    <article class="card story searchable">
-      <h3>🤝 सच्ची मदद</h3>
-      <p>एक विद्यार्थी ने अपने मित्र को कठिन सवाल समझाया। दोनों ने साथ अभ्यास किया।</p>
-      <b>सीख:</b> ज्ञान बाँटने से सभी को लाभ होता है।
-    </article>
-  </div>
-</section>
-
-<section id="education" class="panel">
-  <h2>📚 Education | पढ़ाई</h2>
-  <p>कक्षा और विषय चुनें। अभी यह नमूना विषय सूची है।</p>
-  <input id="subjectSearch" placeholder="विषय खोजें..." oninput="renderSubjects()">
-  <br><br>
-  <select id="classLevel" onchange="renderSubjects()">
-    <option value="all">सभी स्तर</option>
-    <option value="school">कक्षा 1–10</option>
-    <option value="senior">कक्षा 11–12</option>
-    <option value="college">कॉलेज</option>
-    <option value="competitive">प्रतियोगी परीक्षाएँ</option>
-    <option value="computer">कंप्यूटर और Coding</option>
-  </select>
-  <div class="grid" id="subjectList" style="margin-top:15px"></div>
-</section>
-
-<section id="exams" class="panel">
-  <h2>🎯 प्रतियोगी परीक्षाएँ</h2>
-  <div class="grid">
-    <div class="card searchable">
-      <h3>NEET</h3><p>Physics, Chemistry और Biology।</p>
-      <button onclick="selectSubject('NEET')">प्रश्न हल करें</button>
-    </div>
-    <div class="card searchable">
-      <h3>JEE Main</h3><p>गणित, Physics और Chemistry।</p>
-      <button onclick="selectSubject('JEE')">प्रश्न हल करें</button>
-    </div>
-    <div class="card searchable">
-      <h3>SSC / रेलवे</h3><p>GK, Reasoning और गणित।</p>
-      <button onclick="selectSubject('सरकारी नौकरी')">प्रश्न हल करें</button>
-    </div>
-    <div class="card searchable">
-      <h3>CUET / CET</h3><p>प्रवेश परीक्षाओं की तैयारी।</p>
-      <button onclick="selectSubject('सामान्य ज्ञान (GK)')">GK प्रश्न हल करें</button>
-    </div>
-  </div>
-</section>
-
-<section id="test" class="panel">
-  <h2>📝 Online Test</h2>
-  <p id="testSubject">सभी उपलब्ध नमूना प्रश्नों का टेस्ट।</p>
-  <p id="testProgress">टेस्ट शुरू करने के लिए बटन दबाएँ।</p>
-  <button onclick="startTest()">टेस्ट शुरू करें</button>
-  <div id="quizArea" class="hidden">
-    <h3 id="question"></h3>
-    <div id="options"></div>
-    <p id="feedback"></p>
-    <button id="nextBtn" class="hidden" onclick="nextQuestion()">अगला प्रश्न</button>
-  </div>
-  <div id="result" class="hidden"></div>
-</section>
-
-<section id="jobs" class="panel">
-  <h2>💼 Jobs | नौकरी</h2>
-  <div class="grid">
-    <div class="card searchable"><h3>सरकारी नौकरी</h3><p>SSC, रेलवे, पुलिस और अन्य भर्तियाँ।</p></div>
-    <div class="card searchable"><h3>प्राइवेट नौकरी</h3><p>निजी कंपनियों में अवसर।</p></div>
-    <div class="card searchable"><h3>ऑनलाइन काम</h3><p>कौशल और वैध ऑनलाइन काम की जानकारी।</p></div>
-  </div>
-  <p class="muted">लाइव नौकरी की सूची अभी कनेक्ट नहीं है। आवेदन से पहले आधिकारिक नोटिफिकेशन जाँचें।</p>
-</section>
-
-<section id="ai" class="panel">
-  <h2>🤖 AI Assistant</h2>
-  <p>अपना सवाल लिखें।</p>
-  <input id="aiQuestion" placeholder="अपना सवाल लिखें...">
-  <br><br>
-  <button onclick="askAI()">सवाल भेजें</button>
-  <p id="aiAnswer"></p>
-  <p class="muted">असली AI सेवा अभी कनेक्ट नहीं है। इसके लिए सुरक्षित सर्वर और AI API चाहिए।</p>
-</section>
-
-<section id="games" class="panel">
-  <h2>🎮 Learning Games</h2>
-  <div class="card">
-    <h3>🔢 संख्या पहचानो</h3>
-    <p>10 + 5 का उत्तर क्या है?</p>
-    <button onclick="gameAnswer(10)">10</button>
-    <button onclick="gameAnswer(15)">15</button>
-    <button onclick="gameAnswer(20)">20</button>
-    <p id="gameResult"></p>
-  </div>
-</section>
-
-<section id="shopping" class="panel">
-  <h2>🛒 Shopping / Marketplace</h2>
-  <div class="grid">
-    <div class="card searchable"><h3>📚 Books</h3><p>किताबों का सेक्शन।</p></div>
-    <div class="card searchable"><h3>💻 Electronics</h3><p>कंप्यूटर और इलेक्ट्रॉनिक्स।</p></div>
-    <div class="card searchable"><h3>🛍️ Other Products</h3><p>अन्य उत्पादों का सेक्शन।</p></div>
-  </div>
-  <p class="muted">उत्पाद, विक्रेता खाते, भुगतान और ऑर्डर सिस्टम अभी नहीं जुड़े हैं।</p>
-</section>
-
-<section class="panel">
-  <h2>📌 StarHub के बारे में</h2>
-  <p>StarHub एक शुरुआती वेबसाइट प्रोजेक्ट है। समाचार API चालू है। अन्य सुविधाओं को चरणबद्ध तरीके से जोड़ा जा सकता है।</p>
-</section>
-
-</main>
-
-<footer>
-  <h3>🌟 StarHub News</h3>
-  <p>समाचार • सीखें • पढ़ें • आगे बढ़ें</p>
-  <p>© StarHub</p>
-</footer>
-
-<script>
-const NEWS_API =
-  "https://starhubesnews.amitprajapat858904.workers.dev/news?country=";
-
-const subjects = [
-  {name:"हिंदी",level:"school",icon:"📖"},
-  {name:"English",level:"school",icon:"🔤"},
-  {name:"गणित",level:"school",icon:"➗"},
-  {name:"विज्ञान",level:"school",icon:"🔬"},
-  {name:"सामाजिक विज्ञान",level:"school",icon:"🌍"},
-  {name:"Physics",level:"senior",icon:"⚡"},
-  {name:"Chemistry",level:"senior",icon:"🧪"},
-  {name:"Biology",level:"senior",icon:"🧬"},
-  {name:"Mathematics",level:"senior",icon:"📐"},
-  {name:"Computer Science",level:"senior",icon:"💻"},
-  {name:"Accountancy",level:"senior",icon:"🧾"},
-  {name:"Business Studies",level:"senior",icon:"🏢"},
-  {name:"Economics",level:"senior",icon:"📈"},
-  {name:"History",level:"senior",icon:"🏛️"},
-  {name:"Geography",level:"senior",icon:"🌏"},
-  {name:"Political Science",level:"senior",icon:"⚖️"},
-  {name:"Psychology",level:"college",icon:"🧠"},
-  {name:"Sociology",level:"college",icon:"👥"},
-  {name:"NEET",level:"competitive",icon:"🩺"},
-  {name:"JEE",level:"competitive",icon:"⚙️"},
-  {name:"सामान्य ज्ञान (GK)",level:"competitive",icon:"🌐"},
-  {name:"Reasoning",level:"competitive",icon:"🧩"},
-  {name:"करंट अफेयर्स",level:"competitive",icon:"📰"},
-  {name:"English Grammar",level:"competitive",icon:"✍️"},
-  {name:"हिंदी व्याकरण",level:"competitive",icon:"📝"},
-  {name:"Computer Fundamentals",level:"computer",icon:"🖥️"},
-  {name:"Coding",level:"computer",icon:"👨‍💻"}
-];
-
-const questions = [
-  {subject:"गणित",q:"12 × 8 = ?",opts:["86","96","108","88"],ans:1,ex:"12 × 8 = 96।"},
-  {subject:"विज्ञान",q:"पौधे भोजन किस प्रक्रिया से बनाते हैं?",opts:["श्वसन","प्रकाश संश्लेषण","पाचन","वाष्पीकरण"],ans:1,ex:"पौधे प्रकाश संश्लेषण द्वारा भोजन बनाते हैं।"},
-  {subject:"हिंदी",q:"'सूर्य' का पर्यायवाची कौन-सा है?",opts:["रवि","रात्रि","पवन","नीर"],ans:0,ex:"रवि, सूर्य का पर्यायवाची है।"},
-  {subject:"English",q:"What is the plural of child?",opts:["Childs","Childes","Children","Childrens"],ans:2,ex:"The correct plural is children."},
-  {subject:"Physics",q:"बल की SI इकाई क्या है?",opts:["Joule","Watt","Newton","Pascal"],ans:2,ex:"बल की SI इकाई न्यूटन है।"},
-  {subject:"Chemistry",q:"ऑक्सीजन का परमाणु क्रमांक क्या है?",opts:["6","7","8","16"],ans:2,ex:"ऑक्सीजन का परमाणु क्रमांक 8 है।"},
-  {subject:"Biology",q:"कोशिका का पावरहाउस किसे कहते हैं?",opts:["केंद्रक","माइटोकॉन्ड्रिया","राइबोसोम","गॉल्जी तंत्र"],ans:1,ex:"माइटोकॉन्ड्रिया ऊर्जा उत्पादन में महत्वपूर्ण है।"},
-  {subject:"Mathematics",q:"If x + 5 = 12, what is x?",opts:["5","6","7","17"],ans:2,ex:"x = 12 − 5 = 7."},
-  {subject:"Computer Fundamentals",q:"CPU का पूरा नाम क्या है?",opts:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Control Power Unit"],ans:0,ex:"CPU का पूरा नाम Central Processing Unit है।"},
-  {subject:"सामान्य ज्ञान (GK)",q:"भारत का संविधान कब लागू हुआ?",opts:["15 अगस्त 1947","26 जनवरी 1950","2 अक्टूबर 1950","26 नवंबर 1949"],ans:1,ex:"संविधान 26 जनवरी 1950 को लागू हुआ।"},
-  {subject:"Reasoning",q:"2, 4, 6, 8, __",opts:["9","10","11","12"],ans:1,ex:"हर बार 2 जुड़ता है।"},
-  {subject:"NEET",q:"मानव हृदय में कितने कक्ष होते हैं?",opts:["2","3","4","5"],ans:2,ex:"मानव हृदय में चार कक्ष होते हैं।"},
-  {subject:"JEE",q:"स्थिर वेग होने पर त्वरण कितना होता है?",opts:["शून्य","अनंत","9.8 m/s²","1 m/s²"],ans:0,ex:"स्थिर वेग का अर्थ शून्य त्वरण है।"}
-];
-
-let currentSubject = "";
-let activeQuestions = [];
-let index = 0;
-let score = 0;
-let answered = false;
-
-function safeText(value) {
-  return typeof value === "string" ? value : "";
+const el = id => document.getElementById(id);
+window.showToast = (msg) => {
+  const t=el("toast"); t.textContent=msg; t.classList.remove("hidden");
+  setTimeout(()=>t.classList.add("hidden"),3500);
+};
+function setStatus(id,msg,type="") {
+  const x=el(id); if(!x)return; x.textContent=msg; x.classList.remove("hidden","ok","err");
+  if(type)x.classList.add(type);
 }
-
-function makeNewsImage(url, title) {
-  const img = document.createElement("img");
-  img.alt = title || "समाचार की तस्वीर";
-  img.loading = "lazy";
-  if (url && /^https:\/\//i.test(url)) {
-    img.src = url;
-  } else {
-    img.style.display = "none";
-  }
-  img.onerror = () => { img.style.display = "none"; };
-  return img;
+window.showSection = (name) => {
+  document.querySelectorAll("main section[id^='section-']").forEach(s=>s.classList.add("hidden"));
+  const target=el("section-"+name); if(target)target.classList.remove("hidden");
+  document.querySelectorAll(".navbtn[data-section]").forEach(b=>b.classList.toggle("active",b.dataset.section===name));
+  document.querySelectorAll(".mobileNav button").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(name==="home"?"home":name==="community"?"local":name==="learning"?"learn":name)));
+  if(name==="admin")refreshAdminGate();
+  if(name==="books")loadCollection("books","allBooks");
+  if(name==="stories")loadCollection("stories","allStories");
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+window.filterVisible = (value) => {
+  const q=value.toLowerCase();
+  document.querySelectorAll(".newsCard").forEach(c=>c.classList.toggle("hidden",!c.innerText.toLowerCase().includes(q)));
+};
+window.openAuth = () => { el("authModal").classList.remove("hidden"); };
+window.closeAuth = () => el("authModal").classList.add("hidden");
+window.toggleAuthMode = () => {
+  authMode=authMode==="login"?"register":"login";
+  el("authTitle").textContent=authMode==="login"?"Welcome to StarHubes":"Create your account";
+  el("authSubtitle").textContent=authMode==="login"?"Login करके community से जुड़ें":"Email और password से अकाउंट बनाएँ";
+  el("authSubmit").textContent=authMode==="login"?"Login":"Register";
+  el("authSwitch").textContent=authMode==="login"?"नया अकाउंट बनाएँ":"पहले से अकाउंट है? Login करें";
+  el("authPassword").value="";
+};
+window.submitAuth = async () => {
+  const email=el("authEmail").value.trim(), password=el("authPassword").value;
+  if(!email||password.length<6){setStatus("authStatus","सही ईमेल और कम से कम 6 अक्षर का पासवर्ड डालें।","err");return;}
+  try{
+    if(authMode==="login")await signInWithEmailAndPassword(auth,email,password);
+    else await createUserWithEmailAndPassword(auth,email,password);
+    setStatus("authStatus","सफलता! आप लॉगिन हो गए।","ok");
+    setTimeout(closeAuth,700);
+  }catch(e){setStatus("authStatus",friendlyError(e),"err");}
+};
+window.doLogout = async()=>{try{await signOut(auth);showToast("आप लॉगआउट हो गए।");}catch(e){showToast(friendlyError(e));}};
+function friendlyError(e){
+  const c=e?.code||"";
+  if(c.includes("auth/invalid-credential"))return "ईमेल या पासवर्ड सही नहीं है।";
+  if(c.includes("auth/email-already-in-use"))return "इस ईमेल का अकाउंट पहले से है—Login करें।";
+  if(c.includes("auth/weak-password"))return "पासवर्ड कम से कम 6 अक्षर का रखें।";
+  if(c.includes("permission-denied"))return "Firestore Rules ने अनुमति नहीं दी। UID, admin role और Rules जाँचें।";
+  if(c.includes("failed-precondition"))return "Firestore query/index की समस्या है। Console का संदेश देखें।";
+  return e?.message||"कुछ गड़बड़ हुई। Firebase Console जाँचें।";
 }
-
-function makeNewsLink(url) {
-  const link = document.createElement("a");
-  if (url && /^https?:\/\//i.test(url)) {
-    link.href = url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = "पूरी खबर पढ़ें ↗";
-  } else {
-    link.textContent = "लिंक उपलब्ध नहीं";
+onAuthStateChanged(auth, async user=>{
+  currentUser=user; isAdmin=false;
+  el("loginBtn").classList.toggle("hidden",!!user);
+  el("logoutBtn").classList.toggle("hidden",!user);
+  el("userAvatar").textContent=user?(user.email||"U").charAt(0).toUpperCase():"S";
+  if(user) await refreshAdminGate(); else {
+    el("adminNav").classList.add("hidden");
+    el("adminGate").textContent="Admin Panel देखने के लिए पहले Login करें।";
+    el("adminContent").classList.add("hidden");
   }
-  return link;
+});
+async function refreshAdminGate(){
+  const gate=el("adminGate");
+  if(!currentUser){gate.textContent="Admin Panel के लिए Login ज़रूरी है।";el("adminContent").classList.add("hidden");return;}
+  // The Firestore Rules remain the authority. This UI only shows the form after a protected write/read probe.
+  // Client cannot read admins/{uid} because its direct read is intentionally denied.
+  try{
+    const snap=await getDocs(query(collection(db,"news"),where("status","==","published"),limit(1)));
+    // A public read is not proof of admin; keep panel hidden until owner UID is configured below.
+    const configuredMasterUid = ";
+    isAdmin = currentUser.uid===configuredMasterUid;
+    if(isAdmin){
+      el("adminNav").classList.remove("hidden");el("adminBadge").textContent="Master Admin";
+      gate.textContent="आपका UID Master Admin के रूप में UI में सेट है। Firestore Rules भी write को जाँचेंगे।";
+      gate.className="status ok";el("adminContent").classList.remove("hidden");loadAdminList();
+    }else{
+      el("adminNav").classList.add("hidden");el("adminContent").classList.add("hidden");
+      gate.textContent="आप लॉगिन हैं, लेकिन Admin UI के लिए HTML में configured UID डालना बाकी है। यह UID Authentication → Users से लें।";
+      gate.className="status";
+    }
+  }catch(e){
+    gate.textContent="Admin access जाँच नहीं हो पाई: "+friendlyError(e);
+    gate.className="status err";el("adminContent").classList.add("hidden");
+  }
 }
-
-function renderNews(newsItems) {
-  const featured = document.getElementById("featuredNews");
-  const side = document.getElementById("sideNews");
-  const ticker = document.getElementById("tickerTrack");
-
-  featured.innerHTML = "";
-  side.innerHTML = "";
-
-  if (!newsItems.length) {
-    featured.textContent = "अभी कोई खबर उपलब्ध नहीं है।";
-    ticker.innerHTML = "<span>अभी कोई नई खबर उपलब्ध नहीं है।</span>";
-    return;
+async function loadCollection(name,targetId){
+  const target=el(targetId); if(!target)return;
+  target.innerHTML='<div class="empty">लोड हो रहा है…</div>';
+  try{
+    const q=query(collection(db,name),where("status","==","published"),orderBy("createdAt","desc"),limit(12));
+    const snap=await getDocs(q);
+    renderCards(target,snap.docs.map(d=>({id:d.id,...d.data()})),name);
+  }catch(e){
+    target.innerHTML='<div class="empty">डेटा अभी लोड नहीं हो पाया। '+escapeHtml(friendlyError(e))+'</div>';
   }
-
-  const headlines = newsItems.map(n => safeText(n.title))
-    .filter(Boolean);
-
-  const tickerText = headlines.length
-    ? headlines.map(t => "🔴 " + t).join("　　 •　　 ")
-    : "StarHub News में आपका स्वागत है।";
-
-  ticker.innerHTML = "";
-  for (let i = 0; i < 2; i++) {
-    const span = document.createElement("span");
-    span.textContent = tickerText;
-    ticker.appendChild(span);
-  }
-
-  const mainNews = newsItems[0];
-  const mainCard = document.createElement("article");
-  mainCard.className = "news-feature";
-  mainCard.appendChild(makeNewsImage(mainNews.image_url, mainNews.title));
-
-  const mainBody = document.createElement("div");
-  mainBody.className = "news-body";
-
-  const badge = document.createElement("span");
-  badge.className = "badge";
-  badge.textContent = "मुख्य खबर";
-  mainBody.appendChild(badge);
-
-  const title = document.createElement("h3");
-  title.textContent = safeText(mainNews.title) || "समाचार";
-  mainBody.appendChild(title);
-
-  const desc = document.createElement("p");
-  desc.textContent = safeText(mainNews.description || mainNews.snippet);
-  mainBody.appendChild(desc);
-
-  const meta = document.createElement("p");
-  meta.className = "muted";
-  meta.textContent = "स्रोत: " + (safeText(mainNews.source) || "समाचार स्रोत");
-  mainBody.appendChild(meta);
-
-  mainBody.appendChild(makeNewsLink(mainNews.url));
-  mainCard.appendChild(mainBody);
-  featured.appendChild(mainCard);
-
-  newsItems.slice(1).forEach(item => {
-    const card = document.createElement("article");
-    card.className = "news-card searchable";
-    card.appendChild(makeNewsImage(item.image_url, item.title));
-
-    const body = document.createElement("div");
-    const h = document.createElement("h3");
-    h.textContent = safeText(item.title) || "समाचार";
-    body.appendChild(h);
-
-    const p = document.createElement("p");
-    p.className = "muted";
-    p.textContent = safeText(item.source);
-    body.appendChild(p);
-
-    body.appendChild(makeNewsLink(item.url));
-    card.appendChild(body);
-    side.appendChild(card);
-  });
 }
-
-async function loadNews() {
-  const country = document.getElementById("newsCountry").value;
-  const status = document.getElementById("newsStatus");
-  const button = document.getElementById("refreshNews");
-
-  status.textContent = "खबरें लोड हो रही हैं...";
-  button.disabled = true;
-
-  try {
-    const response = await fetch(NEWS_API + encodeURIComponent(country), {
-      cache: "no-cache"
+function renderCards(target,items,type){
+  if(!items.length){target.innerHTML='<div class="empty">अभी कोई प्रकाशित सामग्री नहीं है। Admin Panel से सामग्री जोड़ें।</div>';return;}
+  target.innerHTML=items.map(item=>{
+    const tag=type==="jobs"?"orange":type==="stories"?"green":"";
+    const date=item.createdAt?.toDate?item.createdAt.toDate().toLocaleDateString("hi-IN"):"StarHubes";
+    const link=safeUrl(item.url||item.applyUrl||"");
+    return `<article class="card newsCard" data-search="${escapeHtml((item.title||"")+" "+(item.description||"")+" "+(item.category||""))}">
+      <span class="tag ${tag}">${escapeHtml(item.category||type.toUpperCase())}</span>
+      <h3>${escapeHtml(item.title||"Untitled")}</h3>
+      <p>${escapeHtml(item.description||item.summary||"अधिक जानकारी जल्द जोड़ी जाएगी।")}</p>
+      ${item.area?`<p>📍 ${escapeHtml(item.area)}</p>`:""}
+      ${link?`<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">${type==="jobs"?"आवेदन / Official Link":"और पढ़ें / Open"}</button></a></div>`:""}
+      <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Published</span></div>
+    </article>`;
+  }).join("");
+}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function safeUrl(value){try{const u=new URL(value);return ["https:","http:"].includes(u.protocol)?u.href:"";}catch{return "";}}
+window.refreshContent=async()=>{
+  const tasks=[
+    ["news","homeNews"],["news","allNews"],["jobs","allJobs"],
+    ["books","allBooks"],["stories","allStories"],["news","communityNews"]
+  ];
+  const results=await Promise.all(tasks.map(async ([name,targetId])=>{
+    try {
+      const q=query(collection(db,name),where("status","==","published"),orderBy("createdAt","desc"),limit(12));
+      const snap=await getDocs(q);
+      renderCards(el(targetId),snap.docs.map(d=>({id:d.id,...d.data()})),name);
+      return true;
+    } catch(e) {
+      const target=el(targetId);
+      if(target) target.innerHTML='<div class="empty">डेटा लोड नहीं हुआ: '+escapeHtml(friendlyError(e))+'</div>';
+      return false;
+    }
+  }));
+  const ok=results.every(Boolean);
+  el("connectionStatus").textContent=ok?"Firebase पढ़ने का अनुरोध सफल हुआ।":"Firebase/Firestore में समस्या है—ऊपर दिखा संदेश देखें।";
+  el("connectionStatus").className=ok?"status ok":"status err";
+  el("rightStatus").textContent=ok?"Firestore requests successful":"Firestore request failed; check database and Rules";
+};
+window.submitLocalNews=async()=>{
+  if(!currentUser){openAuth();setStatus("localStatus","खबर भेजने के लिए पहले Login करें।","err");return;}
+  const title=el("localTitle").value.trim(),area=el("localArea").value.trim(),description=el("localBody").value.trim();
+  if(!title||!description){setStatus("localStatus","शीर्षक और विवरण भरें।","err");return;}
+  // The current rules don't allow user-created news. Do not silently bypass them.
+  setStatus("localStatus","आपकी खबर का फॉर्म तैयार है, लेकिन मौजूदा Rules users को news लिखने नहीं देते। सुरक्षित pending-review collection/Rules अगले चरण में जोड़ना होगा।","err");
+};
+window.publishPost=async()=>{
+  if(!currentUser){openAuth();return;}
+  if(!isAdmin){setStatus("adminStatus","Master Admin UID सेट नहीं है। पहले HTML में अपना Authentication UID डालें।","err");return;}
+  const type=el("postType").value,title=el("postTitle").value.trim(),description=el("postDescription").value.trim(),status=el("postStatus").value;
+  if(!title){setStatus("adminStatus","Title भरना ज़रूरी है।","err");return;}
+  const url=safeUrl(el("postUrl").value.trim());
+  try{
+    await addDoc(collection(db,type),{
+      title,description,status,category:el("postCategory").value.trim()||type,
+      ...(url?{url}:{}),createdAt:serverTimestamp(),authorId:currentUser.uid
     });
-
-    if (!response.ok) {
-      throw new Error("News service error: " + response.status);
+    setStatus("adminStatus","कंटेंट सेव हो गया।","ok");
+    el("postTitle").value="";el("postDescription").value="";el("postUrl").value="";el("postCategory").value="";
+    await refreshContent();await loadAdminList();
+  }catch(e){setStatus("adminStatus","सेव नहीं हुआ: "+friendlyError(e),"err");}
+};
+async function loadAdminList(){
+  const target=el("adminList");if(!target)return;
+  target.textContent="लोड हो रहा है…";
+  try{
+    const results=[];
+    for(const name of collections){
+      const snap=await getDocs(query(collection(db,name),orderBy("createdAt","desc"),limit(5)));
+      snap.docs.forEach(d=>results.push({id:d.id,...d.data(),_type:name}));
     }
-
-    const result = await response.json();
-
-    if (!Array.isArray(result.data)) {
-      throw new Error("समाचार डेटा उपलब्ध नहीं है");
-    }
-
-    renderNews(result.data);
-
-    if (result.data.length === 0) {
-      status.textContent = "अभी कोई खबर नहीं मिली। बाद में कोशिश करें।";
-    } else {
-      status.textContent = result.data.length +
-        " खबरें मिलीं • " + new Date().toLocaleTimeString("hi-IN");
-    }
-  } catch (error) {
-    status.textContent =
-      "खबरें लोड नहीं हुईं। इंटरनेट कनेक्शन जाँचें और फिर अपडेट करें।";
-    console.error(error);
-  } finally {
-    button.disabled = false;
-  }
+    results.sort((a,b)=>(b.createdAt?.toMillis?.()||0)-(a.createdAt?.toMillis?.()||0));
+    target.innerHTML=results.length?results.slice(0,15).map(x=>`<div class="post"><span class="tag">${escapeHtml(x._type)}</span> <span class="tag ${x.status==="published"?"green":"orange"}">${escapeHtml(x.status||"unknown")}</span><h3>${escapeHtml(x.title||"Untitled")}</h3><p class="muted tiny">${escapeHtml(x.description||"")}</p></div>`).join(""):'<div class="empty">अभी कोई कंटेंट नहीं है।</div>';
+  }catch(e){target.textContent="Admin list load नहीं हुई: "+friendlyError(e);}
 }
-
-document.getElementById("newsCountry").addEventListener("change", loadNews);
-
-function renderSubjects() {
-  const query = document.getElementById("subjectSearch").value.toLowerCase().trim();
-  const level = document.getElementById("classLevel").value;
-  const list = document.getElementById("subjectList");
-  list.innerHTML = "";
-
-  const filtered = subjects.filter(s =>
-    s.name.toLowerCase().includes(query) &&
-    (level === "all" || s.level === level)
-  );
-
-  if (!filtered.length) {
-    list.textContent = "कोई विषय नहीं मिला।";
-    return;
-  }
-
-  filtered.forEach(s => {
-    const card = document.createElement("div");
-    card.className = "card searchable";
-
-    const h = document.createElement("h3");
-    h.textContent = s.icon + " " + s.name;
-
-    const btn = document.createElement("button");
-    btn.textContent = "प्रश्न हल करें";
-    btn.onclick = () => selectSubject(s.name);
-
-    card.append(h, btn);
-    list.appendChild(card);
-  });
-}
-
-function selectSubject(name) {
-  currentSubject = name;
-  document.getElementById("testSubject").textContent = "चुना गया विषय: " + name;
-  document.getElementById("test").scrollIntoView({behavior:"smooth"});
-}
-
-function startTest() {
-  if (currentSubject === "NEET") {
-    activeQuestions = questions.filter(q =>
-      ["NEET","Physics","Chemistry","Biology"].includes(q.subject));
-  } else if (currentSubject === "JEE") {
-    activeQuestions = questions.filter(q =>
-      ["JEE","Physics","Chemistry","Mathematics"].includes(q.subject));
-  } else if (currentSubject === "सरकारी नौकरी") {
-    activeQuestions = questions.filter(q =>
-      ["सामान्य ज्ञान (GK)","Reasoning"].includes(q.subject));
-  } else if (currentSubject) {
-    activeQuestions = questions.filter(q => q.subject === currentSubject);
-  } else {
-    activeQuestions = [...questions];
-  }
-
-  if (!activeQuestions.length) {
-    alert("इस विषय के नमूना प्रश्न अभी नहीं जोड़े गए हैं।");
-    return;
-  }
-
-  index = 0;
-  score = 0;
-  document.getElementById("result").classList.add("hidden");
-  document.getElementById("quizArea").classList.remove("hidden");
-  showQuestion();
-}
-
-function showQuestion() {
-  answered = false;
-  const q = activeQuestions[index];
-
-  document.getElementById("testProgress").textContent =
-    "प्रश्न " + (index + 1) + " / " + activeQuestions.length +
-    " | अंक: " + score;
-  document.getElementById("question").textContent = q.q;
-  document.getElementById("feedback").textContent = "";
-  document.getElementById("nextBtn").classList.add("hidden");
-
-  const box = document.getElementById("options");
-  box.innerHTML = "";
-
-  q.opts.forEach((option, i) => {
-    const btn = document.createElement("button");
-    btn.className = "answer";
-    btn.textContent = String.fromCharCode(65 + i) + ". " + option;
-    btn.onclick = () => checkAnswer(i, btn);
-    box.appendChild(btn);
-  });
-}
-
-function checkAnswer(choice, button) {
-  if (answered) return;
-  answered = true;
-
-  const q = activeQuestions[index];
-
-  document.querySelectorAll(".answer").forEach((b, i) => {
-    b.disabled = true;
-    if (i === q.ans) b.classList.add("correct");
-  });
-
-  if (choice === q.ans) {
-    score++;
-    document.getElementById("feedback").textContent = "✅ सही उत्तर! " + q.ex;
-  } else {
-    button.classList.add("wrong");
-    document.getElementById("feedback").textContent =
-      "❌ सही उत्तर: " + q.opts[q.ans] + ". " + q.ex;
-  }
-
-  document.getElementById("testProgress").textContent =
-    "प्रश्न " + (index + 1) + " / " + activeQuestions.length +
-    " | अंक: " + score;
-
-  const next = document.getElementById("nextBtn");
-  next.classList.remove("hidden");
-  next.textContent = index === activeQuestions.length - 1
-    ? "रिजल्ट देखें" : "अगला प्रश्न";
-}
-
-function nextQuestion() {
-  index++;
-
-  if (index < activeQuestions.length) {
-    showQuestion();
-    return;
-  }
-
-  document.getElementById("quizArea").classList.add("hidden");
-  const result = document.getElementById("result");
-  result.classList.remove("hidden");
-  result.innerHTML = "";
-
-  const h = document.createElement("h3");
-  h.textContent = "टेस्ट पूरा हुआ!";
-
-  const p = document.createElement("p");
-  p.textContent = "अंक: " + score + " / " + activeQuestions.length +
-    " (" + Math.round(score / activeQuestions.length * 100) + "%)";
-
-  const btn = document.createElement("button");
-  btn.textContent = "दोबारा टेस्ट दें";
-  btn.onclick = startTest;
-
-  result.append(h, p, btn);
-}
-
-function searchWebsite() {
-  const query = document.getElementById("globalSearch").value.toLowerCase().trim();
-
-  document.querySelectorAll(".searchable").forEach(el => {
-    el.style.display = el.textContent.toLowerCase().includes(query) ? "" : "none";
-  });
-}
-
-function gameAnswer(n) {
-  document.getElementById("gameResult").textContent =
-    n === 15 ? "✅ सही जवाब!" : "❌ फिर से कोशिश करो।";
-}
-
-function askAI() {
-  const q = document.getElementById("aiQuestion").value.trim();
-  document.getElementById("aiAnswer").textContent = q
-    ? "अभी असली AI सेवा कनेक्ट नहीं है।"
-    : "पहले अपना सवाल लिखें।";
-}
-
-renderSubjects();
-loadNews();
+window.answerQuiz=(button,correct)=>{
+  document.querySelectorAll("#quizOptions button").forEach(b=>b.disabled=true);
+  el("quizResult").textContent=correct?"सही जवाब! 🎉":"यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली";
+  el("quizResult").style.color=correct?"#087443":"#b42318";
+};
+window.guessNumber=()=>{
+  const n=Number(el("guessInput").value),answer=Math.floor(Math.random()*10)+1;
+  el("guessResult").textContent=n===answer?`सही! नंबर ${answer} था।`:`इस बार नंबर ${answer} था—फिर कोशिश करें।`;
+};
+el("year").textContent=new Date().getFullYear();
+window.refreshContent();
 </script>
-
 </body>
 </html>
