@@ -379,6 +379,148 @@ window.guessNumber=()=>{
 el("year").textContent=new Date().getFullYear();
 window.refreshContent();
 </script>
+
+<section id="study-room" style="font-family:Arial,sans-serif;max-width:1000px;margin:25px auto;padding:18px;background:#f4f7fb;border-radius:16px;color:#172033">
+  <h2>📚 StarHubes Group Study</h2>
+  <p>एक विषय चुनें और दोस्तों के साथ पढ़ाई शुरू करें।</p>
+
+  <label for="studySubject">विषय चुनें</label>
+  <select id="studySubject" style="padding:10px;width:100%;margin:8px 0">
+    <option>Mathematics</option>
+    <option>Science</option>
+    <option>English</option>
+    <option>Hindi</option>
+    <option>General Knowledge</option>
+    <option>Computer</option>
+    <option>Other</option>
+  </select>
+
+  <label for="studyRoomName">Study Room का नाम</label>
+  <input id="studyRoomName" placeholder="जैसे Maths Chapter 1"
+    style="box-sizing:border-box;padding:10px;width:100%;margin:8px 0">
+
+  <button id="createStudyRoom" style="padding:11px 16px;background:#155eef;color:white;border:0;border-radius:8px">
+    Create Study Room
+  </button>
+
+  <div id="studyStatus" role="status" style="margin:12px 0"></div>
+
+  <div id="studyTools" hidden>
+    <h3 id="studyHeading">Study Board</h3>
+    <p>दोस्तों को बुलाने के लिए यह लिंक शेयर करें:</p>
+    <input id="studyInvite" readonly style="box-sizing:border-box;width:100%;padding:10px">
+    <button id="copyStudyInvite" style="padding:9px;margin:8px 0">Copy Invite Link</button>
+
+    <h3>📝 Shared Study Notes</h3>
+    <textarea id="studyNotes" rows="5"
+      placeholder="यहाँ प्रश्न टाइप करके हल करें..."
+      style="box-sizing:border-box;width:100%;padding:12px"></textarea>
+
+    <h3>✍️ Drawing / Touch Pen Board</h3>
+    <p>माउस, टच स्क्रीन या स्टाइलस से लिखें।</p>
+    <button id="studyPen">Pen</button>
+    <button id="studyEraser">Eraser</button>
+    <button id="studyClear">Clear Board</button>
+    <canvas id="studyCanvas" width="900" height="420"
+      style="display:block;width:100%;height:auto;background:white;border:1px solid #bbc5d5;border-radius:8px;touch-action:none;margin-top:10px"></canvas>
+
+    <h3>🎥 Live Study Call</h3>
+    <button id="studyVideo">Start Video Call</button>
+    <button id="studyAudio">Start Audio Call</button>
+    <p id="callStatus" role="status">
+      कॉल शुरू करने के लिए वीडियो/ऑडियो सेवा को सर्वर से जोड़ना बाकी है।
+    </p>
+  </div>
+</section>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let drawing = false;
+  let erasing = false;
+  let lastX = 0, lastY = 0;
+
+  const canvas = $("studyCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#172033";
+
+  $("createStudyRoom").addEventListener("click", () => {
+    const subject = $("studySubject").value;
+    const roomName = $("studyRoomName").value.trim();
+
+    if (!roomName) {
+      $("studyStatus").textContent = "पहले Study Room का नाम लिखें।";
+      return;
+    }
+
+    const roomId = crypto.randomUUID();
+    const invite = new URL(location.href);
+    invite.hash = "study=" + roomId;
+
+    $("studyHeading").textContent = subject + " — " + roomName;
+    $("studyInvite").value = invite.href;
+    $("studyTools").hidden = false;
+    $("studyStatus").textContent =
+      "रूम का स्थानीय इंटरफ़ेस तैयार है। इसे लाइव मल्टी-यूज़र रूम बनाने के लिए backend जोड़ना होगा।";
+  });
+
+  $("copyStudyInvite").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText($("studyInvite").value);
+      $("studyStatus").textContent = "लिंक कॉपी हो गया।";
+    } catch {
+      $("studyInvite").select();
+      $("studyStatus").textContent = "लिंक चुन लिया गया है; Ctrl+C दबाएँ।";
+    }
+  });
+
+  function point(e) {
+    const r = canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) * canvas.width / r.width,
+      y: (e.clientY - r.top) * canvas.height / r.height
+    };
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    drawing = true;
+    canvas.setPointerCapture(e.pointerId);
+    const p = point(e);
+    lastX = p.x;
+    lastY = p.y;
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (!drawing) return;
+    const p = point(e);
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = erasing ? "#ffffff" : "#172033";
+    ctx.lineWidth = erasing ? 22 : 3;
+    ctx.stroke();
+    lastX = p.x;
+    lastY = p.y;
+  });
+
+  function stopDrawing() { drawing = false; }
+  canvas.addEventListener("pointerup", stopDrawing);
+  canvas.addEventListener("pointercancel", stopDrawing);
+
+  $("studyPen").onclick = () => { erasing = false; };
+  $("studyEraser").onclick = () => { erasing = true; };
+  $("studyClear").onclick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  $("studyVideo").onclick = $("studyAudio").onclick = () => {
+    $("callStatus").textContent =
+      "Live call अभी connected नहीं है। इसके लिए authenticated video-call backend configure करना होगा।";
+  };
+})();
+</script>
 </body>
 </html>'''
 path = Path("/mnt/data/index.html")
