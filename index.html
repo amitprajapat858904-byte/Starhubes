@@ -38,7 +38,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning &amp; Tests</button>
       <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books &amp; PDFs</button>
       <button class="navbtn" data-section="games" onclick="showSection('games')"><span class="navicon">🎮</span> Games</button>
-      <button class="navbtn active" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
+      <button class="navbtn" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
       <button class="navbtn" data-section="stories" onclick="showSection('stories')"><span class="navicon">📖</span> Stories</button>
       <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Local Community News</button>
       <div class="sideLabel">YOUR SPACE</div>
@@ -59,7 +59,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
         <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('jobs')">नौकरियाँ खोजें</button>
       </div>
       <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('community')">📍 Local News</button></div>
-      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्र प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Admin Panel से सामग्री जोड़ें।</div></div>
       <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
       <div class="grid3">
@@ -112,7 +112,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
     </section>
 
     <!-- Group Study Section -->
-    <section id="section-study" class="">
+    <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study</h2><p>साझा पढ़ाई, notes और whiteboard</p></div></div>
       <div class="card"><span class="tag">GROUP STUDY PORTAL</span><h3 style="margin:10px 0">Active Collaborative Study Session</h3><p>आप यहाँ अपने दोस्तों के साथ नोट्स शेयर कर सकते हैं और ग्रुप डिस्कशन रूम बना सकते हैं।</p><div class="status ok" id="studyStatus">Group Study सिस्टम पूरी तरह से तैयार है।</div></div>
     </section>
@@ -190,7 +190,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
   </div>
 </div>
 
-<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);zIndex:40;box-shadow:var(--shadow);max-width:90%;"></div>
+<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
 <script>
 const el = id => document.getElementById(id);
@@ -273,7 +273,6 @@ function saveDB(key, data) {
 }
 
 window.refreshContent = () => {
-  // Load standard items
   renderCards(el('homeNews'), getDB('news').slice(0, 4), 'news');
   renderCards(el('allNews'), getDB('news'), 'news');
   renderCards(el('allJobs'), getDB('jobs'), 'jobs');
@@ -338,7 +337,7 @@ window.submitLocalNews = () => {
   list.unshift(newItem);
   saveDB('community', list);
 
-  setStatus('localStatus', 'आपकी खबर सफलतापर्वूक सबमिट हो गई!', 'ok');
+  setStatus('localStatus', 'आपकी खबर सफलतापूर्वक सबमिट हो गई!', 'ok');
   el('localTitle').value = '';
   el('localArea').value = '';
   el('localBody').value = '';
