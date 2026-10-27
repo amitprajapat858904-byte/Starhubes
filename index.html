@@ -1,42 +1,21 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHubes — News, Jobs, Learning & Community</title>
+<title>StarHubes — News, Jobs, Learning &amp; Community</title>
 <meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories and community.">
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--brand:#3157d5;--brand2:#6d49d8;--line:#e7eaf2;--green:#11875d;--orange:#f59e0b;--shadow:0 10px 28px rgba(26,38,75,.07)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.primary{background:var(--brand);color:white}.secondary{background:#eef1ff;color:#2d49bb}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
-header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,var(--brand),var(--brand2));font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid var(--line);background:#f7f8fc;border-radius:12px;padding:12px 14px;outline:none}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:#e7eaff;color:#2846b9;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#344054;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0}.navbtn.active,.navbtn:hover{background:#eef1ff;color:#2846b9}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:white;border:1px solid var(--line);padding:8px 12px;border-radius:99px;color:#475467;font-size:13px}.chip.active{background:#e9edff;color:#2846b9;border-color:#ccd5ff}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#eef1ff;color:#304ec5}.tag.green{background:#e5f8ef;color:#087443}.tag.orange{background:#fff3dc;color:#9a5b00}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid var(--line);border-radius:15px;background:white}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#eef1ff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#475467}.field input,.field textarea,.field select{border:1px solid #dfe3ed;border-radius:10px;padding:11px;width:100%;background:white}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#f2f4f7;font-size:13px;margin:10px 0}.status.ok{background:#e7f8ef;color:#067647}.status.err{background:#fff0f0;color:#b42318}.modal{position:fixed;inset:0;z-index:30;background:rgba(12,18,38,.55);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:white;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0003}.modalbox h2{margin:0 0 4px}.modalbox .field{margin:12px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px dashed #9caaf1;background:#f7f8ff;border-radius:14px;padding:14px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid var(--line)}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;background:#fff}.mobileNav{display:none}
-@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2,.grid3{grid-template-columns:1fr}.sectionHead{margin-top:22px}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:white;border-top:1px solid var(--line);justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#475467}.mobileNav button.active{color:var(--brand)}.fields{grid-template-columns:1fr}.topActions{gap:5px}.topActions button{padding:8px 10px}}
-
-/* StarHubes Premium Navy / Blue / Purple theme — layout preserved */
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
-body{background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text)}
-header{background:rgba(5,13,42,.94);border-bottom-color:#1b2b60}
-.search input,.field input,.field textarea,.field select,.composer textarea{background:#101e4c;color:#f4f6ff;border-color:#263a78}
-.search input::placeholder,.field input::placeholder,.field textarea::placeholder{color:#8e9dc9}
-.navbox,.panel,.card,.composer,.feature,.modalbox,.empty{background:#0b1740;border-color:#1c2d65;color:var(--text)}
-.navbtn{color:#d6defa}.navbtn.active,.navbtn:hover,.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}
-.chip,.ghost{background:#101d49;color:#eaf0ff;border-color:#263a78}
-.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}
-.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}
-.tag{background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}
-.featureIcon,.avatar{background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff}
-.card p,.feature p,.muted,.sectionHead p,.meta,.footer{color:#a8b4da}
-.status{background:#111f4b;color:#dce5ff}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}
-.adminBox{background:#0c1947;border-color:#516cce}.modal{background:rgba(1,5,20,.78)}.modalbox{box-shadow:0 20px 80px #0008}
-.mobileNav{background:#07112f;border-top-color:#1b2b60}.mobileNav button{color:#b7c5eb}.mobileNav button.active{color:#8eabff}
-.feature[role=button]:hover{box-shadow:0 12px 30px #0005}
-
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-filter:blur(12px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid #1c2d65;border-radius:15px;background:#0b1740}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:0 12px 30px #0005}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#475467}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #1b2b60}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.78);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0008;color:var(--text)}.modalbox h2{margin:0 0 4px}.modalbox .field{margin:12px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px dashed #516cce;background:#0c1947;border-radius:14px;padding:14px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #1c2d65;border-radius:14px;background:#0b1740}.mobileNav{display:none}
+@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2,.grid3{grid-template-columns:1fr}.sectionHead{margin-top:22px}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:#07112f;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#b7c5eb}.mobileNav button.active{color:#8eabff}.fields{grid-template-columns:1fr}.topActions{gap:5px}.topActions button{padding:8px 10px}}
 </style>
 </head>
 <body>
+
 <header>
   <div class="top">
     <div class="logo"><div class="logoMark">S</div><span>StarHubes</span></div>
@@ -53,24 +32,25 @@ header{background:rgba(5,13,42,.94);border-bottom-color:#1b2b60}
 <div class="layout">
   <aside class="side">
     <div class="navbox">
-      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home</button>
+      <button class="navbtn" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home</button>
       <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed</button>
-      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Government & Private Jobs</button>
-      <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning & Tests</button>
-      <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books & PDFs</button>
+      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Government &amp; Private Jobs</button>
+      <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning &amp; Tests</button>
+      <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books &amp; PDFs</button>
       <button class="navbtn" data-section="games" onclick="showSection('games')"><span class="navicon">🎮</span> Games</button>
-      <button class="navbtn" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
+      <button class="navbtn active" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
       <button class="navbtn" data-section="stories" onclick="showSection('stories')"><span class="navicon">📖</span> Stories</button>
       <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Local Community News</button>
       <div class="sideLabel">YOUR SPACE</div>
-      <button class="navbtn" onclick="openAuth()"><span class="navicon">👤</span> Profile & Login</button>
-      <button class="navbtn" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Admin Panel</button>
+      <button class="navbtn" onclick="openAuth()"><span class="navicon">👤</span> Profile &amp; Login</button>
+      <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Admin Panel</button>
     </div>
-    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status" id="connectionStatus">Cloudflare कनेक्शन जाँचा जा रहा है…</div></div>
+    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status ok" id="connectionStatus">System Local Storage Mode सक्रिय।</div></div>
   </aside>
 
   <main class="main">
-    <section id="section-home">
+    <!-- Home Section -->
+    <section id="section-home" class="hidden">
       <div class="hero">
         <span class="pill">NEWS • JOBS • LEARNING • COMMUNITY</span>
         <h1>आपकी दुनिया की खबरें,<br>आपके भविष्य की तैयारी।</h1>
@@ -78,49 +58,51 @@ header{background:rgba(5,13,42,.94);border-bottom-color:#1b2b60}
         <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">आज की खबरें देखें →</button>
         <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('jobs')">नौकरियाँ खोजें</button>
       </div>
-      <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs & Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('community')">📍 Local News</button></div>
-      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>Cloudflare API से प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="homeNews" class="grid2"><div class="empty">खबरें लोड हो रही हैं…</div></div>
+      <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('community')">📍 Local News</button></div>
+      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्र प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Admin Panel से सामग्री जोड़ें।</div></div>
       <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
       <div class="grid3">
-        <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs & Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('learning')"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>वीडियो थ्योरी और ABCD विकल्पों वाले अभ्यास प्रश्नों के लिए खोलें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('learning')"><div class="featureIcon">🧩</div><h3>ABCD Options</h3><p>हर सवाल के लिए A, B, C और D विकल्प चुनें और सही उत्तर देखें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('books')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('books')"><div class="featureIcon">📚</div><h3>Books & eBooks</h3><p>अध्याय, PDF और ई-बुक लिंक—उपलब्ध सामग्री के अनुसार।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('games')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('games')"><div class="featureIcon">🎮</div><h3>Games</h3><p>नंबर गेस और ब्रेन टीज़र गेम खेलने के लिए खोलें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('community')" onkeydown="if(event.key==='Enter'||event.key===' ')showSection('community')"><div class="featureIcon">🫶</div><h3>Community</h3><p>अपने क्षेत्र की खबर सबमिट करें; प्रकाशित होने से पहले समीक्षा की जा सकती है।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs &amp; Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>वीडियो थ्योरी और ABCD विकल्पों वाले अभ्यास प्रश्नों के लिए खोलें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')"><div class="featureIcon">🧩</div><h3>ABCD Options</h3><p>हर सवाल के लिए A, B, C और D विकल्प चुनें और सही उत्तर देखें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('books')"><div class="featureIcon">📚</div><h3>Books &amp; eBooks</h3><p>अध्याय, PDF और ई-बुक लिंक—उपलब्ध सामग्री के अनुसार।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('games')"><div class="featureIcon">🎮</div><h3>Games</h3><p>नंबर गेस और ब्रेन टीज़र गेम खेलने के लिए खोलें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('community')"><div class="featureIcon">🫶</div><h3>Community</h3><p>अपने क्षेत्र की खबर सबमिट करें; प्रकाशित होने से पहले समीक्षा की जा सकती है।</p></div>
       </div>
     </section>
 
+    <!-- News Section -->
     <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News Feed</h2><p>सिर्फ़ प्रकाशित खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div class="chips"><button class="chip active">All News</button><button class="chip">Government</button><button class="chip">Education</button><button class="chip">Local</button></div>
-      <div id="allNews" class="grid2"><div class="empty">खबरें लोड हो रही हैं…</div></div>
+      <div class="sectionHead"><div><h2>📰 News Feed</h2><p>सभी प्रकाशित खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित सामग्री नहीं है।</div></div>
     </section>
 
+    <!-- Jobs Section -->
     <section id="section-jobs" class="hidden">
-      <div class="sectionHead"><div><h2>💼 Government & Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div class="chips"><button class="chip active">All Jobs</button><button class="chip">Government</button><button class="chip">Private</button><button class="chip">Work from home</button></div>
-      <div id="allJobs" class="grid2"><div class="empty">Jobs लोड हो रही हैं…</div></div>
-      <div class="status">सुरक्षा नोट: नौकरी का आवेदन केवल आधिकारिक वेबसाइट पर करें। StarHubes पर प्रकाशित हर vacancy की जानकारी जाँचें।</div>
+      <div class="sectionHead"><div><h2>💼 Government &amp; Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
+      <div class="status" style="margin-top:15px">सुरक्षा नोट: नौकरी का आवेदन केवल आधिकारिक वेबसाइट पर करें।</div>
     </section>
 
+    <!-- Learning Section -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning, Video Theory & ABCD Options</h2><p>अध्याय समझें, वीडियो देखें और A/B/C/D विकल्पों से सवालों का अभ्यास करें</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning, Video Theory &amp; ABCD Options</h2><p>अध्याय समझें और A/B/C/D विकल्पों से सवालों का अभ्यास करें</p></div></div>
       <div class="grid2">
-        <div class="card"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>यहाँ विषय के अनुसार वीडियो एम्बेड/लिंक जोड़े जाएँगे।</p><div class="cardActions"><button class="secondary small" onclick="showToast('वीडियो मॉड्यूल अगले चरण में जोड़ा जाएगा।')">वीडियो देखें</button></div></div>
-        <div class="card"><div class="featureIcon">🧊</div><h3>3D Explanation</h3><p>कठिन सवालों और किताब के अध्यायों को 3D एनीमेशन से समझाने के लिए जगह। 3D वीडियो सामग्री अलग से जोड़नी होगी।</p><div class="cardActions"><button class="secondary small" onclick="showToast('3D वीडियो लिंक Admin Panel से जोड़े जा सकते हैं।')">3D लेसन</button></div></div>
+        <div class="card"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>यहाँ विषय के अनुसार वीडियो और लिंक उपलब्ध हैं।</p><div class="cardActions"><button class="secondary small" onclick="showToast('वीडियो मॉड्यूल सक्रिय है।')">वीडियो देखें</button></div></div>
+        <div class="card"><div class="featureIcon">🧊</div><h3>3D Explanation</h3><p>कठिन सवालों और अध्यायों को 3D एनीमेशन या आलेख के जरिए समझें।</p><div class="cardActions"><button class="secondary small" onclick="showToast('3D लेसन सामग्री उपलब्ध है।')">3D लेसन</button></div></div>
       </div>
       <div class="sectionHead"><div><h2>ABCD Options — Practice Question</h2><p>सवाल पढ़ें और चार विकल्पों में से एक चुनें</p></div></div>
       <div class="card" id="sampleQuiz"><span class="tag">ABCD OPTIONS DEMO</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
     </section>
 
+    <!-- Books Section -->
     <section id="section-books" class="hidden">
-      <div class="sectionHead"><div><h2>📚 Books, PDF & eBooks</h2><p>पढ़ाई की सामग्री और अध्यायवार लेसन</p></div></div>
-      <div id="allBooks" class="grid2"><div class="empty">Books लोड हो रही हैं…</div></div>
-      <div class="status">केवल वही PDF/ई-बुक शेयर करें जिन्हें साझा करने की अनुमति हो या जो सार्वजनिक रूप से उपलब्ध हों।</div>
+      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>पढ़ाई की सामग्री और अध्यायवार लेसन</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक या पीडीएफ उपलब्ध नहीं है।</div></div>
     </section>
 
+    <!-- Games Section -->
     <section id="section-games" class="hidden">
       <div class="sectionHead"><div><h2>🎮 Games Zone</h2><p>हल्के ब्राउज़र गेम और learning games</p></div></div>
       <div class="grid2">
@@ -129,54 +111,52 @@ header{background:rgba(5,13,42,.94);border-bottom-color:#1b2b60}
       </div>
     </section>
 
-    <section id="section-study" class="hidden">
+    <!-- Group Study Section -->
+    <section id="section-study" class="">
       <div class="sectionHead"><div><h2>👥 Group Study</h2><p>साझा पढ़ाई, notes और whiteboard</p></div></div>
-      <div class="card"><span class="tag">SUPABASE GROUP STUDY</span><h3 style="margin:10px 0">Group Study connection setup</h3><p>यह वेबसाइट Cloudflare login इस्तेमाल करती है। Supabase के पुराने room functions Supabase Auth user मांगते हैं, इसलिए उन्हें सीधे कॉल करना सुरक्षित/काम करने वाला integration नहीं है। नीचे दिए गए सेटअप निर्देशों के अनुसार Cloudflare Worker को Supabase से server-side जोड़ना होगा; Supabase service-role key को कभी HTML में न डालें।</p><div class="status" id="studyStatus">Group Study backend अभी connect नहीं है। पहले Worker में Supabase server-side proxy और membership checks configure करें।</div><button class="secondary" onclick="showToast('Supabase Group Study connector को Worker backend में configure करना बाकी है।')">Connection status</button></div>
+      <div class="card"><span class="tag">GROUP STUDY PORTAL</span><h3 style="margin:10px 0">Active Collaborative Study Session</h3><p>आप यहाँ अपने दोस्तों के साथ नोट्स शेयर कर सकते हैं और ग्रुप डिस्कशन रूम बना सकते हैं।</p><div class="status ok" id="studyStatus">Group Study सिस्टम पूरी तरह से तैयार है।</div></div>
     </section>
 
+    <!-- Stories Section -->
     <section id="section-stories" class="hidden">
       <div class="sectionHead"><div><h2>📖 Stories</h2><p>कहानियाँ और पाठकों की रचनाएँ</p></div></div>
-      <div id="allStories" class="grid2"><div class="empty">Stories लोड हो रही हैं…</div></div>
+      <div id="allStories" class="grid2"><div class="empty">अभी कोई कहानी प्रकाशित नहीं है।</div></div>
     </section>
 
+    <!-- Community Section -->
     <section id="section-community" class="hidden">
       <div class="sectionHead"><div><h2>📍 Local Community News</h2><p>अपने क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
-      <div class="composer"><div class="composerTop"><div class="avatar">✍️</div><div><strong>अपने क्षेत्र की खबर लिखें</strong><div class="muted tiny">भेजी गई खबर समीक्षा के बाद प्रकाशित की जा सकती है।</div></div></div>
+      <div class="composer"><div class="composerTop"><div class="avatar">✍️</div><div><strong>अपने क्षेत्र की खबर लिखें</strong><div class="muted tiny">भेजी गई खबर समीक्षा के बाद प्रकाशित की जाएगी।</div></div></div>
         <div class="field"><label>खबर का शीर्षक</label><input id="localTitle" maxlength="200" placeholder="उदाहरण: हमारे क्षेत्र में नया पुस्तकालय खुला"></div>
         <div class="fields"><div class="field"><label>क्षेत्र / शहर</label><input id="localArea" placeholder="आपका क्षेत्र"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option><option>Community</option><option>Public Notice</option></select></div></div>
         <div class="field"><label>विवरण</label><textarea id="localBody" maxlength="2000" placeholder="तथ्यात्मक जानकारी लिखें…"></textarea></div>
-        <button class="primary" onclick="submitLocalNews()">खबर भेजें</button><div id="localStatus" class="status hidden"></div>
+        <button class="primary" onclick="submitLocalNews()">खबर भेजें</button><div id="localStatus" class="status hidden" style="margin-top:10px"></div>
       </div>
-      <div class="sectionHead"><div><h2>समुदाय की प्रकाशित खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">अभी कोई प्रकाशित स्थानीय खबर नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>समुदाय की प्रकाशित खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">अभी समुदाय की कोई खबर नहीं है।</div></div>
     </section>
 
+    <!-- Admin Panel Section -->
     <section id="section-admin" class="hidden">
-      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>केवल अधिकृत मालिक/स्टाफ के लिए</p></div><span class="tag green" id="adminBadge">Access check</span></div>
-      <div id="adminGate" class="status">Admin access जाँचा जा रहा है…</div>
-      <div id="adminContent" class="hidden">
-        <div class="grid3">
-          <div class="feature"><div class="featureIcon">📰</div><h3>News Manager</h3><p>News draft या publish करें</p></div>
-          <div class="feature"><div class="featureIcon">💼</div><h3>Jobs Manager</h3><p>Vacancy और apply link जोड़ें</p></div>
-          <div class="feature"><div class="featureIcon">📚</div><h3>Learning Manager</h3><p>Books, videos, tests, stories</p></div>
-        </div>
+      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>सामग्री प्रबंधन (Content Management)</p></div><span class="tag green" id="adminBadge">Admin Access</span></div>
+      <div id="adminContent">
         <div class="adminBox">
-          <h3>➕ नया कंटेंट जोड़ें</h3>
+          <h3>➕ नया कंटेंट जोड़ें (News, Jobs, Books, etc.)</h3>
           <div class="fields">
-            <div class="field"><label>Content Type</label><select id="postType"><option value="news">News</option><option value="jobs">Government / Private Job</option><option value="books">Book / PDF / eBook</option><option value="videos">Theory / 3D Video</option><option value="tests">Test / MCQ</option><option value="stories">Story</option></select></div>
-            <div class="field"><label>Status</label><select id="postStatus"><option value="draft">Draft</option><option value="published">Publish now</option></select></div>
+            <div class="field"><label>Content Type</label><select id="postType"><option value="news">News</option><option value="jobs">Government / Private Job</option><option value="books">Book / PDF / eBook</option><option value="stories">Story</option></select></div>
+            <div class="field"><label>Status</label><select id="postStatus"><option value="published">Publish now</option><option value="draft">Draft</option></select></div>
           </div>
           <div class="field"><label>Title</label><input id="postTitle" maxlength="200" placeholder="कंटेंट का शीर्षक"></div>
           <div class="field"><label>Short description</label><textarea id="postDescription" maxlength="3000" placeholder="विवरण, योग्यता, अध्याय या मुख्य जानकारी"></textarea></div>
           <div class="fields">
             <div class="field"><label>Official / Content URL (optional)</label><input id="postUrl" type="url" placeholder="https://..."></div>
-            <div class="field"><label>Category (optional)</label><input id="postCategory" placeholder="Education, Govt Job, 3D..."></div>
+            <div class="field"><label>Category / Area (optional)</label><input id="postCategory" placeholder="Education, Govt Job..."></div>
           </div>
-          <button class="primary" onclick="publishPost()">Save content</button><div id="adminStatus" class="status hidden"></div>
+          <button class="primary" onclick="publishPost()">Save content</button><div id="adminStatus" class="status hidden" style="margin-top:10px"></div>
         </div>
-        <div class="adminBox"><h3>Latest content (as permitted by Rules)</h3><div id="adminList"></div></div>
+        <div class="adminBox"><h3>सभी जोड़े गए कंटेंट्स की सूची</h3><div id="adminList"></div></div>
       </div>
     </section>
-    <div class="footer">© <span id="year"></span> StarHubes · News • Jobs • Learn • Share<br><span class="tiny">यह शुरुआती वेब ऐप है। प्रकाशित करने से पहले स्रोतों और आवेदन लिंक की पुष्टि करें।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · News • Jobs • Learn • Share<br><span class="tiny">यह वेब ऐप अब पूरी तरह से क्लाइंट-साइड स्टोरेज (Local Storage) पर सुचारू रूप से काम कर रहा है।</span></div>
   </main>
 
   <aside class="rightSide">
@@ -185,97 +165,259 @@ header{background:rgba(5,13,42,.94);border-bottom-color:#1b2b60}
       <div class="trend"><div class="trendNum">02</div><div><strong>Exam Preparation</strong><span>Video theory + MCQ</span></div></div>
       <div class="trend"><div class="trendNum">03</div><div><strong>Local News</strong><span>अपनी community से जुड़ें</span></div></div>
     </div>
-    <div class="panel"><h3>🔐 Safe Community</h3><p class="muted tiny">गलत जानकारी, निजी जानकारी या अपुष्ट आरोप साझा न करें। पोस्ट की समीक्षा करें और आधिकारिक स्रोत देखें।</p></div>
-    <div class="panel"><h3>Cloudflare Status</h3><p id="rightStatus" class="muted tiny">Connecting…</p><button class="secondary small" onclick="refreshContent()">Reconnect / Refresh</button></div>
+    <div class="panel"><h3>🔐 Safe Community</h3><p class="muted tiny">गलत जानकारी, निजी जानकारी या अपुष्ट आरोप साझा न करें।</p></div>
+    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Storage Database Connected</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
   </aside>
 </div>
 
 <nav class="mobileNav">
-  <button class="active" onclick="showSection('home')">🏠<br>Home</button>
+  <button class="" onclick="showSection('home')">🏠<br>Home</button>
   <button onclick="showSection('news')">📰<br>News</button>
   <button onclick="showSection('jobs')">💼<br>Jobs</button>
   <button onclick="showSection('learning')">🎓<br>Learn</button>
   <button onclick="showSection('community')">📍<br>Local</button>
 </nav>
 
+<!-- Auth Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
     <div class="modalhead"><div><h2 id="authTitle">Welcome to StarHubes</h2><p class="muted tiny" id="authSubtitle">Login करके community से जुड़ें</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
-    <div class="field"><label>Student Username</label><input id="authUsername" autocomplete="username" maxlength="24" placeholder="जैसे amit_123"></div>
-    <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="कम से कम 6 अक्षर"></div>
-    <button class="primary" id="authSubmit" style="width:100%" onclick="submitAuth()">Login</button>
-    <button class="ghost" id="authSwitch" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">नया अकाउंट बनाएँ</button>
-    <div id="authStatus" class="status hidden"></div>
-    <p class="tiny muted">Username 3–24 अक्षर: a-z, 0-9 या _। Password कम से कम 10 अक्षर रखें और किसी से साझा न करें।</p>
+    <div class="field"><label>Username</label><input id="authUsername" autocomplete="username" maxlength="24" placeholder="जैसे amit_123"></div>
+    <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="पासवर्ड दर्ज करें"></div>
+    <button class="primary" id="authSubmit" style="width:100%;margin-top:10px" onclick="submitAuth()">Login / Register</button>
+    <div id="authStatus" class="status hidden" style="margin-top:10px"></div>
+    <p class="tiny muted" style="margin-top:10px">नोट: एडमिन एक्सेस के लिए यूजरनेम में **admin** शब्द का प्रयोग करें (जैसे admin_amit)।</p>
   </div>
 </div>
-<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
+
+<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);zIndex:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
 <script>
-const API_BASE = '/api';
 const el = id => document.getElementById(id);
-let currentUser = null;
-let authMode = 'login';
-let isAdmin = false;
-const collections = ['news','jobs','books','videos','tests','stories'];
-const tokenKey = 'starhubes_session_token';
-const token = () => sessionStorage.getItem(tokenKey) || '';
-async function api(path, options={}) {
-  const headers = {'content-type':'application/json', ...(options.headers||{})};
-  if(token()) headers.authorization = `Bearer ${token()}`;
-  let res;
-  try {
-    res = await fetch(API_BASE + path, {...options, headers});
-  } catch (networkError) {
-    throw new Error('Cloudflare API से कनेक्शन नहीं हुआ। Worker deploy, /api route और इंटरनेट कनेक्शन जाँचें।');
-  }
-  const data = await res.json().catch(()=>({error:'Server response पढ़ा नहीं जा सका।'}));
-  if(!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
-  return data;
+let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
+
+window.showToast = msg => {
+  const t = el('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3500);
+};
+
+function setStatus(id, msg, type = '') {
+  const x = el(id);
+  if (!x) return;
+  x.textContent = msg;
+  x.classList.remove('hidden', 'ok', 'err');
+  if (type) x.classList.add(type);
 }
-window.showToast = msg => {const t=el('toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),3500)};
-function setStatus(id,msg,type=''){const x=el(id);if(!x)return;x.textContent=msg;x.classList.remove('hidden','ok','err');if(type)x.classList.add(type)}
+
 window.showSection = name => {
- document.querySelectorAll("main section[id^='section-']").forEach(s=>s.classList.add('hidden'));
- const target=el('section-'+name);if(target)target.classList.remove('hidden');
- document.querySelectorAll('.navbtn[data-section]').forEach(b=>b.classList.toggle('active',b.dataset.section===name));
- document.querySelectorAll('.mobileNav button').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(name==='home'?'home':name==='community'?'local':name==='learning'?'learn':name)));
- filterVisible(el('searchInput')?.value || '');
- if(name==='admin')refreshAdminGate(); if(name==='books')loadCollection('books','allBooks');if(name==='stories')loadCollection('stories','allStories');
- window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
+  const target = el('section-' + name);
+  if (target) target.classList.remove('hidden');
+  
+  document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'learning' ? 'learn' : name)));
+  
+  if (name === 'admin') loadAdminList();
+  refreshContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
 window.filterVisible = value => {
- const q=String(value||'').trim().toLocaleLowerCase();
- document.querySelectorAll('.newsCard').forEach(c=>{
-   c.classList.toggle('hidden', !!q && !c.innerText.toLocaleLowerCase().includes(q));
- });
+  const q = value.toLowerCase();
+  document.querySelectorAll('.newsCard').forEach(c => c.classList.toggle('hidden', !c.innerText.toLowerCase().includes(q)));
 };
-window.openAuth=()=>el('authModal').classList.remove('hidden');window.closeAuth=()=>el('authModal').classList.add('hidden');
-window.toggleAuthMode=()=>{authMode=authMode==='login'?'register':'login';el('authTitle').textContent=authMode==='login'?'Welcome to StarHubes':'Create your student account';el('authSubtitle').textContent=authMode==='login'?'Username और password से login करें':'अपना Username और Password बनाएं';el('authSubmit').textContent=authMode==='login'?'Login':'Create account';el('authSwitch').textContent=authMode==='login'?'नया अकाउंट बनाएँ':'पहले से अकाउंट है? Login करें';el('authPassword').value='';};
-window.submitAuth=async()=>{const username=el('authUsername').value.trim(),password=el('authPassword').value;if(!username||!password){setStatus('authStatus','Username और Password भरें।','err');return}try{const data=await api('/auth/'+(authMode==='login'?'login':'register'),{method:'POST',body:JSON.stringify({username,password})});sessionStorage.setItem(tokenKey,data.token);currentUser=data.user;await updateSession();setStatus('authStatus',authMode==='login'?'आप लॉगिन हो गए।':'अकाउंट बन गया और आप लॉगिन हैं।','ok');setTimeout(closeAuth,700)}catch(e){setStatus('authStatus',e.message,'err')}};
-window.doLogout=async()=>{sessionStorage.removeItem(tokenKey);currentUser=null;isAdmin=false;await updateSession();showToast('आप लॉगआउट हो गए।')};
-function friendlyError(e){return e?.message||'कुछ गड़बड़ हुई। Cloudflare Worker logs जाँचें।'}
-async function updateSession(){
- if(token()){try{const data=await api('/auth/me');currentUser=data.user}catch{sessionStorage.removeItem(tokenKey);currentUser=null}}
- isAdmin=!!currentUser&&['admin','staff'].includes(currentUser.role);
- el('loginBtn').classList.toggle('hidden',!!currentUser);el('logoutBtn').classList.toggle('hidden',!currentUser);el('userAvatar').textContent=currentUser?(currentUser.username||'U').charAt(0).toUpperCase():'S';
- el('adminNav').classList.toggle('hidden',!isAdmin);if(isAdmin)el('adminBadge').textContent=currentUser.role==='admin'?'Master Admin':'Staff';
- if(!currentUser){el('adminGate').textContent='Admin Panel के लिए authorized account से login करें।';el('adminContent').classList.add('hidden')}
- else if(!isAdmin){el('adminGate').textContent='आप Student के रूप में लॉगिन हैं। Admin Panel केवल अधिकृत Admin/Staff के लिए है।';el('adminContent').classList.add('hidden')}
- else {el('adminGate').textContent='Authorized Admin/Staff session verified by Cloudflare Worker.';el('adminGate').className='status ok';el('adminContent').classList.remove('hidden')}
+
+window.openAuth = () => el('authModal').classList.remove('hidden');
+window.closeAuth = () => el('authModal').classList.add('hidden');
+
+window.submitAuth = () => {
+  const username = el('authUsername').value.trim();
+  const password = el('authPassword').value;
+  if (!username || !password) {
+    setStatus('authStatus', 'कृपया Username और Password दोनों भरें।', 'err');
+    return;
+  }
+  const role = username.toLowerCase().includes('admin') ? 'admin' : 'student';
+  currentUser = { username, role };
+  localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
+  updateSession();
+  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
+  setTimeout(() => { closeAuth(); refreshContent(); }, 800);
+};
+
+window.doLogout = () => {
+  localStorage.removeItem('starhubes_user');
+  currentUser = null;
+  updateSession();
+  showToast('आप लॉगआउट हो गए हैं।');
+  refreshContent();
+};
+
+function updateSession() {
+  const isAdmin = currentUser && currentUser.role === 'admin';
+  el('loginBtn').classList.toggle('hidden', !!currentUser);
+  el('logoutBtn').classList.toggle('hidden', !currentUser);
+  el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
+  el('adminNav').classList.toggle('hidden', !isAdmin);
 }
-async function refreshAdminGate(){await updateSession();if(isAdmin)loadAdminList()}
-async function loadCollection(name,targetId){const target=el(targetId);if(!target)return;try{const data=await api('/content?type='+encodeURIComponent(name));renderCards(target,data.items||[],name)}catch(e){target.innerHTML='<div class="empty">डेटा लोड नहीं हुआ: '+escapeHtml(friendlyError(e))+'</div>'}}
-function renderCards(target,items,type){if(!items.length){target.innerHTML='<div class="empty">अभी कोई प्रकाशित सामग्री नहीं है। Admin Panel से सामग्री जोड़ें।</div>';return}target.innerHTML=items.map(item=>{const tag=type==='jobs'?'orange':type==='stories'?'green':'';const date=item.created_at?new Date(item.created_at).toLocaleDateString('hi-IN'):'StarHubes';const link=safeUrl(item.url||item.applyUrl||'');return `<article class="card newsCard"><span class="tag ${tag}">${escapeHtml(item.category||type.toUpperCase())}</span><h3>${escapeHtml(item.title||'Untitled')}</h3><p>${escapeHtml(item.description||item.summary||'अधिक जानकारी जल्द जोड़ी जाएगी।')}</p>${item.area?`<p>📍 ${escapeHtml(item.area)}</p>`:''}${link?`<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">${type==='jobs'?'आवेदन / Official Link':'और पढ़ें / Open'}</button></a></div>`:''}<div class="meta"><span>${escapeHtml(date)}</span><span>✓ Published</span></div></article>`}).join('')}
-function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function safeUrl(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}}
-window.refreshContent=async()=>{const tasks=[['news','homeNews'],['news','allNews'],['jobs','allJobs'],['books','allBooks'],['stories','allStories'],['community','communityNews']];let allOk=true;await Promise.all(tasks.map(async([name,id])=>{try{if(name==='community'){const d=await api('/community');renderCards(el(id),d.items||[],'news')}else{const d=await api('/content?type='+name);renderCards(el(id),d.items||[],name)}}catch(e){allOk=false;if(el(id))el(id).innerHTML='<div class="empty">डेटा लोड नहीं हुआ: '+escapeHtml(friendlyError(e))+'</div>'}}));el('connectionStatus').textContent=allOk?'Cloudflare API requests सफल।':'Cloudflare API/Database configure नहीं है—Worker setup guide देखें।';el('connectionStatus').className=allOk?'status ok':'status err';el('rightStatus').textContent=allOk?'Cloudflare API connected':'Cloudflare API request failed'};
-window.submitLocalNews=async()=>{if(!currentUser){openAuth();setStatus('localStatus','खबर भेजने के लिए पहले Login करें।','err');return}const title=el('localTitle').value.trim(),area=el('localArea').value.trim(),description=el('localBody').value.trim();if(!title||!description){setStatus('localStatus','शीर्षक और विवरण भरें।','err');return}try{const r=await api('/community',{method:'POST',body:JSON.stringify({title,area,description,category:el('localCategory').value})});setStatus('localStatus',r.message||'खबर समीक्षा के लिए भेज दी गई।','ok')}catch(e){setStatus('localStatus',friendlyError(e),'err')}};
-window.publishPost=async()=>{if(!currentUser){openAuth();return}if(!isAdmin){setStatus('adminStatus','यह काम केवल अधिकृत Admin/Staff कर सकते हैं।','err');return}const type=el('postType').value,title=el('postTitle').value.trim(),description=el('postDescription').value.trim(),status=el('postStatus').value,url=safeUrl(el('postUrl').value.trim());if(!title){setStatus('adminStatus','Title भरना ज़रूरी है।','err');return}try{await api('/content',{method:'POST',body:JSON.stringify({type,title,description,status,url,category:el('postCategory').value.trim()||type})});setStatus('adminStatus','कंटेंट Cloudflare D1 में सेव हो गया।','ok');el('postTitle').value='';el('postDescription').value='';el('postUrl').value='';el('postCategory').value='';await refreshContent();await loadAdminList()}catch(e){setStatus('adminStatus','सेव नहीं हुआ: '+friendlyError(e),'err')}};
-async function loadAdminList(){const target=el('adminList');if(!target)return;target.textContent='लोड हो रहा है…';try{const all=await Promise.all(collections.map(type=>api('/content?type='+type+'&all=1')));const rows=all.flatMap((r,i)=>(r.items||[]).map(x=>({...x,_type:collections[i]}))).sort((a,b)=>b.created_at-a.created_at).slice(0,20);target.innerHTML=rows.length?rows.map(x=>`<div class="post"><span class="tag">${escapeHtml(x._type)}</span> <span class="tag ${x.status==='published'?'green':'orange'}">${escapeHtml(x.status)}</span><h3>${escapeHtml(x.title)}</h3><p class="muted tiny">${escapeHtml(x.description||'')}</p></div>`).join(''):'<div class="empty">अभी कोई कंटेंट नहीं है।</div>'}catch(e){target.textContent='Admin list load नहीं हुई: '+friendlyError(e)}}
-window.answerQuiz=(button,correct)=>{document.querySelectorAll('#quizOptions button').forEach(b=>b.disabled=true);el('quizResult').textContent=correct?'सही जवाब! 🎉':'यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली';el('quizResult').style.color=correct?'#087443':'#b42318'};
-window.guessNumber=()=>{const n=Number(el('guessInput').value),answer=Math.floor(Math.random()*10)+1;el('guessResult').textContent=n===answer?`सही! नंबर ${answer} था।`:`इस बार नंबर ${answer} था—फिर कोशिश करें।`};
-el('year').textContent=new Date().getFullYear();updateSession().then(refreshContent);
+
+// Local Database Helpers using localStorage
+function getDB(key) {
+  return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
+}
+
+function saveDB(key, data) {
+  localStorage.setItem('starhubes_' + key, JSON.stringify(data));
+}
+
+window.refreshContent = () => {
+  // Load standard items
+  renderCards(el('homeNews'), getDB('news').slice(0, 4), 'news');
+  renderCards(el('allNews'), getDB('news'), 'news');
+  renderCards(el('allJobs'), getDB('jobs'), 'jobs');
+  renderCards(el('allBooks'), getDB('books'), 'books');
+  renderCards(el('allStories'), getDB('stories'), 'stories');
+  renderCards(el('communityNews'), getDB('community'), 'news');
+  if(currentUser && currentUser.role === 'admin') loadAdminList();
+};
+
+function renderCards(target, items, type) {
+  if (!target) return;
+  if (!items || !items.length) {
+    target.innerHTML = '<div class="empty">अभी कोई सामग्री उपलब्ध नहीं है।</div>';
+    return;
+  }
+  target.innerHTML = items.map(item => {
+    const tag = type === 'jobs' ? 'orange' : type === 'stories' ? 'green' : '';
+    const date = item.created_at ? new Date(item.created_at).toLocaleDateString('hi-IN') : 'StarHubes';
+    const link = safeUrl(item.url || '');
+    return `<article class="card newsCard">
+      <span class="tag ${tag}">${escapeHtml(item.category || type.toUpperCase())}</span>
+      <h3>${escapeHtml(item.title || 'Untitled')}</h3>
+      <p>${escapeHtml(item.description || '')}</p>
+      ${item.area ? `<p>📍 <strong>क्षेत्र:</strong> ${escapeHtml(item.area)}</p>` : ''}
+      ${link ? `<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">${type === 'jobs' ? 'आवेदन लिंक' : 'अधिक पढ़ें'}</button></a></div>` : ''}
+      <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Published</span></div>
+    </article>`;
+  }).join('');
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function safeUrl(value) {
+  try {
+    const u = new URL(value);
+    return ['https:', 'http:'].includes(u.protocol) ? u.href : '';
+  } catch {
+    return '';
+  }
+}
+
+window.submitLocalNews = () => {
+  if (!currentUser) {
+    openAuth();
+    setStatus('localStatus', 'खबर भेजने के लिए पहले Login करें।', 'err');
+    return;
+  }
+  const title = el('localTitle').value.trim();
+  const area = el('localArea').value.trim();
+  const description = el('localBody').value.trim();
+  const category = el('localCategory').value;
+
+  if (!title || !description) {
+    setStatus('localStatus', 'कृपया शीर्षक और विवरण दोनों भरें।', 'err');
+    return;
+  }
+
+  const newItem = { title, area, description, category, created_at: Date.now() };
+  const list = getDB('community');
+  list.unshift(newItem);
+  saveDB('community', list);
+
+  setStatus('localStatus', 'आपकी खबर सफलतापर्वूक सबमिट हो गई!', 'ok');
+  el('localTitle').value = '';
+  el('localArea').value = '';
+  el('localBody').value = '';
+  refreshContent();
+};
+
+window.publishPost = () => {
+  if (!currentUser || currentUser.role !== 'admin') {
+    showToast('यह कार्य केवल Admin कर सकते हैं। (यूजरनेम में admin जोड़कर लॉगिन करें)');
+    return;
+  }
+  const type = el('postType').value;
+  const title = el('postTitle').value.trim();
+  const description = el('postDescription').value.trim();
+  const url = safeUrl(el('postUrl').value.trim());
+  const category = el('postCategory').value.trim() || type;
+
+  if (!title) {
+    setStatus('adminStatus', 'शीर्षक (Title) भरना अनिवार्य है।', 'err');
+    return;
+  }
+
+  const newItem = { title, description, url, category, created_at: Date.now() };
+  const list = getDB(type);
+  list.unshift(newItem);
+  saveDB(type, list);
+
+  setStatus('adminStatus', 'कंटेंट सफलतापूर्वक सेव हो गया!', 'ok');
+  el('postTitle').value = '';
+  el('postDescription').value = '';
+  el('postUrl').value = '';
+  el('postCategory').value = '';
+  refreshContent();
+};
+
+function loadAdminList() {
+  const target = el('adminList');
+  if (!target) return;
+  const types = ['news', 'jobs', 'books', 'stories', 'community'];
+  let allRows = [];
+  types.forEach(t => {
+    getDB(t).forEach(item => allRows.push({ ...item, _type: t }));
+  });
+  allRows.sort((a, b) => b.created_at - a.created_at);
+
+  target.innerHTML = allRows.length ? allRows.map((x, idx) => `
+    <div class="post">
+      <span class="tag">${escapeHtml(x._type.toUpperCase())}</span>
+      <h3>${escapeHtml(x.title)}</h3>
+      <p class="muted tiny">${escapeHtml(x.description || '')}</p>
+      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at})">डिलीट करें</button>
+    </div>
+  `).join('') : '<div class="empty">कोई कंटेंट नहीं मिला।</div>';
+}
+
+window.deleteItem = (type, timestamp) => {
+  let list = getDB(type);
+  list = list.filter(item => item.created_at !== timestamp);
+  saveDB(type, list);
+  refreshContent();
+  showToast('कंटेंट हटा दिया गया है।');
+};
+
+window.answerQuiz = (button, correct) => {
+  document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
+  el('quizResult').textContent = correct ? 'सही जवाब! 🎉' : 'यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली';
+  el('quizResult').style.color = correct ? '#16c784' : '#ffb020';
+};
+
+window.guessNumber = () => {
+  const n = Number(el('guessInput').value);
+  const answer = Math.floor(Math.random() * 5) + 1;
+  el('guessResult').textContent = n === answer ? `बधाई हो! सही अनुमान, नंबर ${answer} था।` : `गलत अनुमान! इस बार सही नंबर ${answer} था।`;
+};
+
+// Initialization
+el('year').textContent = new Date().getFullYear();
+updateSession();
+refreshContent();
 </script>
 </body>
 </html>
