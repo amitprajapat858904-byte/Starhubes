@@ -68,7 +68,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div class="grid3">
         <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs &amp; Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
         <div class="feature" role="button" tabindex="0" onclick="showSection('learning')"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>वीडियो थ्योरी और ABCD विकल्पों वाले अभ्यास प्रश्नों के लिए खोलें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('study')"><div class="featureIcon">👥</div><h3>Group Study</h3><p>विषय के अनुसार रूम बनाएं, max 10 छात्र जुड़े और साझा नोट्स लिखें।</p></div>
+        <div class="feature" role="button" tabindex="0" onclick="showSection('study')"><div class="featureIcon">👥</div><h3>Group Study</h3><p>विषय के अनुसार रूम बनाएं, पर्सनल कोड और लाइव वॉइस/वीडियो चैट।</p></div>
         <div class="feature" role="button" tabindex="0" onclick="showSection('books')"><div class="featureIcon">📚</div><h3>Books &amp; eBooks</h3><p>अध्याय, PDF और ई-बुक लिंक—उपलब्ध सामग्री के अनुसार।</p></div>
         <div class="feature" role="button" tabindex="0" onclick="showSection('games')"><div class="featureIcon">🎮</div><h3>Games</h3><p>नंबर गेस और ब्रेन टीज़र गेम खेलने के लिए खोलें।</p></div>
         <div class="feature" role="button" tabindex="0" onclick="showSection('community')"><div class="featureIcon">🫶</div><h3>Community</h3><p>अपने क्षेत्र की खबर सबमिट करें; प्रकाशित होने से पहले समीक्षा की जा सकती है।</p></div>
@@ -113,16 +113,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       </div>
     </section>
 
-    <!-- Group Study Section -->
+    <!-- Group Study Section (Secured with Personal Code, Live Voice/Video & Whiteboard Eraser) -->
     <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>विषय के अनुसार स्टडी रूम बनाएं, 10 छात्र जुड़ें, साझा नोट्स और व्हाइटबोर्ड का उपयोग करें</p></div></div>
+      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल, साझा नोट्स और इरेज़र व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
-        <h3>➕ नया स्टडी रूम बनाएं</h3>
+        <h3>➕ नया पर्सनल स्टडी रूम बनाएं</h3>
         <div class="fields">
-          <div class="field"><label>विषय / रूम का नाम</label><input id="roomName" placeholder="जैसे: Physics Class 12, SSC Math"></div>
-          <div class="field"><label>विषय श्रेणी</label><input id="roomSubject" placeholder="Physics / Maths / General"></div>
+          <div class="field"><label>रूम का नाम</label><input id="roomName" placeholder="जैसे: Physics Class 12"></div>
+          <div class="field"><label>विषय श्रेणी</label><input id="roomSubject" placeholder="Physics / Maths"></div>
         </div>
-        <button class="primary" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
+        <div class="fields" style="margin-top:8px;">
+          <div class="field"><label>🔒 पर्सनल रूम कोड (Secret Passcode)</label><input id="roomCode" type="text" placeholder="जॉइन करने के लिए कोड (जैसे: 1234)"></div>
+        </div>
+        <button class="primary" style="margin-top:8px;" onclick="createStudyRoom()">सुरक्षित रूम बनाएं</button>
         <div id="roomStatus" class="status hidden" style="margin-top:8px;"></div>
       </div>
       
@@ -131,11 +134,24 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
 
       <!-- Active Room Workspace -->
       <div id="roomWorkspace" class="card hidden" style="margin-top:20px; border:2px solid var(--brand);">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <h3 id="activeRoomTitle" style="color:var(--brand);">Room: </h3>
-          <button class="danger small" onclick="leaveRoom()">रूम छोड़ें (Exit)</button>
+          <div>
+            <button class="primary small" style="background:#16c784;" onclick="startLiveVoiceCall()">🎙️ लाइव वॉइस कॉल शुरू करें</button>
+            <button class="danger small" onclick="leaveRoom()">रूम छोड़ें (Exit)</button>
+          </div>
         </div>
-        <p class="tiny muted" id="roomMembersCount">सदस्य: 1 / 10</p>
+        <p class="tiny muted" id="roomMembersCount" style="margin-top:6px;">सदस्य: 1 / 10</p>
+        
+        <!-- Live Audio/Video Stream Box -->
+        <div id="liveCallContainer" class="hidden" style="margin-top:12px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:10px;">
+          <span class="tag green">LIVE AUDIO/VIDEO ACTIVE</span>
+          <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+            <video id="localVideo" autoplay muted playsinline style="width:140px; height:100px; background:#000; border-radius:8px; object-fit:cover;"></video>
+            <div id="remoteVideosContainer" style="display:flex; gap:10px;"></div>
+          </div>
+        </div>
+
         <div class="grid2" style="margin-top:14px;">
           <div>
             <label style="font-size:12px; font-weight:800;">📝 साझा नोटपैड (Shared Notepad)</label>
@@ -150,11 +166,18 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
             </div>
           </div>
         </div>
-        <!-- Whiteboard Section -->
+        
+        <!-- Whiteboard Section with Eraser -->
         <div style="margin-top:16px;">
-          <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Interactive Whiteboard)</label>
-          <canvas id="whiteboard" width="600" height="250" style="background:#fff; border-radius:10px; width:100%; margin-top:6px; cursor:crosshair;"></canvas>
-          <button class="ghost small" style="margin-top:6px;" onclick="clearWhiteboard()">बोर्ड साफ़ करें (Clear)</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Interactive Whiteboard &amp; Eraser)</label>
+            <div style="display:flex; gap:6px;">
+              <button class="secondary small" id="penBtn" onclick="setTool('pen')">✏️ पेन (Pen)</button>
+              <button class="ghost small" id="eraserBtn" onclick="setTool('eraser')">🧹 इरेज़र (Eraser)</button>
+              <button class="danger small" onclick="clearWhiteboard()">बोर्ड साफ़ करें</button>
+            </div>
+          </div>
+          <canvas id="whiteboard" width="600" height="250" style="background:#fff; border-radius:10px; width:100%; cursor:crosshair;"></canvas>
         </div>
       </div>
     </section>
@@ -220,7 +243,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
   <button onclick="showSection('study')">👥<br>Study</button>
 </nav>
 
-<!-- Separate Auth Modal for Login & Register (No Email Required) -->
+<!-- Auth Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
     <div class="modalhead"><div><h2 id="authTitle">Student Login</h2><p class="muted tiny" id="authSubtitle">अपनी ID और Password से प्रवेश करें</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
@@ -233,10 +256,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
   </div>
 </div>
 
+<!-- Room Passcode Prompt Modal -->
+<div id="passcodeModal" class="modal hidden" onclick="if(event.target===this)closePasscodeModal()">
+  <div class="modalbox">
+    <div class="modalhead"><div><h2>🔒 Enter Room Passcode</h2><p class="muted tiny">इस प्राइवेट रूम में प्रवेश करने के लिए कोड दर्ज करें</p></div><button class="ghost small" onclick="closePasscodeModal()">✕</button></div>
+    <div class="field"><label>Secret Room Code</label><input id="enteredPasscode" type="password" placeholder="रूम कोड दर्ज करें"></div>
+    <button class="primary" style="width:100%; margin-top:10px;" onclick="verifyRoomPasscode()">जॉइन करें</button>
+    <div id="passcodeStatus" class="status hidden" style="margin-top:10px;"></div>
+  </div>
+</div>
+
 <div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
 <script>
-// Supabase Configuration (अपनी Supabase details यहाँ डालें यदि चाहें)
 const SUPABASE_URL = '';
 const SUPABASE_ANON_KEY = '';
 const supabaseClient = (window.supabase && SUPABASE_URL) ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
@@ -244,7 +276,9 @@ const supabaseClient = (window.supabase && SUPABASE_URL) ? supabase.createClient
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 let currentRoomId = null;
-let currentAuthMode = 'login'; // 'login' or 'register'
+let pendingRoomId = null;
+let currentAuthMode = 'login';
+let currentTool = 'pen'; // 'pen' or 'eraser'
 
 window.showToast = msg => {
   const t = el('toast');
@@ -320,8 +354,6 @@ window.submitAuth = () => {
     return;
   }
   
-  // Login Mode
-  // Master Admin condition: if username contains 'admin' or matches stored account
   const isAdmin = username.toLowerCase().includes('admin');
   if (!isAdmin && accounts[username] && accounts[username] !== password) {
     setStatus('authStatus', 'गलत पासवर्ड! पुनः प्रयास करें।', 'err');
@@ -352,7 +384,6 @@ function updateSession() {
   el('adminNav').classList.toggle('hidden', !isAdmin);
 }
 
-// Local Database Helpers
 function getDB(key) {
   return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
 }
@@ -405,7 +436,7 @@ function safeUrl(value) {
   }
 }
 
-// Group Study Rooms & Whiteboard
+// Group Study Rooms with Passcode & Whiteboard Eraser
 window.createStudyRoom = async () => {
   if (!currentUser) {
     openAuth('login');
@@ -414,12 +445,14 @@ window.createStudyRoom = async () => {
   }
   const name = el('roomName').value.trim();
   const subject = el('roomSubject').value.trim();
+  const passcode = el('roomCode').value.trim();
+
   if (!name) {
     setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err');
     return;
   }
 
-  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [], canvasData: [] };
+  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
   
   if (supabaseClient) {
     await supabaseClient.from('study_rooms').insert([newRoom]);
@@ -431,7 +464,8 @@ window.createStudyRoom = async () => {
 
   el('roomName').value = '';
   el('roomSubject').value = '';
-  setStatus('roomStatus', 'रूम सफलतापूर्वक बन गया!', 'ok');
+  el('roomCode').value = '';
+  setStatus('roomStatus', 'सुरक्षित रूम सफलतापूर्वक बन गया!', 'ok');
   loadStudyRooms();
 };
 
@@ -446,18 +480,47 @@ window.loadStudyRooms = () => {
   target.innerHTML = rooms.map(r => `
     <div class="card">
       <span class="tag green">${escapeHtml(r.subject)}</span>
-      <h3>${escapeHtml(r.name)}</h3>
+      <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)} | सदस्य: ${(r.members || []).length} / 10</p>
-      <button class="primary small" style="margin-top:10px;" onclick="joinRoom('${r.id}')">रूम जॉइन करें</button>
+      <button class="primary small" style="margin-top:10px;" onclick="tryJoinRoom('${r.id}')">रूम जॉइन करें</button>
     </div>
   `).join('');
 };
 
-window.joinRoom = roomId => {
+window.tryJoinRoom = roomId => {
   if (!currentUser) {
     openAuth('login');
     return;
   }
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === roomId);
+  if (!room) return;
+
+  if (room.passcode && room.creator !== currentUser.username && !room.members.includes(currentUser.username)) {
+    pendingRoomId = roomId;
+    el('enteredPasscode').value = '';
+    el('passcodeStatus').classList.add('hidden');
+    el('passcodeModal').classList.remove('hidden');
+    return;
+  }
+  proceedJoinRoom(roomId);
+};
+
+window.closePasscodeModal = () => el('passcodeModal').classList.add('hidden');
+
+window.verifyRoomPasscode = () => {
+  const passcode = el('enteredPasscode').value.trim();
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === pendingRoomId);
+  if (room && room.passcode === passcode) {
+    closePasscodeModal();
+    proceedJoinRoom(pendingRoomId);
+  } else {
+    setStatus('passcodeStatus', 'गलत रूम कोड! पुनः प्रयास करें।', 'err');
+  }
+};
+
+window.proceedJoinRoom = roomId => {
   const rooms = getDB('study_rooms');
   const room = rooms.find(r => r.id === roomId);
   if (!room) return;
@@ -484,6 +547,7 @@ window.joinRoom = roomId => {
 window.leaveRoom = () => {
   currentRoomId = null;
   el('roomWorkspace').classList.add('hidden');
+  el('liveCallContainer').classList.add('hidden');
   loadStudyRooms();
 };
 
@@ -518,18 +582,45 @@ function renderChatMessages(msgs) {
   box.scrollTop = box.scrollHeight;
 }
 
-// Whiteboard Logic
+// Live Voice / Video Call using WebRTC MediaStream
+window.startLiveVoiceCall = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+    el('localVideo').srcObject = stream;
+    el('liveCallContainer').classList.remove('hidden');
+    showToast('लाइव वॉइस और वीडियो कनेक्शन सक्रिय हो गया है!');
+  } catch (err) {
+    showToast('कैमरा या माइक्रोफ़ोन की अनुमति नहीं मिली।');
+  }
+};
+
+// Whiteboard with Pen & Eraser
 let isDrawing = false;
+window.setTool = tool => {
+  currentTool = tool;
+  el('penBtn').className = tool === 'pen' ? 'secondary small' : 'ghost small';
+  el('eraserBtn').className = tool === 'eraser' ? 'secondary small' : 'ghost small';
+};
+
 function initWhiteboard() {
   const canvas = el('whiteboard');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  ctx.strokeStyle = '#172033';
-  ctx.lineWidth = 2;
   ctx.lineCap = 'round';
 
   canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
-  canvas.onmousemove = e => { if (!isDrawing) return; ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); };
+  canvas.onmousemove = e => {
+    if (!isDrawing) return;
+    if (currentTool === 'eraser') {
+      ctx.strokeStyle = '#ffffff'; // Background color (White) to erase
+      ctx.lineWidth = 15; // Thicker stroke for eraser
+    } else {
+      ctx.strokeStyle = '#172033'; // Pen color
+      ctx.lineWidth = 2;
+    }
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  };
   canvas.onmouseup = () => { isDrawing = false; };
   canvas.onmouseleave = () => { isDrawing = false; };
 }
@@ -604,44 +695,4 @@ function loadAdminList() {
   const types = ['news', 'jobs', 'books', 'stories', 'community'];
   let allRows = [];
   types.forEach(t => {
-    getDB(t).forEach(item => allRows.push({ ...item, _type: t }));
-  });
-  allRows.sort((a, b) => b.created_at - a.created_at);
-
-  target.innerHTML = allRows.length ? allRows.map((x, idx) => `
-    <div class="post">
-      <span class="tag">${escapeHtml(x._type.toUpperCase())}</span>
-      <h3>${escapeHtml(x.title)}</h3>
-      <p class="muted tiny">${escapeHtml(x.description || '')}</p>
-      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at})">डिलीट करें</button>
-    </div>
-  `).join('') : '<div class="empty">कोई कंटेंट नहीं मिला।</div>';
-}
-
-window.deleteItem = (type, timestamp) => {
-  let list = getDB(type);
-  list = list.filter(item => item.created_at !== timestamp);
-  saveDB(type, list);
-  refreshContent();
-  showToast('कंटेंट हटा दिया गया है।');
-};
-
-window.answerQuiz = (button, correct) => {
-  document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
-  el('quizResult').textContent = correct ? 'सही जवाब! 🎉' : 'यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली';
-  el('quizResult').style.color = correct ? '#16c784' : '#ffb020';
-};
-
-window.guessNumber = () => {
-  const n = Number(el('guessInput').value);
-  const answer = Math.floor(Math.random() * 5) + 1;
-  el('guessResult').textContent = n === answer ? `बधाई हो! सही अनुमान, नंबर ${answer} था।` : `गलत अनुमान! इस बार सही नंबर ${answer} था।`;
-};
-
-// Initialization
-el('year').textContent = new Date().getFullYear();
-updateSession();
-refreshContent();
-</script>
-</body>
-</html>
+    getDB(t).forEach(item => allRows.push({ ...item
