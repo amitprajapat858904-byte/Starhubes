@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHubes — News, Jobs, Learning &amp; Community</title>
-<meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories and community.">
-<!-- Supabase JS Client -->
+<title>StarHubes — Master Learning &amp; Community Platform</title>
+<meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories, group study and community.">
+<!-- Supabase JS Client Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
@@ -24,7 +24,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
     <div class="search"><input id="searchInput" placeholder="News, jobs, books, tests खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
       <button class="ghost small desktop" onclick="showSection('jobs')">Find Jobs</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth()">Student Login</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth('login')">Student Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar">S</div>
     </div>
@@ -44,10 +44,11 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <button class="navbtn" data-section="stories" onclick="showSection('stories')"><span class="navicon">📖</span> Stories</button>
       <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Local Community News</button>
       <div class="sideLabel">YOUR SPACE</div>
-      <button class="navbtn" onclick="openAuth()"><span class="navicon">👤</span> Student ID &amp; Profile</button>
-      <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Admin Panel</button>
+      <button class="navbtn" onclick="openAuth('login')"><span class="navicon">👤</span> Student Login</button>
+      <button class="navbtn" onclick="openAuth('register')"><span class="navicon">📝</span> Student Register</button>
+      <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Master Admin Panel</button>
     </div>
-    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status ok" id="connectionStatus">Supabase Ready</div></div>
+    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status ok" id="connectionStatus">System Connected</div></div>
   </aside>
 
   <main class="main">
@@ -62,7 +63,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       </div>
       <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('study')">👥 Group Study</button></div>
       <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Admin Panel से सामग्री जोड़ें।</div></div>
+      <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Master Admin से सामग्री जोड़ें।</div></div>
       <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
       <div class="grid3">
         <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs &amp; Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
@@ -112,9 +113,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       </div>
     </section>
 
-    <!-- Group Study Section (Supabase Realtime) -->
+    <!-- Group Study Section -->
     <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>विषय के अनुसार स्टडी रूम बनाएं, 10 छात्र जुड़ें और साझा नोट्स लिखें</p></div></div>
+      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>विषय के अनुसार स्टडी रूम बनाएं, 10 छात्र जुड़ें, साझा नोट्स और व्हाइटबोर्ड का उपयोग करें</p></div></div>
       <div class="card" style="margin-bottom:16px;">
         <h3>➕ नया स्टडी रूम बनाएं</h3>
         <div class="fields">
@@ -128,7 +129,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div class="sectionHead"><div><h2>उपलब्ध स्टडी रूम (Active Rooms)</h2></div></div>
       <div id="studyRoomsList" class="grid2"><div class="empty">कोई एक्टिव रूम नहीं है। नया रूम बनाएं!</div></div>
 
-      <!-- Active Room Workspace (Hidden until joined) -->
+      <!-- Active Room Workspace -->
       <div id="roomWorkspace" class="card hidden" style="margin-top:20px; border:2px solid var(--brand);">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <h3 id="activeRoomTitle" style="color:var(--brand);">Room: </h3>
@@ -144,10 +145,16 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
             <label style="font-size:12px; font-weight:800;">💬 ग्रुप चैट (Group Discussion)</label>
             <div id="chatBox" style="height:165px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:8px; overflow-y:auto; margin-top:6px; font-size:13px;"></div>
             <div style="display:flex; gap:6px; margin-top:6px;">
-              संदेश लिखें... <input id="chatInput" placeholder="संदेश..." style="flex:1; padding:8px; border-radius:8px; border:1px solid #263a78; background:#101e4c; color:#fff;">
+              <input id="chatInput" placeholder="संदेश लिखें..." style="flex:1; padding:8px; border-radius:8px; border:1px solid #263a78; background:#101e4c; color:#fff;">
               <button class="primary small" onclick="sendChatMessage()">भेजें</button>
             </div>
           </div>
+        </div>
+        <!-- Whiteboard Section -->
+        <div style="margin-top:16px;">
+          <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Interactive Whiteboard)</label>
+          <canvas id="whiteboard" width="600" height="250" style="background:#fff; border-radius:10px; width:100%; margin-top:6px; cursor:crosshair;"></canvas>
+          <button class="ghost small" style="margin-top:6px;" onclick="clearWhiteboard()">बोर्ड साफ़ करें (Clear)</button>
         </div>
       </div>
     </section>
@@ -170,9 +177,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div class="sectionHead"><div><h2>समुदाय की प्रकाशित खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">अभी समुदाय की कोई खबर नहीं है।</div></div>
     </section>
 
-    <!-- Admin Panel Section -->
+    <!-- Master Admin Panel Section -->
     <section id="section-admin" class="hidden">
-      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>सामग्री प्रबंधन (Content Management)</p></div><span class="tag green" id="adminBadge">Admin Access</span></div>
+      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>सामग्री प्रबंधन (Content Management)</p></div><span class="tag green" id="adminBadge">Master Admin</span></div>
       <div id="adminContent">
         <div class="adminBox">
           <h3>➕ नया कंटेंट जोड़ें (News, Jobs, Books, etc.)</h3>
@@ -191,7 +198,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
         <div class="adminBox"><h3>सभी जोड़े गए कंटेंट्स की सूची</h3><div id="adminList"></div></div>
       </div>
     </section>
-    <div class="footer">© <span id="year">2026</span> StarHubes · News • Jobs • Learn • Share<br><span class="tiny">यह वेब ऐप Supabase डेटाबेस और यूज़र आईडी लॉगिन के साथ सक्रिय है।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · Master News • Jobs • Learn • Share<br><span class="tiny">यह प्लेटफ़ॉर्म मास्टर एडमिन और सुरक्षित स्टूडेंट आईडी लॉगिन के साथ सक्रिय है।</span></div>
   </main>
 
   <aside class="rightSide">
@@ -201,7 +208,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div class="trend"><div class="trendNum">03</div><div><strong>Local News</strong><span>अपनी community से जुड़ें</span></div></div>
     </div>
     <div class="panel"><h3>🔐 Safe Community</h3><p class="muted tiny">गलत जानकारी, निजी जानकारी या अपुष्ट आरोप साझा न करें।</p></div>
-    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Supabase Connected</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
+    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Master Platform Connected</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
   </aside>
 </div>
 
@@ -213,29 +220,31 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
   <button onclick="showSection('study')">👥<br>Study</button>
 </nav>
 
-<!-- Student Auth Modal (No Email Required) -->
+<!-- Separate Auth Modal for Login & Register (No Email Required) -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
-    <div class="modalhead"><div><h2 id="authTitle">Student ID &amp; Login</h2><p class="muted tiny" id="authSubtitle">अपना Username और Password बनाएं</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
+    <div class="modalhead"><div><h2 id="authTitle">Student Login</h2><p class="muted tiny" id="authSubtitle">अपनी ID और Password से प्रवेश करें</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
     <div class="field"><label>Student Username (ID)</label><input id="authUsername" autocomplete="username" maxlength="24" placeholder="जैसे: Rahul123"></div>
     <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="अपना पासवर्ड दर्ज करें"></div>
-    <button class="primary" id="authSubmit" style="width:100%;margin-top:10px" onclick="submitAuth()">Login / Register</button>
+    <button class="primary" id="authSubmit" style="width:100%;margin-top:10px" onclick="submitAuth()">Login</button>
+    <button class="ghost" id="authSwitchBtn" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">नया अकाउंट बनाएँ (Register)</button>
     <div id="authStatus" class="status hidden" style="margin-top:10px"></div>
-    <p class="tiny muted" style="margin-top:10px">नोट: एडमिन एक्सेस के लिए यूजरनेम में **admin** शब्द का प्रयोग करें (जैसे admin_amit)। ईमेल की कोई आवश्यकता नहीं है।</p>
+    <p class="tiny muted" style="margin-top:10px">💡 <strong>मास्टर एडमिन बनने के लिए:</strong> यूजरनेम में `admin` का उपयोग करें (जैसे: `admin_amit`) और पासवर्ड सेट करके लॉगिन करें।</p>
   </div>
 </div>
 
 <div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
 <script>
-// Supabase Configuration (अपनी Supabase details यहाँ डालें)
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+// Supabase Configuration (अपनी Supabase details यहाँ डालें यदि चाहें)
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+const supabaseClient = (window.supabase && SUPABASE_URL) ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 let currentRoomId = null;
+let currentAuthMode = 'login'; // 'login' or 'register'
 
 window.showToast = msg => {
   const t = el('toast');
@@ -271,17 +280,55 @@ window.filterVisible = value => {
   document.querySelectorAll('.newsCard').forEach(c => c.classList.toggle('hidden', !c.innerText.toLowerCase().includes(q)));
 };
 
-window.openAuth = () => el('authModal').classList.remove('hidden');
+window.openAuth = (mode = 'login') => {
+  currentAuthMode = mode;
+  el('authTitle').textContent = mode === 'login' ? 'Student Login' : 'Student Register';
+  el('authSubtitle').textContent = mode === 'login' ? 'अपनी ID और Password से प्रवेश करें' : 'नया यूजरनेम और पासवर्ड बनाएं';
+  el('authSubmit').textContent = mode === 'login' ? 'Login' : 'Register & Create ID';
+  el('authSwitchBtn').textContent = mode === 'login' ? 'नया अकाउंट बनाएँ (Register)' : 'पहिले से अकाउंट है? Login करें';
+  el('authUsername').value = '';
+  el('authPassword').value = '';
+  el('authStatus').classList.add('hidden');
+  el('authModal').classList.remove('hidden');
+};
+
 window.closeAuth = () => el('authModal').classList.add('hidden');
+
+window.toggleAuthMode = () => {
+  openAuth(currentAuthMode === 'login' ? 'register' : 'login');
+};
 
 window.submitAuth = () => {
   const username = el('authUsername').value.trim();
   const password = el('authPassword').value;
   if (!username || !password) {
-    setStatus('authStatus', 'कृपया Student Username और Password दोनों भरें।', 'err');
+    setStatus('authStatus', 'कृपया Username और Password दोनों भरें।', 'err');
     return;
   }
-  const role = username.toLowerCase().includes('admin') ? 'admin' : 'student';
+  
+  let accounts = JSON.parse(localStorage.getItem('starhubes_accounts') || '{}');
+  
+  if (currentAuthMode === 'register') {
+    if (accounts[username]) {
+      setStatus('authStatus', 'यह यूजरनेम पहले से मौजूद है। दूसरा चुनें।', 'err');
+      return;
+    }
+    accounts[username] = password;
+    localStorage.setItem('starhubes_accounts', JSON.stringify(accounts));
+    setStatus('authStatus', 'अकाउंट सफलतापूर्वक बन गया! अब लॉगिन करें।', 'ok');
+    setTimeout(() => openAuth('login'), 1000);
+    return;
+  }
+  
+  // Login Mode
+  // Master Admin condition: if username contains 'admin' or matches stored account
+  const isAdmin = username.toLowerCase().includes('admin');
+  if (!isAdmin && accounts[username] && accounts[username] !== password) {
+    setStatus('authStatus', 'गलत पासवर्ड! पुनः प्रयास करें।', 'err');
+    return;
+  }
+  
+  const role = isAdmin ? 'admin' : 'student';
   currentUser = { username, role };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
   updateSession();
@@ -305,7 +352,7 @@ function updateSession() {
   el('adminNav').classList.toggle('hidden', !isAdmin);
 }
 
-// Local Database Helpers fallback / Supabase sync
+// Local Database Helpers
 function getDB(key) {
   return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
 }
@@ -358,10 +405,10 @@ function safeUrl(value) {
   }
 }
 
-// Group Study Features (Supabase Sync & Max 10 Members)
+// Group Study Rooms & Whiteboard
 window.createStudyRoom = async () => {
   if (!currentUser) {
-    openAuth();
+    openAuth('login');
     showToast('स्टडी रूम बनाने के लिए पहले Login करें।');
     return;
   }
@@ -372,7 +419,7 @@ window.createStudyRoom = async () => {
     return;
   }
 
-  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
+  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [], canvasData: [] };
   
   if (supabaseClient) {
     await supabaseClient.from('study_rooms').insert([newRoom]);
@@ -408,7 +455,7 @@ window.loadStudyRooms = () => {
 
 window.joinRoom = roomId => {
   if (!currentUser) {
-    openAuth();
+    openAuth('login');
     return;
   }
   const rooms = getDB('study_rooms');
@@ -430,6 +477,7 @@ window.joinRoom = roomId => {
   el('sharedNotepad').value = room.notepad || '';
   renderChatMessages(room.messages || []);
   el('roomWorkspace').classList.remove('hidden');
+  initWhiteboard();
   window.scrollTo({ top: el('roomWorkspace').offsetTop, behavior: 'smooth' });
 };
 
@@ -470,9 +518,32 @@ function renderChatMessages(msgs) {
   box.scrollTop = box.scrollHeight;
 }
 
+// Whiteboard Logic
+let isDrawing = false;
+function initWhiteboard() {
+  const canvas = el('whiteboard');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#172033';
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+
+  canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
+  canvas.onmousemove = e => { if (!isDrawing) return; ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); };
+  canvas.onmouseup = () => { isDrawing = false; };
+  canvas.onmouseleave = () => { isDrawing = false; };
+}
+
+window.clearWhiteboard = () => {
+  const canvas = el('whiteboard');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
 window.submitLocalNews = () => {
   if (!currentUser) {
-    openAuth();
+    openAuth('login');
     setStatus('localStatus', 'खबर भेजने के लिए पहले Login करें।', 'err');
     return;
   }
@@ -500,7 +571,7 @@ window.submitLocalNews = () => {
 
 window.publishPost = () => {
   if (!currentUser || currentUser.role !== 'admin') {
-    showToast('यह कार्य केवल Admin कर सकते हैं।');
+    showToast('यह कार्य केवल Master Admin कर सकते हैं।');
     return;
   }
   const type = el('postType').value;
