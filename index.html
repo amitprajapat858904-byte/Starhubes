@@ -287,7 +287,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
 
     <button class="primary" id="authSubmitBtn" style="width:100%;margin-top:8px;" onclick="handleAuthAction()">OTP भेजें (Send OTP)</button>
     <div id="authStatus" class="status hidden" style="margin-top:10px;"></div>
-    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> यूजरनेम में `admin` जोड़ें (जैसे: `admin_amit`)।</p>
+    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> `amitprajapat858904@gmail.com` से लॉगिन करने पर ही एडमिन पैनल खुलेगा।</p>
   </div>
 </div>
 
@@ -383,10 +383,11 @@ window.handleAuthAction = () => {
   if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (डेमो के लिए 1234 डालें)', 'err'); return; }
 
   const finalUser = username || email.split('@')[0];
-  const isAdmin = finalUser.toLowerCase().includes('admin');
-  const role = isAdmin ? 'admin' : 'student';
+  
+  // सिर्फ आपकी जीमेल को मास्टर एडमिन अधिकार मिलेगा
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  const role = (email.toLowerCase() === masterAdminEmail) ? 'admin' : 'student';
 
-  // Check 5-day trial start date
   let trialStart = localStorage.getItem('starhubes_trial_' + finalUser);
   if(!trialStart) {
     trialStart = Date.now();
@@ -396,7 +397,7 @@ window.handleAuthAction = () => {
   currentUser = { username: finalUser, role, email, trialStart };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
   updateSession();
-  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए! 5-दिन का फ्री ट्रायल एक्टिव है।', 'ok');
+  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
   setTimeout(() => { closeAuth(); refreshContent(); }, 1000);
 };
 
@@ -410,7 +411,9 @@ window.doLogout = () => {
 };
 
 function updateSession() {
-  const isAdmin = currentUser && currentUser.role === 'admin';
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  const isAdmin = currentUser && (currentUser.email === masterAdminEmail || currentUser.role === 'admin');
+
   el('loginBtn').classList.toggle('hidden', !!currentUser);
   el('logoutBtn').classList.toggle('hidden', !currentUser);
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
@@ -438,7 +441,11 @@ window.refreshContent = () => {
   renderCards(el('allBooks'), getDB('books'), 'books');
   renderCards(el('communityNews'), getDB('community'), 'news');
   loadMarketplaceApps();
-  if(currentUser && currentUser.role === 'admin') loadAdminStatsAndList();
+  
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  if(currentUser && (currentUser.email === masterAdminEmail || currentUser.role === 'admin')) {
+    loadAdminStatsAndList();
+  }
 };
 
 function renderCards(target, items, type) {
@@ -728,7 +735,8 @@ window.submitLocalNews = () => {
 };
 
 window.publishPost = () => {
-  if (!currentUser || currentUser.role !== 'admin') { showToast('केवल एडमिन कर सकते हैं।'); return; }
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  if (!currentUser || currentUser.email !== masterAdminEmail) { showToast('यह केवल मास्टर एडमिन कर सकते हैं।'); return; }
   const type = el('postType').value;
   const title = el('postTitle').value.trim();
   const description = el('postDescription').value.trim();
