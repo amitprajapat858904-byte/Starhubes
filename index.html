@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StarHubes — Master Learning &amp; Community Platform</title>
 <meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories, group study and community.">
-<!-- Supabase JS Client Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
@@ -61,7 +59,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
         <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">आज की खबरें देखें →</button>
         <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('jobs')">नौकरियाँ खोजें</button>
       </div>
-      <div class="chips"><button class="chip active" onclick="showSection('news')">📰 Latest News</button><button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button><button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button><button class="chip" onclick="showSection('study')">👥 Group Study</button></div>
+      <div class="chips">
+        <button class="chip active" onclick="showSection('news')">📰 Latest News</button>
+        <button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button>
+        <button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button>
+        <button class="chip" onclick="showSection('study')">👥 Group Study</button>
+      </div>
       <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Master Admin से सामग्री जोड़ें।</div></div>
       <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
@@ -113,7 +116,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       </div>
     </section>
 
-    <!-- Group Study Section (Secured with Personal Code, Live Voice/Video & Whiteboard Eraser) -->
+    <!-- Group Study Section -->
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल, साझा नोट्स और इरेज़र व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
@@ -269,10 +272,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
 <div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
 
 <script>
-const SUPABASE_URL = '';
-const SUPABASE_ANON_KEY = '';
-const supabaseClient = (window.supabase && SUPABASE_URL) ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 let currentRoomId = null;
@@ -282,6 +281,7 @@ let currentTool = 'pen'; // 'pen' or 'eraser'
 
 window.showToast = msg => {
   const t = el('toast');
+  if(!t) return;
   t.textContent = msg;
   t.classList.remove('hidden');
   setTimeout(() => t.classList.add('hidden'), 3500);
@@ -436,8 +436,8 @@ function safeUrl(value) {
   }
 }
 
-// Group Study Rooms with Passcode & Whiteboard Eraser
-window.createStudyRoom = async () => {
+// Group Study Rooms
+window.createStudyRoom = () => {
   if (!currentUser) {
     openAuth('login');
     showToast('स्टडी रूम बनाने के लिए पहले Login करें।');
@@ -453,10 +453,6 @@ window.createStudyRoom = async () => {
   }
 
   const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
-  
-  if (supabaseClient) {
-    await supabaseClient.from('study_rooms').insert([newRoom]);
-  }
   
   const rooms = getDB('study_rooms');
   rooms.unshift(newRoom);
@@ -582,12 +578,14 @@ function renderChatMessages(msgs) {
   box.scrollTop = box.scrollHeight;
 }
 
-// Live Voice / Video Call using WebRTC MediaStream
+// Live Voice / Video Call
 window.startLiveVoiceCall = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-    el('localVideo').srcObject = stream;
-    el('liveCallContainer').classList.remove('hidden');
+    const localVid = el('localVideo');
+    if(localVid) localVid.srcObject = stream;
+    const callContainer = el('liveCallContainer');
+    if(callContainer) callContainer.classList.remove('hidden');
     showToast('लाइव वॉइस और वीडियो कनेक्शन सक्रिय हो गया है!');
   } catch (err) {
     showToast('कैमरा या माइक्रोफ़ोन की अनुमति नहीं मिली।');
@@ -598,8 +596,10 @@ window.startLiveVoiceCall = async () => {
 let isDrawing = false;
 window.setTool = tool => {
   currentTool = tool;
-  el('penBtn').className = tool === 'pen' ? 'secondary small' : 'ghost small';
-  el('eraserBtn').className = tool === 'eraser' ? 'secondary small' : 'ghost small';
+  const penBtn = el('penBtn');
+  const eraserBtn = el('eraserBtn');
+  if(penBtn) penBtn.className = tool === 'pen' ? 'secondary small' : 'ghost small';
+  if(eraserBtn) eraserBtn.className = tool === 'eraser' ? 'secondary small' : 'ghost small';
 };
 
 function initWhiteboard() {
@@ -612,10 +612,10 @@ function initWhiteboard() {
   canvas.onmousemove = e => {
     if (!isDrawing) return;
     if (currentTool === 'eraser') {
-      ctx.strokeStyle = '#ffffff'; // Background color (White) to erase
-      ctx.lineWidth = 15; // Thicker stroke for eraser
+      ctx.strokeStyle = '#ffffff'; 
+      ctx.lineWidth = 15; 
     } else {
-      ctx.strokeStyle = '#172033'; // Pen color
+      ctx.strokeStyle = '#172033'; 
       ctx.lineWidth = 2;
     }
     ctx.lineTo(e.offsetX, e.offsetY);
@@ -695,4 +695,53 @@ function loadAdminList() {
   const types = ['news', 'jobs', 'books', 'stories', 'community'];
   let allRows = [];
   types.forEach(t => {
-    getDB(t).forEach(item => allRows.push({ ...item
+    getDB(t).forEach(item => allRows.push({ ...item, _type: t }));
+  });
+  allRows.sort((a, b) => b.created_at - a.created_at);
+
+  target.innerHTML = allRows.length ? allRows.map((x, idx) => `
+    <div class="post">
+      <span class="tag">${escapeHtml(x._type.toUpperCase())}</span>
+      <h3>${escapeHtml(x.title)}</h3>
+      <p class="muted tiny">${escapeHtml(x.description || '')}</p>
+      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at})">डिलीट करें</button>
+    </div>
+  `).join('') : '<div class="empty">कोई कंटेंट नहीं मिला।</div>';
+}
+
+window.deleteItem = (type, timestamp) => {
+  let list = getDB(type);
+  list = list.filter(item => item.created_at !== timestamp);
+  saveDB(type, list);
+  refreshContent();
+  showToast('कंटेंट हटा दिया गया है।');
+};
+
+window.answerQuiz = (button, correct) => {
+  document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
+  const res = el('quizResult');
+  if(res) {
+    res.textContent = correct ? 'सही जवाब! 🎉' : 'यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली';
+    res.style.color = correct ? '#16c784' : '#ffb020';
+  }
+};
+
+window.guessNumber = () => {
+  const input = el('guessInput');
+  const result = el('guessResult');
+  if(!input || !result) return;
+  const n = Number(input.value);
+  const answer = Math.floor(Math.random() * 5) + 1;
+  result.textContent = n === answer ? `बधाई हो! सही अनुमान, नंबर ${answer} था।` : `गलत अनुमान! इस बार सही नंबर ${answer} था।`;
+};
+
+// Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = el('year');
+  if(yearEl) yearEl.textContent = new Date().getFullYear();
+  updateSession();
+  refreshContent();
+});
+</script>
+</body>
+</html>
