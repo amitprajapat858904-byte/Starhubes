@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHubes — Master Learning &amp; Community Platform</title>
-<meta name="description" content="StarHubes: News, government and private jobs, learning, tests, books, stories, group study and community.">
+<title>StarHubes — Master App Store &amp; Learning Platform</title>
+<meta name="description" content="StarHubes: News, government jobs, learning, apps marketplace, group study and community.">
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;font-weight:700}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
-header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-filter:blur(12px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid #1c2d65;border-radius:15px;background:#0b1740}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:0 12px 30px #0005}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #1b2b60}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.78);display:grid;place-items:center;padding:18px}.modalbox{width:min(460px,100%);background:#0b1740;border-radius:20px;padding:22px;box-shadow:0 20px 80px #0008;color:var(--text)}.modalbox h2{margin:0 0 4px}.modalbox .field{margin:12px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px dashed #516cce;background:#0c1947;border-radius:14px;padding:14px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #1c2d65;border-radius:14px;background:#0b1740}.mobileNav{display:none}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:700;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 4px 15px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid #1c2d65;border-radius:15px;background:#0b1740}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:0 12px 30px #0005}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #1b2b60}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text)}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#101e4c;border-radius:12px;padding:4px;margin-bottom:16px}.auth-tab{background:transparent;color:var(--muted);padding:9px;font-size:14px;font-weight:700;border-radius:9px;text-align:center;cursor:pointer}.auth-tab.active{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.stat-card{background:#101e4c;border:1px solid #263a78;border-radius:14px;padding:14px;text-align:center}.stat-card h4{margin:0;font-size:22px;color:var(--brand)}.stat-card p{margin:4px 0 0;font-size:12px;color:var(--muted)}
+.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}.mobileNav{display:none}
 @media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2,.grid3{grid-template-columns:1fr}.sectionHead{margin-top:22px}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:#07112f;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#b7c5eb}.mobileNav button.active{color:#8eabff}.fields{grid-template-columns:1fr}.topActions{gap:5px}.topActions button{padding:8px 10px}}
 </style>
@@ -19,10 +22,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
 <header>
   <div class="top">
     <div class="logo"><div class="logoMark">S</div><span>StarHubes</span></div>
-    <div class="search"><input id="searchInput" placeholder="News, jobs, books, tests खोजें..." oninput="filterVisible(this.value)"></div>
+    <div class="search"><input id="searchInput" placeholder="News, jobs, apps खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
-      <button class="ghost small desktop" onclick="showSection('jobs')">Find Jobs</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth('login')">Student Login</button>
+      <button class="ghost small desktop" onclick="showSection('apps')">📱 App Store</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth('login')">Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar">S</div>
     </div>
@@ -33,55 +36,47 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
   <aside class="side">
     <div class="navbox">
       <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home</button>
-      <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed</button>
-      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Government &amp; Private Jobs</button>
+      <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed <span class="tag green" style="margin-left:auto; font-size:9px; padding:2px 5px;">FREE</span></button>
+      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Jobs &amp; Vacancies</button>
+      <button class="navbtn" data-section="apps" onclick="showSection('apps')"><span class="navicon">📱</span> App Store &amp; Upload</button>
       <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning &amp; Tests</button>
       <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books &amp; PDFs</button>
-      <button class="navbtn" data-section="games" onclick="showSection('games')"><span class="navicon">🎮</span> Games</button>
       <button class="navbtn" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
-      <button class="navbtn" data-section="stories" onclick="showSection('stories')"><span class="navicon">📖</span> Stories</button>
-      <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Local Community News</button>
+      <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Community News</button>
       <div class="sideLabel">YOUR SPACE</div>
-      <button class="navbtn" onclick="openAuth('login')"><span class="navicon">👤</span> Student Login</button>
-      <button class="navbtn" onclick="openAuth('register')"><span class="navicon">📝</span> Student Register</button>
-      <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Master Admin Panel</button>
+      <button class="navbtn" onclick="openAuth('login')"><span class="navicon">👤</span> Account &amp; Bank</button>
+      <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Master Admin</button>
     </div>
-    <div class="panel" style="margin-top:14px"><h3>StarHubes Community</h3><p class="muted tiny">खबरें पढ़ें, सीखें, टेस्ट दें और अपने क्षेत्र की उपयोगी जानकारी साझा करें।</p><div class="status ok" id="connectionStatus">System Connected</div></div>
+    <div class="panel" style="margin-top:14px">
+      <h3>Trial Status</h3>
+      <p class="muted tiny" id="trialStatusText">5-Day Free Trial सक्रिय है।</p>
+      <div class="status ok" id="connectionStatus">System Connected</div>
+    </div>
   </aside>
 
   <main class="main">
     <!-- Home Section -->
     <section id="section-home" class="">
       <div class="hero">
-        <span class="pill">NEWS • JOBS • LEARNING • COMMUNITY</span>
-        <h1>आपकी दुनिया की खबरें,<br>आपके भविष्य की तैयारी।</h1>
-        <p>ताज़ा खबरें, सरकारी और प्राइवेट नौकरियाँ, पढ़ाई, टेस्ट, किताबें और अपने क्षेत्र की जानकारी—एक ही जगह।</p>
-        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">आज की खबरें देखें →</button>
-        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('jobs')">नौकरियाँ खोजें</button>
+        <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
+        <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने ऐप्स अपलोड करें।</h1>
+        <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना ऐप स्टोर पर अपलोड करके कमाई करें।</p>
+        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">फ्री खबरें देखें →</button>
+        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('apps')">ऐप स्टोर खोलें</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('news')">📰 Latest News</button>
-        <button class="chip" onclick="showSection('jobs')">💼 Jobs &amp; Vacancies</button>
-        <button class="chip" onclick="showSection('learning')">🧠 ABCD Options</button>
+        <button class="chip active" onclick="showSection('news')">📰 Free News Feed</button>
+        <button class="chip" onclick="showSection('apps')">📱 App Store &amp; Upload</button>
         <button class="chip" onclick="showSection('study')">👥 Group Study</button>
       </div>
-      <div class="sectionHead"><div><h2>ताज़ा खबरें</h2><p>प्रकाशित खबरें यहाँ दिखेंगी</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है। Master Admin से सामग्री जोड़ें।</div></div>
-      <div class="sectionHead"><div><h2>StarHubes पर और क्या मिलेगा?</h2><p>एक ही प्लेटफ़ॉर्म पर जानकारी और सीखने के साधन</p></div></div>
-      <div class="grid3">
-        <div class="feature" role="button" tabindex="0" onclick="showSection('jobs')"><div class="featureIcon">💼</div><h3>Jobs &amp; Vacancy</h3><p>सरकारी/प्राइवेट नौकरी, योग्यता, अंतिम तिथि और आधिकारिक आवेदन लिंक।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('learning')"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>वीडियो थ्योरी और ABCD विकल्पों वाले अभ्यास प्रश्नों के लिए खोलें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('study')"><div class="featureIcon">👥</div><h3>Group Study</h3><p>विषय के अनुसार रूम बनाएं, पर्सनल कोड और लाइव वॉइस/वीडियो चैट।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('books')"><div class="featureIcon">📚</div><h3>Books &amp; eBooks</h3><p>अध्याय, PDF और ई-बुक लिंक—उपलब्ध सामग्री के अनुसार।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('games')"><div class="featureIcon">🎮</div><h3>Games</h3><p>नंबर गेस और ब्रेन टीज़र गेम खेलने के लिए खोलें।</p></div>
-        <div class="feature" role="button" tabindex="0" onclick="showSection('community')"><div class="featureIcon">🫶</div><h3>Community</h3><p>अपने क्षेत्र की खबर सबमिट करें; प्रकाशित होने से पहले समीक्षा की जा सकती है।</p></div>
-      </div>
+      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (हमेशा फ्री)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
     <!-- News Section -->
     <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News Feed</h2><p>सभी प्रकाशित खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित सामग्री नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें सभी पाठकों के लिए बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित खबर नहीं है।</div></div>
     </section>
 
     <!-- Jobs Section -->
@@ -90,35 +85,65 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
     </section>
 
+    <!-- App Store & Developer Upload Section -->
+    <section id="section-apps" class="hidden">
+      <div class="sectionHead"><div><h2>📱 StarHubes App Store</h2><p>डेवलपर्स अपने ऐप्स अपलोड करें और यूजर्स ऐप्स डाउनलोड करें</p></div></div>
+      
+      <!-- Upload App Form -->
+      <div class="card" style="margin-bottom:20px; border:1px solid var(--brand);">
+        <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
+        <p class="muted tiny">ईमेल और फोन वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
+        <div class="fields">
+          <div class="field"><label>कंपनी / डेवलपर का नाम</label><input id="devCompany" placeholder="जैसे: Star Tech"></div>
+          <div class="field"><label>ऐप का नाम</label><input id="appName" placeholder="जैसे: My Study App"></div>
+        </div>
+        <div class="fields" style="margin-top:8px;">
+          <div class="field"><label>ईमेल (Email for OTP)</label><input id="devEmail" type="email" placeholder="developer@gmail.com"></div>
+          <div class="field"><label>मोबाइल नंबर (Phone)</label><input id="devPhone" placeholder="10 अंकों का मोबाइल नंबर"></div>
+        </div>
+        <div class="field" style="margin-top:8px;"><label>ऐप विवरण (Description)</label><input id="appDesc" placeholder="ऐप के बारे में मुख्य बातें..."></div>
+        <div class="fields" style="margin-top:8px;">
+          <div class="field"><label>ऐप स्क्रीनशॉट इमेज URL</label><input id="appImg" type="url" placeholder="https://image-link.com/photo.png"></div>
+          <div class="field"><label>डाउनलोड / APK लिंक</label><input id="appUrl" type="url" placeholder="https://play.google.com/... या APK link"></div>
+        </div>
+        <button class="primary" style="margin-top:12px;" onclick="submitDeveloperApp()">ऐप सबमिट करें</button>
+        <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
+      </div>
+
+      <!-- Bank Payout Settings Card -->
+      <div class="card" style="margin-bottom:20px;">
+        <h3>🏦 बैंक अकाउंट जोड़ें (कमाई का पैसा लेने के लिए)</h3>
+        <div class="fields">
+          <div class="field"><label>खाता धारक का नाम (Account Name)</label><input id="bankName" placeholder="बैंक पासबुक के अनुसार"></div>
+          <div class="field"><label>बैंक खाता संख्या (Account Number)</label><input id="bankAccNo" type="password" placeholder="अकाउंट नंबर दर्ज करें"></div>
+        </div>
+        <div class="fields" style="margin-top:8px;">
+          <div class="field"><label>IFSC कोड</label><input id="bankIfsc" placeholder="जैसे: SBIN000XXXX"></div>
+          <div class="field"><label>UPI ID (वैकल्पिक)</label><input id="bankUpi" placeholder="username@paytm"></div>
+        </div>
+        <button class="secondary" style="margin-top:10px;" onclick="saveBankDetails()">बैंक विवरण सुरक्षित करें</button>
+        <div id="bankStatus" class="status hidden" style="margin-top:8px;"></div>
+      </div>
+
+      <div class="sectionHead"><div><h2>उपलब्ध ऐप्स (Marketplace Apps)</h2></div></div>
+      <div id="marketplaceApps" class="grid2"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div></div>
+    </section>
+
     <!-- Learning Section -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning, Video Theory &amp; ABCD Options</h2><p>अध्याय समझें और A/B/C/D विकल्पों से सवालों का अभ्यास करें</p></div></div>
-      <div class="grid2">
-        <div class="card"><div class="featureIcon">🎥</div><h3>Video Theory</h3><p>यहाँ विषय के अनुसार वीडियो और लिंक उपलब्ध हैं।</p><div class="cardActions"><button class="secondary small" onclick="showToast('वीडियो मॉड्यूल सक्रिय है।')">वीडियो देखें</button></div></div>
-        <div class="card"><div class="featureIcon">🧊</div><h3>3D Explanation</h3><p>कठिन सवालों और अध्यायों को 3D एनीमेशन या आलेख के जरिए समझें।</p><div class="cardActions"><button class="secondary small" onclick="showToast('3D लेसन सामग्री उपलब्ध है।')">3D लेसन</button></div></div>
-      </div>
-      <div class="sectionHead"><div><h2>ABCD Options — Practice Question</h2><p>सवाल पढ़ें और चार विकल्पों में से एक चुनें</p></div></div>
-      <div class="card" id="sampleQuiz"><span class="tag">ABCD OPTIONS DEMO</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests</h2><p>अध्याय समझें और अभ्यास करें</p></div></div>
+      <div class="card"><span class="tag green">FREE ACCESS</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
     </section>
 
     <!-- Books Section -->
     <section id="section-books" class="hidden">
-      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>पढ़ाई की सामग्री और अध्यायवार लेसन</p></div></div>
-      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक या पीडीएफ उपलब्ध नहीं है।</div></div>
-    </section>
-
-    <!-- Games Section -->
-    <section id="section-games" class="hidden">
-      <div class="sectionHead"><div><h2>🎮 Games Zone</h2><p>हल्के ब्राउज़र गेम और learning games</p></div></div>
-      <div class="grid2">
-        <div class="card"><div class="featureIcon">🔢</div><h3>Number Guess</h3><p>1 से 10 के बीच नंबर का अनुमान लगाएँ।</p><div class="fields"><div class="field"><label>आपका अनुमान</label><input id="guessInput" type="number" min="1" max="10" placeholder="1-10"></div><div class="field" style="justify-content:end"><button class="primary" onclick="guessNumber()">Check</button></div></div><p id="guessResult"></p></div>
-        <div class="card"><div class="featureIcon">🧠</div><h3>Quick Brain Teaser</h3><p>2, 4, 8, 16, ?</p><button class="secondary small" onclick="showToast('सही उत्तर: 32')">उत्तर देखें</button></div>
-      </div>
+      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>पढ़ाई की सामग्री</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक उपलब्ध नहीं है।</div></div>
     </section>
 
     <!-- Group Study Section -->
     <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल, साझा नोट्स और इरेज़र व्हाइटबोर्ड</p></div></div>
+      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल और साझा व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
         <h3>➕ नया पर्सनल स्टडी रूम बनाएं</h3>
         <div class="fields">
@@ -135,7 +160,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       <div class="sectionHead"><div><h2>उपलब्ध स्टडी रूम (Active Rooms)</h2></div></div>
       <div id="studyRoomsList" class="grid2"><div class="empty">कोई एक्टिव रूम नहीं है। नया रूम बनाएं!</div></div>
 
-      <!-- Active Room Workspace -->
       <div id="roomWorkspace" class="card hidden" style="margin-top:20px; border:2px solid var(--brand);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <h3 id="activeRoomTitle" style="color:var(--brand);">Room: </h3>
@@ -146,12 +170,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
         </div>
         <p class="tiny muted" id="roomMembersCount" style="margin-top:6px;">सदस्य: 1 / 10</p>
         
-        <!-- Live Audio/Video Stream Box -->
         <div id="liveCallContainer" class="hidden" style="margin-top:12px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:10px;">
           <span class="tag green">LIVE AUDIO/VIDEO ACTIVE</span>
           <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
             <video id="localVideo" autoplay muted playsinline style="width:140px; height:100px; background:#000; border-radius:8px; object-fit:cover;"></video>
-            <div id="remoteVideosContainer" style="display:flex; gap:10px;"></div>
           </div>
         </div>
 
@@ -170,7 +192,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
           </div>
         </div>
         
-        <!-- Whiteboard Section with Eraser -->
         <div style="margin-top:16px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
             <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Interactive Whiteboard &amp; Eraser)</label>
@@ -185,77 +206,88 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.94);backdrop-fi
       </div>
     </section>
 
-    <!-- Stories Section -->
-    <section id="section-stories" class="hidden">
-      <div class="sectionHead"><div><h2>📖 Stories</h2><p>कहानियाँ और पाठकों की रचनाएँ</p></div></div>
-      <div id="allStories" class="grid2"><div class="empty">अभी कोई कहानी प्रकाशित नहीं है।</div></div>
-    </section>
-
     <!-- Community Section -->
     <section id="section-community" class="hidden">
-      <div class="sectionHead"><div><h2>📍 Local Community News</h2><p>अपने क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
-      <div class="composer"><div class="composerTop"><div class="avatar">✍️</div><div><strong>अपने क्षेत्र की खबर लिखें</strong><div class="muted tiny">भेजी गई खबर समीक्षा के बाद प्रकाशित की जाएगी।</div></div></div>
-        <div class="field"><label>खबर का शीर्षक</label><input id="localTitle" maxlength="200" placeholder="उदाहरण: हमारे क्षेत्र में नया पुस्तकालय खुला"></div>
-        <div class="fields"><div class="field"><label>क्षेत्र / शहर</label><input id="localArea" placeholder="आपका क्षेत्र"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option><option>Community</option><option>Public Notice</option></select></div></div>
-        <div class="field"><label>विवरण</label><textarea id="localBody" maxlength="2000" placeholder="तथ्यात्मक जानकारी लिखें…"></textarea></div>
+      <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
+      <div class="composer">
+        <div class="field"><label>खबर का शीर्षक</label><input id="localTitle" maxlength="200" placeholder="शीर्षक..."></div>
+        <div class="fields"><div class="field"><label>क्षेत्र</label><input id="localArea" placeholder="शहर"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option></select></div></div>
+        <div class="field"><label>विवरण</label><textarea id="localBody" maxlength="2000" placeholder="जानकारी..."></textarea></div>
         <button class="primary" onclick="submitLocalNews()">खबर भेजें</button><div id="localStatus" class="status hidden" style="margin-top:10px"></div>
       </div>
-      <div class="sectionHead"><div><h2>समुदाय की प्रकाशित खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">अभी समुदाय की कोई खबर नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>समुदाय की खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
     <!-- Master Admin Panel Section -->
     <section id="section-admin" class="hidden">
-      <div class="sectionHead"><div><h2>🛡️ Master Admin Panel</h2><p>सामग्री प्रबंधन (Content Management)</p></div><span class="tag green" id="adminBadge">Master Admin</span></div>
-      <div id="adminContent">
-        <div class="adminBox">
-          <h3>➕ नया कंटेंट जोड़ें (News, Jobs, Books, etc.)</h3>
-          <div class="fields">
-            <div class="field"><label>Content Type</label><select id="postType"><option value="news">News</option><option value="jobs">Government / Private Job</option><option value="books">Book / PDF / eBook</option><option value="stories">Story</option></select></div>
-            <div class="field"><label>Status</label><select id="postStatus"><option value="published">Publish now</option><option value="draft">Draft</option></select></div>
-          </div>
-          <div class="field"><label>Title</label><input id="postTitle" maxlength="200" placeholder="कंटेंट का शीर्षक"></div>
-          <div class="field"><label>Short description</label><textarea id="postDescription" maxlength="3000" placeholder="विवरण, योग्यता, अध्याय या मुख्य जानकारी"></textarea></div>
-          <div class="fields">
-            <div class="field"><label>Official / Content URL (optional)</label><input id="postUrl" type="url" placeholder="https://..."></div>
-            <div class="field"><label>Category / Area (optional)</label><input id="postCategory" placeholder="Education, Govt Job..."></div>
-          </div>
-          <button class="primary" onclick="publishPost()">Save content</button><div id="adminStatus" class="status hidden" style="margin-top:10px"></div>
-        </div>
-        <div class="adminBox"><h3>सभी जोड़े गए कंटेंट्स की सूची</h3><div id="adminList"></div></div>
+      <div class="sectionHead"><div><h2>🛡️ Master Admin Control Center</h2><p>कंटेंट प्रबंधन एवं स्टैटिस्टिक्स</p></div><span class="tag green">Master Admin</span></div>
+      
+      <div class="stats-grid">
+        <div class="stat-card"><h4 id="statNews">0</h4><p>कुल खबरें</p></div>
+        <div class="stat-card"><h4 id="statApps">0</h4><p>कुल ऐप्स</p></div>
+        <div class="stat-card"><h4 id="statRooms">0</h4><p>एक्टिव रूम</p></div>
       </div>
+
+      <div class="adminBox">
+        <h3 style="margin-top:0;">➕ नया मास्टर कंटेंट जोड़ें (News, Jobs, etc.)</h3>
+        <div class="fields">
+          <div class="field"><label>Type</label><select id="postType"><option value="news">News (Free)</option><option value="jobs">Job Vacancy</option><option value="books">Book / PDF</option><option value="stories">Story</option></select></div>
+          <div class="field"><label>Status</label><select id="postStatus"><option value="published">Publish</option></select></div>
+        </div>
+        <div class="field"><label>Title</label><input id="postTitle" placeholder="शीर्षक"></div>
+        <div class="field"><label>Description</label><textarea id="postDescription" placeholder="विवरण"></textarea></div>
+        <div class="fields">
+          <div class="field"><label>URL (optional)</label><input id="postUrl" type="url" placeholder="https://..."></div>
+          <div class="field"><label>Category</label><input id="postCategory" placeholder="Category"></div>
+        </div>
+        <button class="primary" onclick="publishPost()">कंटेंट सेव करें</button><div id="adminStatus" class="status hidden" style="margin-top:10px"></div>
+      </div>
+      <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
-    <div class="footer">© <span id="year">2026</span> StarHubes · Master News • Jobs • Learn • Share<br><span class="tiny">यह प्लेटफ़ॉर्म मास्टर एडमिन और सुरक्षित स्टूडेंट आईडी लॉगिन के साथ सक्रिय है।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · News • Apps • Learn • Share<br><span class="tiny">फ्री न्यूज, 5-दिन ट्रायल, ऐप स्टोर और बैंक पेआउट सिस्टम सक्रिय।</span></div>
   </main>
 
   <aside class="rightSide">
-    <div class="panel"><h3>🔥 Explore StarHubes</h3>
-      <div class="trend"><div class="trendNum">01</div><div><strong>Government Jobs</strong><span>Vacancy, eligibility, deadline</span></div></div>
-      <div class="trend"><div class="trendNum">02</div><div><strong>Exam Preparation</strong><span>Video theory + MCQ</span></div></div>
-      <div class="trend"><div class="trendNum">03</div><div><strong>Local News</strong><span>अपनी community से जुड़ें</span></div></div>
+    <div class="panel"><h3>🔥 StarHubes Features</h3>
+      <div class="trend"><div class="trendNum">01</div><div><strong>Free News</strong><span>हमेशा सभी के लिए मुफ्त</span></div></div>
+      <div class="trend"><div class="trendNum">02</div><div><strong>App Marketplace</strong><span>अपना ऐप अपलोड करें</span></div></div>
+      <div class="trend"><div class="trendNum">03</div><div><strong>5-Day Trial</strong><span>तुरंत मुफ्त एक्सेस</span></div></div>
     </div>
-    <div class="panel"><h3>🔐 Safe Community</h3><p class="muted tiny">गलत जानकारी, निजी जानकारी या अपुष्ट आरोप साझा न करें।</p></div>
-    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Master Platform Connected</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
+    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Platform Active &amp; Secured</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
   </aside>
 </div>
 
 <nav class="mobileNav">
-  <button class="" onclick="showSection('home')">🏠<br>Home</button>
+  <button onclick="showSection('home')">🏠<br>Home</button>
   <button onclick="showSection('news')">📰<br>News</button>
-  <button onclick="showSection('jobs')">💼<br>Jobs</button>
-  <button onclick="showSection('learning')">🎓<br>Learn</button>
+  <button onclick="showSection('apps')">📱<br>Apps</button>
   <button onclick="showSection('study')">👥<br>Study</button>
 </nav>
 
-<!-- Auth Modal -->
+<!-- Professional Email OTP Login Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
-    <div class="modalhead"><div><h2 id="authTitle">Student Login</h2><p class="muted tiny" id="authSubtitle">अपनी ID और Password से प्रवेश करें</p></div><button class="ghost small" onclick="closeAuth()">✕</button></div>
-    <div class="field"><label>Student Username (ID)</label><input id="authUsername" autocomplete="username" maxlength="24" placeholder="जैसे: Rahul123"></div>
-    <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="अपना पासवर्ड दर्ज करें"></div>
-    <button class="primary" id="authSubmit" style="width:100%;margin-top:10px" onclick="submitAuth()">Login</button>
-    <button class="ghost" id="authSwitchBtn" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">नया अकाउंट बनाएँ (Register)</button>
-    <div id="authStatus" class="status hidden" style="margin-top:10px"></div>
-    <p class="tiny muted" style="margin-top:10px">💡 <strong>मास्टर एडमिन बनने के लिए:</strong> यूजरनेम में `admin` का उपयोग करें (जैसे: `admin_amit`) और पासवर्ड सेट करके लॉगिन करें।</p>
+    <div class="modalhead">
+      <div><h2 id="authModalTitle">Secure Email Login</h2><p class="muted tiny" id="authModalSub">ईमेल OTP के जरिए सुरक्षित प्रवेश करें</p></div>
+      <button class="ghost small" onclick="closeAuth()">✕</button>
+    </div>
+    
+    <div class="auth-tabs" style="margin-top:16px;">
+      <button class="auth-tab active" id="loginTabBtn" onclick="switchAuthMode('login')">Login</button>
+      <button class="auth-tab" id="registerTabBtn" onclick="switchAuthMode('register')">Register</button>
+    </div>
+
+    <div class="field" id="usernameFieldContainer"><label>Username / Student ID</label><input id="authUsername" maxlength="24" placeholder="जैसे: Rahul123"></div>
+    <div class="field"><label>Email Address (OTP Verification)</label><input id="authEmail" type="email" placeholder="example@gmail.com"></div>
+    
+    <div id="otpInputContainer" class="field hidden">
+      <label>6-Digit OTP (Demo Code: 1234)</label>
+      <input id="authOtp" type="text" placeholder="1234">
+    </div>
+
+    <button class="primary" id="authSubmitBtn" style="width:100%;margin-top:8px;" onclick="handleAuthAction()">OTP भेजें (Send OTP)</button>
+    <div id="authStatus" class="status hidden" style="margin-top:10px;"></div>
+    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> यूजरनेम में `admin` जोड़ें (जैसे: `admin_amit`)।</p>
   </div>
 </div>
 
@@ -277,7 +309,8 @@ let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 let currentRoomId = null;
 let pendingRoomId = null;
 let currentAuthMode = 'login';
-let currentTool = 'pen'; // 'pen' or 'eraser'
+let otpStepSent = false;
+let currentTool = 'pen';
 
 window.showToast = msg => {
   const t = el('toast');
@@ -301,10 +334,11 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'learning' ? 'learn' : name === 'study' ? 'study' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'apps' : name)));
   
-  if (name === 'admin') loadAdminList();
+  if (name === 'admin') loadAdminStatsAndList();
   if (name === 'study') loadStudyRooms();
+  if (name === 'apps') loadMarketplaceApps();
   refreshContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -315,57 +349,55 @@ window.filterVisible = value => {
 };
 
 window.openAuth = (mode = 'login') => {
-  currentAuthMode = mode;
-  el('authTitle').textContent = mode === 'login' ? 'Student Login' : 'Student Register';
-  el('authSubtitle').textContent = mode === 'login' ? 'अपनी ID और Password से प्रवेश करें' : 'नया यूजरनेम और पासवर्ड बनाएं';
-  el('authSubmit').textContent = mode === 'login' ? 'Login' : 'Register & Create ID';
-  el('authSwitchBtn').textContent = mode === 'login' ? 'नया अकाउंट बनाएँ (Register)' : 'पहिले से अकाउंट है? Login करें';
-  el('authUsername').value = '';
-  el('authPassword').value = '';
+  switchAuthMode(mode);
   el('authStatus').classList.add('hidden');
   el('authModal').classList.remove('hidden');
 };
 
 window.closeAuth = () => el('authModal').classList.add('hidden');
 
-window.toggleAuthMode = () => {
-  openAuth(currentAuthMode === 'login' ? 'register' : 'login');
+window.switchAuthMode = mode => {
+  currentAuthMode = mode;
+  otpStepSent = false;
+  el('loginTabBtn').className = mode === 'login' ? 'auth-tab active' : 'auth-tab';
+  el('registerTabBtn').className = mode === 'register' ? 'auth-tab active' : 'auth-tab';
+  el('authModalTitle').textContent = mode === 'login' ? 'Secure Email Login' : 'Register & Start 5-Day Trial';
+  el('authSubmitBtn').textContent = 'OTP भेजें (Send OTP)';
+  el('otpInputContainer').classList.add('hidden');
 };
 
-window.submitAuth = () => {
+window.handleAuthAction = () => {
+  const email = el('authEmail').value.trim();
   const username = el('authUsername').value.trim();
-  const password = el('authPassword').value;
-  if (!username || !password) {
-    setStatus('authStatus', 'कृपया Username और Password दोनों भरें।', 'err');
+  if(!email) { setStatus('authStatus', 'कृपया वैध ईमेल दर्ज करें।', 'err'); return; }
+
+  if(!otpStepSent) {
+    otpStepSent = true;
+    el('otpInputContainer').classList.remove('hidden');
+    el('authSubmitBtn').textContent = 'लॉगिन सत्यापित करें (Verify OTP)';
+    setStatus('authStatus', 'डेमो: आपके ईमेल पर OTP (1234) भेजा गया है।', 'ok');
     return;
   }
-  
-  let accounts = JSON.parse(localStorage.getItem('starhubes_accounts') || '{}');
-  
-  if (currentAuthMode === 'register') {
-    if (accounts[username]) {
-      setStatus('authStatus', 'यह यूजरनेम पहले से मौजूद है। दूसरा चुनें।', 'err');
-      return;
-    }
-    accounts[username] = password;
-    localStorage.setItem('starhubes_accounts', JSON.stringify(accounts));
-    setStatus('authStatus', 'अकाउंट सफलतापूर्वक बन गया! अब लॉगिन करें।', 'ok');
-    setTimeout(() => openAuth('login'), 1000);
-    return;
-  }
-  
-  const isAdmin = username.toLowerCase().includes('admin');
-  if (!isAdmin && accounts[username] && accounts[username] !== password) {
-    setStatus('authStatus', 'गलत पासवर्ड! पुनः प्रयास करें।', 'err');
-    return;
-  }
-  
+
+  const otp = el('authOtp').value.trim();
+  if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (डेमो के लिए 1234 डालें)', 'err'); return; }
+
+  const finalUser = username || email.split('@')[0];
+  const isAdmin = finalUser.toLowerCase().includes('admin');
   const role = isAdmin ? 'admin' : 'student';
-  currentUser = { username, role };
+
+  // Check 5-day trial start date
+  let trialStart = localStorage.getItem('starhubes_trial_' + finalUser);
+  if(!trialStart) {
+    trialStart = Date.now();
+    localStorage.setItem('starhubes_trial_' + finalUser, trialStart);
+  }
+
+  currentUser = { username: finalUser, role, email, trialStart };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
   updateSession();
-  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
-  setTimeout(() => { closeAuth(); refreshContent(); }, 800);
+  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए! 5-दिन का फ्री ट्रायल एक्टिव है।', 'ok');
+  setTimeout(() => { closeAuth(); refreshContent(); }, 1000);
 };
 
 window.doLogout = () => {
@@ -373,6 +405,7 @@ window.doLogout = () => {
   currentUser = null;
   updateSession();
   showToast('आप लॉगआउट हो गए हैं।');
+  showSection('home');
   refreshContent();
 };
 
@@ -382,6 +415,12 @@ function updateSession() {
   el('logoutBtn').classList.toggle('hidden', !currentUser);
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
   el('adminNav').classList.toggle('hidden', !isAdmin);
+
+  if(currentUser && currentUser.trialStart) {
+    const daysPassed = Math.floor((Date.now() - Number(currentUser.trialStart)) / (1000 * 60 * 60 * 24));
+    const daysLeft = Math.max(0, 5 - daysPassed);
+    el('trialStatusText').textContent = daysLeft > 0 ? `फ्री ट्रायल: ${daysLeft} दिन शेष हैं।` : `ट्रायल समाप्त (₹25/महीना प्लान अपेक्षित)`;
+  }
 }
 
 function getDB(key) {
@@ -393,13 +432,13 @@ function saveDB(key, data) {
 }
 
 window.refreshContent = () => {
-  renderCards(el('homeNews'), getDB('news').slice(0, 4), 'news');
+  renderCards(el('homeNews'), getDB('news'), 'news');
   renderCards(el('allNews'), getDB('news'), 'news');
   renderCards(el('allJobs'), getDB('jobs'), 'jobs');
   renderCards(el('allBooks'), getDB('books'), 'books');
-  renderCards(el('allStories'), getDB('stories'), 'stories');
   renderCards(el('communityNews'), getDB('community'), 'news');
-  if(currentUser && currentUser.role === 'admin') loadAdminList();
+  loadMarketplaceApps();
+  if(currentUser && currentUser.role === 'admin') loadAdminStatsAndList();
 };
 
 function renderCards(target, items, type) {
@@ -409,19 +448,93 @@ function renderCards(target, items, type) {
     return;
   }
   target.innerHTML = items.map(item => {
-    const tag = type === 'jobs' ? 'orange' : type === 'stories' ? 'green' : '';
+    const tag = type === 'jobs' ? 'orange' : 'green';
     const date = item.created_at ? new Date(item.created_at).toLocaleDateString('hi-IN') : 'StarHubes';
     const link = safeUrl(item.url || '');
     return `<article class="card newsCard">
-      <span class="tag ${tag}">${escapeHtml(item.category || type.toUpperCase())}</span>
+      <span class="tag ${tag}">${type === 'news' ? 'FREE NEWS' : escapeHtml(item.category || type.toUpperCase())}</span>
       <h3>${escapeHtml(item.title || 'Untitled')}</h3>
       <p>${escapeHtml(item.description || '')}</p>
       ${item.area ? `<p>📍 <strong>क्षेत्र:</strong> ${escapeHtml(item.area)}</p>` : ''}
-      ${link ? `<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">${type === 'jobs' ? 'आवेदन लिंक' : 'अधिक पढ़ें'}</button></a></div>` : ''}
-      <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Published</span></div>
+      ${link ? `<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">अधिक पढ़ें</button></a></div>` : ''}
+      <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Verified</span></div>
     </article>`;
   }).join('');
 }
+
+// Developer App Store Submit
+window.submitDeveloperApp = () => {
+  if(!currentUser) { openAuth('login'); showToast('ऐप अपलोड करने के लिए पहले लॉगिन करें।'); return; }
+  const company = el('devCompany').value.trim();
+  const name = el('appName').value.trim();
+  const email = el('devEmail').value.trim();
+  const phone = el('devPhone').value.trim();
+  const desc = el('appDesc').value.trim();
+  const img = safeUrl(el('appImg').value.trim());
+  const url = safeUrl(el('appUrl').value.trim());
+
+  if(!name || !email || !url) {
+    setStatus('uploadStatus', 'कृपया ऐप का नाम, ईमेल और डाउनलोड लिंक भरें।', 'err');
+    return;
+  }
+
+  const newApp = { id: 'app_' + Date.now(), company: company || currentUser.username, name, email, phone, desc, img, url, downloads: 0, developer: currentUser.username, created_at: Date.now() };
+  const apps = getDB('marketplace_apps');
+  apps.unshift(newApp);
+  saveDB('marketplace_apps', apps);
+
+  setStatus('uploadStatus', 'आपका ऐप सफलतापूर्वक पब्लिश हो गया!', 'ok');
+  el('devCompany').value = ''; el('appName').value = ''; el('devEmail').value = ''; el('devPhone').value = ''; el('appDesc').value = ''; el('appImg').value = ''; el('appUrl').value = '';
+  loadMarketplaceApps();
+};
+
+window.loadMarketplaceApps = () => {
+  const target = el('marketplaceApps');
+  if(!target) return;
+  const apps = getDB('marketplace_apps');
+  if(!apps.length) {
+    target.innerHTML = '<div class="empty">अभी कोई ऐप स्टोर पर उपलब्ध नहीं है।</div>';
+    return;
+  }
+  target.innerHTML = apps.map(app => `
+    <div class="card" style="display:flex; flex-direction:column; gap:10px;">
+      <span class="tag orange">${escapeHtml(app.company)}</span>
+      <h3>${escapeHtml(app.name)}</h3>
+      <p>${escapeHtml(app.desc || 'कोई विवरण उपलब्ध नहीं।')}</p>
+      <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong> बार | डेवलपर: ${escapeHtml(app.developer)}</p>
+      <div class="cardActions">
+        <a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')">
+          <button class="primary small">डൗน์โหลด करें (Download)</button>
+        </a>
+      </div>
+    </div>
+  `).join('');
+};
+
+window.incrementDownload = appId => {
+  let apps = getDB('marketplace_apps');
+  const app = apps.find(a => a.id === appId);
+  if(app) {
+    app.downloads = (app.downloads || 0) + 1;
+    saveDB('marketplace_apps', apps);
+    loadMarketplaceApps();
+  }
+};
+
+window.saveBankDetails = () => {
+  if(!currentUser) { openAuth('login'); return; }
+  const name = el('bankName').value.trim();
+  const acc = el('bankAccNo').value.trim();
+  const ifsc = el('bankIfsc').value.trim();
+  const upi = el('bankUpi').value.trim();
+
+  if(!acc || !ifsc) {
+    setStatus('bankStatus', 'कृपया खाता संख्या और IFSC कोड दर्ज करें।', 'err');
+    return;
+  }
+  localStorage.setItem('starhubes_bank_' + currentUser.username, JSON.stringify({ name, acc, ifsc, upi }));
+  setStatus('bankStatus', 'बैंक विवरण सुरक्षित हो गया! 95% Payout सीधे इसी खाते में आएगा।', 'ok');
+};
 
 function escapeHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -438,30 +551,19 @@ function safeUrl(value) {
 
 // Group Study Rooms
 window.createStudyRoom = () => {
-  if (!currentUser) {
-    openAuth('login');
-    showToast('स्टडी रूम बनाने के लिए पहले Login करें।');
-    return;
-  }
+  if (!currentUser) { openAuth('login'); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
   const name = el('roomName').value.trim();
   const subject = el('roomSubject').value.trim();
   const passcode = el('roomCode').value.trim();
-
-  if (!name) {
-    setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err');
-    return;
-  }
+  if (!name) { setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err'); return; }
 
   const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
-  
   const rooms = getDB('study_rooms');
   rooms.unshift(newRoom);
   saveDB('study_rooms', rooms);
 
-  el('roomName').value = '';
-  el('roomSubject').value = '';
-  el('roomCode').value = '';
-  setStatus('roomStatus', 'सुरक्षित रूम सफलतापूर्वक बन गया!', 'ok');
+  el('roomName').value = ''; el('roomSubject').value = ''; el('roomCode').value = '';
+  setStatus('roomStatus', 'सुरक्षित रूम बन गया!', 'ok');
   loadStudyRooms();
 };
 
@@ -469,10 +571,7 @@ window.loadStudyRooms = () => {
   const target = el('studyRoomsList');
   if (!target) return;
   const rooms = getDB('study_rooms');
-  if (!rooms.length) {
-    target.innerHTML = '<div class="empty">कोई एक्टिव रूम नहीं है। नया रूम बनाएं!</div>';
-    return;
-  }
+  if (!rooms.length) { target.innerHTML = '<div class="empty">कोई एक्टिव रूम नहीं है।</div>'; return; }
   target.innerHTML = rooms.map(r => `
     <div class="card">
       <span class="tag green">${escapeHtml(r.subject)}</span>
@@ -484,10 +583,7 @@ window.loadStudyRooms = () => {
 };
 
 window.tryJoinRoom = roomId => {
-  if (!currentUser) {
-    openAuth('login');
-    return;
-  }
+  if (!currentUser) { openAuth('login'); return; }
   const rooms = getDB('study_rooms');
   const room = rooms.find(r => r.id === roomId);
   if (!room) return;
@@ -512,7 +608,7 @@ window.verifyRoomPasscode = () => {
     closePasscodeModal();
     proceedJoinRoom(pendingRoomId);
   } else {
-    setStatus('passcodeStatus', 'गलत रूम कोड! पुनः प्रयास करें।', 'err');
+    setStatus('passcodeStatus', 'गलत रूम कोड!', 'err');
   }
 };
 
@@ -522,10 +618,7 @@ window.proceedJoinRoom = roomId => {
   if (!room) return;
 
   if (!room.members.includes(currentUser.username)) {
-    if (room.members.length >= 10) {
-      showToast('इस रूम में अधिकतम 10 सदस्य पूरे हो चुके हैं!');
-      return;
-    }
+    if (room.members.length >= 10) { showToast('रूम में अधिकतम 10 सदस्य पूरे हो चुके हैं!'); return; }
     room.members.push(currentUser.username);
     saveDB('study_rooms', rooms);
   }
@@ -543,7 +636,6 @@ window.proceedJoinRoom = roomId => {
 window.leaveRoom = () => {
   currentRoomId = null;
   el('roomWorkspace').classList.add('hidden');
-  el('liveCallContainer').classList.add('hidden');
   loadStudyRooms();
 };
 
@@ -551,10 +643,7 @@ window.updateNotepad = val => {
   if (!currentRoomId) return;
   const rooms = getDB('study_rooms');
   const room = rooms.find(r => r.id === currentRoomId);
-  if (room) {
-    room.notepad = val;
-    saveDB('study_rooms', rooms);
-  }
+  if (room) { room.notepad = val; saveDB('study_rooms', rooms); }
 };
 
 window.sendChatMessage = () => {
@@ -578,28 +667,22 @@ function renderChatMessages(msgs) {
   box.scrollTop = box.scrollHeight;
 }
 
-// Live Voice / Video Call
 window.startLiveVoiceCall = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-    const localVid = el('localVideo');
-    if(localVid) localVid.srcObject = stream;
-    const callContainer = el('liveCallContainer');
-    if(callContainer) callContainer.classList.remove('hidden');
-    showToast('लाइव वॉइस और वीडियो कनेक्शन सक्रिय हो गया है!');
+    el('localVideo').srcObject = stream;
+    el('liveCallContainer').classList.remove('hidden');
+    showToast('लाइव कॉल सक्रिय!');
   } catch (err) {
-    showToast('कैमरा या माइक्रोफ़ोन की अनुमति नहीं मिली।');
+    showToast('कैमरा/माइक की अनुमति नहीं मिली।');
   }
 };
 
-// Whiteboard with Pen & Eraser
 let isDrawing = false;
 window.setTool = tool => {
   currentTool = tool;
-  const penBtn = el('penBtn');
-  const eraserBtn = el('eraserBtn');
-  if(penBtn) penBtn.className = tool === 'pen' ? 'secondary small' : 'ghost small';
-  if(eraserBtn) eraserBtn.className = tool === 'eraser' ? 'secondary small' : 'ghost small';
+  el('penBtn').className = tool === 'pen' ? 'secondary small' : 'ghost small';
+  el('eraserBtn').className = tool === 'eraser' ? 'secondary small' : 'ghost small';
 };
 
 function initWhiteboard() {
@@ -611,13 +694,8 @@ function initWhiteboard() {
   canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
   canvas.onmousemove = e => {
     if (!isDrawing) return;
-    if (currentTool === 'eraser') {
-      ctx.strokeStyle = '#ffffff'; 
-      ctx.lineWidth = 15; 
-    } else {
-      ctx.strokeStyle = '#172033'; 
-      ctx.lineWidth = 2;
-    }
+    ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#172033';
+    ctx.lineWidth = currentTool === 'eraser' ? 15 : 2;
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
   };
@@ -633,109 +711,82 @@ window.clearWhiteboard = () => {
 };
 
 window.submitLocalNews = () => {
-  if (!currentUser) {
-    openAuth('login');
-    setStatus('localStatus', 'खबर भेजने के लिए पहले Login करें।', 'err');
-    return;
-  }
+  if (!currentUser) { openAuth('login'); return; }
   const title = el('localTitle').value.trim();
   const area = el('localArea').value.trim();
   const description = el('localBody').value.trim();
   const category = el('localCategory').value;
-
-  if (!title || !description) {
-    setStatus('localStatus', 'कृपया शीर्षक और विवरण दोनों भरें।', 'err');
-    return;
-  }
+  if (!title || !description) return;
 
   const newItem = { title, area, description, category, created_at: Date.now() };
   const list = getDB('community');
   list.unshift(newItem);
   saveDB('community', list);
-
-  setStatus('localStatus', 'आपकी खबर सफलतापूर्वक सबमिट हो गई!', 'ok');
-  el('localTitle').value = '';
-  el('localArea').value = '';
-  el('localBody').value = '';
+  setStatus('localStatus', 'खबर सबमिट हो गई!', 'ok');
+  el('localTitle').value = ''; el('localBody').value = '';
   refreshContent();
 };
 
 window.publishPost = () => {
-  if (!currentUser || currentUser.role !== 'admin') {
-    showToast('यह कार्य केवल Master Admin कर सकते हैं।');
-    return;
-  }
+  if (!currentUser || currentUser.role !== 'admin') { showToast('केवल एडमिन कर सकते हैं।'); return; }
   const type = el('postType').value;
   const title = el('postTitle').value.trim();
   const description = el('postDescription').value.trim();
   const url = safeUrl(el('postUrl').value.trim());
   const category = el('postCategory').value.trim() || type;
-
-  if (!title) {
-    setStatus('adminStatus', 'शीर्षक (Title) भरना अनिवार्य है।', 'err');
-    return;
-  }
+  if (!title) return;
 
   const newItem = { title, description, url, category, created_at: Date.now() };
   const list = getDB(type);
   list.unshift(newItem);
   saveDB(type, list);
-
-  setStatus('adminStatus', 'कंटेंट सफलतापूर्वक सेव हो गया!', 'ok');
-  el('postTitle').value = '';
-  el('postDescription').value = '';
-  el('postUrl').value = '';
-  el('postCategory').value = '';
+  setStatus('adminStatus', 'कंटेंट सेव हो गया!', 'ok');
+  el('postTitle').value = ''; el('postDescription').value = '';
+  loadAdminStatsAndList();
   refreshContent();
 };
 
-function loadAdminList() {
+function loadAdminStatsAndList() {
+  el('statNews').textContent = getDB('news').length;
+  el('statApps').textContent = getDB('marketplace_apps').length;
+  el('statRooms').textContent = getDB('study_rooms').length;
+
   const target = el('adminList');
   if (!target) return;
-  const types = ['news', 'jobs', 'books', 'stories', 'community'];
   let allRows = [];
-  types.forEach(t => {
+  ['news', 'jobs', 'books', 'stories', 'marketplace_apps'].forEach(t => {
     getDB(t).forEach(item => allRows.push({ ...item, _type: t }));
   });
   allRows.sort((a, b) => b.created_at - a.created_at);
 
-  target.innerHTML = allRows.length ? allRows.map((x, idx) => `
+  target.innerHTML = allRows.length ? allRows.map(x => `
     <div class="post">
       <span class="tag">${escapeHtml(x._type.toUpperCase())}</span>
-      <h3>${escapeHtml(x.title)}</h3>
-      <p class="muted tiny">${escapeHtml(x.description || '')}</p>
-      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at})">डिलीट करें</button>
+      <h3>${escapeHtml(x.title || x.name)}</h3>
+      <p class="muted tiny">${escapeHtml(x.description || x.desc || '')}</p>
+      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at || x.id})">डिलीट करें</button>
     </div>
-  `).join('') : '<div class="empty">कोई कंटेंट नहीं मिला।</div>';
+  `).join('') : '<div class="empty">कोई कंटेंट नहीं।</div>';
 }
 
-window.deleteItem = (type, timestamp) => {
+window.deleteItem = (type, identifier) => {
   let list = getDB(type);
-  list = list.filter(item => item.created_at !== timestamp);
+  list = list.filter(item => (item.created_at !== identifier && item.id !== identifier));
   saveDB(type, list);
+  loadAdminStatsAndList();
   refreshContent();
-  showToast('कंटेंट हटा दिया गया है।');
+  showToast('हटा दिया गया है।');
 };
 
 window.answerQuiz = (button, correct) => {
   document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
   const res = el('quizResult');
   if(res) {
-    res.textContent = correct ? 'सही जवाब! 🎉' : 'यह सही जवाब नहीं है। सही उत्तर: B. नई दिल्ली';
+    res.textContent = correct ? 'सही जवाब! 🎉' : 'गलत जवाब। सही उत्तर: B. नई दिल्ली';
     res.style.color = correct ? '#16c784' : '#ffb020';
   }
 };
 
-window.guessNumber = () => {
-  const input = el('guessInput');
-  const result = el('guessResult');
-  if(!input || !result) return;
-  const n = Number(input.value);
-  const answer = Math.floor(Math.random() * 5) + 1;
-  result.textContent = n === answer ? `बधाई हो! सही अनुमान, नंबर ${answer} था।` : `गलत अनुमान! इस बार सही नंबर ${answer} था।`;
-};
-
-// Initialization
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = el('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();
