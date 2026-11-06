@@ -243,4 +243,545 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
       </div>
       <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
-    <div class="footer">© <span id="year">2026
+    <div class="footer">© <span id="year">2026</span> StarHubes · News • Apps • Learn • Share<br><span class="tiny">फ्री न्यूज, 5-दिन ट्रायल, ऐप स्टोर और बैंक पेआउट सिस्टम सक्रिय।</span></div>
+  </main>
+
+  <aside class="rightSide">
+    <div class="panel"><h3>🔥 StarHubes Features</h3>
+      <div class="trend"><div class="trendNum">01</div><div><strong>Free News</strong><span>हमेशा सभी के लिए मुफ्त</span></div></div>
+      <div class="trend"><div class="trendNum">02</div><div><strong>App Marketplace</strong><span>अपना ऐप अपलोड करें</span></div></div>
+      <div class="trend"><div class="trendNum">03</div><div><strong>5-Day Trial</strong><span>तुरंत मुफ्त एक्सेस</span></div></div>
+    </div>
+    <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Platform Active &amp; Secured</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
+  </aside>
+</div>
+
+<nav class="mobileNav">
+  <button onclick="showSection('home')">🏠<br>Home</button>
+  <button onclick="showSection('news')">📰<br>News</button>
+  <button onclick="showSection('apps')">📱<br>Apps</button>
+  <button onclick="showSection('study')">👥<br>Study</button>
+</nav>
+
+<!-- Phone Number & Email OTP Login Modal -->
+<div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
+  <div class="modalbox">
+    <div class="modalhead">
+      <div><h2 id="authModalTitle">Mobile &amp; Email OTP Login</h2><p class="muted tiny" id="authModalSub">मोबाइल नंबर या ईमेल दर्ज करके OTP प्राप्त करें</p></div>
+      <button class="ghost small" onclick="closeAuth()">✕</button>
+    </div>
+    
+    <div class="field" style="margin-top:16px;"><label>मोबाइल नंबर या ईमेल (Mobile Number / Email)</label><input id="authInput" placeholder="जैसे: 9876543210 या email@gmail.com"></div>
+    
+    <div id="otpInputContainer" class="field hidden">
+      <label>6-Digit OTP (डेमो कोड: 1234)</label>
+      <input id="authOtp" type="text" placeholder="1234">
+    </div>
+
+    <button class="primary" id="authSubmitBtn" style="width:100%;margin-top:8px;" onclick="handleAuthAction()">OTP भेजें (Send OTP)</button>
+    <div id="authStatus" class="status hidden" style="margin-top:10px;"></div>
+    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> `amitprajapat858904@gmail.com` से लॉगिन करने पर ही एडमिन पैनल खुलेगा।</p>
+  </div>
+</div>
+
+<!-- Room Passcode Prompt Modal -->
+<div id="passcodeModal" class="modal hidden" onclick="if(event.target===this)closePasscodeModal()">
+  <div class="modalbox">
+    <div class="modalhead"><div><h2>🔒 Enter Room Passcode</h2><p class="muted tiny">इस प्राइवेट रूम में प्रवेश करने के लिए कोड दर्ज करें</p></div><button class="ghost small" onclick="closePasscodeModal()">✕</button></div>
+    <div class="field"><label>Secret Room Code</label><input id="enteredPasscode" type="password" placeholder="रूम कोड दर्ज करें"></div>
+    <button class="primary" style="width:100%; margin-top:10px;" onclick="verifyRoomPasscode()">जॉइन करें</button>
+    <div id="passcodeStatus" class="status hidden" style="margin-top:10px;"></div>
+  </div>
+</div>
+
+<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
+
+<script>
+const el = id => document.getElementById(id);
+let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
+let currentRoomId = null;
+let pendingRoomId = null;
+let otpStepSent = false;
+let currentTool = 'pen';
+
+window.showToast = msg => {
+  const t = el('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3500);
+};
+
+function setStatus(id, msg, type = '') {
+  const x = el(id);
+  if (!x) return;
+  x.textContent = msg;
+  x.classList.remove('hidden', 'ok', 'err');
+  if (type) x.classList.add(type);
+}
+
+window.showSection = name => {
+  document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
+  const target = el('section-' + name);
+  if (target) target.classList.remove('hidden');
+  
+  document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'apps' : name)));
+  
+  if (name === 'admin') loadAdminStatsAndList();
+  if (name === 'study') loadStudyRooms();
+  if (name === 'apps') loadMarketplaceApps();
+  refreshContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.filterVisible = value => {
+  const q = value.toLowerCase();
+  document.querySelectorAll('.newsCard').forEach(c => c.classList.toggle('hidden', !c.innerText.toLowerCase().includes(q)));
+};
+
+window.openAuth = () => {
+  otpStepSent = false;
+  el('otpInputContainer').classList.add('hidden');
+  el('authSubmitBtn').textContent = 'OTP भेजें (Send OTP)';
+  el('authStatus').classList.add('hidden');
+  el('authInput').value = '';
+  el('authModal').classList.remove('hidden');
+};
+
+window.closeAuth = () => el('authModal').classList.add('hidden');
+
+window.handleAuthAction = () => {
+  const inputVal = el('authInput').value.trim();
+  if(!inputVal) { setStatus('authStatus', 'कृपया अपना मोबाइल नंबर या ईमेल दर्ज करें।', 'err'); return; }
+
+  if(!otpStepSent) {
+    otpStepSent = true;
+    el('otpInputContainer').classList.remove('hidden');
+    el('authSubmitBtn').textContent = 'लॉगिन सत्यापित करें (Verify OTP)';
+    setStatus('authStatus', 'डेमो: आपके नंबर/ईमेल पर OTP (1234) भेजा गया है।', 'ok');
+    return;
+  }
+
+  const otp = el('authOtp').value.trim();
+  if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (डेमो के लिए 1234 डालें)', 'err'); return; }
+
+  const identifier = inputVal.toLowerCase();
+  const username = identifier.includes('@') ? identifier.split('@')[0] : 'User_' + identifier.slice(-4);
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  const role = (identifier === masterAdminEmail) ? 'admin' : 'student';
+
+  let trialStart = localStorage.getItem('starhubes_trial_' + identifier);
+  if(!trialStart) {
+    trialStart = Date.now();
+    localStorage.setItem('starhubes_trial_' + identifier, trialStart);
+  }
+
+  currentUser = { username, role, email: identifier, trialStart };
+  localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
+  updateSession();
+  setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
+  setTimeout(() => { closeAuth(); refreshContent(); }, 1000);
+};
+
+window.doLogout = () => {
+  localStorage.removeItem('starhubes_user');
+  currentUser = null;
+  updateSession();
+  showToast('आप लॉगआउट हो गए हैं।');
+  showSection('home');
+  refreshContent();
+};
+
+function updateSession() {
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  const isAdmin = currentUser && (currentUser.email === masterAdminEmail || currentUser.role === 'admin');
+
+  el('loginBtn').classList.toggle('hidden', !!currentUser);
+  el('logoutBtn').classList.toggle('hidden', !currentUser);
+  el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
+  el('adminNav').classList.toggle('hidden', !isAdmin);
+
+  if(currentUser && currentUser.trialStart) {
+    const daysPassed = Math.floor((Date.now() - Number(currentUser.trialStart)) / (1000 * 60 * 60 * 24));
+    const daysLeft = Math.max(0, 5 - daysPassed);
+    el('trialStatusText').textContent = daysLeft > 0 ? `फ्री ट्रायल: ${daysLeft} दिन शेष हैं।` : `ट्रायल समाप्त (₹25/महीना प्लान अपेक्षित)`;
+  }
+}
+
+function getDB(key) {
+  return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
+}
+
+function saveDB(key, data) {
+  localStorage.setItem('starhubes_' + key, JSON.stringify(data));
+}
+
+window.refreshContent = () => {
+  renderCards(el('homeNews'), getDB('news'), 'news');
+  renderCards(el('allNews'), getDB('news'), 'news');
+  renderCards(el('allJobs'), getDB('jobs'), 'jobs');
+  renderCards(el('allBooks'), getDB('books'), 'books');
+  renderCards(el('communityNews'), getDB('community'), 'news');
+  loadMarketplaceApps();
+  
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  if(currentUser && (currentUser.email === masterAdminEmail || currentUser.role === 'admin')) {
+    loadAdminStatsAndList();
+  }
+};
+
+function renderCards(target, items, type) {
+  if (!target) return;
+  if (!items || !items.length) {
+    target.innerHTML = '<div class="empty">अभी कोई सामग्री उपलब्ध नहीं है।</div>';
+    return;
+  }
+  target.innerHTML = items.map(item => {
+    const tag = type === 'jobs' ? 'orange' : 'green';
+    const date = item.created_at ? new Date(item.created_at).toLocaleDateString('hi-IN') : 'StarHubes';
+    const link = safeUrl(item.url || '');
+    return `<article class="card newsCard">
+      <span class="tag ${tag}">${type === 'news' ? 'FREE NEWS' : escapeHtml(item.category || type.toUpperCase())}</span>
+      <h3>${escapeHtml(item.title || 'Untitled')}</h3>
+      <p>${escapeHtml(item.description || '')}</p>
+      ${item.area ? `<p>📍 <strong>क्षेत्र:</strong> ${escapeHtml(item.area)}</p>` : ''}
+      ${link ? `<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">अधिक पढ़ें</button></a></div>` : ''}
+      <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Verified</span></div>
+    </article>`;
+  }).join('');
+}
+
+// Developer App Store Submit
+window.submitDeveloperApp = () => {
+  if(!currentUser) { openAuth(); showToast('ऐप अपलोड करने के लिए पहले लॉगिन करें।'); return; }
+  const company = el('devCompany').value.trim();
+  const name = el('appName').value.trim();
+  const email = el('devEmail').value.trim();
+  const desc = el('appDesc').value.trim();
+  const url = safeUrl(el('appUrl').value.trim());
+
+  if(!name || !email || !url) {
+    setStatus('uploadStatus', 'कृपया ऐप का नाम, संपर्क और डाउनलोड लिंक भरें।', 'err');
+    return;
+  }
+
+  const newApp = { id: 'app_' + Date.now(), company: company || currentUser.username, name, email, desc, url, downloads: 0, developer: currentUser.username, created_at: Date.now() };
+  const apps = getDB('marketplace_apps');
+  apps.unshift(newApp);
+  saveDB('marketplace_apps', apps);
+
+  setStatus('uploadStatus', 'आपका ऐप सफलतापूर्वक पब्लिश हो गया!', 'ok');
+  el('devCompany').value = ''; el('appName').value = ''; el('devEmail').value = ''; el('appDesc').value = ''; el('appUrl').value = '';
+  loadMarketplaceApps();
+};
+
+window.loadMarketplaceApps = () => {
+  const target = el('marketplaceApps');
+  if(!target) return;
+  const apps = getDB('marketplace_apps');
+  if(!apps.length) {
+    target.innerHTML = '<div class="empty">अभी कोई ऐप स्टोर पर उपलब्ध नहीं है।</div>';
+    return;
+  }
+  target.innerHTML = apps.map(app => `
+    <div class="card" style="display:flex; flex-direction:column; gap:10px;">
+      <span class="tag orange">${escapeHtml(app.company)}</span>
+      <h3>${escapeHtml(app.name)}</h3>
+      <p>${escapeHtml(app.desc || 'कोई विवरण उपलब्ध नहीं।')}</p>
+      <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong> बार | डेवलपर: ${escapeHtml(app.developer)}</p>
+      <div class="cardActions">
+        <a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')">
+          <button class="primary small">डൗน์โหลด करें (Download)</button>
+        </a>
+      </div>
+    </div>
+  `).join('');
+};
+
+window.incrementDownload = appId => {
+  let apps = getDB('marketplace_apps');
+  const app = apps.find(a => a.id === appId);
+  if(app) {
+    app.downloads = (app.downloads || 0) + 1;
+    saveDB('marketplace_apps', apps);
+    loadMarketplaceApps();
+  }
+};
+
+window.saveBankDetails = () => {
+  if(!currentUser) { openAuth(); return; }
+  const name = el('bankName').value.trim();
+  const acc = el('bankAccNo').value.trim();
+  const ifsc = el('bankIfsc').value.trim();
+  const upi = el('bankUpi').value.trim();
+
+  if(!acc || !ifsc) {
+    setStatus('bankStatus', 'कृपया खाता संख्या और IFSC कोड दर्ज करें।', 'err');
+    return;
+  }
+  localStorage.setItem('starhubes_bank_' + currentUser.email, JSON.stringify({ name, acc, ifsc, upi }));
+  setStatus('bankStatus', 'बैंक विवरण सुरक्षित हो गया! 95% Payout सीधे इसी खाते में आएगा।', 'ok');
+};
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function safeUrl(value) {
+  try {
+    const u = new URL(value);
+    return ['https:', 'http:'].includes(u.protocol) ? u.href : '';
+  } catch {
+    return '';
+  }
+}
+
+// Group Study Rooms
+window.createStudyRoom = () => {
+  if (!currentUser) { openAuth(); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
+  const name = el('roomName').value.trim();
+  const subject = el('roomSubject').value.trim();
+  const passcode = el('roomCode').value.trim();
+  if (!name) { setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err'); return; }
+
+  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
+  const rooms = getDB('study_rooms');
+  rooms.unshift(newRoom);
+  saveDB('study_rooms', rooms);
+
+  el('roomName').value = ''; el('roomSubject').value = ''; el('roomCode').value = '';
+  setStatus('roomStatus', 'सुरक्षित रूम बन गया!', 'ok');
+  loadStudyRooms();
+};
+
+window.loadStudyRooms = () => {
+  const target = el('studyRoomsList');
+  if (!target) return;
+  const rooms = getDB('study_rooms');
+  if (!rooms.length) { target.innerHTML = '<div class="empty">कोई एक्टिव रूम नहीं है।</div>'; return; }
+  target.innerHTML = rooms.map(r => `
+    <div class="card">
+      <span class="tag green">${escapeHtml(r.subject)}</span>
+      <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
+      <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)} | सदस्य: ${(r.members || []).length} / 10</p>
+      <button class="primary small" style="margin-top:10px;" onclick="tryJoinRoom('${r.id}')">रूम जॉइन करें</button>
+    </div>
+  `).join('');
+};
+
+window.tryJoinRoom = roomId => {
+  if (!currentUser) { openAuth(); return; }
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === roomId);
+  if (!room) return;
+
+  if (room.passcode && room.creator !== currentUser.username && !room.members.includes(currentUser.username)) {
+    pendingRoomId = roomId;
+    el('enteredPasscode').value = '';
+    el('passcodeStatus').classList.add('hidden');
+    el('passcodeModal').classList.remove('hidden');
+    return;
+  }
+  proceedJoinRoom(roomId);
+};
+
+window.closePasscodeModal = () => el('passcodeModal').classList.add('hidden');
+
+window.verifyRoomPasscode = () => {
+  const passcode = el('enteredPasscode').value.trim();
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === pendingRoomId);
+  if (room && room.passcode === passcode) {
+    closePasscodeModal();
+    proceedJoinRoom(pendingRoomId);
+  } else {
+    setStatus('passcodeStatus', 'गलत रूम कोड!', 'err');
+  }
+};
+
+window.proceedJoinRoom = roomId => {
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === roomId);
+  if (!room) return;
+
+  if (!room.members.includes(currentUser.username)) {
+    if (room.members.length >= 10) { showToast('रूम में अधिकतम 10 सदस्य पूरे हो चुके हैं!'); return; }
+    room.members.push(currentUser.username);
+    saveDB('study_rooms', rooms);
+  }
+
+  currentRoomId = roomId;
+  el('activeRoomTitle').textContent = 'Room: ' + room.name;
+  el('roomMembersCount').textContent = `सदस्य (${room.members.length} / 10): ${room.members.join(', ')}`;
+  el('sharedNotepad').value = room.notepad || '';
+  renderChatMessages(room.messages || []);
+  el('roomWorkspace').classList.remove('hidden');
+  initWhiteboard();
+  window.scrollTo({ top: el('roomWorkspace').offsetTop, behavior: 'smooth' });
+};
+
+window.leaveRoom = () => {
+  currentRoomId = null;
+  el('roomWorkspace').classList.add('hidden');
+  loadStudyRooms();
+};
+
+window.updateNotepad = val => {
+  if (!currentRoomId) return;
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === currentRoomId);
+  if (room) { room.notepad = val; saveDB('study_rooms', rooms); }
+};
+
+window.sendChatMessage = () => {
+  const text = el('chatInput').value.trim();
+  if (!text || !currentRoomId) return;
+  const rooms = getDB('study_rooms');
+  const room = rooms.find(r => r.id === currentRoomId);
+  if (room) {
+    if (!room.messages) room.messages = [];
+    room.messages.push({ sender: currentUser.username, text, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+    saveDB('study_rooms', rooms);
+    el('chatInput').value = '';
+    renderChatMessages(room.messages);
+  }
+};
+
+function renderChatMessages(msgs) {
+  const box = el('chatBox');
+  if (!box) return;
+  box.innerHTML = msgs.map(m => `<div><strong>${escapeHtml(m.sender)}</strong> <span class="tiny muted">[${m.time}]</span>: ${escapeHtml(m.text)}</div>`).join('');
+  box.scrollTop = box.scrollHeight;
+}
+
+window.startLiveVoiceCall = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+    el('localVideo').srcObject = stream;
+    el('liveCallContainer').classList.remove('hidden');
+    showToast('लाइव कॉल सक्रिय!');
+  } catch (err) {
+    showToast('कैमरा/माइक की अनुमति नहीं मिली।');
+  }
+};
+
+let isDrawing = false;
+window.setTool = tool => {
+  currentTool = tool;
+  el('penBtn').className = tool === 'pen' ? 'secondary small' : 'ghost small';
+  el('eraserBtn').className = tool === 'eraser' ? 'secondary small' : 'ghost small';
+};
+
+function initWhiteboard() {
+  const canvas = el('whiteboard');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.lineCap = 'round';
+
+  canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
+  canvas.onmousemove = e => {
+    if (!isDrawing) return;
+    ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#172033';
+    ctx.lineWidth = currentTool === 'eraser' ? 15 : 2;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  };
+  canvas.onmouseup = () => { isDrawing = false; };
+  canvas.onmouseleave = () => { isDrawing = false; };
+}
+
+window.clearWhiteboard = () => {
+  const canvas = el('whiteboard');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
+window.submitLocalNews = () => {
+  if (!currentUser) { openAuth(); return; }
+  const title = el('localTitle').value.trim();
+  const area = el('localArea').value.trim();
+  const description = el('localBody').value.trim();
+  const category = el('localCategory').value;
+  if (!title || !description) return;
+
+  const newItem = { title, area, description, category, created_at: Date.now() };
+  const list = getDB('community');
+  list.unshift(newItem);
+  saveDB('community', list);
+  setStatus('localStatus', 'खबर सबमिट हो गई!', 'ok');
+  el('localTitle').value = ''; el('localBody').value = '';
+  refreshContent();
+};
+
+window.publishPost = () => {
+  const masterAdminEmail = "amitprajapat858904@gmail.com";
+  if (!currentUser || currentUser.email !== masterAdminEmail) { showToast('यह केवल मास्टर एडमिन कर सकते हैं।'); return; }
+  const type = el('postType').value;
+  const title = el('postTitle').value.trim();
+  const description = el('postDescription').value.trim();
+  const url = safeUrl(el('postUrl').value.trim());
+  const category = el('postCategory').value.trim() || type;
+  if (!title) return;
+
+  const newItem = { title, description, url, category, created_at: Date.now() };
+  const list = getDB(type);
+  list.unshift(newItem);
+  saveDB(type, list);
+  setStatus('adminStatus', 'कंटेंट सेव हो गया!', 'ok');
+  el('postTitle').value = ''; el('postDescription').value = '';
+  loadAdminStatsAndList();
+  refreshContent();
+};
+
+function loadAdminStatsAndList() {
+  el('statNews').textContent = getDB('news').length;
+  el('statApps').textContent = getDB('marketplace_apps').length;
+  el('statRooms').textContent = getDB('study_rooms').length;
+
+  const target = el('adminList');
+  if (!target) return;
+  let allRows = [];
+  ['news', 'jobs', 'books', 'stories', 'marketplace_apps'].forEach(t => {
+    getDB(t).forEach(item => allRows.push({ ...item, _type: t }));
+  });
+  allRows.sort((a, b) => b.created_at - a.created_at);
+
+  target.innerHTML = allRows.length ? allRows.map(x => `
+    <div class="post">
+      <span class="tag">${escapeHtml(x._type.toUpperCase())}</span>
+      <h3>${escapeHtml(x.title || x.name)}</h3>
+      <p class="muted tiny">${escapeHtml(x.description || x.desc || '')}</p>
+      <button class="danger small" style="margin-top:6px;" onclick="deleteItem('${x._type}', ${x.created_at || x.id})">डिलीट करें</button>
+    </div>
+  `).join('') : '<div class="empty">कोई कंटेंट नहीं।</div>';
+}
+
+window.deleteItem = (type, identifier) => {
+  let list = getDB(type);
+  list = list.filter(item => (item.created_at !== identifier && item.id !== identifier));
+  saveDB(type, list);
+  loadAdminStatsAndList();
+  refreshContent();
+  showToast('हटा दिया गया है।');
+};
+
+window.answerQuiz = (button, correct) => {
+  document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
+  const res = el('quizResult');
+  if(res) {
+    res.textContent = correct ? 'सही जवाब! 🎉' : 'गलत जवाब। सही उत्तर: B. नई दिल्ली';
+    res.style.color = correct ? '#16c784' : '#ffb020';
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = el('year');
+  if(yearEl) yearEl.textContent = new Date().getFullYear();
+  updateSession();
+  refreshContent();
+});
+</script>
+</body>
+</html>
