@@ -3,29 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHubes — Master App Store &amp; Learning Platform</title>
+<title>StarHubes — Multi-Page App Store &amp; Platform</title>
 <meta name="description" content="StarHubes: News, government jobs, learning, apps marketplace, group study and community.">
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:700;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 4px 15px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
-header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:500px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.feature{padding:16px;border:1px solid #1c2d65;border-radius:15px;background:#0b1740}.feature[role="button"]{cursor:pointer;transition:transform .15s,box-shadow .15s}.feature[role="button"]:hover{transform:translateY(-2px);box-shadow:0 12px 30px #0005}.featureIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;font-size:22px;margin-bottom:10px}.feature h3{margin:0 0 5px;font-size:15px}.feature p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}.composer{padding:16px;margin-top:16px}.composerTop{display:flex;gap:10px;align-items:center}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0;outline-color:#c6d0ff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.trend{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #1b2b60}.trend:last-child{border-bottom:0}.trendNum{font-size:18px;font-weight:900;color:#9aa7e8}.trend strong{font-size:13px;display:block}.trend span{font-size:11px;color:var(--muted)}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text)}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#101e4c;border-radius:12px;padding:4px;margin-bottom:16px}.auth-tab{background:transparent;color:var(--muted);padding:9px;font-size:14px;font-weight:700;border-radius:9px;text-align:center;cursor:pointer}.auth-tab.active{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.stat-card{background:#101e4c;border:1px solid #263a78;border-radius:14px;padding:14px;text-align:center}.stat-card h4{margin:0;font-size:22px;color:var(--brand)}.stat-card p{margin:4px 0 0;font-size:12px;color:var(--muted)}
-.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.post h3{margin:6px 0}.post p{margin:6px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}.mobileNav{display:none}
-@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2,.grid3{grid-template-columns:1fr}.sectionHead{margin-top:22px}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:#07112f;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#b7c5eb}.mobileNav button.active{color:#8eabff}.fields{grid-template-columns:1fr}.topActions{gap:5px}.topActions button{padding:8px 10px}}
+header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:400px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:10px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.composer{padding:16px;margin-top:16px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text)}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}.mobileNav{display:none}
+@media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}}
+@media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2{grid-template-columns:1fr}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:#07112f;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#b7c5eb}.mobileNav button.active{color:#8eabff}.fields{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="top">
-    <div class="logo"><div class="logoMark">S</div><span>StarHubes</span></div>
+    <div class="logo" onclick="showSection('home')"><div class="logoMark">S</div><span>StarHubes</span></div>
     <div class="search"><input id="searchInput" placeholder="News, jobs, apps खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
       <button class="ghost small desktop" onclick="showSection('apps')">📱 App Store</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth('login')">Login / OTP</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Login / OTP</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar">S</div>
     </div>
@@ -35,16 +32,16 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
 <div class="layout">
   <aside class="side">
     <div class="navbox">
-      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home</button>
+      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home Page</button>
       <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed <span class="tag green" style="margin-left:auto; font-size:9px; padding:2px 5px;">FREE</span></button>
       <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Jobs &amp; Vacancies</button>
-      <button class="navbtn" data-section="apps" onclick="showSection('apps')"><span class="navicon">📱</span> App Store &amp; Upload</button>
+      <button class="navbtn" data-section="apps" onclick="showSection('apps')"><span class="navicon">📱</span> App Store Page</button>
       <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning &amp; Tests</button>
       <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books &amp; PDFs</button>
       <button class="navbtn" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
       <button class="navbtn" data-section="community" onclick="showSection('community')"><span class="navicon">📍</span> Community News</button>
-      <div class="sideLabel">YOUR SPACE</div>
-      <button class="navbtn" onclick="openAuth('login')"><span class="navicon">👤</span> Account &amp; Bank</button>
+      <div class="sideLabel">USER SPACE</div>
+      <button class="navbtn" onclick="openAuth()"><span class="navicon">👤</span> Account &amp; Bank</button>
       <button class="navbtn hidden" data-section="admin" id="adminNav" onclick="showSection('admin')"><span class="navicon">🛡️</span> Master Admin</button>
     </div>
     <div class="panel" style="margin-top:14px">
@@ -55,8 +52,8 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
   </aside>
 
   <main class="main">
-    <!-- Home Section -->
-    <section id="section-home" class="">
+    <!-- Home Section (Double Page Multi-View) -->
+    <section id="section-home">
       <div class="hero">
         <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
         <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने ऐप्स अपलोड करें।</h1>
@@ -66,7 +63,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
       </div>
       <div class="chips">
         <button class="chip active" onclick="showSection('news')">📰 Free News Feed</button>
-        <button class="chip" onclick="showSection('apps')">📱 App Store &amp; Upload</button>
+        <button class="chip" onclick="showSection('apps')">📱 App Store Page</button>
         <button class="chip" onclick="showSection('study')">👥 Group Study</button>
       </div>
       <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (हमेशा फ्री)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
@@ -85,12 +82,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- App Store & Developer Upload Section -->
+    <!-- App Store Page (Double Page View with Corner Upload Button) -->
     <section id="section-apps" class="hidden">
-      <div class="sectionHead"><div><h2>📱 StarHubes App Store</h2><p>डेवलपर्स अपने ऐप्स अपलोड करें और यूजर्स ऐप्स डाउनलोड करें</p></div></div>
-      
-      <!-- Upload App Form -->
-      <div class="card" style="margin-bottom:20px; border:1px solid var(--brand);">
+      <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div>
+          <h2>📱 StarHubes App Store</h2>
+          <p>उपलब्ध ऐप्स डाउनलोड करें और डेवलपर्स अपने ऐप्स मैनेज करें</p>
+        </div>
+        <!-- Corner Upload Button -->
+        <button class="primary" onclick="toggleUploadForm()">🚀 + अपना ऐप अपलोड करें</button>
+      </div>
+
+      <!-- Upload App Modal / Card (Initially Hidden, opens via corner button) -->
+      <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
         <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
         <p class="muted tiny">मोबाइल नंबर या ईमेल से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
         <div class="fields">
@@ -105,12 +109,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
           <div class="field"><label>ऐप स्क्रीनशॉट इमेज URL</label><input id="appImg" type="url" placeholder="https://image-link.com/photo.png"></div>
           <div class="field"><label>डाउनलोड / APK लिंक</label><input id="appUrl" type="url" placeholder="https://play.google.com/... या APK link"></div>
         </div>
-        <button class="primary" style="margin-top:12px;" onclick="submitDeveloperApp()">ऐप सबमिट करें</button>
+        <div style="display:flex; gap:10px; margin-top:12px;">
+          <button class="primary" onclick="submitDeveloperApp()">ऐप सबमिट करें</button>
+          <button class="ghost" onclick="toggleUploadForm()">रद्द करें</button>
+        </div>
         <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
       </div>
 
+      <!-- Apps First Display (Marketplace Apps appear at top) -->
+      <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>सबसे पहले डाउनलोड करें</p></div></div>
+      <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले बटन से अपलोड करें।</div></div>
+
       <!-- Bank Payout Settings Card -->
-      <div class="card" style="margin-bottom:20px;">
+      <div class="card" style="margin-top:20px;">
         <h3>🏦 बैंक अकाउंट जोड़ें (कमाई का पैसा लेने के लिए)</h3>
         <div class="fields">
           <div class="field"><label>खाता धारक का नाम (Account Name)</label><input id="bankName" placeholder="बैंक पासबुक के अनुसार"></div>
@@ -123,9 +134,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
         <button class="secondary" style="margin-top:10px;" onclick="saveBankDetails()">बैंक विवरण सुरक्षित करें</button>
         <div id="bankStatus" class="status hidden" style="margin-top:8px;"></div>
       </div>
-
-      <div class="sectionHead"><div><h2>उपलब्ध ऐप्स (Marketplace Apps)</h2></div></div>
-      <div id="marketplaceApps" class="grid2"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div></div>
     </section>
 
     <!-- Learning Section -->
@@ -221,10 +229,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
     <section id="section-admin" class="hidden">
       <div class="sectionHead"><div><h2>🛡️ Master Admin Control Center</h2><p>कंटेंट प्रबंधन एवं स्टैटिस्टिक्स</p></div><span class="tag green">Master Admin</span></div>
       
-      <div class="stats-grid">
-        <div class="stat-card"><h4 id="statNews">0</h4><p>कुल खबरें</p></div>
-        <div class="stat-card"><h4 id="statApps">0</h4><p>कुल ऐप्स</p></div>
-        <div class="stat-card"><h4 id="statRooms">0</h4><p>एक्टिव रूम</p></div>
+      <div class="grid2" style="margin-bottom:16px;">
+        <div class="card" style="text-align:center;"><h4><span id="statNews">0</span></h4><p class="tiny muted">कुल खबरें</p></div>
+        <div class="card" style="text-align:center;"><h4><span id="statApps">0</span></h4><p class="tiny muted">कुल ऐप्स</p></div>
       </div>
 
       <div class="adminBox">
@@ -243,14 +250,15 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
       </div>
       <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
-    <div class="footer">© <span id="year">2026</span> StarHubes · News • Apps • Learn • Share<br><span class="tiny">फ्री न्यूज, 5-दिन ट्रायल, ऐप स्टोर और बैंक पेआउट सिस्टम सक्रिय।</span></div>
+    
+    <div class="footer">© <span id="year">2026</span> StarHubes · Multi-Page Marketplace<br><span class="tiny">डबल पेज लेआउट, ऐप स्टोर और मोबाइल OTP लॉगिन सक्रिय।</span></div>
   </main>
 
   <aside class="rightSide">
-    <div class="panel"><h3>🔥 StarHubes Features</h3>
-      <div class="trend"><div class="trendNum">01</div><div><strong>Free News</strong><span>हमेशा सभी के लिए मुफ्त</span></div></div>
-      <div class="trend"><div class="trendNum">02</div><div><strong>App Marketplace</strong><span>अपना ऐप अपलोड करें</span></div></div>
-      <div class="trend"><div class="trendNum">03</div><div><strong>5-Day Trial</strong><span>तुरंत मुफ्त एक्सेस</span></div></div>
+    <div class="panel"><h3>🔥 Quick Pages</h3>
+      <div class="trend"><div class="trendNum">01</div><div style="cursor:pointer;" onclick="showSection('home')"><strong>Home Dashboard</strong><span>मुख्य पन्ना</span></div></div>
+      <div class="trend"><div class="trendNum">02</div><div style="cursor:pointer;" onclick="showSection('apps')"><strong>App Store Page</strong><span>ऐप्स डाउनलोड करें</span></div></div>
+      <div class="trend"><div class="trendNum">03</div><div style="cursor:pointer;" onclick="showSection('news')"><strong>Free News Feed</strong><span>ताज़ा खबरें</span></div></div>
     </div>
     <div class="panel"><h3>System Status</h3><p id="rightStatus" class="muted tiny">Platform Active &amp; Secured</p><button class="secondary small" onclick="refreshContent()">Refresh Data</button></div>
   </aside>
@@ -259,7 +267,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
 <nav class="mobileNav">
   <button onclick="showSection('home')">🏠<br>Home</button>
   <button onclick="showSection('news')">📰<br>News</button>
-  <button onclick="showSection('apps')">📱<br>Apps</button>
+  <button onclick="showSection('apps')">📱<br>AppStore</button>
   <button onclick="showSection('study')">👥<br>Study</button>
 </nav>
 
@@ -267,11 +275,11 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2 id="authModalTitle">Mobile &amp; Email OTP Login</h2><p class="muted tiny" id="authModalSub">मोबाइल नंबर या ईमेल दर्ज करके OTP प्राप्त करें</p></div>
+      <div><h2 id="authModalTitle">Mobile &amp; Email OTP Login</h2><p class="muted tiny">मोबाइल नंबर या ईमेल दर्ज करके OTP प्राप्त करें</p></div>
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
     
-    <div class="field" style="margin-top:16px;"><label>मोबाइल नंबर या ईमेल (Mobile Number / Email)</label><input id="authInput" placeholder="जैसे: 9876543210 या email@gmail.com"></div>
+    <div class="field" style="margin-top:16px;"><label>मोबाइल नंबर या ईमेल (Mobile / Email)</label><input id="authInput" placeholder="जैसे: 9876543210 या email@gmail.com"></div>
     
     <div id="otpInputContainer" class="field hidden">
       <label>6-Digit OTP (डेमो कोड: 1234)</label>
@@ -280,7 +288,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.85);backdrop-fi
 
     <button class="primary" id="authSubmitBtn" style="width:100%;margin-top:8px;" onclick="handleAuthAction()">OTP भेजें (Send OTP)</button>
     <div id="authStatus" class="status hidden" style="margin-top:10px;"></div>
-    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> `amitprajapat858904@gmail.com` से लॉगिन करने पर ही एडमिन पैनल खुलेगा।</p>
+    <p class="tiny muted" style="margin-top:14px; text-align:center;">💡 <strong>मास्टर एडमिन:</strong> `amitprajapat858904@gmail.com` से लॉगिन करने पर एडमिन पैनल खुलेगा।</p>
   </div>
 </div>
 
@@ -326,7 +334,7 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'apps' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'appstore' : name)));
   
   if (name === 'admin') loadAdminStatsAndList();
   if (name === 'study') loadStudyRooms();
@@ -338,6 +346,14 @@ window.showSection = name => {
 window.filterVisible = value => {
   const q = value.toLowerCase();
   document.querySelectorAll('.newsCard').forEach(c => c.classList.toggle('hidden', !c.innerText.toLowerCase().includes(q)));
+};
+
+window.toggleUploadForm = () => {
+  const card = el('uploadCardContainer');
+  if(card) {
+    card.classList.toggle('hidden');
+    card.scrollIntoView({ behavior: 'smooth' });
+  }
 };
 
 window.openAuth = () => {
@@ -473,6 +489,7 @@ window.submitDeveloperApp = () => {
 
   setStatus('uploadStatus', 'आपका ऐप सफलतापूर्वक पब्लिश हो गया!', 'ok');
   el('devCompany').value = ''; el('appName').value = ''; el('devEmail').value = ''; el('appDesc').value = ''; el('appUrl').value = '';
+  toggleUploadForm();
   loadMarketplaceApps();
 };
 
@@ -481,11 +498,11 @@ window.loadMarketplaceApps = () => {
   if(!target) return;
   const apps = getDB('marketplace_apps');
   if(!apps.length) {
-    target.innerHTML = '<div class="empty">अभी कोई ऐप स्टोर पर उपलब्ध नहीं है।</div>';
+    target.innerHTML = '<div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले "अपना ऐप अपलोड करें" बटन पर क्लिक करें।</div>';
     return;
   }
   target.innerHTML = apps.map(app => `
-    <div class="card" style="display:flex; flex-direction:column; gap:10px;">
+    <div class="card" style="display:flex; flex-direction:column; gap:10px; border-left:4px solid var(--brand);">
       <span class="tag orange">${escapeHtml(app.company)}</span>
       <h3>${escapeHtml(app.name)}</h3>
       <p>${escapeHtml(app.desc || 'कोई विवरण उपलब्ध नहीं।')}</p>
@@ -738,7 +755,6 @@ window.publishPost = () => {
 function loadAdminStatsAndList() {
   el('statNews').textContent = getDB('news').length;
   el('statApps').textContent = getDB('marketplace_apps').length;
-  el('statRooms').textContent = getDB('study_rooms').length;
 
   const target = el('adminList');
   if (!target) return;
