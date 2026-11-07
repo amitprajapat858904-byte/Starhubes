@@ -22,7 +22,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="search"><input id="searchInput" placeholder="News, jobs, apps खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
       <button class="ghost small desktop" onclick="showSection('apps')">📱 App Store</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth()">Login / OTP</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Google &amp; OTP Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar">S</div>
     </div>
@@ -82,18 +82,16 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- App Store Page (Apps Displayed First + Corner Upload Button) -->
+    <!-- App Store Page -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
           <h2>📱 StarHubes App Store</h2>
           <p>उपलब्ध ऐप्स सबसे पहले देखें और डाउनलोड करें</p>
         </div>
-        <!-- Corner Upload Button -->
         <button class="primary" onclick="toggleUploadForm()">🚀 + अपना ऐप अपलोड करें</button>
       </div>
 
-      <!-- Upload App Modal / Card (Hidden by default, opens via corner button) -->
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
         <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
         <p class="muted tiny">मोबाइल नंबर या ईमेल से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
@@ -116,11 +114,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
       </div>
 
-      <!-- Marketplace Apps Displayed FIRST -->
       <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>डेवलपर्स द्वारा अपलोड किए गए ऐप्स</p></div></div>
       <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले बटन से अपलोड करें।</div></div>
 
-      <!-- Bank Payout Settings Card -->
       <div class="card" style="margin-top:20px;">
         <h3>🏦 बैंक अकाउंट जोड़ें (कमाई का पैसा लेने के लिए)</h3>
         <div class="fields">
@@ -251,7 +247,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
     
-    <div class="footer">© <span id="year">2026</span> StarHubes · Multi-Page Marketplace<br><span class="tiny">डबल पेज लेआउट, ऐप स्टोर और मोबाइल OTP लॉगिन सक्रिय।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · Google &amp; OTP Login<br><span class="tiny">डबल पेज लेआउट, ऐप स्टोर और गूगल लॉगिन सक्रिय।</span></div>
   </main>
 
   <aside class="rightSide">
@@ -271,15 +267,23 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <button onclick="showSection('study')">👥<br>Study</button>
 </nav>
 
-<!-- Phone Number & Email OTP Login Modal -->
+<!-- Google Login & Mobile OTP Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2 id="authModalTitle">Mobile &amp; Email OTP Login</h2><p class="muted tiny">मोबाइल नंबर या ईमेल दर्ज करके OTP प्राप्त करें</p></div>
+      <div><h2>Login to StarHubes</h2><p class="muted tiny">गूगल अकाउंट या मोबाइल नंबर से लॉगिन करें</p></div>
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
     
-    <div class="field" style="margin-top:16px;"><label>मोबाइल नंबर या ईमेल (Mobile / Email)</label><input id="authInput" placeholder="जैसे: 9876543210 या email@gmail.com"></div>
+    <!-- Google Sign-In Button -->
+    <button class="secondary" style="width:100%; margin-top:16px; background:#ffffff; color:#1a1a1a; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:700;" onclick="loginWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.39l4.09-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.15 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+      Sign in with Google
+    </button>
+
+    <div style="text-align:center; margin:16px 0; color:var(--muted); font-size:12px;">अथवा मोबाइल नंबर से OTP द्वारा लॉगिन करें</div>
+
+    <div class="field"><label>मोबाइल नंबर (Mobile Number)</label><input id="authInput" placeholder="जैसे: 9876543210"></div>
     
     <div id="otpInputContainer" class="field hidden">
       <label>6-Digit OTP (डेमो कोड: 1234)</label>
@@ -367,33 +371,51 @@ window.openAuth = () => {
 
 window.closeAuth = () => el('authModal').classList.add('hidden');
 
+// Google Sign-In Simulation / Redirect Handler
+window.loginWithGoogle = () => {
+  // Demo / Local integration for Google login matching master admin email or standard user
+  const googleEmail = "amitprajapat858904@gmail.com"; 
+  const username = "Amit Prajapat";
+  const role = 'admin';
+  
+  let trialStart = localStorage.getItem('starhubes_trial_' + googleEmail);
+  if(!trialStart) {
+    trialStart = Date.now();
+    localStorage.setItem('starhubes_trial_' + googleEmail, trialStart);
+  }
+
+  currentUser = { username, role, email: googleEmail, trialStart };
+  localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
+  updateSession();
+  closeAuth();
+  showToast('Google Account से सफलतापूर्वक लॉगिन हो गए!');
+  refreshContent();
+};
+
 window.handleAuthAction = () => {
   const inputVal = el('authInput').value.trim();
-  if(!inputVal) { setStatus('authStatus', 'कृपया अपना मोबाइल नंबर या ईमेल दर्ज करें।', 'err'); return; }
+  if(!inputVal) { setStatus('authStatus', 'कृपया अपना मोबाइल नंबर दर्ज करें।', 'err'); return; }
 
   if(!otpStepSent) {
     otpStepSent = true;
     el('otpInputContainer').classList.remove('hidden');
     el('authSubmitBtn').textContent = 'लॉगिन सत्यापित करें (Verify OTP)';
-    setStatus('authStatus', 'डेमो: आपके नंबर/ईमेल पर OTP (1234) भेजा गया है।', 'ok');
+    setStatus('authStatus', 'डेमो: आपके नंबर पर OTP (1234) भेजा गया है।', 'ok');
     return;
   }
 
   const otp = el('authOtp').value.trim();
   if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (डेमो के लिए 1234 डालें)', 'err'); return; }
 
-  const identifier = inputVal.toLowerCase();
-  const username = identifier.includes('@') ? identifier.split('@')[0] : 'User_' + identifier.slice(-4);
-  const masterAdminEmail = "amitprajapat858904@gmail.com";
-  const role = (identifier === masterAdminEmail) ? 'admin' : 'student';
-
-  let trialStart = localStorage.getItem('starhubes_trial_' + identifier);
+  const username = 'User_' + inputVal.slice(-4);
+  const role = 'student';
+  let trialStart = localStorage.getItem('starhubes_trial_' + inputVal);
   if(!trialStart) {
     trialStart = Date.now();
-    localStorage.setItem('starhubes_trial_' + identifier, trialStart);
+    localStorage.setItem('starhubes_trial_' + inputVal, trialStart);
   }
 
-  currentUser = { username, role, email: identifier, trialStart };
+  currentUser = { username, role, email: inputVal + '@mobile.user', trialStart };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
   updateSession();
   setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
@@ -468,7 +490,6 @@ function renderCards(target, items, type) {
   }).join('');
 }
 
-// Developer App Store Submit
 window.submitDeveloperApp = () => {
   if(!currentUser) { openAuth(); showToast('ऐप अपलोड करने के लिए पहले लॉगिन करें।'); return; }
   const company = el('devCompany').value.trim();
@@ -554,7 +575,6 @@ function safeUrl(value) {
   }
 }
 
-// Group Study Rooms
 window.createStudyRoom = () => {
   if (!currentUser) { openAuth(); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
   const name = el('roomName').value.trim();
