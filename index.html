@@ -52,7 +52,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </aside>
 
   <main class="main">
-    <!-- Home Section (Double Page Multi-View) -->
+    <!-- Home Section -->
     <section id="section-home">
       <div class="hero">
         <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
@@ -82,18 +82,18 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- App Store Page (Double Page View with Corner Upload Button) -->
+    <!-- App Store Page (Apps Displayed First + Corner Upload Button) -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
           <h2>📱 StarHubes App Store</h2>
-          <p>उपलब्ध ऐप्स डाउनलोड करें और डेवलपर्स अपने ऐप्स मैनेज करें</p>
+          <p>उपलब्ध ऐप्स सबसे पहले देखें और डाउनलोड करें</p>
         </div>
         <!-- Corner Upload Button -->
         <button class="primary" onclick="toggleUploadForm()">🚀 + अपना ऐप अपलोड करें</button>
       </div>
 
-      <!-- Upload App Modal / Card (Initially Hidden, opens via corner button) -->
+      <!-- Upload App Modal / Card (Hidden by default, opens via corner button) -->
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
         <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
         <p class="muted tiny">मोबाइल नंबर या ईमेल से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
@@ -116,8 +116,8 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
       </div>
 
-      <!-- Apps First Display (Marketplace Apps appear at top) -->
-      <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>सबसे पहले डाउनलोड करें</p></div></div>
+      <!-- Marketplace Apps Displayed FIRST -->
+      <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>डेवलपर्स द्वारा अपलोड किए गए ऐप्स</p></div></div>
       <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले बटन से अपलोड करें।</div></div>
 
       <!-- Bank Payout Settings Card -->
@@ -498,7 +498,7 @@ window.loadMarketplaceApps = () => {
   if(!target) return;
   const apps = getDB('marketplace_apps');
   if(!apps.length) {
-    target.innerHTML = '<div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले "अपना ऐप अपलोड करें" बटन पर क्लिक करें।</div>';
+    target.innerHTML = '<div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। ऊपर कोने वाले "अपना ऐप अपलोड करें" बटन पर क्लिक करें।</div>';
     return;
   }
   target.innerHTML = apps.map(app => `
