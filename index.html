@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarHubes — Multi-Page App Store &amp; Platform</title>
+<title>StarHubes — Modern Platform &amp; Admin Hub</title>
 <meta name="description" content="StarHubes: News, government jobs, learning, apps marketplace, group study and community.">
 <style>
-:root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
+:root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 16px 40px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:700;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 4px 15px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
 header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}
 .topNavLinks{display:flex;gap:6px;align-items:center;overflow-x:auto;padding:4px 0}.topNavLinks button{background:transparent;color:#d6defa;font-size:13px;padding:6px 12px;border-radius:8px;white-space:nowrap}.topNavLinks button.active,.topNavLinks button:hover{background:#182b67;color:#fff}
-.search{flex:1;max-width:260px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:8px 12px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:10px}.newsImg{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-top:8px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.composer{padding:16px;margin-top:16px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(520px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text);max-height:90vh;overflow-y:auto}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}
+.search{flex:1;max-width:240px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:8px 12px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:10px}.newsImg{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-top:8px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.composer{padding:16px;margin-top:16px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.88);backdrop-filter:blur(8px);display:grid;place-items:center;padding:18px}.modalbox{width:min(580px,100%);background:linear-gradient(145deg,#0c1947,#07102f);border:1px solid #2e458c;border-radius:24px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);color:var(--text);max-height:90vh;overflow-y:auto}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}
 .fab{position:fixed;bottom:78px;right:24px;width:56px;height:56px;background:linear-gradient(135deg,#2878ff,#8b45ff);color:white;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(40,120,255,.4);cursor:pointer;z-index:25;transition:transform .2s}.fab:hover{transform:scale(1.08)}
 .mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#050d2a;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}
 .mobileNav button{font-size:11px;padding:6px 2px;background:transparent;color:#b7c5eb;display:flex;flex-direction:column;align-items:center;gap:2px}.mobileNav button.active{color:#8eabff}
@@ -38,7 +38,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
     <div class="search"><input id="searchInput" placeholder="खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
-      <button class="ghost small" onclick="openSettingsModal()" title="Settings & Bank & Staff">⚙️ Settings</button>
+      <!-- Modern Settings & Admin Portal Access (Only for Amit) -->
+      <button class="ghost small" onclick="openSettingsModal()" title="Modern Settings & Bank">⚙️ Settings</button>
+      <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️ Admin Panel</button>
       <button class="primary small" id="loginBtn" onclick="openAuth()">Login / OTP</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar" onclick="openAuth()" title="Account">S</div>
@@ -99,7 +101,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
 
       <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>डेवलपर्स द्वारा अपलोड किए गए ऐप्स</p></div></div>
-      <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले बटन से अपलोड करें।</div></div>
+      <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div></div>
     </section>
 
     <!-- 3. News Feed Page -->
@@ -116,17 +118,17 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
     <!-- 5. Learning Page -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests</h2><p>अध्याय समझें और अभ्यास करें</p></div></div>
-      <div class="card"><span class="tag green">FREE ACCESS</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests (Admin Questions)</h2><p>मास्टर एडमिन द्वारा जोड़े गए प्रश्न और अभ्यास सेट</p></div></div>
+      <div id="learningQuestionsList" class="grid2"><div class="empty">अभी कोई प्रश्न उपलब्ध नहीं है। एडमिन पैनल से प्रश्न जोड़ें।</div></div>
     </section>
 
     <!-- 6. Books Page -->
     <section id="section-books" class="hidden">
-      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>पढ़ाई की सामग्री</p></div></div>
-      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक उपलब्ध नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>अध्ययन सामग्री और ई-बुक्स</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक/PDF उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- 7. Group Study Page (Updated with Question Photo Upload to Whiteboard) -->
+    <!-- 7. Group Study Page (Fixed Black Pen for Whiteboard & Question Photo Upload) -->
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल और साझा व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
@@ -143,7 +145,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
       
       <div class="sectionHead"><div><h2>उपलब्ध स्टडी रूम (Active Rooms)</h2></div></div>
-      <div id="studyRoomsList" class="grid2"><div class="empty">कोई एक्टिव रूम नहीं है। नया रूम बनाएं!</div></div>
+      <div id="studyRoomsList" class="grid2"><div class="empty">कोई एक्टिव रूम नहीं है।</div></div>
 
       <div id="roomWorkspace" class="card hidden" style="margin-top:20px; border:2px solid var(--brand);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
@@ -179,18 +181,17 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         
         <div style="margin-top:16px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
-            <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Interactive Whiteboard &amp; Question Photo)</label>
+            <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Black Pen &amp; Question Photo)</label>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <!-- Upload Question Photo Button -->
               <label class="primary small" style="display:inline-flex; align-items:center; gap:4px; cursor:pointer; background:#8b45ff;">
                 📷 प्रश्न की फोटो जोड़ें <input type="file" accept="image/*" class="hidden" onchange="uploadQuestionPhoto(event)">
               </label>
-              <button class="secondary small" id="penBtn" onclick="setTool('pen')">✏️ पेन</button>
+              <button class="secondary small" id="penBtn" onclick="setTool('pen')">✏️ पेन (Black)</button>
               <button class="ghost small" id="eraserBtn" onclick="setTool('eraser')">🧹 इरेज़र</button>
               <button class="danger small" onclick="clearWhiteboard()">बोर्ड साफ़ करें</button>
             </div>
           </div>
-          <canvas id="whiteboard" width="600" height="300" style="background:#fff; border-radius:10px; width:100%; cursor:crosshair;"></canvas>
+          <canvas id="whiteboard" width="600" height="300" style="background:#ffffff; border-radius:10px; width:100%; cursor:crosshair;"></canvas>
         </div>
       </div>
     </section>
@@ -207,14 +208,14 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="sectionHead"><div><h2>समुदाय की खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
     
-    <div class="footer" style="padding-bottom:60px;">© <span id="year">2026</span> StarHubes · Multi-Page System<br><span class="tiny">व्हाइटबोर्ड पर फोटो/प्रश्न साझा करने की सुविधा सक्रिय।</span></div>
+    <div class="footer" style="padding-bottom:60px;">© <span id="year">2026</span> StarHubes · Multi-Page System<br><span class="tiny">मॉडर्न सेटिंग्स और एडमिन सुरक्षित।</span></div>
   </main>
 </div>
 
-<!-- Floating Plus Button (+) for adding news/questions/photos anywhere -->
+<!-- Floating Plus Button (+) for quick posting -->
 <div class="fab" onclick="openCreateModal()" title="नया पोस्ट / खबर डालें">+</div>
 
-<!-- Bottom Navigation Bar for Mobile & Easy Access -->
+<!-- Bottom Navigation Bar for Mobile -->
 <nav class="mobileNav">
   <button onclick="showSection('home')">🏠<span>Home</span></button>
   <button onclick="showSection('news')">📰<span>News</span></button>
@@ -223,44 +224,89 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <button onclick="showSection('study')">👥<span>Study</span></button>
 </nav>
 
-<!-- ⚙️ Settings Modal -->
+<!-- ⚙️ Modern Settings Modal (Bank Account Settings) -->
 <div id="settingsModal" class="modal hidden" onclick="if(event.target===this)closeSettingsModal()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2>⚙️ Platform Settings</h2><p class="muted tiny">बैंक अकाउंट और मास्टर एडमिन / कर्मचारी प्रबंधन</p></div>
+      <div><h2>⚙️ Modern Bank Settings</h2><p class="muted tiny">अपनी कमाई (Payout) प्राप्त करने के लिए बैंक विवरण दर्ज करें</p></div>
       <button class="ghost small" onclick="closeSettingsModal()">✕</button>
     </div>
 
     <div style="margin-top:16px;">
-      <h3 style="font-size:16px; color:var(--brand); border-bottom:1px solid #1b2b60; padding-bottom:6px;">🏦 बैंक अकाउंट सेटिंग्स (Payouts)</h3>
-      <div class="fields" style="margin-top:10px;">
+      <div class="fields">
         <div class="field"><label>खाता धारक का नाम</label><input id="bankName" placeholder="पासबुक के अनुसार"></div>
-        <div class="field"><label>अकाउंट नंबर</label><input id="bankAccNo" type="password" placeholder="अकाउंट नंबर"></div>
+        <div class="field"><label>बैंक खाता संख्या (Account No)</label><input id="bankAccNo" type="password" placeholder="अकाउंट नंबर"></div>
       </div>
       <div class="fields" style="margin-top:8px;">
         <div class="field"><label>IFSC कोड</label><input id="bankIfsc" placeholder="SBIN000XXXX"></div>
-        <div class="field"><label>UPI ID</label><input id="bankUpi" placeholder="username@upi"></div>
+        <div class="field"><label>UPI ID (वैकल्पिक)</label><input id="bankUpi" placeholder="username@upi"></div>
       </div>
-      <button class="secondary small" style="margin-top:8px;" onclick="saveBankDetails()">बैंक विवरण सेव करें</button>
-      <div id="bankStatus" class="status hidden" style="margin-top:6px;"></div>
-    </div>
-
-    <div id="staffSection" style="margin-top:24px; border-top:1px solid #1b2b60; padding-top:16px;">
-      <h3 style="font-size:16px; color:var(--orange); border-bottom:1px solid #1b2b60; padding-bottom:6px;">🛡️ एडमिन &amp; स्टाफ मैनेजमेंट (Staff Management)</h3>
-      <p class="muted tiny" style="margin-top:6px;">यहाँ से आप नए कर्मचारियों को जोड़ सकते हैं।</p>
-      <div class="fields" style="margin-top:10px;">
-        <div class="field"><label>कर्मचारी का नाम</label><input id="staffName" placeholder="नाम"></div>
-        <div class="field"><label>ईमेल या मोबाइल</label><input id="staffEmail" placeholder="email@domain.com"></div>
-      </div>
-      <button class="primary small" style="margin-top:8px;" onclick="addStaffMember()">कर्मचारी जोड़ें</button>
-      <div id="staffStatus" class="status hidden" style="margin-top:6px;"></div>
-      <h4 style="margin:14px 0 6px; font-size:14px;">अधिकृत स्टाफ सूची:</h4>
-      <div id="staffList" style="background:#07112f; border:1px solid #263a78; border-radius:10px; padding:10px; max-height:120px; overflow-y:auto; font-size:13px;"></div>
+      <button class="secondary" style="width:100%; margin-top:12px;" onclick="saveBankDetails()">बैंक विवरण सुरक्षित करें</button>
+      <div id="bankStatus" class="status hidden" style="margin-top:8px;"></div>
     </div>
   </div>
 </div>
 
-<!-- ➕ Create News / Post Modal -->
+<!-- 🛡️ Master Admin Panel Modal (Strictly for Amit Prajapat) -->
+<div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
+  <div class="modalbox" style="width:min(640px, 100%);">
+    <div class="modalhead">
+      <div><h2>🛡️ Master Admin Control Panel</h2><p class="muted tiny" style="color:var(--orange);">केवल अमित प्रजापत (`amitprajapat858904@gmail.com`) के लिए अधिकृत</p></div>
+      <button class="ghost small" onclick="closeAdminModal()">✕</button>
+    </div>
+    
+    <div class="adminBox">
+      <h3 style="margin-top:0; color:var(--green);">➕ नया प्रश्न (Question) या PDF/Book अपलोड करें</h3>
+      <div class="fields">
+        <div class="field">
+          <label>कंटेंट का प्रकार</label>
+          <select id="adminPostType" onchange="toggleAdminFields()">
+            <option value="questions">🎓 लर्निंग प्रश्न (Quiz Question)</option>
+            <option value="books">📚 बुक / PDF (eBook PDF)</option>
+            <option value="news">📰 ताज़ा खबर (Free News)</option>
+            <option value="jobs">💼 जॉब वेकेंसी (Job Vacancy)</option>
+          </select>
+        </div>
+        <div class="field"><label>श्रेणी (Category)</label><input id="adminCategory" placeholder="जैसे: Science / SSC / Physics"></div>
+      </div>
+
+      <div class="field"><label>शीर्षक (Title / Question)</label><input id="adminTitle" placeholder="प्रश्न या बुक का शीर्षक दर्ज करें..."></div>
+      <div class="field"><label>विस्तृत विवरण (Description / Solution)</label><textarea id="adminDesc" placeholder="पूरा विवरण या उत्तर यहाँ लिखें..."></textarea></div>
+      
+      <!-- Question Specific Options (A, B, C, D) -->
+      <div id="questionOptionsBox">
+        <div class="fields">
+          <div class="field"><label>विकल्प A</label><input id="optA" placeholder="Option A"></div>
+          <div class="field"><label>विकल्प B</label><input id="optB" placeholder="Option B"></div>
+        </div>
+        <div class="fields">
+          <div class="field"><label>विकल्प C</label><input id="optC" placeholder="Option C"></div>
+          <div class="field"><label>विकल्प D</label><input id="optD" placeholder="Option D"></div>
+        </div>
+        <div class="field">
+          <label>सही उत्तर (Correct Option)</label>
+          <select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+        </div>
+      </div>
+
+      <!-- PDF / Image / Link URLs -->
+      <div class="fields">
+        <div class="field"><label>फोटो या कवर इमेज URL</label><input id="adminImg" type="url" placeholder="https://image-link.com/photo.jpg"></div>
+        <div class="field"><label>PDF / डाउनलोड लिंक (URL)</label><input id="adminPdfUrl" type="url" placeholder="https://drive.google.com/... या PDF link"></div>
+      </div>
+
+      <button class="primary" style="width:100%; margin-top:12px;" onclick="adminPublishContent()">डेटाबेस में सेव करें (Publish)</button>
+      <div id="adminStatus" class="status hidden" style="margin-top:8px;"></div>
+    </div>
+
+    <div class="adminBox">
+      <h3 style="margin-top:0;">📋 अपलोड किए गए कंटेंट्स की सूची</h3>
+      <div id="adminItemsList" style="max-height:180px; overflow-y:auto;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ➕ General User Post Modal (+ Button) -->
 <div id="createModal" class="modal hidden" onclick="if(event.target===this)closeCreateModal()">
   <div class="modalbox">
     <div class="modalhead">
@@ -273,7 +319,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <select id="modalPostType">
         <option value="news">📰 ताज़ा खबर (Free News)</option>
         <option value="jobs">💼 जॉब वेकेंसी (Job Vacancy)</option>
-        <option value="books">📚 बुक / PDF (Books)</option>
       </select>
     </div>
 
@@ -326,6 +371,7 @@ let currentRoomId = null;
 let pendingRoomId = null;
 let otpStepSent = false;
 let currentTool = 'pen';
+const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 
 window.showToast = msg => {
   const t = el('toast');
@@ -353,6 +399,8 @@ window.showSection = name => {
   
   if (name === 'study') loadStudyRooms();
   if (name === 'apps') loadMarketplaceApps();
+  if (name === 'learning') loadLearningQuestions();
+  if (name === 'books') loadBooksList();
   refreshContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -369,20 +417,30 @@ window.toggleUploadForm = () => {
 
 window.openSettingsModal = () => {
   if(!currentUser) { openAuth(); showToast('सेटिंग्स देखने के लिए पहले लॉगिन करें।'); return; }
-  const masterEmail = "amitprajapat858904@gmail.com";
-  const isMaster = currentUser.email === masterEmail || currentUser.role === 'admin';
-  el('staffSection').style.display = isMaster ? 'block' : 'none';
-  if(isMaster) loadStaffList();
-
   const savedBank = JSON.parse(localStorage.getItem('starhubes_bank_' + currentUser.email) || '{}');
   if(savedBank.name) el('bankName').value = savedBank.name;
   if(savedBank.acc) el('bankAccNo').value = savedBank.acc;
   if(savedBank.ifsc) el('bankIfsc').value = savedBank.ifsc;
   if(savedBank.upi) el('bankUpi').value = savedBank.upi;
-
   el('settingsModal').classList.remove('hidden');
 };
 window.closeSettingsModal = () => el('settingsModal').classList.add('hidden');
+
+window.openAdminModal = () => {
+  if(!currentUser || currentUser.email !== MASTER_ADMIN_EMAIL) { showToast('यह केवल मास्टर एडमिन (अमित) के लिए सुरक्षित है!'); return; }
+  el('adminStatus').classList.add('hidden');
+  el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
+  el('optA').value = ''; el('optB').value = ''; el('optC').value = ''; el('optD').value = '';
+  toggleAdminFields();
+  loadAdminItemsList();
+  el('adminModal').classList.remove('hidden');
+};
+window.closeAdminModal = () => el('adminModal').classList.add('hidden');
+
+window.toggleAdminFields = () => {
+  const type = el('adminPostType').value;
+  el('questionOptionsBox').style.display = type === 'questions' ? 'block' : 'none';
+};
 
 window.openCreateModal = () => {
   if(!currentUser) { openAuth(); showToast('कंटेंट डालने के लिए पहले लॉगिन करें।'); return; }
@@ -403,15 +461,14 @@ window.openAuth = () => {
 window.closeAuth = () => el('authModal').classList.add('hidden');
 
 window.loginWithGoogle = () => {
-  const googleEmail = "amitprajapat858904@gmail.com"; 
-  currentUser = { username: "Amit Prajapat", role: 'admin', email: googleEmail };
+  currentUser = { username: "Amit Prajapat", role: 'admin', email: MASTER_ADMIN_EMAIL };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
-  updateSession(); closeAuth(); showToast('Google Account से लॉगिन हो गए!'); refreshContent();
+  updateSession(); closeAuth(); showToast('मास्टर एडमिन के रूप में लॉगिन सफल!'); refreshContent();
 };
 
 window.handleAuthAction = () => {
   const inputVal = el('authInput').value.trim();
-  if(!inputVal) { setStatus('authStatus', 'कृपया अपना मोबाइल नंबर दर्ज करें।', 'err'); return; }
+  if(!inputVal) { setStatus('authStatus', 'कृपया मोबाइल नंबर दर्ज करें।', 'err'); return; }
 
   if(!otpStepSent) {
     otpStepSent = true;
@@ -424,9 +481,9 @@ window.handleAuthAction = () => {
   const otp = el('authOtp').value.trim();
   if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (1234 डालें)', 'err'); return; }
 
-  const staffList = JSON.parse(localStorage.getItem('starhubes_staff') || '[]');
-  const role = staffList.some(s => s.email === inputVal) ? 'admin' : 'student';
-  currentUser = { username: 'User_' + inputVal.slice(-4), role, email: inputVal + '@mobile.user' };
+  const email = inputVal === '8589048589' ? MASTER_ADMIN_EMAIL : inputVal + '@mobile.user';
+  const role = email === MASTER_ADMIN_EMAIL ? 'admin' : 'student';
+  currentUser = { username: email === MASTER_ADMIN_EMAIL ? 'Amit Prajapat' : 'User_' + inputVal.slice(-4), role, email };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
   updateSession(); setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
   setTimeout(() => { closeAuth(); refreshContent(); }, 1000);
@@ -438,8 +495,10 @@ window.doLogout = () => {
 };
 
 function updateSession() {
+  const isMaster = currentUser && currentUser.email === MASTER_ADMIN_EMAIL;
   el('loginBtn').classList.toggle('hidden', !!currentUser);
   el('logoutBtn').classList.toggle('hidden', !currentUser);
+  el('adminPortalBtn').classList.toggle('hidden', !isMaster);
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
@@ -450,7 +509,8 @@ window.refreshContent = () => {
   renderCards(el('homeNews'), getDB('news'), 'news');
   renderCards(el('allNews'), getDB('news'), 'news');
   renderCards(el('allJobs'), getDB('jobs'), 'jobs');
-  renderCards(el('allBooks'), getDB('books'), 'books');
+  loadLearningQuestions();
+  loadBooksList();
   loadMarketplaceApps();
 };
 
@@ -465,13 +525,114 @@ function renderCards(target, items, type) {
     return `<article class="card newsCard">
       <span class="tag ${tag}">${escapeHtml(item.category || type.toUpperCase())}</span>
       <h3>${escapeHtml(item.title || 'Untitled')}</h3>
-      ${img ? `<img class="newsImg" src="${img}" alt="News Image">` : ''}
+      ${img ? `<img class="newsImg" src="${img}" alt="Image">` : ''}
       <p>${escapeHtml(item.description || '')}</p>
       ${link ? `<div class="cardActions"><a href="${link}" target="_blank" rel="noopener noreferrer"><button class="secondary small">अधिक पढ़ें / देखें</button></a></div>` : ''}
       <div class="meta"><span>${escapeHtml(date)}</span><span>✓ Verified</span></div>
     </article>`;
   }).join('');
 }
+
+window.adminPublishContent = () => {
+  if(!currentUser || currentUser.email !== MASTER_ADMIN_EMAIL) { showToast('अनुमति नहीं है!'); return; }
+  const type = el('adminPostType').value;
+  const title = el('adminTitle').value.trim();
+  const description = el('adminDesc').value.trim();
+  const category = el('adminCategory').value.trim() || type.toUpperCase();
+  const image = safeUrl(el('adminImg').value.trim());
+  const url = safeUrl(el('adminPdfUrl').value.trim());
+
+  if(!title) { setStatus('adminStatus', 'शीर्षक दर्ज करना अनिवार्य है।', 'err'); return; }
+
+  let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: Date.now() };
+  if(type === 'questions') {
+    newItem.options = [el('optA').value.trim(), el('optB').value.trim(), el('optC').value.trim(), el('optD').value.trim()];
+    newItem.correct = el('correctOpt').value;
+  }
+
+  const list = getDB(type);
+  list.unshift(newItem);
+  saveDB(type, list);
+
+  setStatus('adminStatus', 'सफलतापूर्वक पब्लिश हो गया!', 'ok');
+  el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
+  loadAdminItemsList();
+  refreshContent();
+};
+
+function loadAdminItemsList() {
+  const target = el('adminItemsList');
+  if(!target) return;
+  let all = [];
+  ['questions', 'books', 'news', 'jobs'].forEach(t => {
+    getDB(t).forEach(x => all.push({ ...x, _type: t }));
+  });
+  all.sort((a,b) => b.created_at - a.created_at);
+  if(!all.length) { target.innerHTML = 'कोई कंटेंट नहीं है।'; return; }
+  target.innerHTML = all.map(x => `
+    <div style="padding:8px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
+      <div><span class="tag">${x._type.toUpperCase()}</span> <strong>${escapeHtml(x.title)}</strong></div>
+      <button class="danger small" onclick="deleteAdminItem('${x._type}', '${x.id}')">हटाएं</button>
+    </div>
+  `).join('');
+}
+
+window.deleteAdminItem = (type, id) => {
+  let list = getDB(type);
+  list = list.filter(x => x.id !== id);
+  saveDB(type, list);
+  loadAdminItemsList();
+  refreshContent();
+  showToast('हटा दिया गया।');
+};
+
+window.loadLearningQuestions = () => {
+  const target = el('learningQuestionsList');
+  if(!target) return;
+  const qs = getDB('questions');
+  if(!qs.length) { target.innerHTML = '<div class="empty">अभी कोई प्रश्न उपलब्ध नहीं है। (एडमिन पैनल से जोड़ें)</div>'; return; }
+  target.innerHTML = qs.map((q, idx) => `
+    <div class="card">
+      <span class="tag green">${escapeHtml(q.category)}</span>
+      <h3 style="margin-top:8px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
+      ${q.image ? `<img class="newsImg" src="${q.image}" alt="Question Image">` : ''}
+      <p>${escapeHtml(q.description)}</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+        ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')">${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</button>`).join('')}
+      </div>
+      <p class="quizAnsResult" style="margin-top:8px; font-weight:700;"></p>
+    </div>
+  `).join('');
+};
+
+window.checkUserAnswer = (btn, chosen, correct) => {
+  const parent = btn.parentElement.parentElement;
+  const resultEl = parent.querySelector('.quizAnsResult');
+  parent.querySelectorAll('button').forEach(b => b.disabled = true);
+  if(chosen === correct) {
+    resultEl.textContent = '🎉 सही उत्तर!';
+    resultEl.style.color = 'var(--green)';
+  } else {
+    resultEl.textContent = `❌ गलत उत्तर। सही उत्तर: ${correct}`;
+    resultEl.style.color = 'var(--orange)';
+  }
+};
+
+window.loadBooksList = () => {
+  const target = el('allBooks');
+  if(!target) return;
+  const books = getDB('books');
+  if(!books.length) { target.innerHTML = '<div class="empty">अभी कोई बुक/PDF उपलब्ध नहीं है।</div>'; return; }
+  target.innerHTML = books.map(b => `
+    <div class="card">
+      <span class="tag green">${escapeHtml(b.category)}</span>
+      <h3>${escapeHtml(b.title)}</h3>
+      ${b.image ? `<img class="newsImg" src="${b.image}" alt="Book Cover">` : ''}
+      <p>${escapeHtml(b.description)}</p>
+      ${b.url ? `<div class="cardActions"><a href="${b.url}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF डाउनलोड करें / पढ़ें</button></a></div>` : ''}
+    </div>
+  `).join('');
+};
 
 window.submitGlobalPost = () => {
   if(!currentUser) { openAuth(); return; }
@@ -482,7 +643,7 @@ window.submitGlobalPost = () => {
   const url = safeUrl(el('modalUrl').value.trim());
 
   if(!title || !description) { setStatus('modalStatus', 'कृपया शीर्षक और विवरण दर्ज करें।', 'err'); return; }
-  const newItem = { title, description, image, url, category: type.toUpperCase(), created_at: Date.now() };
+  const newItem = { id: 'item_' + Date.now(), title, description, image, url, category: type.toUpperCase(), created_at: Date.now() };
   const list = getDB(type); list.unshift(newItem); saveDB(type, list);
   setStatus('modalStatus', 'पब्लिश हो गया!', 'ok');
   setTimeout(() => { closeCreateModal(); refreshContent(); }, 1000);
@@ -534,23 +695,6 @@ window.saveBankDetails = () => {
   localStorage.setItem('starhubes_bank_' + currentUser.email, JSON.stringify({ name, acc, ifsc, upi }));
   setStatus('bankStatus', 'बैंक विवरण सुरक्षित हो गया!', 'ok');
 };
-
-window.addStaffMember = () => {
-  const name = el('staffName').value.trim(); const email = el('staffEmail').value.trim();
-  if(!name || !email) { setStatus('staffStatus', 'नाम और ईमेल भरें।', 'err'); return; }
-  let staffList = JSON.parse(localStorage.getItem('starhubes_staff') || '[]');
-  staffList.push({ name, email, added_at: Date.now() });
-  localStorage.setItem('starhubes_staff', JSON.stringify(staffList));
-  el('staffName').value = ''; el('staffEmail').value = '';
-  setStatus('staffStatus', 'स्टाफ जुड़ गया!', 'ok'); loadStaffList();
-};
-
-function loadStaffList() {
-  const listEl = el('staffList'); if(!listEl) return;
-  const staffList = JSON.parse(localStorage.getItem('starhubes_staff') || '[]');
-  if(!staffList.length) { listEl.innerHTML = 'कोई स्टाफ नहीं है।'; return; }
-  listEl.innerHTML = staffList.map(s => `<div>👤 <strong>${escapeHtml(s.name)}</strong> (${escapeHtml(s.email)})</div>`).join('');
-}
 
 function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function safeUrl(value) {
@@ -610,7 +754,7 @@ window.updateNotepad = val => {
   if (r) { r.notepad = val; saveDB('study_rooms', rooms); }
 };
 
-// 📷 Upload Question Photo and draw directly on Whiteboard
+// 📷 Upload Question Photo and draw directly on Whiteboard (Fixed Black Pen)
 window.uploadQuestionPhoto = event => {
   const file = event.target.files[0];
   if(!file) return;
@@ -620,8 +764,6 @@ window.uploadQuestionPhoto = event => {
     img.onload = function() {
       const canvas = el('whiteboard');
       const ctx = canvas.getContext('2d');
-      // Draw image onto canvas nicely scaled
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 10, 10, canvas.width - 20, canvas.height - 20);
       showToast('प्रश्न की फोटो बोर्ड पर लोड कर दी गई है!');
     };
@@ -638,8 +780,9 @@ function initWhiteboard() {
   canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
   canvas.onmousemove = e => {
     if (!isDrawing) return;
-    ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#172033';
-    ctx.lineWidth = currentTool === 'eraser' ? 20 : 2;
+    // Fixed: Pen is strictly dark/black (#111827) for high visibility on white board
+    ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#111827';
+    ctx.lineWidth = currentTool === 'eraser' ? 24 : 2.5;
     ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke();
   };
   canvas.onmouseup = () => { isDrawing = false; };
