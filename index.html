@@ -9,7 +9,7 @@
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 12px 32px rgba(0,0,0,.24)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:700;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 4px 15px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
 header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}.search{flex:1;max-width:400px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:10px 14px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:25px 0 13px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.composer{padding:16px;margin-top:16px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text)}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}.mobileNav{display:none}
+.layout{max-width:1280px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr) 265px;gap:20px}.side,.rightSide{position:sticky;top:84px;align-self:start}.navbox,.panel,.card,.hero,.composer{background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.navbox{padding:10px}.navbtn{width:100%;text-align:left;background:transparent;color:#d6defa;padding:12px;display:flex;gap:12px;align-items:center;margin:2px 0;border-radius:10px}.navbtn.active,.navbtn:hover{background:#182b67;color:#fff;border-color:#3d65d7}.navicon{width:24px;text-align:center}.sideLabel{font-size:11px;font-weight:800;color:#98a2b3;padding:15px 12px 4px;letter-spacing:.08em}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0}.newsCard{display:flex;flex-direction:column;gap:10px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.composer{padding:16px;margin-top:16px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px}.panel h3{margin:0 0 10px;font-size:15px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px}.modalbox{width:min(440px,100%);background:#0b1740;border:1px solid #263a78;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.5);color:var(--text)}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.post{padding:14px 0;border-bottom:1px solid #1b2b60}.post:last-child{border-bottom:0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}.mobileNav{display:none}
 @media(max-width:1050px){.layout{grid-template-columns:190px minmax(0,1fr)}.rightSide{display:none}}
 @media(max-width:700px){.top{padding:10px 12px;gap:10px}.logo{font-size:18px}.search{display:none}.topActions .desktop{display:none}.layout{display:block;margin:14px auto;padding:0 12px}.side{display:none}.hero{padding:22px}.grid2{grid-template-columns:1fr}.mobileNav{display:flex;position:sticky;bottom:0;z-index:12;background:#07112f;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}.mobileNav button{font-size:11px;padding:7px 4px;background:transparent;color:#b7c5eb}.mobileNav button.active{color:#8eabff}.fields{grid-template-columns:1fr}}
 </style>
@@ -22,7 +22,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="search"><input id="searchInput" placeholder="News, jobs, apps खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
       <button class="ghost small desktop" onclick="showSection('apps')">📱 App Store</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth()">Google &amp; OTP Login</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Login / OTP</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar">S</div>
     </div>
@@ -32,10 +32,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div class="layout">
   <aside class="side">
     <div class="navbox">
-      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home Page</button>
-      <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed <span class="tag green" style="margin-left:auto; font-size:9px; padding:2px 5px;">FREE</span></button>
-      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Jobs &amp; Vacancies</button>
+      <button class="navbtn active" data-section="home" onclick="showSection('home')"><span class="navicon">🏠</span> Home Dashboard</button>
       <button class="navbtn" data-section="apps" onclick="showSection('apps')"><span class="navicon">📱</span> App Store Page</button>
+      <button class="navbtn" data-section="news" onclick="showSection('news')"><span class="navicon">📰</span> News Feed</button>
+      <button class="navbtn" data-section="jobs" onclick="showSection('jobs')"><span class="navicon">💼</span> Jobs &amp; Vacancies</button>
       <button class="navbtn" data-section="learning" onclick="showSection('learning')"><span class="navicon">🎓</span> Learning &amp; Tests</button>
       <button class="navbtn" data-section="books" onclick="showSection('books')"><span class="navicon">📚</span> Books &amp; PDFs</button>
       <button class="navbtn" data-section="study" onclick="showSection('study')"><span class="navicon">👥</span> Group Study</button>
@@ -52,37 +52,25 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </aside>
 
   <main class="main">
-    <!-- Home Section -->
+    <!-- 1. Home Page Section -->
     <section id="section-home">
       <div class="hero">
         <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
         <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने ऐप्स अपलोड करें।</h1>
         <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना ऐप स्टोर पर अपलोड करके कमाई करें।</p>
-        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('news')">फ्री खबरें देखें →</button>
-        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('apps')">ऐप स्टोर खोलें</button>
+        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('apps')">ऐप स्टोर खोलें →</button>
+        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('news')">फ्री खबरें देखें</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('news')">📰 Free News Feed</button>
-        <button class="chip" onclick="showSection('apps')">📱 App Store Page</button>
+        <button class="chip active" onclick="showSection('apps')">📱 App Store Page</button>
+        <button class="chip" onclick="showSection('news')">📰 Free News Feed</button>
         <button class="chip" onclick="showSection('study')">👥 Group Study</button>
       </div>
-      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (हमेशा फ्री)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
-    <!-- News Section -->
-    <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें सभी पाठकों के लिए बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित खबर नहीं है।</div></div>
-    </section>
-
-    <!-- Jobs Section -->
-    <section id="section-jobs" class="hidden">
-      <div class="sectionHead"><div><h2>💼 Government &amp; Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
-    </section>
-
-    <!-- App Store Page -->
+    <!-- 2. App Store Page Section -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
@@ -132,19 +120,31 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
     </section>
 
-    <!-- Learning Section -->
+    <!-- 3. News Feed Section -->
+    <section id="section-news" class="hidden">
+      <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें सभी पाठकों के लिए बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित खबर नहीं है।</div></div>
+    </section>
+
+    <!-- 4. Jobs Section -->
+    <section id="section-jobs" class="hidden">
+      <div class="sectionHead"><div><h2>💼 Government &amp; Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
+    </section>
+
+    <!-- 5. Learning Section -->
     <section id="section-learning" class="hidden">
       <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests</h2><p>अध्याय समझें और अभ्यास करें</p></div></div>
       <div class="card"><span class="tag green">FREE ACCESS</span><h3 style="margin-top:10px">भारत की राजधानी क्या है?</h3><div id="quizOptions" class="grid2" style="margin-top:14px"><button class="ghost" onclick="answerQuiz(this,false)">A. मुंबई</button><button class="ghost" onclick="answerQuiz(this,true)">B. नई दिल्ली</button><button class="ghost" onclick="answerQuiz(this,false)">C. जयपुर</button><button class="ghost" onclick="answerQuiz(this,false)">D. भोपाल</button></div><p id="quizResult" style="margin-top:12px"></p></div>
     </section>
 
-    <!-- Books Section -->
+    <!-- 6. Books Section -->
     <section id="section-books" class="hidden">
       <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>पढ़ाई की सामग्री</p></div></div>
       <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- Group Study Section -->
+    <!-- 7. Group Study Section -->
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल और साझा व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
@@ -209,7 +209,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
     </section>
 
-    <!-- Community Section -->
+    <!-- 8. Community Section -->
     <section id="section-community" class="hidden">
       <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
       <div class="composer">
@@ -221,7 +221,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="sectionHead"><div><h2>समुदाय की खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
-    <!-- Master Admin Panel Section -->
+    <!-- 9. Master Admin Panel Section -->
     <section id="section-admin" class="hidden">
       <div class="sectionHead"><div><h2>🛡️ Master Admin Control Center</h2><p>कंटेंट प्रबंधन एवं स्टैटिस्टिक्स</p></div><span class="tag green">Master Admin</span></div>
       
@@ -247,7 +247,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
     
-    <div class="footer">© <span id="year">2026</span> StarHubes · Google &amp; OTP Login<br><span class="tiny">डबल पेज लेआउट, ऐप स्टोर और गूगल लॉगिन सक्रिय।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · Multi-Page System<br><span class="tiny">स्वतंत्र पेज स्विचिंग, ऐप स्टोर और गूगल/ओटीपी लॉगिन सक्रिय।</span></div>
   </main>
 
   <aside class="rightSide">
@@ -333,10 +333,13 @@ function setStatus(id, msg, type = '') {
 }
 
 window.showSection = name => {
+  // Hide all independent pages/sections
   document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
+  // Show only the requested page
   const target = el('section-' + name);
   if (target) target.classList.remove('hidden');
   
+  // Highlight active sidebar navigation buttons
   document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
   document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'appstore' : name)));
   
@@ -371,9 +374,7 @@ window.openAuth = () => {
 
 window.closeAuth = () => el('authModal').classList.add('hidden');
 
-// Google Sign-In Simulation / Redirect Handler
 window.loginWithGoogle = () => {
-  // Demo / Local integration for Google login matching master admin email or standard user
   const googleEmail = "amitprajapat858904@gmail.com"; 
   const username = "Amit Prajapat";
   const role = 'admin';
@@ -816,7 +817,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = el('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();
   updateSession();
-  refreshContent();
+  showSection('home'); // Ensure default is strictly Home page view
 });
 </script>
 </body>
