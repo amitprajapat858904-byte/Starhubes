@@ -80,6 +80,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <button class="primary" onclick="toggleUploadForm()">🚀 + अपना ऐप अपलोड करें</button>
       </div>
 
+      <!-- Clean App Upload Form (Bank details removed from here) -->
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
         <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
         <p class="muted tiny">मोबाइल नंबर या ईमेल से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
@@ -105,8 +106,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>डेवलपर्स द्वारा अपलोड किए गए ऐप्स</p></div></div>
       <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है। कोने वाले बटन से अपलोड करें।</div></div>
 
-      <div class="card" style="margin-top:20px;">
+      <!-- Separate Bank Account Section (Outside upload form) -->
+      <div class="card" style="margin-top:20px; border-left:4px solid var(--green);">
         <h3>🏦 बैंक अकाउंट जोड़ें (कमाई का पैसा लेने के लिए)</h3>
+        <p class="muted tiny">अपने ऐप्स की कमाई का 95% हिस्सा सीधे अपने बैंक खाते में पाने के लिए यहां अपनी बैंक डिटेल्स दर्ज करें।</p>
         <div class="fields">
           <div class="field"><label>खाता धारक का नाम (Account Name)</label><input id="bankName" placeholder="बैंक पासबुक के अनुसार"></div>
           <div class="field"><label>बैंक खाता संख्या (Account Number)</label><input id="bankAccNo" type="password" placeholder="अकाउंट नंबर दर्ज करें"></div>
@@ -247,7 +250,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="adminBox"><h3 style="margin-top:0;">📋 सभी कंटेंट्स की सूची</h3><div id="adminList"></div></div>
     </section>
     
-    <div class="footer">© <span id="year">2026</span> StarHubes · Multi-Page System<br><span class="tiny">स्वतंत्र पेज स्विचिंग, ऐप स्टोर और गूगल/ओटीपी लॉगिन सक्रिय।</span></div>
+    <div class="footer">© <span id="year">2026</span> StarHubes · Multi-Page System<br><span class="tiny">बैंक डिटेल्स अलग सेक्शन में, स्वतंत्र पेज स्विचिंग और लॉगिन सक्रिय।</span></div>
   </main>
 
   <aside class="rightSide">
@@ -275,7 +278,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
     
-    <!-- Google Sign-In Button -->
     <button class="secondary" style="width:100%; margin-top:16px; background:#ffffff; color:#1a1a1a; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:700;" onclick="loginWithGoogle()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.39l4.09-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.15 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
       Sign in with Google
@@ -296,7 +298,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </div>
 </div>
 
-<!-- Room Passcode Prompt Modal -->
 <div id="passcodeModal" class="modal hidden" onclick="if(event.target===this)closePasscodeModal()">
   <div class="modalbox">
     <div class="modalhead"><div><h2>🔒 Enter Room Passcode</h2><p class="muted tiny">इस प्राइवेट रूम में प्रवेश करने के लिए कोड दर्ज करें</p></div><button class="ghost small" onclick="closePasscodeModal()">✕</button></div>
@@ -333,13 +334,10 @@ function setStatus(id, msg, type = '') {
 }
 
 window.showSection = name => {
-  // Hide all independent pages/sections
   document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
-  // Show only the requested page
   const target = el('section-' + name);
   if (target) target.classList.remove('hidden');
   
-  // Highlight active sidebar navigation buttons
   document.querySelectorAll('.navbtn[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
   document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'local' : name === 'apps' ? 'appstore' : name)));
   
@@ -817,7 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = el('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();
   updateSession();
-  showSection('home'); // Ensure default is strictly Home page view
+  showSection('home');
 });
 </script>
 </body>
