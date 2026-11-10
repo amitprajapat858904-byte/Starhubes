@@ -7,29 +7,39 @@
 <meta name="description" content="StarHubes: News, government jobs, learning, apps marketplace, group study and community.">
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 16px 40px rgba(0,0,0,.35)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 16px;font-weight:700;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 4px 15px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.tiny{font-size:12px}.hidden{display:none!important}
-header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}
-.topNavLinks{display:flex;gap:6px;align-items:center;overflow-x:auto;padding:4px 0}.topNavLinks button{background:transparent;color:#d6defa;font-size:13px;padding:6px 12px;border-radius:8px;white-space:nowrap}.topNavLinks button.active,.topNavLinks button:hover{background:#182b67;color:#fff}
-.search{flex:1;max-width:240px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:8px 12px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:8px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800}
-.layout{max-width:1280px;margin:22px auto;padding:0 20px}.main{min-width:0}.hero{padding:25px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:18px}.hero:after{content:"";position:absolute;width:220px;height:220px;border:36px solid rgba(255,255,255,.09);border-radius:50%;right:-40px;top:-70px}.hero h1{font-size:clamp(24px,3vw,36px);line-height:1.12;margin:0 0 10px;max-width:540px}.hero p{margin:0 0 18px;color:#e4eaff;max-width:600px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:99px;font-size:12px;margin-bottom:12px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px}.sectionHead h2{font-size:20px;margin:0}.sectionHead p{font-size:13px;margin:4px 0 0;color:var(--muted)}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{background:#101d49;border:1px solid #263a78;padding:8px 12px;border-radius:99px;color:#eaf0ff;font-size:13px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{padding:16px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:18px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:10px}.newsImg{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-top:8px}.tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.03em;border-radius:7px;padding:5px 8px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}.card h3{margin:0;font-size:17px;line-height:1.35}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:6px 12px;font-weight:600;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 2px 10px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:5px 8px;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.hidden{display:none!important}
+header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}
+.topNavLinks{display:flex;gap:4px;align-items:center;overflow-x:auto;padding:2px 0}.topNavLinks button{background:transparent;color:#d6defa;font-size:12px;padding:5px 10px;border-radius:6px;white-space:nowrap}.topNavLinks button.active,.topNavLinks button:hover{background:#182b67;color:#fff}
+.search{flex:1;max-width:200px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:6px 10px;font-size:12px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:6px;align-items:center}.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}
+.layout{max-width:1280px;margin:18px auto;padding:0 16px}.main{min-width:0}.hero{padding:20px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:14px}.hero h1{font-size:clamp(20px,2.5vw,30px);line-height:1.15;margin:0 0 8px;max-width:500px}.hero p{margin:0 0 14px;color:#e4eaff;font-size:13px;max-width:550px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 8px;border-radius:99px;font-size:11px;margin-bottom:10px}
+.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.sectionHead h2{font-size:18px;margin:0}.sectionHead p{font-size:12px;margin:2px 0 0;color:var(--muted)}.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chip{background:#101d49;border:1px solid #263a78;padding:6px 10px;border-radius:99px;color:#eaf0ff;font-size:12px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:14px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:14px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:8px}.newsImg{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-top:6px}.tag{display:inline-flex;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.02em;border-radius:6px;padding:3px 6px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}
+.card h3{margin:0;font-size:15px;line-height:1.3}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.meta{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 
-/* Special Clean White Styling for News Section */
-#section-news .card, #homeNews .card {
-  background: #ffffff !important;
-  color: #111827 !important;
-  border: 1px solid #e5e7eb !important;
-}
-#section-news .card p, #homeNews .card p, #section-news .meta, #homeNews .meta {
-  color: #4b5563 !important;
-}
-#section-news .card h3, #homeNews .card h3 {
-  color: #1f2937 !important;
-}
+/* Clean White Styling for News Section */
+#section-news .card, #homeNews .card{background:#ffffff!important;color:#111827!important;border:1px solid #e5e7eb!important}
+#section-news .card p, #homeNews .card p, #section-news .meta, #homeNews .meta{color:#4b5563!important}
+#section-news .card h3, #homeNews .card h3{color:#1f2937!important}
 
-.composer{padding:16px;margin-top:16px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:12px;padding:12px;resize:vertical;min-height:72px;margin:12px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin:8px 0}.field label{font-size:12px;font-weight:800;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:10px;padding:11px;width:100%;background:#101e4c;color:#f4f6ff}.panel{padding:16px;margin-bottom:14px;background:#0b1740;border:1px solid #1c2d65;border-radius:18px}.footer{padding:24px 0;color:var(--muted);font-size:12px;text-align:center}.status{padding:10px 12px;border-radius:10px;background:#111f4b;color:#dce5ff;font-size:13px;margin:10px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.88);backdrop-filter:blur(8px);display:grid;place-items:center;padding:18px}.modalbox{width:min(580px,100%);background:linear-gradient(145deg,#0c1947,#07102f);border:1px solid #2e458c;border-radius:24px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);color:var(--text);max-height:90vh;overflow-y:auto}.modalbox h2{margin:0 0 4px;font-size:22px}.modalbox .field{margin:14px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:16px;padding:18px;margin:14px 0}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:14px;background:#0b1740}
-.fab{position:fixed;bottom:78px;right:24px;width:56px;height:56px;background:linear-gradient(135deg,#2878ff,#8b45ff);color:white;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 20px rgba(40,120,255,.4);cursor:pointer;z-index:25;transition:transform .2s}.fab:hover{transform:scale(1.08)}
-.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#050d2a;border-top:1px solid #1b2b60;justify-content:space-around;padding:8px 4px}
-.mobileNav button{font-size:11px;padding:6px 2px;background:transparent;color:#b7c5eb;display:flex;flex-direction:column;align-items:center;gap:2px}.mobileNav button.active{color:#8eabff}
+.composer{padding:14px;margin-top:14px;background:#0b1740;border:1px solid #1c2d65;border-radius:14px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:10px;font-size:12px;resize:vertical;min-height:60px;margin:10px 0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field{display:flex;flex-direction:column;gap:4px;margin:6px 0}.field label{font-size:11px;font-weight:700;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:8px;padding:8px;font-size:12px;width:100%;background:#101e4c;color:#f4f6ff}
+.footer{padding:20px 0;color:var(--muted);font-size:11px;text-align:center}.status{padding:8px 10px;border-radius:8px;background:#111f4b;color:#dce5ff;font-size:12px;margin:8px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}
+
+/* Modal / Standard Dialogs */
+.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px}
+.modalbox{width:min(520px,100%);background:linear-gradient(145deg,#0c1947,#07102f);border:1px solid #2e458c;border-radius:18px;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.6);color:var(--text);max-height:85vh;overflow-y:auto}
+.modalbox h2{margin:0 0 4px;font-size:18px}.modalbox .field{margin:10px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}
+
+/* Side Settings Drawer (Right Side Compact Panel) */
+.sideDrawer{position:fixed;top:0;right:-340px;width:320px;height:100vh;background:#091336;border-left:1px solid #1b2b60;box-shadow:-10px 0 30px rgba(0,0,0,.5);z-index:50;transition:right 0.3s ease;padding:20px;display:flex;flex-direction:column;overflow-y:auto}
+.sideDrawer.open{right:0}
+.drawerHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b2b60;padding-bottom:10px;margin-bottom:14px}
+.drawerHead h3{margin:0;font-size:16px}
+
+.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:12px;padding:14px;margin:10px 0}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:12px;background:#0b1740}
+.fab{position:fixed;bottom:70px;right:20px;width:48px;height:48px;background:linear-gradient(135deg,#2878ff,#8b45ff);color:white;border-radius:50%;display:grid;place-items:center;font-size:24px;box-shadow:0 4px 15px rgba(40,120,255,.4);cursor:pointer;z-index:25;transition:transform .2s}.fab:hover{transform:scale(1.08)}
+.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#050d2a;border-top:1px solid #1b2b60;justify-content:space-around;padding:6px 2px}
+.mobileNav button{font-size:10px;padding:4px 2px;background:transparent;color:#b7c5eb;display:flex;flex-direction:column;align-items:center;gap:1px}.mobileNav button.active{color:#8eabff}
 @media(max-width:900px){.topNavLinks{display:none}}
 @media(max-width:700px){.grid2{grid-template-columns:1fr}.fields{grid-template-columns:1fr}}
 </style>
@@ -53,9 +63,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
     <div class="search"><input id="searchInput" placeholder="खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
-      <button class="ghost small" onclick="openSettingsModal()">⚙️ Settings</button>
-      <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️ Admin Panel</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth()">Google Login</button>
+      <button class="ghost small" onclick="openSettingsDrawer()">⚙️ Settings</button>
+      <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️ Admin</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar" onclick="openAuth()" title="Account">S</div>
     </div>
@@ -69,144 +79,105 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
         <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने ऐप्स अपलोड करें।</h1>
         <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना ऐप स्टोर पर अपलोड करके कमाई करें।</p>
-        <button class="primary" style="background:white;color:#2947ba" onclick="showSection('apps')">ऐप स्टोर खोलें →</button>
-        <button class="ghost" style="color:white;border-color:#ffffff66;margin-left:6px" onclick="showSection('news')">फ्री खबरें देखें</button>
+        <button class="primary small" onclick="showSection('apps')">ऐप स्टोर खोलें →</button>
+        <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('news')">फ्री खबरें</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('apps')">📱 App Store Page</button>
-        <button class="chip" onclick="showSection('news')">📰 Free News Feed</button>
+        <button class="chip active" onclick="showSection('apps')">📱 App Store</button>
+        <button class="chip" onclick="showSection('news')">📰 News Feed</button>
         <button class="chip" onclick="showSection('study')">👥 Group Study</button>
       </div>
       <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
-    <!-- App Store Upload Section -->
+    <!-- App Store Section -->
     <section id="section-apps" class="hidden">
-      <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div>
           <h2>📱 StarHubes App Store</h2>
           <p>उपलब्ध ऐप्स सबसे पहले देखें और डाउनलोड करें</p>
         </div>
-        <button class="primary" onclick="toggleUploadForm()">🚀 + अपना ऐप अपलोड करें</button>
+        <button class="primary small" onclick="toggleUploadForm()">🚀 + ऐप अपलोड करें</button>
       </div>
 
-      <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
-        <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
-        <p class="muted tiny">यहाँ यूजरनेम, ऐप का नाम, फोटो और लिंक दर्ज करें।</p>
+      <div id="uploadCardContainer" class="card hidden" style="margin-bottom:16px; border:2px solid var(--brand);">
+        <h3>🚀 ऐप अपलोड फॉर्म</h3>
+        <p class="muted tiny">यूजरनेम, ऐप का नाम और लिंक दर्ज करें।</p>
         
         <div class="fields">
-          <div class="field"><label>डेवलपर यूजरनेम (Username)</label><input id="devUsername" placeholder="जैसे: amit_prajapat"></div>
-          <div class="field"><label>ऐप का नाम (App Name)</label><input id="appName" placeholder="जैसे: Study Master App"></div>
+          <div class="field"><label>यूजरनेम</label><input id="devUsername" placeholder="amit_prajapat"></div>
+          <div class="field"><label>ऐप नाम</label><input id="appName" placeholder="Study App"></div>
         </div>
 
-        <div class="fields" style="margin-top:8px;">
-          <div class="field"><label>ऐप फोटो / स्क्रीनशॉट URL (App Photo)</label><input id="appImg" type="url" placeholder="https://image-link.com/app-photo.png"></div>
-          <div class="field"><label>डाउनलोड / APK लिंक (App URL)</label><input id="appUrl" type="url" placeholder="https://play.google.com/... या APK link"></div>
+        <div class="fields" style="margin-top:6px;">
+          <div class="field"><label>ऐप फोटो URL</label><input id="appImg" type="url" placeholder="https://..."></div>
+          <div class="field"><label>APK/डाउनलोड लिंक</label><input id="appUrl" type="url" placeholder="https://..."></div>
         </div>
 
-        <div class="field" style="margin-top:8px;"><label>ऐप विवरण (Description)</label><input id="appDesc" placeholder="ऐप के बारे में मुख्य बातें..."></div>
+        <div class="field" style="margin-top:6px;"><label>विवरण</label><input id="appDesc" placeholder="मुख्य बातें..."></div>
 
-        <div style="display:flex; gap:10px; margin-top:12px;">
-          <button class="primary" onclick="submitDeveloperApp()">ऐप सबमिट करें</button>
-          <button class="ghost" onclick="toggleUploadForm()">रद्द करें</button>
+        <div style="display:flex; gap:6px; margin-top:10px;">
+          <button class="primary small" onclick="submitDeveloperApp()">सबमिट करें</button>
+          <button class="ghost small" onclick="toggleUploadForm()">रद्द करें</button>
         </div>
-        <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
+        <div id="uploadStatus" class="status hidden" style="margin-top:6px;"></div>
       </div>
 
-      <div class="sectionHead" style="margin-top:10px;"><div><h2>📥 उपलब्ध ऐप्स (Marketplace Apps)</h2><p>डेवलपर्स द्वारा अपलोड किए गए ऐप्स</p></div></div>
-      <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div></div>
+      <div class="sectionHead" style="margin-top:8px;"><div><h2>📥 उपलब्ध ऐप्स</h2></div></div>
+      <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई ऐप नहीं है।</div></div>
     </section>
 
-    <!-- News Section (Clean White Background) -->
+    <!-- News Section -->
     <section id="section-news" class="hidden">
       <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित खबर नहीं है।</div></div>
+      <div id="allNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
     <section id="section-jobs" class="hidden">
-      <div class="sectionHead"><div><h2>💼 Government &amp; Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>💼 Jobs &amp; Vacancies</h2><p>आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allJobs" class="grid2"><div class="empty">कोई जॉब नहीं है।</div></div>
     </section>
 
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests (Admin Questions)</h2><p>मास्टर एडमिन द्वारा जोड़े गए प्रश्न और अभ्यास सेट</p></div></div>
-      <div id="learningQuestionsList" class="grid2"><div class="empty">अभी कोई प्रश्न उपलब्ध नहीं है। एडमिन पैनल से प्रश्न जोड़ें।</div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests</h2><p>प्रश्नोत्तरी</p></div></div>
+      <div id="learningQuestionsList" class="grid2"><div class="empty">कोई प्रश्न नहीं है।</div></div>
     </section>
 
     <section id="section-books" class="hidden">
-      <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>अध्ययन सामग्री और ई-बुक्स</p></div></div>
-      <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक/PDF उपलब्ध नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>📚 Books &amp; PDFs</h2><p>ई-बुक्स</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">कोई बुक नहीं है।</div></div>
     </section>
 
     <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल और साझा व्हाइटबोर्ड</p></div></div>
-      <div class="card" style="margin-bottom:16px;">
-        <h3>➕ नया पर्सनल स्टडी रूम बनाएं</h3>
+      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>स्टडी रूम और व्हाइटबोर्ड</p></div></div>
+      <div class="card" style="margin-bottom:12px;">
+        <h3>➕ नया रूम बनाएं</h3>
         <div class="fields">
-          <div class="field"><label>रूम का नाम</label><input id="roomName" placeholder="जैसे: Physics Class 12"></div>
-          <div class="field"><label>विषय श्रेणी</label><input id="roomSubject" placeholder="Physics / Maths"></div>
+          <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="Physics Class"></div>
+          <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Physics"></div>
         </div>
-        <div class="fields" style="margin-top:8px;">
-          <div class="field"><label>🔒 पर्सनल रूम कोड (Secret Passcode)</label><input id="roomCode" type="text" placeholder="जॉइन करने के लिए कोड (जैसे: 1234)"></div>
-        </div>
-        <button class="primary" style="margin-top:8px;" onclick="createStudyRoom()">सुरक्षित रूम बनाएं</button>
-        <div id="roomStatus" class="status hidden" style="margin-top:8px;"></div>
+        <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
+        <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
+        <div id="roomStatus" class="status hidden" style="margin-top:6px;"></div>
       </div>
       
-      <div class="sectionHead"><div><h2>उपलब्ध स्टडी रूम (Active Rooms)</h2></div></div>
-      <div id="studyRoomsList" class="grid2"><div class="empty">कोई एक्टिव रूम नहीं है।</div></div>
-
-      <div id="roomWorkspace" class="card hidden" style="margin-top:20px; border:2px solid var(--brand);">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-          <h3 id="activeRoomTitle" style="color:var(--brand);">Room: </h3>
-          <div>
-            <button class="primary small" style="background:#16c784;" onclick="startLiveVoiceCall()">🎙️ लाइव वॉइस कॉल शुरू करें</button>
-            <button class="danger small" onclick="leaveRoom()">रूम छोड़ें (Exit)</button>
-          </div>
-        </div>
-        <p class="tiny muted" id="roomMembersCount" style="margin-top:6px;">सदस्य: 1 / 10</p>
-        
-        <div class="grid2" style="margin-top:14px;">
-          <div>
-            <label style="font-size:12px; font-weight:800;">📝 साझा नोटपैड (Shared Notepad)</label>
-            <textarea id="sharedNotepad" rows="8" placeholder="यहाँ सभी सदस्य मिलकर नोट्स लिख सकते हैं..." oninput="updateNotepad(this.value)" style="width:100%; margin-top:6px; background:#101e4c; color:#fff; border:1px solid #263a78; border-radius:10px; padding:10px;"></textarea>
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:800;">💬 ग्रुप चैट (Group Discussion)</label>
-            <div id="chatBox" style="height:165px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:8px; overflow-y:auto; margin-top:6px; font-size:13px;"></div>
-          </div>
-        </div>
-        
-        <div style="margin-top:16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
-            <label style="font-size:12px; font-weight:800;">✍️ साझा व्हाइटबोर्ड (Black Pen &amp; Question Photo)</label>
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <label class="primary small" style="display:inline-flex; align-items:center; gap:4px; cursor:pointer; background:#8b45ff;">
-                📷 प्रश्न की फोटो जोड़ें <input type="file" accept="image/*" class="hidden" onchange="uploadQuestionPhoto(event)">
-              </label>
-              <button class="secondary small" id="penBtn" onclick="setTool('pen')">✏️ पेन (Black)</button>
-              <button class="ghost small" id="eraserBtn" onclick="setTool('eraser')">🧹 इरेज़र</button>
-              <button class="danger small" onclick="clearWhiteboard()">बोर्ड साफ़ करें</button>
-            </div>
-          </div>
-          <canvas id="whiteboard" width="600" height="300" style="background:#ffffff; border-radius:10px; width:100%; cursor:crosshair;"></canvas>
-        </div>
-      </div>
+      <div class="sectionHead"><div><h2>एक्टिव रूम्स</h2></div></div>
+      <div id="studyRoomsList" class="grid2"></div>
     </section>
 
     <section id="section-community" class="hidden">
-      <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
+      <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की खबर</p></div></div>
       <div class="composer">
-        <div class="field"><label>खबर का शीर्षक</label><input id="localTitle" maxlength="200" placeholder="शीर्षक..."></div>
+        <div class="field"><label>शीर्षक</label><input id="localTitle" placeholder="शीर्षक"></div>
         <div class="fields"><div class="field"><label>क्षेत्र</label><input id="localArea" placeholder="शहर"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option></select></div></div>
-        <div class="field"><label>विवरण</label><textarea id="localBody" maxlength="2000" placeholder="जानकारी..."></textarea></div>
-        <button class="primary" onclick="submitLocalNews()">खबर भेजें</button><div id="localStatus" class="status hidden" style="margin-top:10px"></div>
+        <div class="field"><label>विवरण</label><textarea id="localBody" placeholder="विवरण..."></textarea></div>
+        <button class="primary small" onclick="submitLocalNews()">भेजें</button><div id="localStatus" class="status hidden" style="margin-top:6px"></div>
       </div>
-      <div class="sectionHead"><div><h2>समुदाय की खबरें</h2></div></div><div id="communityNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>समुदाय खबरें</h2></div></div><div id="communityNews" class="grid2"></div>
     </section>
     
-    <div class="footer" style="padding-bottom:60px;">© <span id="year">2026</span> <span id="footerCompanyName">StarHubes</span> · Multi-Page System<br><span class="tiny">सुरक्षित मास्टर एडमिन पैनल सक्रिय।</span></div>
+    <div class="footer" style="padding-bottom:50px;">© <span id="year">2026</span> <span id="footerCompanyName">StarHubes</span></div>
   </main>
 </div>
 
@@ -221,125 +192,107 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <button onclick="showSection('study')">👥<span>Study</span></button>
 </nav>
 
-<!-- ⚙️ Updated Settings Modal (Company Name, Company Email, User Login Gmail) -->
-<div id="settingsModal" class="modal hidden" onclick="if(event.target===this)closeSettingsModal()">
-  <div class="modalbox">
-    <div class="modalhead">
-      <div><h2>⚙️ Company &amp; Login Settings</h2><p class="muted tiny">अपनी कंपनी का नाम, ईमेल और लॉगिन जीमेल कॉन्फ़िगर करें</p></div>
-      <button class="ghost small" onclick="closeSettingsModal()">✕</button>
-    </div>
-    <div style="margin-top:16px;">
-      <div class="fields">
-        <div class="field"><label>कंपनी का नाम (Company Name)</label><input id="settingsCompanyName" placeholder="जैसे: StarHubes"></div>
-        <div class="field"><label>कंपनी ईमेल (Company Email)</label><input id="settingsCompanyEmail" placeholder="support@starn.in"></div>
-      </div>
-      <div class="field" style="margin-top:8px;">
-        <label>यूजर लॉगिन जीमेल (Active Login Gmail)</label>
-        <input id="settingsUserEmail" placeholder="user@gmail.com" readonly style="opacity: 0.7;">
-      </div>
-      <button class="secondary" style="width:100%; margin-top:12px;" onclick="saveCompanySettings()">सेटिंग्स सुरक्षित करें</button>
-      <div id="settingsStatus" class="status hidden" style="margin-top:8px;"></div>
-    </div>
+<!-- ⚙️ Side Settings Drawer (Right Side Compact Panel) -->
+<div id="settingsDrawer" class="sideDrawer">
+  <div class="drawerHead">
+    <h3>⚙️ Settings</h3>
+    <button class="ghost small" onclick="closeSettingsDrawer()">✕</button>
   </div>
+  <div class="field"><label>कंपनी का नाम</label><input id="settingsCompanyName" placeholder="StarHubes"></div>
+  <div class="field" style="margin-top:8px;"><label>कंपनी ईमेल</label><input id="settingsCompanyEmail" placeholder="support@starn.in"></div>
+  <div class="field" style="margin-top:8px;"><label>लॉगिन जीमेल</label><input id="settingsUserEmail" readonly style="opacity:0.7;"></div>
+  <button class="primary small" style="width:100%; margin-top:12px;" onclick="saveCompanySettings()">सुरक्षित करें</button>
+  <div id="settingsStatus" class="status hidden" style="margin-top:6px;"></div>
 </div>
 
 <!-- 🛡️ Master Admin Panel Modal -->
 <div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
-  <div class="modalbox" style="width:min(640px, 100%);">
+  <div class="modalbox">
     <div class="modalhead">
-      <div><h2>🛡️ Master Admin Control Panel</h2><p class="muted tiny" style="color:var(--orange);">केवल मास्टर एडमिन के लिए अधिकृत</p></div>
+      <div><h2>🛡️ Master Admin Panel</h2><p class="muted tiny">अधिकृत एडमिन</p></div>
       <button class="ghost small" onclick="closeAdminModal()">✕</button>
     </div>
     <div class="adminBox">
-      <h3 style="margin-top:0; color:var(--green);">➕ नया प्रश्न (Question) या PDF/Book अपलोड करें</h3>
+      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें</h3>
       <div class="fields">
         <div class="field">
-          <label>कंटेंट का प्रकार</label>
+          <label>प्रकार</label>
           <select id="adminPostType" onchange="toggleAdminFields()">
-            <option value="questions">🎓 लर्निंग प्रश्न (Quiz Question)</option>
-            <option value="books">📚 बुक / PDF (eBook PDF)</option>
-            <option value="news">📰 ताज़ा खबर (Free News)</option>
-            <option value="jobs">💼 जॉब वेकेंसी (Job Vacancy)</option>
+            <option value="questions">🎓 प्रश्न (Quiz)</option>
+            <option value="books">📚 बुक / PDF</option>
+            <option value="news">📰 ताज़ा खबर</option>
+            <option value="jobs">💼 जॉब वेकेंसी</option>
           </select>
         </div>
-        <div class="field"><label>श्रेणी (Category)</label><input id="adminCategory" placeholder="जैसे: Science / SSC / Physics"></div>
+        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="Science"></div>
       </div>
-      <div class="field"><label>शीर्षक (Title / Question)</label><input id="adminTitle" placeholder="प्रश्न या बुक का शीर्षक दर्ज करें..."></div>
-      <div class="field"><label>विस्तृत विवरण (Description / Solution)</label><textarea id="adminDesc" placeholder="पूरा विवरण या उत्तर यहाँ लिखें..."></textarea></div>
+      <div class="field"><label>शीर्षक</label><input id="adminTitle" placeholder="शीर्षक..."></div>
+      <div class="field"><label>विवरण</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
       
       <div id="questionOptionsBox">
         <div class="fields">
-          <div class="field"><label>विकल्प A</label><input id="optA" placeholder="Option A"></div>
-          <div class="field"><label>विकल्प B</label><input id="optB" placeholder="Option B"></div>
+          <div class="field"><label>ऑप्शन A</label><input id="optA"></div>
+          <div class="field"><label>ऑप्शन B</label><input id="optB"></div>
         </div>
         <div class="fields">
-          <div class="field"><label>विकल्प C</label><input id="optC" placeholder="Option C"></div>
-          <div class="field"><label>विकल्प D</label><input id="optD" placeholder="Option D"></div>
+          <div class="field"><label>ऑप्शन C</label><input id="optC"></div>
+          <div class="field"><label>ऑप्शन D</label><input id="optD"></div>
         </div>
-        <div class="field">
-          <label>सही उत्तर (Correct Option)</label>
-          <select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
-        </div>
+        <div class="field"><label>सही उत्तर</label><select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
       </div>
 
       <div class="fields">
-        <div class="field"><label>फोटो या कवर इमेज URL</label><input id="adminImg" type="url" placeholder="https://image-link.com/photo.jpg"></div>
-        <div class="field"><label>PDF / डाउनलोड लिंक (URL)</label><input id="adminPdfUrl" type="url" placeholder="https://drive.google.com/... या PDF link"></div>
+        <div class="field"><label>इमेज URL</label><input id="adminImg" type="url" placeholder="https://..."></div>
+        <div class="field"><label>PDF/लिंक URL</label><input id="adminPdfUrl" type="url" placeholder="https://..."></div>
       </div>
 
-      <button class="primary" style="width:100%; margin-top:12px;" onclick="adminPublishContent()">डेटाबेस में सेव करें (Publish)</button>
-      <div id="adminStatus" class="status hidden" style="margin-top:8px;"></div>
-    </div>
-    <div class="adminBox">
-      <h3 style="margin-top:0;">📋 अपलोड किए गए कंटेंट्स की सूची</h3>
-      <div id="adminItemsList" style="max-height:180px; overflow-y:auto;"></div>
+      <button class="primary small" style="width:100%; margin-top:10px;" onclick="adminPublishContent()">पब्लिश करें</button>
+      <div id="adminStatus" class="status hidden" style="margin-top:6px;"></div>
     </div>
   </div>
 </div>
 
-<!-- ➕ General User News Post Modal (+ Button Restricted to News Only) -->
+<!-- ➕ News Post Modal (+ Button) -->
 <div id="createModal" class="modal hidden" onclick="if(event.target===this)closeCreateModal()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2>📰 ताज़ा खबर साझा करें (News Post)</h2><p class="muted tiny">फोटो और विवरण के साथ अपनी खबर पब्लिश करें</p></div>
+      <div><h2>📰 ताज़ा खबर साझा करें</h2><p class="muted tiny">केवल ताज़ा खबर पोस्ट करें</p></div>
       <button class="ghost small" onclick="closeCreateModal()">✕</button>
     </div>
     
-    <div class="field"><label>खबर का शीर्षक (Title)</label><input id="modalTitle" placeholder="मुख्य शीर्षक दर्ज करें..."></div>
-    <div class="field"><label>विस्तृत विवरण (Description)</label><textarea id="modalDesc" placeholder="जानकारी यहाँ लिखें..."></textarea></div>
+    <div class="field"><label>शीर्षक</label><input id="modalTitle" placeholder="शीर्षक..."></div>
+    <div class="field"><label>विवरण</label><textarea id="modalDesc" placeholder="विवरण..."></textarea></div>
     
     <div class="fields">
-      <div class="field"><label>फोटो/इमेज URL</label><input id="modalImg" type="url" placeholder="https://image-link.com/photo.jpg"></div>
-      <div class="field"><label>अधिक जानकारी लिंक (URL)</label><input id="modalUrl" type="url" placeholder="https://..."></div>
+      <div class="field"><label>इमेज URL</label><input id="modalImg" type="url" placeholder="https://..."></div>
+      <div class="field"><label>लिंक URL</label><input id="modalUrl" type="url" placeholder="https://..."></div>
     </div>
 
-    <button class="primary" style="width:100%; margin-top:12px;" onclick="submitGlobalNewsPost()">खबर पब्लिश करें</button>
-    <div id="modalStatus" class="status hidden" style="margin-top:8px;"></div>
+    <button class="primary small" style="width:100%; margin-top:10px;" onclick="submitGlobalNewsPost()">पब्लिश करें</button>
+    <div id="modalStatus" class="status hidden" style="margin-top:6px;"></div>
   </div>
 </div>
 
 <!-- Google Login Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
-  <div class="modalbox" style="text-align:center;">
+  <div class="modalbox" style="text-align:center; max-width:400px;">
     <div class="modalhead" style="text-align:left;">
-      <div><h2>Login to Platform</h2><p class="muted tiny">अपने गूगल अकाउंट (Gmail) से सुरक्षित लॉगिन करें</p></div>
+      <div><h2>Login</h2><p class="muted tiny">जीमेल से लॉगिन करें</p></div>
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
-    <div style="margin:20px 0;">
-      <div class="field" style="text-align:left;"><label>जीमेल आईडी (Gmail ID)</label><input id="userEmailInput" placeholder="apna.email@gmail.com"></div>
-      <div class="field" style="text-align:left; margin-top:10px;"><label>पूरा नाम (Your Name)</label><input id="userNameInput" placeholder="जैसे: Amit Prajapat"></div>
-      <button class="primary" style="width:100%; margin-top:16px;" onclick="loginWithAnyEmail()">लगिन करें</button>
+    <div style="margin:14px 0;">
+      <div class="field" style="text-align:left;"><label>जीमेल आईडी</label><input id="userEmailInput" placeholder="email@gmail.com"></div>
+      <div class="field" style="text-align:left; margin-top:6px;"><label>नाम</label><input id="userNameInput" placeholder="Amit Prajapat"></div>
+      <button class="primary small" style="width:100%; margin-top:12px;" onclick="loginWithAnyEmail()">लॉगिन करें</button>
     </div>
   </div>
 </div>
 
-<div id="toast" class="status hidden" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);z-index:40;box-shadow:var(--shadow);max-width:90%;"></div>
+<div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:40;max-width:90%;"></div>
 
 <script>
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
-let currentRoomId = null;
-let currentTool = 'pen';
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 
 window.showToast = msg => {
@@ -347,7 +300,7 @@ window.showToast = msg => {
   if(!t) return;
   t.textContent = msg;
   t.classList.remove('hidden');
-  setTimeout(() => t.classList.add('hidden'), 3500);
+  setTimeout(() => t.classList.add('hidden'), 3000);
 };
 
 function setStatus(id, msg, type = '') {
@@ -384,24 +337,24 @@ window.toggleUploadForm = () => {
   if(card) { card.classList.toggle('hidden'); card.scrollIntoView({ behavior: 'smooth' }); }
 };
 
-window.openSettingsModal = () => {
+window.openSettingsDrawer = () => {
   const savedComp = JSON.parse(localStorage.getItem('starhubes_company') || '{}');
   el('settingsCompanyName').value = savedComp.name || 'StarHubes';
   el('settingsCompanyEmail').value = savedComp.email || MASTER_ADMIN_EMAIL;
-  el('settingsUserEmail').value = currentUser ? currentUser.email : 'लॉगिन नहीं किया गया';
+  el('settingsUserEmail').value = currentUser ? currentUser.email : 'लॉगिन नहीं है';
   el('settingsStatus').classList.add('hidden');
-  el('settingsModal').classList.remove('hidden');
+  el('settingsDrawer').classList.add('open');
 };
-window.closeSettingsModal = () => el('settingsModal').classList.add('hidden');
+window.closeSettingsDrawer = () => el('settingsDrawer').classList.remove('open');
 
 window.saveCompanySettings = () => {
   const name = el('settingsCompanyName').value.trim();
   const email = el('settingsCompanyEmail').value.trim();
-  if(!name) { setStatus('settingsStatus', 'कंपनी का नाम दर्ज करें।', 'err'); return; }
+  if(!name) { setStatus('settingsStatus', 'कंपनी नाम भरें।', 'err'); return; }
   localStorage.setItem('starhubes_company', JSON.stringify({ name, email }));
   applyCompanyBranding();
-  setStatus('settingsStatus', 'कंपनी सेटिंग्स सुरक्षित हो गई!', 'ok');
-  setTimeout(() => closeSettingsModal(), 1200);
+  setStatus('settingsStatus', 'सुरक्षित हो गया!', 'ok');
+  setTimeout(() => closeSettingsDrawer(), 1000);
 };
 
 function applyCompanyBranding() {
@@ -417,7 +370,6 @@ window.openAdminModal = () => {
   el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
   el('optA').value = ''; el('optB').value = ''; el('optC').value = ''; el('optD').value = '';
   toggleAdminFields();
-  loadAdminItemsList();
   el('adminModal').classList.remove('hidden');
 };
 window.closeAdminModal = () => el('adminModal').classList.add('hidden');
@@ -428,7 +380,7 @@ window.toggleAdminFields = () => {
 };
 
 window.openCreateModal = () => {
-  if(!currentUser) { openAuth(); showToast('खबर डालने के लिए पहले लॉगिन करें।'); return; }
+  if(!currentUser) { openAuth(); showToast('खबर डालने के लिए लॉगिन करें।'); return; }
   el('modalStatus').classList.add('hidden');
   el('modalTitle').value = ''; el('modalDesc').value = ''; el('modalImg').value = ''; el('modalUrl').value = '';
   el('createModal').classList.remove('hidden');
@@ -441,12 +393,12 @@ window.closeAuth = () => { el('authModal').classList.add('hidden'); };
 window.loginWithAnyEmail = () => {
   const email = el('userEmailInput').value.trim();
   const name = el('userNameInput').value.trim();
-  if(!email || !name) { showToast('कृपया अपना नाम और जीमेल आईडी दोनों दर्ज करें।'); return; }
+  if(!email || !name) { showToast('नाम और जीमेल भरें।'); return; }
   
   const role = (email === MASTER_ADMIN_EMAIL) ? 'admin' : 'student';
   currentUser = { username: name, role: role, email: email };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
-  updateSession(); closeAuth(); showToast(`स्वागत है, ${name}! लॉगिन सफल।`); refreshContent();
+  updateSession(); closeAuth(); showToast(`स्वागत है, ${name}!`); refreshContent();
 };
 
 window.doLogout = () => {
@@ -480,7 +432,7 @@ window.refreshContent = () => {
 
 function renderCards(target, items, type) {
   if (!target) return;
-  if (!items || !items.length) { target.innerHTML = '<div class="empty">अभी कोई सामग्री उपलब्ध नहीं है।</div>'; return; }
+  if (!items || !items.length) { target.innerHTML = '<div class="empty">कोई सामग्री उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = items.map(item => {
     const tag = type === 'jobs' ? 'orange' : 'green';
     const date = item.created_at ? new Date(item.created_at).toLocaleDateString('hi-IN') : 'StarHubes';
@@ -506,7 +458,7 @@ window.adminPublishContent = () => {
   const image = safeUrl(el('adminImg').value.trim());
   const url = safeUrl(el('adminPdfUrl').value.trim());
 
-  if(!title) { setStatus('adminStatus', 'शीर्षक दर्ज करना अनिवार्य है।', 'err'); return; }
+  if(!title) { setStatus('adminStatus', 'शीर्षक अनिवार्य है।', 'err'); return; }
 
   let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: Date.now() };
   if(type === 'questions') {
@@ -518,53 +470,26 @@ window.adminPublishContent = () => {
   list.unshift(newItem);
   saveDB(type, list);
 
-  setStatus('adminStatus', 'सफलतापूर्वक पब्लिश हो गया!', 'ok');
+  setStatus('adminStatus', 'पब्लिश हो गया!', 'ok');
   el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
-  loadAdminItemsList();
   refreshContent();
-};
-
-function loadAdminItemsList() {
-  const target = el('adminItemsList');
-  if(!target) return;
-  let all = [];
-  ['questions', 'books', 'news', 'jobs'].forEach(t => {
-    getDB(t).forEach(x => all.push({ ...x, _type: t }));
-  });
-  all.sort((a,b) => b.created_at - a.created_at);
-  if(!all.length) { target.innerHTML = 'कोई कंटेंट नहीं है।'; return; }
-  target.innerHTML = all.map(x => `
-    <div style="padding:8px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
-      <div><span class="tag">${x._type.toUpperCase()}</span> <strong>${escapeHtml(x.title)}</strong></div>
-      <button class="danger small" onclick="deleteAdminItem('${x._type}', '${x.id}')">हटाएं</button>
-    </div>
-  `).join('');
-}
-
-window.deleteAdminItem = (type, id) => {
-  let list = getDB(type);
-  list = list.filter(x => x.id !== id);
-  saveDB(type, list);
-  loadAdminItemsList();
-  refreshContent();
-  showToast('हटा दिया गया।');
 };
 
 window.loadLearningQuestions = () => {
   const target = el('learningQuestionsList');
   if(!target) return;
   const qs = getDB('questions');
-  if(!qs.length) { target.innerHTML = '<div class="empty">अभी कोई प्रश्न उपलब्ध नहीं है। (एडमिन पैनल से जोड़ें)</div>'; return; }
+  if(!qs.length) { target.innerHTML = '<div class="empty">कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
       <span class="tag green">${escapeHtml(q.category)}</span>
-      <h3 style="margin-top:8px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
-      ${q.image ? `<img class="newsImg" src="${q.image}" alt="Question Image">` : ''}
+      <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
+      ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
       <p>${escapeHtml(q.description)}</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
         ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')">${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</button>`).join('')}
       </div>
-      <p class="quizAnsResult" style="margin-top:8px; font-weight:700;"></p>
+      <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
     </div>
   `).join('');
 };
@@ -577,7 +502,7 @@ window.checkUserAnswer = (btn, chosen, correct) => {
     resultEl.textContent = '🎉 सही उत्तर!';
     resultEl.style.color = 'var(--green)';
   } else {
-    resultEl.textContent = `❌ गलत उत्तर। सही उत्तर: ${correct}`;
+    resultEl.textContent = `❌ गलत। सही: ${correct}`;
     resultEl.style.color = 'var(--orange)';
   }
 };
@@ -586,14 +511,14 @@ window.loadBooksList = () => {
   const target = el('allBooks');
   if(!target) return;
   const books = getDB('books');
-  if(!books.length) { target.innerHTML = '<div class="empty">अभी कोई बुक/PDF उपलब्ध नहीं है।</div>'; return; }
+  if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = books.map(b => `
     <div class="card">
       <span class="tag green">${escapeHtml(b.category)}</span>
       <h3>${escapeHtml(b.title)}</h3>
-      ${b.image ? `<img class="newsImg" src="${b.image}" alt="Book Cover">` : ''}
+      ${b.image ? `<img class="newsImg" src="${b.image}" alt="Book">` : ''}
       <p>${escapeHtml(b.description)}</p>
-      ${b.url ? `<div class="cardActions"><a href="${b.url}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF डाउनलोड करें / पढ़ें</button></a></div>` : ''}
+      ${b.url ? `<div class="cardActions"><a href="${b.url}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF पढ़ें</button></a></div>` : ''}
     </div>
   `).join('');
 };
@@ -605,72 +530,47 @@ window.submitGlobalNewsPost = () => {
   const image = safeUrl(el('modalImg').value.trim());
   const url = safeUrl(el('modalUrl').value.trim());
 
-  if(!title || !description) { setStatus('modalStatus', 'कृपया शीर्षक और विवरण दर्ज करें।', 'err'); return; }
+  if(!title || !description) { setStatus('modalStatus', 'शीर्षक और विवरण भरें।', 'err'); return; }
   
-  const newItem = { 
-    id: 'news_' + Date.now(), 
-    title, 
-    description, 
-    image, 
-    url, 
-    category: 'NEWS', 
-    created_at: Date.now() 
-  };
+  const newItem = { id: 'news_' + Date.now(), title, description, image, url, category: 'NEWS', created_at: Date.now() };
+  const list = getDB('news'); list.unshift(newItem); saveDB('news', list);
   
-  const list = getDB('news'); 
-  list.unshift(newItem); 
-  saveDB('news', list);
-  
-  setStatus('modalStatus', 'ताज़ा खबर सफलतापूर्वक पब्लिश हो गई!', 'ok');
+  setStatus('modalStatus', 'खबर पब्लिश हो गई!', 'ok');
   el('modalTitle').value = ''; el('modalDesc').value = ''; el('modalImg').value = ''; el('modalUrl').value = '';
   setTimeout(() => { closeCreateModal(); refreshContent(); }, 1000);
 };
 
 window.submitDeveloperApp = () => {
-  if(!currentUser) { openAuth(); showToast('पहले लॉगिन करें।'); return; }
+  if(!currentUser) { openAuth(); showToast('लॉगिन करें।'); return; }
   const username = el('devUsername').value.trim();
   const name = el('appName').value.trim();
   const image = safeUrl(el('appImg').value.trim());
   const url = safeUrl(el('appUrl').value.trim());
   const desc = el('appDesc').value.trim();
 
-  if(!name || !url) { setStatus('uploadStatus', 'कृपया ऐप नाम और लिंक भरें।', 'err'); return; }
+  if(!name || !url) { setStatus('uploadStatus', 'ऐप नाम और लिंक भरें।', 'err'); return; }
   
-  const newApp = { 
-    id: 'app_' + Date.now(), 
-    username: username || currentUser.username, 
-    name, 
-    image, 
-    url, 
-    desc, 
-    downloads: 0, 
-    created_at: Date.now() 
-  };
+  const newApp = { id: 'app_' + Date.now(), username: username || currentUser.username, name, image, url, desc, downloads: 0, created_at: Date.now() };
+  const apps = getDB('marketplace_apps'); apps.unshift(newApp); saveDB('marketplace_apps', apps);
   
-  const apps = getDB('marketplace_apps'); 
-  apps.unshift(newApp); 
-  saveDB('marketplace_apps', apps);
-  
-  setStatus('uploadStatus', 'ऐप सफलतापूर्वक सबमिट हो गया!', 'ok');
-  el('devUsername').value = ''; el('appName').value = ''; el('appImg').value = ''; 
-  el('appUrl').value = ''; el('appDesc').value = '';
-  toggleUploadForm(); 
-  loadMarketplaceApps();
+  setStatus('uploadStatus', 'ऐप सबमिट हो गया!', 'ok');
+  el('devUsername').value = ''; el('appName').value = ''; el('appImg').value = ''; el('appUrl').value = ''; el('appDesc').value = '';
+  toggleUploadForm(); loadMarketplaceApps();
 };
 
 window.loadMarketplaceApps = () => {
   const target = el('marketplaceApps');
   if(!target) return;
   const apps = getDB('marketplace_apps');
-  if(!apps.length) { target.innerHTML = '<div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div>'; return; }
+  if(!apps.length) { target.innerHTML = '<div class="empty">कोई ऐप नहीं है।</div>'; return; }
   target.innerHTML = apps.map(app => `
-    <div class="card" style="display:flex; flex-direction:column; gap:10px; border-left:4px solid var(--brand);">
-      <span class="tag orange">👤 डेवलपर: ${escapeHtml(app.username || 'Unknown')}</span>
+    <div class="card" style="display:flex; flex-direction:column; gap:8px; border-left:3px solid var(--brand);">
+      <span class="tag orange">👤 ${escapeHtml(app.username || 'Unknown')}</span>
       <h3>${escapeHtml(app.name)}</h3>
-      ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="App Image">` : ''}
-      <p>${escapeHtml(app.desc || 'विवरण उपलब्ध नहीं।')}</p>
-      <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong> बार</p>
-      <div class="cardActions"><a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')"><button class="primary small">डाउनलोड करें</button></a></div>
+      ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="App">` : ''}
+      <p>${escapeHtml(app.desc || 'विवरण नहीं है।')}</p>
+      <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong></p>
+      <div class="cardActions"><a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')"><button class="primary small">डाउनलोड</button></a></div>
     </div>
   `).join('');
 };
@@ -689,7 +589,7 @@ function safeUrl(value) {
 window.createStudyRoom = () => {
   if (!currentUser) { openAuth(); showToast('लॉगिन करें।'); return; }
   const name = el('roomName').value.trim(); const subject = el('roomSubject').value.trim(); const passcode = el('roomCode').value.trim();
-  if (!name) { setStatus('roomStatus', 'रूम का नाम भरें।', 'err'); return; }
+  if (!name) { setStatus('roomStatus', 'रूम नाम भरें।', 'err'); return; }
   const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
   const rooms = getDB('study_rooms'); rooms.unshift(newRoom); saveDB('study_rooms', rooms);
   el('roomName').value = ''; el('roomSubject').value = ''; el('roomCode').value = '';
@@ -705,76 +605,16 @@ window.loadStudyRooms = () => {
       <span class="tag green">${escapeHtml(r.subject)}</span>
       <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)}</p>
-      <button class="primary small" style="margin-top:10px;" onclick="tryJoinRoom('${r.id}')">रूम जॉइन करें</button>
+      <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}')">जॉइन करें</button>
     </div>
   `).join('');
 };
 
 window.tryJoinRoom = roomId => {
   if (!currentUser) { openAuth(); return; }
-  proceedJoinRoom(roomId);
-};
-
-window.proceedJoinRoom = roomId => {
   const rooms = getDB('study_rooms'); const room = rooms.find(r => r.id === roomId);
-  if (!room) return;
-  if (!room.members.includes(currentUser.username)) room.members.push(currentUser.username);
-  saveDB('study_rooms', rooms);
-  currentRoomId = roomId;
-  el('activeRoomTitle').textContent = 'Room: ' + room.name;
-  el('roomWorkspace').classList.remove('hidden');
-  initWhiteboard();
-  window.scrollTo({ top: el('roomWorkspace').offsetTop, behavior: 'smooth' });
-};
-
-window.leaveRoom = () => { currentRoomId = null; el('roomWorkspace').classList.add('hidden'); loadStudyRooms(); };
-window.updateNotepad = val => {
-  if (!currentRoomId) return;
-  let rooms = getDB('study_rooms'); const r = rooms.find(x => x.id === currentRoomId);
-  if (r) { r.notepad = val; saveDB('study_rooms', rooms); }
-};
-
-window.uploadQuestionPhoto = event => {
-  const file = event.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = new Image();
-    img.onload = function() {
-      const canvas = el('whiteboard');
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 10, 10, canvas.width - 20, canvas.height - 20);
-      showToast('प्रश्न की फोटो बोर्ड पर लोड कर दी गई है!');
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-};
-
-let isDrawing = false;
-window.setTool = tool => { currentTool = tool; };
-
-function initWhiteboard() {
-  const canvas = el('whiteboard'); 
-  if (!canvas) return; 
-  const ctx = canvas.getContext('2d'); 
-  ctx.lineCap = 'round';
-  
-  canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
-  canvas.onmousemove = e => {
-    if (!isDrawing) return;
-    ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#111827';
-    ctx.lineWidth = currentTool === 'eraser' ? 24 : 2.5;
-    ctx.lineTo(e.offsetX, e.offsetY); 
-    ctx.stroke();
-  };
-  canvas.onmouseup = () => { isDrawing = false; };
-  canvas.onmouseleave = () => { isDrawing = false; };
-}
-
-window.clearWhiteboard = () => {
-  const canvas = el('whiteboard'); if (!canvas) return;
-  const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if(!room) return;
+  showToast('रूम जॉइन हो गया!');
 };
 
 document.addEventListener('DOMContentLoaded', () => {
