@@ -39,9 +39,8 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="search"><input id="searchInput" placeholder="खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
       <button class="ghost small" onclick="openSettingsModal()" title="Modern Settings & Bank">⚙️ Settings</button>
-      <!-- Admin Panel Button: Strictly Hidden by default, shown ONLY for Amit Prajapat -->
       <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️ Admin Panel</button>
-      <button class="primary small" id="loginBtn" onclick="openAuth()">Login / OTP</button>
+      <button class="primary small" id="loginBtn" onclick="openAuth()">Google Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar" onclick="openAuth()" title="Account">S</div>
     </div>
@@ -50,7 +49,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
 <div class="layout">
   <main class="main">
-    <!-- 1. Home Dashboard Page -->
     <section id="section-home">
       <div class="hero">
         <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
@@ -68,7 +66,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
-    <!-- 2. App Store Page -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
@@ -80,13 +77,13 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
         <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
-        <p class="muted tiny">मोबाइल नंबर या ईमेल से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
+        <p class="muted tiny">गूगल अकाउंट से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
         <div class="fields">
           <div class="field"><label>कंपनी / डेवलपर का नाम</label><input id="devCompany" placeholder="जैसे: Star Tech"></div>
           <div class="field"><label>ऐप का नाम</label><input id="appName" placeholder="जैसे: My Study App"></div>
         </div>
         <div class="fields" style="margin-top:8px;">
-          <div class="field"><label>मोबाइल नंबर या ईमेल</label><input id="devEmail" placeholder="10 अंकों का मोबाइल नंबर या ईमेल"></div>
+          <div class="field"><label>ईमेल आईडी</label><input id="devEmail" placeholder="developer@gmail.com"></div>
           <div class="field"><label>ऐप विवरण (Description)</label><input id="appDesc" placeholder="ऐप के बारे में मुख्य बातें..."></div>
         </div>
         <div class="fields" style="margin-top:8px;">
@@ -104,31 +101,26 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="marketplaceApps" class="grid2" style="margin-bottom:20px;"><div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div></div>
     </section>
 
-    <!-- 3. News Feed Page -->
     <section id="section-news" class="hidden">
       <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें सभी पाठकों के लिए बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="allNews" class="grid2"><div class="empty">अभी कोई प्रकाशित खबर नहीं है।</div></div>
     </section>
 
-    <!-- 4. Jobs Page -->
     <section id="section-jobs" class="hidden">
       <div class="sectionHead"><div><h2>💼 Government &amp; Private Jobs</h2><p>Vacancy details और आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="allJobs" class="grid2"><div class="empty">अभी कोई जॉब वेकेंसी उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- 5. Learning Page -->
     <section id="section-learning" class="hidden">
       <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests (Admin Questions)</h2><p>मास्टर एडमिन द्वारा जोड़े गए प्रश्न और अभ्यास सेट</p></div></div>
       <div id="learningQuestionsList" class="grid2"><div class="empty">अभी कोई प्रश्न उपलब्ध नहीं है। एडमिन पैनल से प्रश्न जोड़ें।</div></div>
     </section>
 
-    <!-- 6. Books Page -->
     <section id="section-books" class="hidden">
       <div class="sectionHead"><div><h2>📚 Books, PDF &amp; eBooks</h2><p>अध्ययन सामग्री और ई-बुक्स</p></div></div>
       <div id="allBooks" class="grid2"><div class="empty">अभी कोई बुक/PDF उपलब्ध नहीं है।</div></div>
     </section>
 
-    <!-- 7. Group Study Page -->
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>पर्सनल कोड रूम, लाइव वॉइस/वीडियो कॉल और साझा व्हाइटबोर्ड</p></div></div>
       <div class="card" style="margin-bottom:16px;">
@@ -157,13 +149,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         </div>
         <p class="tiny muted" id="roomMembersCount" style="margin-top:6px;">सदस्य: 1 / 10</p>
         
-        <div id="liveCallContainer" class="hidden" style="margin-top:12px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:10px;">
-          <span class="tag green">LIVE AUDIO/VIDEO ACTIVE</span>
-          <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-            <video id="localVideo" autoplay muted playsinline style="width:140px; height:100px; background:#000; border-radius:8px; object-fit:cover;"></video>
-          </div>
-        </div>
-
         <div class="grid2" style="margin-top:14px;">
           <div>
             <label style="font-size:12px; font-weight:800;">📝 साझा नोटपैड (Shared Notepad)</label>
@@ -172,10 +157,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
           <div>
             <label style="font-size:12px; font-weight:800;">💬 ग्रुप चैट (Group Discussion)</label>
             <div id="chatBox" style="height:165px; background:#07112f; border:1px solid #263a78; border-radius:10px; padding:8px; overflow-y:auto; margin-top:6px; font-size:13px;"></div>
-            <div style="display:flex; gap:6px; margin-top:6px;">
-              <input id="chatInput" placeholder="संदेश लिखें..." style="flex:1; padding:8px; border-radius:8px; border:1px solid #263a78; background:#101e4c; color:#fff;">
-              <button class="primary small" onclick="sendChatMessage()">भेजें</button>
-            </div>
           </div>
         </div>
         
@@ -196,7 +177,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
     </section>
 
-    <!-- 8. Community Page -->
     <section id="section-community" class="hidden">
       <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की उपयोगी खबर साझा करें</p></div></div>
       <div class="composer">
@@ -212,10 +192,8 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </main>
 </div>
 
-<!-- Floating Plus Button (+) for quick posting -->
 <div class="fab" onclick="openCreateModal()" title="नया पोस्ट / खबर डालें">+</div>
 
-<!-- Bottom Navigation Bar for Mobile -->
 <nav class="mobileNav">
   <button onclick="showSection('home')">🏠<span>Home</span></button>
   <button onclick="showSection('news')">📰<span>News</span></button>
@@ -224,14 +202,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <button onclick="showSection('study')">👥<span>Study</span></button>
 </nav>
 
-<!-- ⚙️ Modern Settings Modal -->
 <div id="settingsModal" class="modal hidden" onclick="if(event.target===this)closeSettingsModal()">
   <div class="modalbox">
     <div class="modalhead">
       <div><h2>⚙️ Modern Bank Settings</h2><p class="muted tiny">अपनी कमाई (Payout) प्राप्त करने के लिए बैंक विवरण दर्ज करें</p></div>
       <button class="ghost small" onclick="closeSettingsModal()">✕</button>
     </div>
-
     <div style="margin-top:16px;">
       <div class="fields">
         <div class="field"><label>खाता धारक का नाम</label><input id="bankName" placeholder="पासबुक के अनुसार"></div>
@@ -247,14 +223,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </div>
 </div>
 
-<!-- 🛡️ Master Admin Panel Modal (Strictly for Amit Prajapat) -->
 <div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
   <div class="modalbox" style="width:min(640px, 100%);">
     <div class="modalhead">
       <div><h2>🛡️ Master Admin Control Panel</h2><p class="muted tiny" style="color:var(--orange);">केवल अमित प्रजापत (`amitprajapat858904@gmail.com`) के लिए अधिकृत</p></div>
       <button class="ghost small" onclick="closeAdminModal()">✕</button>
     </div>
-    
     <div class="adminBox">
       <h3 style="margin-top:0; color:var(--green);">➕ नया प्रश्न (Question) या PDF/Book अपलोड करें</h3>
       <div class="fields">
@@ -269,11 +243,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         </div>
         <div class="field"><label>श्रेणी (Category)</label><input id="adminCategory" placeholder="जैसे: Science / SSC / Physics"></div>
       </div>
-
       <div class="field"><label>शीर्षक (Title / Question)</label><input id="adminTitle" placeholder="प्रश्न या बुक का शीर्षक दर्ज करें..."></div>
       <div class="field"><label>विस्तृत विवरण (Description / Solution)</label><textarea id="adminDesc" placeholder="पूरा विवरण या उत्तर यहाँ लिखें..."></textarea></div>
       
-      <!-- Question Specific Options (A, B, C, D) -->
       <div id="questionOptionsBox">
         <div class="fields">
           <div class="field"><label>विकल्प A</label><input id="optA" placeholder="Option A"></div>
@@ -289,7 +261,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         </div>
       </div>
 
-      <!-- PDF / Image / Link URLs -->
       <div class="fields">
         <div class="field"><label>फोटो या कवर इमेज URL</label><input id="adminImg" type="url" placeholder="https://image-link.com/photo.jpg"></div>
         <div class="field"><label>PDF / डाउनलोड लिंक (URL)</label><input id="adminPdfUrl" type="url" placeholder="https://drive.google.com/... या PDF link"></div>
@@ -298,7 +269,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <button class="primary" style="width:100%; margin-top:12px;" onclick="adminPublishContent()">डेटाबेस में सेव करें (Publish)</button>
       <div id="adminStatus" class="status hidden" style="margin-top:8px;"></div>
     </div>
-
     <div class="adminBox">
       <h3 style="margin-top:0;">📋 अपलोड किए गए कंटेंट्स की सूची</h3>
       <div id="adminItemsList" style="max-height:180px; overflow-y:auto;"></div>
@@ -306,14 +276,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </div>
 </div>
 
-<!-- ➕ General User Post Modal (+ Button) -->
 <div id="createModal" class="modal hidden" onclick="if(event.target===this)closeCreateModal()">
   <div class="modalbox">
     <div class="modalhead">
       <div><h2>➕ नया कंटेंट / खबर जोड़ें</h2><p class="muted tiny">फोटो और विवरण के साथ पोस्ट पब्लिश करें</p></div>
       <button class="ghost small" onclick="closeCreateModal()">✕</button>
     </div>
-    
     <div class="field">
       <label>कंटेंट का प्रकार</label>
       <select id="modalPostType">
@@ -321,44 +289,28 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <option value="jobs">💼 जॉब वेकेंसी (Job Vacancy)</option>
       </select>
     </div>
-
     <div class="field"><label>शीर्षक (Title)</label><input id="modalTitle" placeholder="मुख्य शीर्षक दर्ज करें..."></div>
     <div class="field"><label>विस्तृत विवरण (Description)</label><textarea id="modalDesc" placeholder="जानकारी यहाँ लिखें..."></textarea></div>
-    
     <div class="fields">
       <div class="field"><label>फोटो/इमेज URL</label><input id="modalImg" type="url" placeholder="https://image-link.com/photo.jpg"></div>
       <div class="field"><label>अधिक जानकारी लिंक (URL)</label><input id="modalUrl" type="url" placeholder="https://..."></div>
     </div>
-
     <button class="primary" style="width:100%; margin-top:12px;" onclick="submitGlobalPost()">पब्लिश करें</button>
     <div id="modalStatus" class="status hidden" style="margin-top:8px;"></div>
   </div>
 </div>
 
-<!-- Google Login & Mobile OTP Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
-  <div class="modalbox">
-    <div class="modalhead">
-      <div><h2>Login to StarHubes</h2><p class="muted tiny">गूगल अकाउंट या मोबाइल नंबर से लॉगिन करें</p></div>
+  <div class="modalbox" style="text-align:center;">
+    <div class="modalhead" style="text-align:left;">
+      <div><h2>Login to StarHubes</h2><p class="muted tiny">अपने गूगल अकाउंट से सुरक्षित लॉगिन करें</p></div>
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
-    
-    <button class="secondary" style="width:100%; margin-top:16px; background:#ffffff; color:#1a1a1a; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:700;" onclick="loginWithGoogle()">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.39l4.09-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.15 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-      Sign in with Google
-    </button>
-
-    <div style="text-align:center; margin:16px 0; color:var(--muted); font-size:12px;">अथवा मोबाइल नंबर से OTP द्वारा लॉगिन करें</div>
-
-    <div class="field"><label>मोबाइल नंबर (Mobile Number)</label><input id="authInput" placeholder="जैसे: 9876543210"></div>
-    
-    <div id="otpInputContainer" class="field hidden">
-      <label>6-Digit OTP (डेमो कोड: 1234)</label>
-      <input id="authOtp" type="text" placeholder="1234">
+    <div style="margin:20px 0;">
+      <div class="field" style="text-align:left;"><label>जीमेल आईडी (Gmail ID)</label><input id="userEmailInput" placeholder="apna.email@gmail.com"></div>
+      <div class="field" style="text-align:left; margin-top:10px;"><label>पूरा नाम (Your Name)</label><input id="userNameInput" placeholder="जैसे: Amit Prajapat"></div>
+      <button class="primary" style="width:100%; margin-top:16px;" onclick="loginWithAnyEmail()">लॉगिन करें</button>
     </div>
-
-    <button class="primary" id="authSubmitBtn" style="width:100%;margin-top:8px;" onclick="handleAuthAction()">OTP भेजें (Send OTP)</button>
-    <div id="authStatus" class="status hidden" style="margin-top:10px;"></div>
   </div>
 </div>
 
@@ -368,8 +320,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 let currentRoomId = null;
-let pendingRoomId = null;
-let otpStepSent = false;
 let currentTool = 'pen';
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 
@@ -450,43 +400,18 @@ window.openCreateModal = () => {
 };
 window.closeCreateModal = () => el('createModal').classList.add('hidden');
 
-window.openAuth = () => {
-  otpStepSent = false;
-  el('otpInputContainer').classList.add('hidden');
-  el('authSubmitBtn').textContent = 'OTP भेजें (Send OTP)';
-  el('authStatus').classList.add('hidden');
-  el('authInput').value = '';
-  el('authModal').classList.remove('hidden');
-};
-window.closeAuth = () => el('authModal').classList.add('hidden');
+window.openAuth = () => { el('authModal').classList.remove('hidden'); };
+window.closeAuth = () => { el('authModal').classList.add('hidden'); };
 
-window.loginWithGoogle = () => {
-  currentUser = { username: "Amit Prajapat", role: 'admin', email: MASTER_ADMIN_EMAIL };
+window.loginWithAnyEmail = () => {
+  const email = el('userEmailInput').value.trim();
+  const name = el('userNameInput').value.trim();
+  if(!email || !name) { showToast('कृपया अपना नाम और जीमेल आईडी दोनों दर्ज करें।'); return; }
+  
+  const role = (email === MASTER_ADMIN_EMAIL) ? 'admin' : 'student';
+  currentUser = { username: name, role: role, email: email };
   localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
-  updateSession(); closeAuth(); showToast('मास्टर एडमिन के रूप में लॉगिन सफल!'); refreshContent();
-};
-
-window.handleAuthAction = () => {
-  const inputVal = el('authInput').value.trim();
-  if(!inputVal) { setStatus('authStatus', 'कृपया मोबाइल नंबर दर्ज करें।', 'err'); return; }
-
-  if(!otpStepSent) {
-    otpStepSent = true;
-    el('otpInputContainer').classList.remove('hidden');
-    el('authSubmitBtn').textContent = 'लॉगिन सत्यापित करें (Verify OTP)';
-    setStatus('authStatus', 'डेमो: OTP (1234) भेजा गया है।', 'ok');
-    return;
-  }
-
-  const otp = el('authOtp').value.trim();
-  if(otp !== '1234') { setStatus('authStatus', 'गलत OTP! (1234 डालें)', 'err'); return; }
-
-  const email = inputVal === '8589048589' ? MASTER_ADMIN_EMAIL : inputVal + '@mobile.user';
-  const role = email === MASTER_ADMIN_EMAIL ? 'admin' : 'student';
-  currentUser = { username: email === MASTER_ADMIN_EMAIL ? 'Amit Prajapat' : 'User_' + inputVal.slice(-4), role, email };
-  localStorage.setItem('starhubes_user', JSON.stringify(currentUser));
-  updateSession(); setStatus('authStatus', 'सफलतापूर्वक लॉगिन हो गए!', 'ok');
-  setTimeout(() => { closeAuth(); refreshContent(); }, 1000);
+  updateSession(); closeAuth(); showToast(`स्वागत है, ${name}! लॉगिन सफल।`); refreshContent();
 };
 
 window.doLogout = () => {
@@ -501,13 +426,8 @@ function updateSession() {
   
   const adminBtn = el('adminPortalBtn');
   if (adminBtn) {
-    if (isMaster) {
-      adminBtn.classList.remove('hidden');
-    } else {
-      adminBtn.classList.add('hidden');
-    }
+    if (isMaster) { adminBtn.classList.remove('hidden'); } else { adminBtn.classList.add('hidden'); }
   }
-  
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
@@ -736,11 +656,6 @@ window.loadStudyRooms = () => {
 
 window.tryJoinRoom = roomId => {
   if (!currentUser) { openAuth(); return; }
-  const rooms = getDB('study_rooms'); const room = rooms.find(r => r.id === roomId);
-  if (!room) return;
-  if (room.passcode && room.creator !== currentUser.username && !room.members.includes(currentUser.username)) {
-    pendingRoomId = roomId; el('enteredPasscode').value = ''; el('passcodeModal').classList.remove('hidden'); return;
-  }
   proceedJoinRoom(roomId);
 };
 
@@ -782,19 +697,25 @@ window.uploadQuestionPhoto = event => {
 
 let isDrawing = false;
 window.setTool = tool => { currentTool = tool; };
+
 function initWhiteboard() {
-  const canvas = el('whiteboard'); if (!canvas) return;
-  const ctx = canvas.getContext('2d'); ctx.lineCap = 'round';
+  const canvas = el('whiteboard'); 
+  if (!canvas) return; 
+  const ctx = canvas.getContext('2d'); 
+  ctx.lineCap = 'round';
+  
   canvas.onmousedown = e => { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
   canvas.onmousemove = e => {
     if (!isDrawing) return;
     ctx.strokeStyle = currentTool === 'eraser' ? '#ffffff' : '#111827';
     ctx.lineWidth = currentTool === 'eraser' ? 24 : 2.5;
-    ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke();
+    ctx.lineTo(e.offsetX, e.offsetY); 
+    ctx.stroke();
   };
   canvas.onmouseup = () => { isDrawing = false; };
   canvas.onmouseleave = () => { isDrawing = false; };
 }
+
 window.clearWhiteboard = () => {
   const canvas = el('whiteboard'); if (!canvas) return;
   const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
