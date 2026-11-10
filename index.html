@@ -66,6 +66,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
+    <!-- App Store & Upload Form Section -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
@@ -76,22 +77,28 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
 
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:20px; border:2px solid var(--brand);">
-        <h3>🚀 अपना ऐप अपलोड करें (Developer Upload)</h3>
-        <p class="muted tiny">गूगल अकाउंट से वेरीफाई करके अपना ऐप लिस्ट करें। डाउनलोड होने पर 95% राशि आपको मिलेगी (5% प्लेटफ़ॉर्म कमीशन)।</p>
+        <h3>🚀 अपना ऐप और बैंक विवरण अपलोड करें (Developer Upload)</h3>
+        <p class="muted tiny">यहाँ यूजरनेम, ऐप का नाम, ऐप फोटो और बैंक अकाउंट नंबर दर्ज करें ताकि कमाई का भुगतान सीधे आपके खाते में भेजा जा सके।</p>
+        
         <div class="fields">
-          <div class="field"><label>कंपनी / डेवलपर का नाम</label><input id="devCompany" placeholder="जैसे: Star Tech"></div>
-          <div class="field"><label>ऐप का नाम</label><input id="appName" placeholder="जैसे: My Study App"></div>
+          <div class="field"><label>डेवलपर यूजरनेम (Username)</label><input id="devUsername" placeholder="जैसे: amit_prajapat"></div>
+          <div class="field"><label>ऐप का नाम (App Name)</label><input id="appName" placeholder="जैसे: Study Master App"></div>
         </div>
+
         <div class="fields" style="margin-top:8px;">
-          <div class="field"><label>ईमेल आईडी</label><input id="devEmail" placeholder="developer@gmail.com"></div>
-          <div class="field"><label>ऐप विवरण (Description)</label><input id="appDesc" placeholder="ऐप के बारे में मुख्य बातें..."></div>
+          <div class="field"><label>ऐप फोटो / स्क्रीनशॉट URL (App Photo)</label><input id="appImg" type="url" placeholder="https://image-link.com/app-photo.png"></div>
+          <div class="field"><label>डाउनलोड / APK लिंक (App URL)</label><input id="appUrl" type="url" placeholder="https://play.google.com/... या APK link"></div>
         </div>
+
         <div class="fields" style="margin-top:8px;">
-          <div class="field"><label>ऐप स्क्रीनशॉट इमेज URL</label><input id="appImg" type="url" placeholder="https://image-link.com/photo.png"></div>
-          <div class="field"><label>डाउनलोड / APK लिंक</label><input id="appUrl" type="url" placeholder="https://play.google.com/... या APK link"></div>
+          <div class="field"><label>बैंक खाता संख्या (Account Number)</label><input id="devAccNo" placeholder="अपना बैंक खाता नंबर"></div>
+          <div class="field"><label>बैंक IFSC कोड (IFSC)</label><input id="devIfsc" placeholder="SBIN000XXXX"></div>
         </div>
+
+        <div class="field" style="margin-top:8px;"><label>ऐप विवरण (Description)</label><input id="appDesc" placeholder="ऐप के बारे में मुख्य बातें..."></div>
+
         <div style="display:flex; gap:10px; margin-top:12px;">
-          <button class="primary" onclick="submitDeveloperApp()">ऐप सबमिट करें</button>
+          <button class="primary" onclick="submitDeveloperApp()">ऐप और बैंक विवरण सबमिट करें</button>
           <button class="ghost" onclick="toggleUploadForm()">रद्द करें</button>
         </div>
         <div id="uploadStatus" class="status hidden" style="margin-top:8px;"></div>
@@ -580,18 +587,38 @@ window.submitGlobalPost = () => {
 
 window.submitDeveloperApp = () => {
   if(!currentUser) { openAuth(); showToast('पहले लॉगिन करें।'); return; }
-  const company = el('devCompany').value.trim();
+  const username = el('devUsername').value.trim();
   const name = el('appName').value.trim();
-  const email = el('devEmail').value.trim();
-  const desc = el('appDesc').value.trim();
+  const image = safeUrl(el('appImg').value.trim());
   const url = safeUrl(el('appUrl').value.trim());
+  const accNo = el('devAccNo').value.trim();
+  const ifsc = el('devIfsc').value.trim();
+  const desc = el('appDesc').value.trim();
 
-  if(!name || !email || !url) { setStatus('uploadStatus', 'कृपया ऐप नाम और लिंक भरें।', 'err'); return; }
-  const newApp = { id: 'app_' + Date.now(), company: company || currentUser.username, name, email, desc, url, downloads: 0, developer: currentUser.username, created_at: Date.now() };
-  const apps = getDB('marketplace_apps'); apps.unshift(newApp); saveDB('marketplace_apps', apps);
-  setStatus('uploadStatus', 'ऐप पब्लिश हो गया!', 'ok');
-  el('devCompany').value = ''; el('appName').value = ''; el('devEmail').value = ''; el('appDesc').value = ''; el('appUrl').value = '';
-  toggleUploadForm(); loadMarketplaceApps();
+  if(!name || !url || !accNo) { setStatus('uploadStatus', 'कृपया ऐप नाम, लिंक और बैंक खाता नंबर भरें।', 'err'); return; }
+  
+  const newApp = { 
+    id: 'app_' + Date.now(), 
+    username: username || currentUser.username, 
+    name, 
+    image, 
+    url, 
+    accNo, 
+    ifsc, 
+    desc, 
+    downloads: 0, 
+    created_at: Date.now() 
+  };
+  
+  const apps = getDB('marketplace_apps'); 
+  apps.unshift(newApp); 
+  saveDB('marketplace_apps', apps);
+  
+  setStatus('uploadStatus', 'ऐप और बैंक विवरण सफलतापूर्वक सबमिट हो गया!', 'ok');
+  el('devUsername').value = ''; el('appName').value = ''; el('appImg').value = ''; 
+  el('appUrl').value = ''; el('devAccNo').value = ''; el('devIfsc').value = ''; el('appDesc').value = '';
+  toggleUploadForm(); 
+  loadMarketplaceApps();
 };
 
 window.loadMarketplaceApps = () => {
@@ -601,8 +628,9 @@ window.loadMarketplaceApps = () => {
   if(!apps.length) { target.innerHTML = '<div class="empty">अभी कोई ऐप अपलोड नहीं किया गया है।</div>'; return; }
   target.innerHTML = apps.map(app => `
     <div class="card" style="display:flex; flex-direction:column; gap:10px; border-left:4px solid var(--brand);">
-      <span class="tag orange">${escapeHtml(app.company)}</span>
+      <span class="tag orange">👤 डेवलपर: ${escapeHtml(app.username || 'Unknown')}</span>
       <h3>${escapeHtml(app.name)}</h3>
+      ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="App Image">` : ''}
       <p>${escapeHtml(app.desc || 'विवरण उपलब्ध नहीं।')}</p>
       <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong> बार</p>
       <div class="cardActions"><a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')"><button class="primary small">डाउनलोड करें</button></a></div>
