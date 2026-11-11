@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StarHubes — Modern Platform &amp; Admin Hub</title>
-<meta name="description" content="StarHubes: Tests, Books, News, Game Store, Group Study and Community.">
+<meta name="description" content="StarHubes: Study, Tests, Books, News, Game Store and Community.">
 <!-- Google Sign-In Official Script -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <!-- Supabase SDK -->
@@ -53,13 +53,13 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="logo" onclick="showSection('home')"><div class="logoMark">S</div><span id="headerCompanyName">StarHubes</span></div>
     
     <div class="topNavLinks">
-      <button class="active" data-section="home" onclick="showSection('home')">🏠 Home</button>
+      <button class="active" data-section="home" onclick="showSection('home')">🏠 Home (News + CA)</button>
+      <button data-section="study" onclick="showSection('study')">👥 Study &amp; Folder</button>
       <button data-section="learning" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
       <button data-section="books" onclick="showSection('books')">📚 Books &amp; PDFs</button>
-      <button data-section="news" onclick="showSection('news')">📰 News &amp; CA</button>
+      <button data-section="news" onclick="showSection('news')">📰 News Feed</button>
       <button data-section="apps" onclick="showSection('apps')">🎮 Game Store</button>
       <button data-section="jobs" onclick="showSection('jobs')">💼 Jobs</button>
-      <button data-section="study" onclick="showSection('study')">👥 Study</button>
       <button data-section="community" onclick="showSection('community')">📍 Community</button>
     </div>
 
@@ -76,21 +76,57 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
 <div class="layout">
   <main class="main">
+    <!-- Home Section featuring News + Current Affairs -->
     <section id="section-home">
       <div class="hero">
-        <span class="pill">TESTS • BOOKS &amp; PDF • FREE NEWS</span>
-        <h1>ऑनलाइन टेस्ट दें, ई-बुक्स पढ़ें,<br>और ताज़ा खबरें पाएं।</h1>
-        <p>अपनी परीक्षा और विषय के अनुसार ऑनलाइन टेस्ट दें, पीडीएफ बुक्स डाउनलोड करें और गेम स्टोर का आनंद लें।</p>
-        <button class="primary small" onclick="showSection('learning')">ऑनलाइन टेस्ट दें →</button>
-        <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('books')">बुक्स पढ़ें</button>
+        <span class="pill">LIVE NEWS • CURRENT AFFAIRS • STUDY HUB</span>
+        <h1>ताज़ा खबरें और लाइव करेंट अफेयर्स<br>हमेशा बिल्कुल फ्री।</h1>
+        <p>बिना किसी रुकावट के दैनिक करेंट अफेयर्स पढ़ें, सरकारी नौकरियां देखें और ग्रुप स्टडी करें।</p>
+        <button class="primary small" onclick="showSection('news')">सभी खबरें पढ़ें →</button>
+        <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('study')">स्टडी फोल्डर</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
-        <button class="chip" onclick="showSection('books')">📚 Books &amp; PDFs</button>
-        <button class="chip" onclick="showSection('news')">📰 News &amp; CA</button>
+        <button class="chip active" onclick="showSection('home')">📰 News &amp; Current Affairs</button>
+        <button class="chip" onclick="showSection('study')">👥 Study &amp; Folder</button>
+        <button class="chip" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
       </div>
-      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; करेंट अफेयर्स (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; लाइव करेंट अफेयर्स</h2><p>हर खबर और अपडेट बिल्कुल मुफ्त</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
+    </section>
+
+    <!-- Study & Integrated Folder Section (Books & PDFs on top) -->
+    <section id="section-study" class="hidden">
+      <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>बुक्स, पीडीएफ, टेस्ट और स्टडी रूम</p></div></div>
+      
+      <!-- Top Priority inside Study Folder: Books & PDFs + Quiz -->
+      <div class="card" style="border:2px solid var(--brand); margin-bottom:16px;">
+        <h3>📂 Integrated Study Folder (Books, PDFs &amp; Tests)</h3>
+        <p class="muted tiny">यहाँ आपकी सभी ई-बुक्स, पीडीएफ और ऑनलाइन टेस्ट सबसे ऊपर उपलब्ध हैं।</p>
+        
+        <div style="display:flex; gap:6px; margin:10px 0; flex-wrap:wrap;">
+          <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स &amp; PDFs (सर्वोच्च)</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट (ABCD)</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ लाइव करेंट अफेयर्स</button>
+        </div>
+
+        <div id="studyFolderContent" style="margin-top:12px;">
+          <div class="empty">लोड हो रहा है...</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px;">
+        <h3>➕ नया ग्रुप स्टडी रूम बनाएं</h3>
+        <div class="fields">
+          <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="Physics Class"></div>
+          <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Physics"></div>
+        </div>
+        <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
+        <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
+        <div id="roomStatus" class="status hidden" style="margin-top:6px;"></div>
+      </div>
+      
+      <div class="sectionHead"><div><h2>एक्टिव रूम्स</h2></div></div>
+      <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"></div>
     </section>
 
     <!-- Learning & Exams Test Section (ABCD Options) -->
@@ -172,40 +208,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">कोई जॉब नहीं है।</div></div>
     </section>
 
-    <!-- Study & Integrated Folder Section -->
-    <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>स्टडी रूम, नोट्स, क्विज़, बुक्स और लाइव करेंट अफेयर्स</p></div></div>
-      
-      <div class="card" style="margin-bottom:12px;">
-        <h3>➕ नया रूम बनाएं</h3>
-        <div class="fields">
-          <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="Physics Class"></div>
-          <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Physics"></div>
-        </div>
-        <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
-        <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
-        <div id="roomStatus" class="status hidden" style="margin-top:6px;"></div>
-      </div>
-      
-      <div class="sectionHead"><div><h2>एक्टिव रूम्स</h2></div></div>
-      <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"></div>
-
-      <div class="card" style="border:2px solid var(--brand); margin-top:20px;">
-        <h3>📂 Integrated Study Folder</h3>
-        <p class="muted tiny">यहाँ सभी स्टडी मटेरियल और लाइव करेंट अफेयर्स एक साथ उपलब्ध हैं।</p>
-        
-        <div style="display:flex; gap:6px; margin:10px 0; flex-wrap:wrap;">
-          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट (ABCD)</button>
-          <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स (PDFs)</button>
-          <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ लाइव करेंट अफेयर्स</button>
-        </div>
-
-        <div id="studyFolderContent" style="margin-top:12px;">
-          <div class="empty">लोड हो रहा है...</div>
-        </div>
-      </div>
-    </section>
-
     <section id="section-community" class="hidden">
       <div class="sectionHead"><div><h2>📍 Community News</h2><p>क्षेत्र की खबर</p></div></div>
       <div class="composer">
@@ -225,11 +227,11 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div class="fab" onclick="openCreateModal()" title="ताज़ा खबर डालें">+</div>
 
 <nav class="mobileNav">
-  <button onclick="showSection('learning')">🎓<span>Tests</span></button>
-  <button onclick="showSection('books')">📚<span>Books</span></button>
   <button onclick="showSection('home')">🏠<span>Home</span></button>
   <button onclick="showSection('news')">📰<span>News</span></button>
   <button onclick="showSection('study')">👥<span>Study</span></button>
+  <button onclick="showSection('learning')">🎓<span>Tests</span></button>
+  <button onclick="showSection('books')">📚<span>Books</span></button>
 </nav>
 
 <!-- ⚙️ Side Settings Drawer -->
@@ -385,9 +387,9 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.topNavLinks button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'learning' ? 'tests' : name === 'books' ? 'books' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'study' ? 'study' : name === 'learning' ? 'tests' : name === 'books' ? 'books' : name)));
   
-  if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('quiz'); }
+  if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('books'); }
   if (name === 'apps') loadMarketplaceApps();
   if (name === 'learning') { populateExamSubjectFilters(); loadLearningQuestions(); }
   if (name === 'books') loadBooksList();
@@ -502,7 +504,6 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
-// Database helper using Supabase with localStorage fallback
 async function getDBAsync(key) {
   try {
     const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
@@ -686,7 +687,18 @@ window.loadBooksList = async () => {
 window.switchStudyFolderTab = async tab => {
   const target = el('studyFolderContent');
   if(!target) return;
-  if(tab === 'quiz') {
+  if(tab === 'books') {
+    const books = await getDBAsync('books');
+    if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
+    target.innerHTML = `<div class="grid2">${books.map(b => `
+      <div class="card" style="background:#07102f;">
+        <span class="tag green">${escapeHtml(b.category)}</span>
+        <h3>${escapeHtml(b.title)}</h3>
+        <p>${escapeHtml(b.description)}</p>
+        ${b.url ? `<div class="cardActions"><a href="${safeUrl(b.url)}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF पढ़ें</button></a></div>` : ''}
+      </div>
+    `).join('')}</div>`;
+  } else if(tab === 'quiz') {
     const qs = await getDBAsync('questions');
     if(!qs.length) { target.innerHTML = '<div class="empty">कोई क्विज़ प्रश्न उपलब्ध नहीं है।</div>'; return; }
     target.innerHTML = `<div class="grid2">${qs.map((q, idx) => `
@@ -698,17 +710,6 @@ window.switchStudyFolderTab = async tab => {
           ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
         </div>
         <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
-      </div>
-    `).join('')}</div>`;
-  } else if(tab === 'books') {
-    const books = await getDBAsync('books');
-    if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
-    target.innerHTML = `<div class="grid2">${books.map(b => `
-      <div class="card" style="background:#07102f;">
-        <span class="tag green">${escapeHtml(b.category)}</span>
-        <h3>${escapeHtml(b.title)}</h3>
-        <p>${escapeHtml(b.description)}</p>
-        ${b.url ? `<div class="cardActions"><a href="${safeUrl(b.url)}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF पढ़ें</button></a></div>` : ''}
       </div>
     `).join('')}</div>`;
   } else if(tab === 'ca') {
