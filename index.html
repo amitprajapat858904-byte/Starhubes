@@ -53,11 +53,11 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="topNavLinks">
       <button class="active" data-section="home" onclick="showSection('home')">🏠 Home</button>
       <button data-section="apps" onclick="showSection('apps')">🎮 Game Store</button>
-      <button data-section="news" onclick="showSection('news')">📰 News</button>
+      <button data-section="news" onclick="showSection('news')">📰 News &amp; Current Affairs</button>
       <button data-section="jobs" onclick="showSection('jobs')">💼 Jobs</button>
-      <button data-section="learning" onclick="showSection('learning')">🎓 Learning</button>
+      <button data-section="learning" onclick="showSection('learning')">🎓 Learning &amp; Tests</button>
       <button data-section="books" onclick="showSection('books')">📚 Books</button>
-      <button data-section="study" onclick="showSection('study')">👥 Study</button>
+      <button data-section="study" onclick="showSection('study')">👥 Study &amp; Folder</button>
       <button data-section="community" onclick="showSection('community')">📍 Community</button>
     </div>
 
@@ -76,18 +76,18 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <main class="main">
     <section id="section-home">
       <div class="hero">
-        <span class="pill">FREE NEWS • GAME STORE • STUDY HUB</span>
+        <span class="pill">FREE NEWS • LIVE CURRENT AFFAIRS • GAME STORE</span>
         <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने गेम अपलोड करें।</h1>
-        <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना गेम स्टोर पर अपलोड करके कमाई करें।</p>
+        <p>बिना किसी रुकावट के खबरें पढ़ें, लाइव करेंट अफेयर्स देखें, और डेवलपर्स अपना गेम स्टोर पर अपलोड करके कमाई करें।</p>
         <button class="primary small" onclick="showSection('apps')">गेम स्टोर खोलें →</button>
         <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('news')">फ्री खबरें</button>
       </div>
       <div class="chips">
         <button class="chip active" onclick="showSection('apps')">🎮 Game Store</button>
-        <button class="chip" onclick="showSection('news')">📰 News Feed</button>
-        <button class="chip" onclick="showSection('study')">👥 Group Study</button>
+        <button class="chip" onclick="showSection('news')">📰 News &amp; CA</button>
+        <button class="chip" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
       </div>
-      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; करेंट अफेयर्स (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
@@ -128,9 +128,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई गेम नहीं है।</div></div>
     </section>
 
-    <!-- News Section -->
+    <!-- News & Current Affairs Section -->
     <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News Feed (Free)</h2><p>सभी खबरें बिल्कुल मुफ्त हैं</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 News &amp; Live Current Affairs</h2><p>दैनिक करेंट अफेयर्स और ताज़ा खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="allNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
@@ -139,9 +139,29 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allJobs" class="grid2"><div class="empty">कोई जॉब नहीं है।</div></div>
     </section>
 
+    <!-- Learning & Exams Test Section -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Tests</h2><p>प्रश्नोत्तरी</p></div></div>
-      <div id="learningQuestionsList" class="grid2"><div class="empty">कोई प्रश्न नहीं है।</div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
+      
+      <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
+        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
+        <div class="fields">
+          <div class="field">
+            <label>परीक्षा का नाम (Exam)</label>
+            <select id="filterExam" onchange="loadLearningQuestions()">
+              <option value="">सभी परीक्षाएं (All Exams)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>विषय (Subject)</label>
+            <select id="filterSubject" onchange="loadLearningQuestions()">
+              <option value="">सभी विषय (All Subjects)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="learningQuestionsList" class="grid2"><div class="empty">कोई प्रश्न उपलब्ध नहीं है।</div></div>
     </section>
 
     <section id="section-books" class="hidden">
@@ -149,8 +169,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allBooks" class="grid2"><div class="empty">कोई बुक नहीं है।</div></div>
     </section>
 
+    <!-- Study & Integrated Folder Section -->
     <section id="section-study" class="hidden">
-      <div class="sectionHead"><div><h2>👥 Group Study Rooms</h2><p>स्टडी रूम और व्हाइटबोर्ड</p></div></div>
+      <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>स्टडी रूम, नोट्स, क्विज़, बुक्स और लाइव करेंट अफेयर्स</p></div></div>
+      
       <div class="card" style="margin-bottom:12px;">
         <h3>➕ नया रूम बनाएं</h3>
         <div class="fields">
@@ -163,7 +185,22 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       </div>
       
       <div class="sectionHead"><div><h2>एक्टिव रूम्स</h2></div></div>
-      <div id="studyRoomsList" class="grid2"></div>
+      <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"></div>
+
+      <div class="card" style="border:2px solid var(--brand); margin-top:20px;">
+        <h3>📂 Integrated Study Folder</h3>
+        <p class="muted tiny">यहाँ सभी स्टडी मटेरियल और लाइव करेंट अफेयर्स एक साथ उपलब्ध हैं।</p>
+        
+        <div style="display:flex; gap:6px; margin:10px 0; flex-wrap:wrap;">
+          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स (PDFs)</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ लाइव करेंट अफेयर्स</button>
+        </div>
+
+        <div id="studyFolderContent" style="margin-top:12px;">
+          <div class="empty">लोड हो रहा है...</div>
+        </div>
+      </div>
     </section>
 
     <section id="section-community" class="hidden">
@@ -205,7 +242,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <div id="settingsStatus" class="status hidden" style="margin-top:6px;"></div>
 </div>
 
-<!-- 🛡️ Master Admin Panel Modal -->
+<!-- 🛡️ Master Admin Panel Modal (Updated with Exam & Subject for Tests) -->
 <div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
   <div class="modalbox">
     <div class="modalhead">
@@ -219,15 +256,22 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div class="field">
           <label>प्रकार</label>
           <select id="adminPostType" onchange="toggleAdminFields()">
-            <option value="questions">🎓 प्रश्न (Quiz)</option>
+            <option value="questions">🎓 परीक्षा टेस्ट / Quiz</option>
             <option value="books">📚 बुक / PDF</option>
-            <option value="news">📰 ताज़ा खबर</option>
+            <option value="news">📰 ताज़ा खबर / Current Affairs</option>
             <option value="jobs">💼 जॉब वेकेंसी</option>
           </select>
         </div>
-        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="Science"></div>
+        <div class="field"><label>श्रेणी / कैटेगरी</label><input id="adminCategory" placeholder="General"></div>
       </div>
-      <div class="field"><label>शीर्षक</label><input id="adminTitle" placeholder="शीर्षक..."></div>
+
+      <!-- Exam & Subject Fields Specifically for Test/Quiz -->
+      <div id="examSubjectBox" class="fields">
+        <div class="field"><label>परीक्षा का नाम (Exam)</label><input id="adminExamName" placeholder="SSC / NEET / UPSC"></div>
+        <div class="field"><label>विषय (Subject)</label><input id="adminSubjectName" placeholder="Physics / Mathematics"></div>
+      </div>
+
+      <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="शीर्षक या प्रश्न..."></div>
       <div class="field"><label>विवरण</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
       
       <div id="questionOptionsBox">
@@ -262,7 +306,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div id="createModal" class="modal hidden" onclick="if(event.target===this)closeCreateModal()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2>📰 ताज़ा खबर साझा करें</h2><p class="muted tiny">केवल ताज़ा खबर पोस्ट करें</p></div>
+      <div><h2>📰 ताज़ा खबर / करेंट अफेयर्स साझा करें</h2><p class="muted tiny">पोस्ट पब्लिश करें</p></div>
       <button class="ghost small" onclick="closeCreateModal()">✕</button>
     </div>
     
@@ -336,9 +380,9 @@ window.showSection = name => {
   document.querySelectorAll('.topNavLinks button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
   document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'community' : name === 'apps' ? 'gamestore' : name)));
   
-  if (name === 'study') loadStudyRooms();
+  if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('quiz'); }
   if (name === 'apps') loadMarketplaceApps();
-  if (name === 'learning') loadLearningQuestions();
+  if (name === 'learning') { populateExamSubjectFilters(); loadLearningQuestions(); }
   if (name === 'books') loadBooksList();
   refreshContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -385,6 +429,7 @@ window.openAdminModal = () => {
   if(!currentUser || currentUser.email !== MASTER_ADMIN_EMAIL) { showToast('अनुमति नहीं है!'); return; }
   el('adminStatus').classList.add('hidden');
   el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
+  el('adminExamName').value = ''; el('adminSubjectName').value = '';
   el('optA').value = ''; el('optB').value = ''; el('optC').value = ''; el('optD').value = '';
   toggleAdminFields();
   loadAdminItemsList();
@@ -395,6 +440,7 @@ window.closeAdminModal = () => el('adminModal').classList.add('hidden');
 window.toggleAdminFields = () => {
   const type = el('adminPostType').value;
   el('questionOptionsBox').style.display = type === 'questions' ? 'block' : 'none';
+  el('examSubjectBox').style.display = type === 'questions' ? 'grid' : 'none';
 };
 
 window.openCreateModal = () => {
@@ -494,6 +540,8 @@ window.adminPublishContent = () => {
 
   let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: Date.now() };
   if(type === 'questions') {
+    newItem.examName = el('adminExamName').value.trim() || 'General Exam';
+    newItem.subjectName = el('adminSubjectName').value.trim() || 'General Subject';
     newItem.options = [el('optA').value.trim(), el('optB').value.trim(), el('optC').value.trim(), el('optD').value.trim()];
     newItem.correct = el('correctOpt').value;
   }
@@ -504,6 +552,7 @@ window.adminPublishContent = () => {
 
   setStatus('adminStatus', 'पब्लिश हो गया!', 'ok');
   el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
+  el('adminExamName').value = ''; el('adminSubjectName').value = '';
   loadAdminItemsList();
   refreshContent();
 };
@@ -534,14 +583,37 @@ window.deleteAdminItem = (type, id) => {
   showToast('हटा दिया गया।');
 };
 
+function populateExamSubjectFilters() {
+  const qs = getDB('questions');
+  const examSelect = el('filterExam');
+  const subjSelect = el('filterSubject');
+  if(!examSelect || !subjSelect) return;
+
+  const exams = [...new Set(qs.map(q => q.examName).filter(Boolean))];
+  const subjects = [...new Set(qs.map(q => q.subjectName).filter(Boolean))];
+
+  examSelect.innerHTML = '<option value="">सभी परीक्षाएं (All Exams)</option>' + exams.map(e => `<option value="${e}">${e}</option>`).join('');
+  subjSelect.innerHTML = '<option value="">सभी विषय (All Subjects)</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
 window.loadLearningQuestions = () => {
   const target = el('learningQuestionsList');
   if(!target) return;
-  const qs = getDB('questions');
-  if(!qs.length) { target.innerHTML = '<div class="empty">कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
+  let qs = getDB('questions');
+  
+  const selectedExam = el('filterExam') ? el('filterExam').value : '';
+  const selectedSubj = el('filterSubject') ? el('filterSubject').value : '';
+
+  if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
+  if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
+
+  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
-      <span class="tag green">${escapeHtml(q.category)}</span>
+      <div style="display:flex; gap:6px; margin-bottom:4px;">
+        <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
+        <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
+      </div>
       <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
       ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
       <p>${escapeHtml(q.description)}</p>
@@ -582,6 +654,48 @@ window.loadBooksList = () => {
   `).join('');
 };
 
+window.switchStudyFolderTab = tab => {
+  const target = el('studyFolderContent');
+  if(!target) return;
+  if(tab === 'quiz') {
+    const qs = getDB('questions');
+    if(!qs.length) { target.innerHTML = '<div class="empty">कोई क्विज़ प्रश्न उपलब्ध नहीं है।</div>'; return; }
+    target.innerHTML = `<div class="grid2">${qs.map((q, idx) => `
+      <div class="card" style="background:#07102f;">
+        <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')} | ${escapeHtml(q.subjectName || 'Subject')}</span>
+        <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
+        <p>${escapeHtml(q.description)}</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
+          ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')">${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</button>`).join('')}
+        </div>
+        <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
+      </div>
+    `).join('')}</div>`;
+  } else if(tab === 'books') {
+    const books = getDB('books');
+    if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
+    target.innerHTML = `<div class="grid2">${books.map(b => `
+      <div class="card" style="background:#07102f;">
+        <span class="tag green">${escapeHtml(b.category)}</span>
+        <h3>${escapeHtml(b.title)}</h3>
+        <p>${escapeHtml(b.description)}</p>
+        ${b.url ? `<div class="cardActions"><a href="${safeUrl(b.url)}" target="_blank" rel="noopener noreferrer"><button class="primary small">📥 PDF पढ़ें</button></a></div>` : ''}
+      </div>
+    `).join('')}</div>`;
+  } else if(tab === 'ca') {
+    const news = getDB('news');
+    if(!news.length) { target.innerHTML = '<div class="empty">कोई लाइव करेंट अफेयर्स उपलब्ध नहीं है।</div>'; return; }
+    target.innerHTML = `<div class="grid2">${news.map(n => `
+      <div class="card" style="background:#07102f;">
+        <span class="tag orange">${escapeHtml(n.category || 'CURRENT AFFAIRS')}</span>
+        <h3>${escapeHtml(n.title)}</h3>
+        <p>${escapeHtml(n.description)}</p>
+        ${n.url ? `<div class="cardActions"><a href="${safeUrl(n.url)}" target="_blank" rel="noopener noreferrer"><button class="secondary small">पूरा पढ़ें</button></a></div>` : ''}
+      </div>
+    `).join('')}</div>`;
+  }
+};
+
 window.submitGlobalNewsPost = () => {
   if(!currentUser) { openAuth(); return; }
   const title = el('modalTitle').value.trim();
@@ -591,10 +705,10 @@ window.submitGlobalNewsPost = () => {
 
   if(!title || !description) { setStatus('modalStatus', 'शीर्षक और विवरण भरें।', 'err'); return; }
   
-  const newItem = { id: 'news_' + Date.now(), title, description, image, url, category: 'NEWS', created_at: Date.now() };
+  const newItem = { id: 'news_' + Date.now(), title, description, image, url, category: 'CURRENT AFFAIRS', created_at: Date.now() };
   const list = getDB('news'); list.unshift(newItem); saveDB('news', list);
   
-  setStatus('modalStatus', 'खबर पब्लिश हो गई!', 'ok');
+  setStatus('modalStatus', 'करेंट अफेयर्स / खबर पब्लिश हो गई!', 'ok');
   el('modalTitle').value = ''; el('modalDesc').value = ''; el('modalImg').value = ''; el('modalUrl').value = '';
   setTimeout(() => { closeCreateModal(); refreshContent(); }, 1000);
 };
