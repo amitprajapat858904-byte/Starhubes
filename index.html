@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StarHubes — Modern Platform &amp; Admin Hub</title>
-<meta name="description" content="StarHubes: News, government jobs, learning, apps marketplace, group study and community.">
+<meta name="description" content="StarHubes: Tests, Books, News, Game Store, Group Study and Community.">
 <!-- Google Sign-In Official Script -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 16px 40px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:6px 12px;font-weight:600;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 2px 10px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:5px 8px;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.hidden{display:none!important}
@@ -52,12 +54,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     
     <div class="topNavLinks">
       <button class="active" data-section="home" onclick="showSection('home')">🏠 Home</button>
+      <button data-section="learning" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
+      <button data-section="books" onclick="showSection('books')">📚 Books &amp; PDFs</button>
+      <button data-section="news" onclick="showSection('news')">📰 News &amp; CA</button>
       <button data-section="apps" onclick="showSection('apps')">🎮 Game Store</button>
-      <button data-section="news" onclick="showSection('news')">📰 News &amp; Current Affairs</button>
       <button data-section="jobs" onclick="showSection('jobs')">💼 Jobs</button>
-      <button data-section="learning" onclick="showSection('learning')">🎓 Learning &amp; Tests</button>
-      <button data-section="books" onclick="showSection('books')">📚 Books</button>
-      <button data-section="study" onclick="showSection('study')">👥 Study &amp; Folder</button>
+      <button data-section="study" onclick="showSection('study')">👥 Study</button>
       <button data-section="community" onclick="showSection('community')">📍 Community</button>
     </div>
 
@@ -76,19 +78,56 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <main class="main">
     <section id="section-home">
       <div class="hero">
-        <span class="pill">FREE NEWS • LIVE CURRENT AFFAIRS • GAME STORE</span>
-        <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने गेम अपलोड करें।</h1>
-        <p>बिना किसी रुकावट के खबरें पढ़ें, लाइव करेंट अफेयर्स देखें, और डेवलपर्स अपना गेम स्टोर पर अपलोड करके कमाई करें।</p>
-        <button class="primary small" onclick="showSection('apps')">गेम स्टोर खोलें →</button>
-        <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('news')">फ्री खबरें</button>
+        <span class="pill">TESTS • BOOKS &amp; PDF • FREE NEWS</span>
+        <h1>ऑनलाइन टेस्ट दें, ई-बुक्स पढ़ें,<br>और ताज़ा खबरें पाएं।</h1>
+        <p>अपनी परीक्षा और विषय के अनुसार ऑनलाइन टेस्ट दें, पीडीएफ बुक्स डाउनलोड करें और गेम स्टोर का आनंद लें।</p>
+        <button class="primary small" onclick="showSection('learning')">ऑनलाइन टेस्ट दें →</button>
+        <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('books')">बुक्स पढ़ें</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('apps')">🎮 Game Store</button>
+        <button class="chip active" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
+        <button class="chip" onclick="showSection('books')">📚 Books &amp; PDFs</button>
         <button class="chip" onclick="showSection('news')">📰 News &amp; CA</button>
-        <button class="chip" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
       </div>
       <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; करेंट अफेयर्स (होम हाइलाइट)</h2><p>हर खबर बिल्कुल मुफ्त उपलब्ध है</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
+    </section>
+
+    <!-- Learning & Exams Test Section (ABCD Options) -->
+    <section id="section-learning" class="hidden">
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ABCD ऑप्शन वाले ऑनलाइन टेस्ट दें</p></div></div>
+      
+      <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
+        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
+        <div class="fields">
+          <div class="field">
+            <label>परीक्षा का नाम (Exam)</label>
+            <select id="filterExam" onchange="loadLearningQuestions()">
+              <option value="">सभी परीक्षाएं (All Exams)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>विषय (Subject)</label>
+            <select id="filterSubject" onchange="loadLearningQuestions()">
+              <option value="">सभी विषय (All Subjects)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="learningQuestionsList" class="grid2"><div class="empty">कोई प्रश्न उपलब्ध नहीं है।</div></div>
+    </section>
+
+    <!-- Books & PDFs Section -->
+    <section id="section-books" class="hidden">
+      <div class="sectionHead"><div><h2>📚 Books &amp; PDFs</h2><p>ई-बुक्स और स्टडी मटेरियल</p></div></div>
+      <div id="allBooks" class="grid2"><div class="empty">कोई बुक नहीं है।</div></div>
+    </section>
+
+    <!-- News & Current Affairs Section -->
+    <section id="section-news" class="hidden">
+      <div class="sectionHead"><div><h2>📰 News &amp; Live Current Affairs</h2><p>दैनिक करेंट अफेयर्स और ताज़ा खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div id="allNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
     <!-- Game Store Section -->
@@ -128,45 +167,9 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई गेम नहीं है।</div></div>
     </section>
 
-    <!-- News & Current Affairs Section -->
-    <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News &amp; Live Current Affairs</h2><p>दैनिक करेंट अफेयर्स और ताज़ा खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
-      <div id="allNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
-    </section>
-
     <section id="section-jobs" class="hidden">
       <div class="sectionHead"><div><h2>💼 Jobs &amp; Vacancies</h2><p>आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
       <div id="allJobs" class="grid2"><div class="empty">कोई जॉब नहीं है।</div></div>
-    </section>
-
-    <!-- Learning & Exams Test Section -->
-    <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
-      
-      <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
-        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
-        <div class="fields">
-          <div class="field">
-            <label>परीक्षा का नाम (Exam)</label>
-            <select id="filterExam" onchange="loadLearningQuestions()">
-              <option value="">सभी परीक्षाएं (All Exams)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>विषय (Subject)</label>
-            <select id="filterSubject" onchange="loadLearningQuestions()">
-              <option value="">सभी विषय (All Subjects)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div id="learningQuestionsList" class="grid2"><div class="empty">कोई प्रश्न उपलब्ध नहीं है।</div></div>
-    </section>
-
-    <section id="section-books" class="hidden">
-      <div class="sectionHead"><div><h2>📚 Books &amp; PDFs</h2><p>ई-बुक्स</p></div></div>
-      <div id="allBooks" class="grid2"><div class="empty">कोई बुक नहीं है।</div></div>
     </section>
 
     <!-- Study & Integrated Folder Section -->
@@ -192,7 +195,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <p class="muted tiny">यहाँ सभी स्टडी मटेरियल और लाइव करेंट अफेयर्स एक साथ उपलब्ध हैं।</p>
         
         <div style="display:flex; gap:6px; margin:10px 0; flex-wrap:wrap;">
-          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट (ABCD)</button>
           <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स (PDFs)</button>
           <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ लाइव करेंट अफेयर्स</button>
         </div>
@@ -222,10 +225,10 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div class="fab" onclick="openCreateModal()" title="ताज़ा खबर डालें">+</div>
 
 <nav class="mobileNav">
+  <button onclick="showSection('learning')">🎓<span>Tests</span></button>
+  <button onclick="showSection('books')">📚<span>Books</span></button>
   <button onclick="showSection('home')">🏠<span>Home</span></button>
   <button onclick="showSection('news')">📰<span>News</span></button>
-  <button onclick="showSection('apps')">🎮<span>GameStore</span></button>
-  <button onclick="showSection('jobs')">💼<span>Jobs</span></button>
   <button onclick="showSection('study')">👥<span>Study</span></button>
 </nav>
 
@@ -242,7 +245,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <div id="settingsStatus" class="status hidden" style="margin-top:6px;"></div>
 </div>
 
-<!-- 🛡️ Master Admin Panel Modal (Updated with Exam & Subject for Tests) -->
+<!-- 🛡️ Master Admin Panel Modal -->
 <div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
   <div class="modalbox">
     <div class="modalhead">
@@ -256,7 +259,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div class="field">
           <label>प्रकार</label>
           <select id="adminPostType" onchange="toggleAdminFields()">
-            <option value="questions">🎓 परीक्षा टेस्ट / Quiz</option>
+            <option value="questions">🎓 परीक्षा टेस्ट / Quiz (ABCD)</option>
             <option value="books">📚 बुक / PDF</option>
             <option value="news">📰 ताज़ा खबर / Current Affairs</option>
             <option value="jobs">💼 जॉब वेकेंसी</option>
@@ -265,25 +268,25 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div class="field"><label>श्रेणी / कैटेगरी</label><input id="adminCategory" placeholder="General"></div>
       </div>
 
-      <!-- Exam & Subject Fields Specifically for Test/Quiz -->
       <div id="examSubjectBox" class="fields">
         <div class="field"><label>परीक्षा का नाम (Exam)</label><input id="adminExamName" placeholder="SSC / NEET / UPSC"></div>
         <div class="field"><label>विषय (Subject)</label><input id="adminSubjectName" placeholder="Physics / Mathematics"></div>
       </div>
 
-      <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="शीर्षक या प्रश्न..."></div>
-      <div class="field"><label>विवरण</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
+      <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
+      <div class="field"><label>विवरण / अतिरिक्त जानकारी</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
       
+      <!-- ABCD Options Inputs -->
       <div id="questionOptionsBox">
         <div class="fields">
-          <div class="field"><label>ऑप्शन A</label><input id="optA"></div>
-          <div class="field"><label>ऑप्शन B</label><input id="optB"></div>
+          <div class="field"><label>ऑप्शन A</label><input id="optA" placeholder="विकल्प A"></div>
+          <div class="field"><label>ऑप्शन B</label><input id="optB" placeholder="विकल्प B"></div>
         </div>
         <div class="fields">
-          <div class="field"><label>ऑप्शन C</label><input id="optC"></div>
-          <div class="field"><label>ऑप्शन D</label><input id="optD"></div>
+          <div class="field"><label>ऑप्शन C</label><input id="optC" placeholder="विकल्प C"></div>
+          <div class="field"><label>ऑप्शन D</label><input id="optD" placeholder="विकल्प D"></div>
         </div>
-        <div class="field"><label>सही उत्तर</label><select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
+        <div class="field"><label>सही उत्तर (Correct Option)</label><select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
       </div>
 
       <div class="fields">
@@ -331,7 +334,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
     <div style="margin:20px 0; display:flex; justify-content:center;">
-      <!-- Google Official Sign-In Button Container -->
       <div id="g_id_onload"
          data-client_id="252279931857-haaacq7brrspb48g8kikt9mu8r24hanb.apps.googleusercontent.com"
          data-callback="handleCredentialResponse"
@@ -352,6 +354,11 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:40;max-width:90%;"></div>
 
 <script>
+// Supabase Configuration
+const SUPABASE_URL = "https://lvcziemskchcojdebxyb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_074d44kBooioY3TgLoJ1cw_N--wELLf";
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
@@ -378,7 +385,7 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.topNavLinks button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'community' : name === 'apps' ? 'gamestore' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'learning' ? 'tests' : name === 'books' ? 'books' : name)));
   
   if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('quiz'); }
   if (name === 'apps') loadMarketplaceApps();
@@ -454,7 +461,6 @@ window.closeCreateModal = () => el('createModal').classList.add('hidden');
 window.openAuth = () => { el('authModal').classList.remove('hidden'); };
 window.closeAuth = () => { el('authModal').classList.add('hidden'); };
 
-// Google Official JWT Response Handler
 window.handleCredentialResponse = response => {
   const responsePayload = parseJwt(response.credential);
   const email = responsePayload.email;
@@ -496,13 +502,31 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
-function getDB(key) { return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]'); }
-function saveDB(key, data) { localStorage.setItem('starhubes_' + key, JSON.stringify(data)); }
+// Database helper using Supabase with localStorage fallback
+async function getDBAsync(key) {
+  try {
+    const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
+    if (!error && data) return data;
+  } catch(e) {}
+  return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
+}
 
-window.refreshContent = () => {
-  renderCards(el('homeNews'), getDB('news'), 'news');
-  renderCards(el('allNews'), getDB('news'), 'news');
-  renderCards(el('allJobs'), getDB('jobs'), 'jobs');
+function getDB(key) { return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]'); }
+async function saveDBAsync(key, item) {
+  try {
+    await _supabase.from(key).insert([item]);
+  } catch(e) {}
+  let list = getDB(key);
+  list.unshift(item);
+  localStorage.setItem('starhubes_' + key, JSON.stringify(list));
+}
+
+window.refreshContent = async () => {
+  const news = await getDBAsync('news');
+  const jobs = await getDBAsync('jobs');
+  renderCards(el('homeNews'), news, 'news');
+  renderCards(el('allNews'), news, 'news');
+  renderCards(el('allJobs'), jobs, 'jobs');
   loadLearningQuestions();
   loadBooksList();
   loadMarketplaceApps();
@@ -527,7 +551,7 @@ function renderCards(target, items, type) {
   }).join('');
 }
 
-window.adminPublishContent = () => {
+window.adminPublishContent = async () => {
   if(!currentUser || currentUser.email !== MASTER_ADMIN_EMAIL) { showToast('अनुमति नहीं है!'); return; }
   const type = el('adminPostType').value;
   const title = el('adminTitle').value.trim();
@@ -536,9 +560,9 @@ window.adminPublishContent = () => {
   const image = safeUrl(el('adminImg').value.trim());
   const url = safeUrl(el('adminPdfUrl').value.trim());
 
-  if(!title) { setStatus('adminStatus', 'शीर्षक अनिवार्य है।', 'err'); return; }
+  if(!title) { setStatus('adminStatus', 'शीर्षक या प्रश्न अनिवार्य है।', 'err'); return; }
 
-  let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: Date.now() };
+  let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: new Date().toISOString() };
   if(type === 'questions') {
     newItem.examName = el('adminExamName').value.trim() || 'General Exam';
     newItem.subjectName = el('adminSubjectName').value.trim() || 'General Subject';
@@ -546,25 +570,25 @@ window.adminPublishContent = () => {
     newItem.correct = el('correctOpt').value;
   }
 
-  const list = getDB(type);
-  list.unshift(newItem);
-  saveDB(type, list);
+  await saveDBAsync(type, newItem);
 
   setStatus('adminStatus', 'पब्लिश हो गया!', 'ok');
   el('adminTitle').value = ''; el('adminDesc').value = ''; el('adminImg').value = ''; el('adminPdfUrl').value = '';
   el('adminExamName').value = ''; el('adminSubjectName').value = '';
+  el('optA').value = ''; el('optB').value = ''; el('optC').value = ''; el('optD').value = '';
   loadAdminItemsList();
   refreshContent();
 };
 
-function loadAdminItemsList() {
+async function loadAdminItemsList() {
   const target = el('adminItemsList');
   if(!target) return;
   let all = [];
-  ['questions', 'books', 'news', 'jobs'].forEach(t => {
-    getDB(t).forEach(x => all.push({ ...x, _type: t }));
-  });
-  all.sort((a,b) => b.created_at - a.created_at);
+  for(let t of ['questions', 'books', 'news', 'jobs']) {
+    let items = await getDBAsync(t);
+    items.forEach(x => all.push({ ...x, _type: t }));
+  }
+  all.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
   if(!all.length) { target.innerHTML = 'कोई कंटेंट नहीं है।'; return; }
   target.innerHTML = all.map(x => `
     <div style="padding:6px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
@@ -574,17 +598,19 @@ function loadAdminItemsList() {
   `).join('');
 }
 
-window.deleteAdminItem = (type, id) => {
-  let list = getDB(type);
-  list = list.filter(x => x.id !== id);
-  saveDB(type, list);
+window.deleteAdminItem = async (type, id) => {
+  try {
+    await _supabase.from(type).delete().eq('id', id);
+  } catch(e) {}
+  let list = getDB(type).filter(x => x.id !== id);
+  localStorage.setItem('starhubes_' + type, JSON.stringify(list));
   loadAdminItemsList();
   refreshContent();
   showToast('हटा दिया गया।');
 };
 
-function populateExamSubjectFilters() {
-  const qs = getDB('questions');
+async function populateExamSubjectFilters() {
+  const qs = await getDBAsync('questions');
   const examSelect = el('filterExam');
   const subjSelect = el('filterSubject');
   if(!examSelect || !subjSelect) return;
@@ -596,10 +622,10 @@ function populateExamSubjectFilters() {
   subjSelect.innerHTML = '<option value="">सभी विषय (All Subjects)</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
 }
 
-window.loadLearningQuestions = () => {
+window.loadLearningQuestions = async () => {
   const target = el('learningQuestionsList');
   if(!target) return;
-  let qs = getDB('questions');
+  let qs = await getDBAsync('questions');
   
   const selectedExam = el('filterExam') ? el('filterExam').value : '';
   const selectedSubj = el('filterSubject') ? el('filterSubject').value : '';
@@ -607,20 +633,21 @@ window.loadLearningQuestions = () => {
   if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
   if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
 
-  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
+  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है। (एडमिन पैनल से टेस्ट जोड़ें)</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
-      <div style="display:flex; gap:6px; margin-bottom:4px;">
+      <div style="display:flex; gap:6px; margin-bottom:6px;">
         <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
         <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
       </div>
       <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
       ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
       <p>${escapeHtml(q.description)}</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
-        ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')">${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</button>`).join('')}
+      
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+        ${(q.options || []).map((opt, i) => `<button class="ghost small" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
       </div>
-      <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
+      <p class="quizAnsResult" style="margin-top:8px; font-weight:700;"></p>
     </div>
   `).join('');
 };
@@ -632,16 +659,18 @@ window.checkUserAnswer = (btn, chosen, correct) => {
   if(chosen === correct) {
     resultEl.textContent = '🎉 सही उत्तर!';
     resultEl.style.color = 'var(--green)';
+    btn.style.background = '#0d4b45';
   } else {
-    resultEl.textContent = `❌ गलत। सही: ${correct}`;
+    resultEl.textContent = `❌ गलत। सही उत्तर: ${correct}`;
     resultEl.style.color = 'var(--orange)';
+    btn.style.background = '#4b1c35';
   }
 };
 
-window.loadBooksList = () => {
+window.loadBooksList = async () => {
   const target = el('allBooks');
   if(!target) return;
-  const books = getDB('books');
+  const books = await getDBAsync('books');
   if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = books.map(b => `
     <div class="card">
@@ -654,11 +683,11 @@ window.loadBooksList = () => {
   `).join('');
 };
 
-window.switchStudyFolderTab = tab => {
+window.switchStudyFolderTab = async tab => {
   const target = el('studyFolderContent');
   if(!target) return;
   if(tab === 'quiz') {
-    const qs = getDB('questions');
+    const qs = await getDBAsync('questions');
     if(!qs.length) { target.innerHTML = '<div class="empty">कोई क्विज़ प्रश्न उपलब्ध नहीं है।</div>'; return; }
     target.innerHTML = `<div class="grid2">${qs.map((q, idx) => `
       <div class="card" style="background:#07102f;">
@@ -666,13 +695,13 @@ window.switchStudyFolderTab = tab => {
         <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
         <p>${escapeHtml(q.description)}</p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
-          ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')">${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</button>`).join('')}
+          ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
         </div>
         <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
       </div>
     `).join('')}</div>`;
   } else if(tab === 'books') {
-    const books = getDB('books');
+    const books = await getDBAsync('books');
     if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
     target.innerHTML = `<div class="grid2">${books.map(b => `
       <div class="card" style="background:#07102f;">
@@ -683,7 +712,7 @@ window.switchStudyFolderTab = tab => {
       </div>
     `).join('')}</div>`;
   } else if(tab === 'ca') {
-    const news = getDB('news');
+    const news = await getDBAsync('news');
     if(!news.length) { target.innerHTML = '<div class="empty">कोई लाइव करेंट अफेयर्स उपलब्ध नहीं है।</div>'; return; }
     target.innerHTML = `<div class="grid2">${news.map(n => `
       <div class="card" style="background:#07102f;">
@@ -696,7 +725,7 @@ window.switchStudyFolderTab = tab => {
   }
 };
 
-window.submitGlobalNewsPost = () => {
+window.submitGlobalNewsPost = async () => {
   if(!currentUser) { openAuth(); return; }
   const title = el('modalTitle').value.trim();
   const description = el('modalDesc').value.trim();
@@ -705,15 +734,15 @@ window.submitGlobalNewsPost = () => {
 
   if(!title || !description) { setStatus('modalStatus', 'शीर्षक और विवरण भरें।', 'err'); return; }
   
-  const newItem = { id: 'news_' + Date.now(), title, description, image, url, category: 'CURRENT AFFAIRS', created_at: Date.now() };
-  const list = getDB('news'); list.unshift(newItem); saveDB('news', list);
+  const newItem = { id: 'news_' + Date.now(), title, description, image, url, category: 'CURRENT AFFAIRS', created_at: new Date().toISOString() };
+  await saveDBAsync('news', newItem);
   
   setStatus('modalStatus', 'करेंट अफेयर्स / खबर पब्लिश हो गई!', 'ok');
   el('modalTitle').value = ''; el('modalDesc').value = ''; el('modalImg').value = ''; el('modalUrl').value = '';
   setTimeout(() => { closeCreateModal(); refreshContent(); }, 1000);
 };
 
-window.submitDeveloperApp = () => {
+window.submitDeveloperApp = async () => {
   if(!currentUser) { openAuth(); showToast('लॉगिन करें।'); return; }
   const username = el('devUsername').value.trim();
   const name = el('appName').value.trim();
@@ -723,18 +752,18 @@ window.submitDeveloperApp = () => {
 
   if(!name || !url) { setStatus('uploadStatus', 'गेम का नाम और लिंक भरें।', 'err'); return; }
   
-  const newApp = { id: 'app_' + Date.now(), username: username || currentUser.username, name, image, url, desc, downloads: 0, created_at: Date.now() };
-  const apps = getDB('marketplace_apps'); apps.unshift(newApp); saveDB('marketplace_apps', apps);
+  const newApp = { id: 'app_' + Date.now(), username: username || currentUser.username, name, image, url, desc, downloads: 0, created_at: new Date().toISOString() };
+  await saveDBAsync('marketplace_apps', newApp);
   
   setStatus('uploadStatus', 'गेम सबमिट हो गया!', 'ok');
   el('devUsername').value = ''; el('appName').value = ''; el('appImg').value = ''; el('appUrl').value = ''; el('appDesc').value = '';
   toggleUploadForm(); loadMarketplaceApps();
 };
 
-window.loadMarketplaceApps = () => {
+window.loadMarketplaceApps = async () => {
   const target = el('marketplaceApps');
   if(!target) return;
-  const apps = getDB('marketplace_apps');
+  const apps = await getDBAsync('marketplace_apps');
   if(!apps.length) { target.innerHTML = '<div class="empty">कोई गेम नहीं है।</div>'; return; }
   target.innerHTML = apps.map(app => `
     <div class="card" style="display:flex; flex-direction:column; gap:8px; border-left:3px solid var(--brand);">
@@ -748,10 +777,17 @@ window.loadMarketplaceApps = () => {
   `).join('');
 };
 
-window.incrementDownload = appId => {
-  let apps = getDB('marketplace_apps');
+window.incrementDownload = async appId => {
+  let apps = await getDBAsync('marketplace_apps');
   const app = apps.find(a => a.id === appId);
-  if(app) { app.downloads = (app.downloads || 0) + 1; saveDB('marketplace_apps', apps); loadMarketplaceApps(); }
+  if(app) { 
+    app.downloads = (app.downloads || 0) + 1; 
+    try {
+      await _supabase.from('marketplace_apps').update({ downloads: app.downloads }).eq('id', appId);
+    } catch(e) {}
+    localStorage.setItem('starhubes_marketplace_apps', JSON.stringify(apps));
+    loadMarketplaceApps(); 
+  }
 };
 
 function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
@@ -759,19 +795,20 @@ function safeUrl(value) {
   try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) ? u.href : ''; } catch { return ''; }
 }
 
-window.createStudyRoom = () => {
+window.createStudyRoom = async () => {
   if (!currentUser) { openAuth(); showToast('लॉगिन करें।'); return; }
   const name = el('roomName').value.trim(); const subject = el('roomSubject').value.trim(); const passcode = el('roomCode').value.trim();
   if (!name) { setStatus('roomStatus', 'रूम नाम भरें।', 'err'); return; }
-  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [] };
-  const rooms = getDB('study_rooms'); rooms.unshift(newRoom); saveDB('study_rooms', rooms);
+  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [], created_at: new Date().toISOString() };
+  
+  await saveDBAsync('study_rooms', newRoom);
   el('roomName').value = ''; el('roomSubject').value = ''; el('roomCode').value = '';
   setStatus('roomStatus', 'रूम बन गया!', 'ok'); loadStudyRooms();
 };
 
-window.loadStudyRooms = () => {
+window.loadStudyRooms = async () => {
   const target = el('studyRoomsList'); if (!target) return;
-  const rooms = getDB('study_rooms');
+  const rooms = await getDBAsync('study_rooms');
   if (!rooms.length) { target.innerHTML = '<div class="empty">कोई एक्टिव रूम नहीं है।</div>'; return; }
   target.innerHTML = rooms.map(r => `
     <div class="card">
