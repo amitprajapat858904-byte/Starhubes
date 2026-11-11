@@ -12,37 +12,37 @@
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 16px 40px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:6px 12px;font-weight:600;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 2px 10px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:5px 8px;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.hidden{display:none!important}
-header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}
-.topNavLinks{display:flex;gap:4px;align-items:center;overflow-x:auto;padding:2px 0}.topNavLinks button{background:transparent;color:#d6defa;font-size:12px;padding:5px 10px;border-radius:6px;white-space:nowrap}.topNavLinks button.active,.topNavLinks button:hover{background:#182b67;color:#fff}
-.search{flex:1;max-width:200px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:6px 10px;font-size:12px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:6px;align-items:center}.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}
-.layout{max-width:1280px;margin:18px auto;padding:0 16px}.main{min-width:0}.hero{padding:20px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:14px}.hero h1{font-size:clamp(20px,2.5vw,30px);line-height:1.15;margin:0 0 8px;max-width:500px}.hero p{margin:0 0 14px;color:#e4eaff;font-size:13px;max-width:550px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 8px;border-radius:99px;font-size:11px;margin-bottom:10px}
-.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.sectionHead h2{font-size:18px;margin:0}.sectionHead p{font-size:12px;margin:2px 0 0;color:var(--muted)}.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chip{background:#101d49;border:1px solid #263a78;padding:6px 10px;border-radius:99px;color:#eaf0ff;font-size:12px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:14px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:14px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:8px}.newsImg{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-top:6px}.tag{display:inline-flex;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.02em;border-radius:6px;padding:3px 6px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}
-.card h3{margin:0;font-size:15px;line-height:1.3}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.meta{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;color:var(--muted);margin-top:auto;padding-top:4px}.cardActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1b2b60}.top{max-width:1280px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:900;white-space:nowrap;cursor:pointer}.logoMark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#173f9d,#6639ba);font-weight:900}
+.topNavLinks{display:flex;gap:4px;align-items:center;overflow-x:auto;padding:2px 0}.topNavLinks button{background:transparent;color:#d6defa;font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap}.topNavLinks button.active,.topNavLinks button:hover{background:#182b67;color:#fff}
+.search{flex:1;max-width:150px;position:relative}.search input{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:5px 8px;font-size:11px;outline:none}.search input::placeholder{color:#8e9dc9}.topActions{margin-left:auto;display:flex;gap:4px;align-items:center}.avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#173f9d,#6639ba);color:#fff;display:grid;place-items:center;font-weight:800;font-size:11px}
+.layout{max-width:1280px;margin:12px auto;padding:0 12px 60px 12px}.main{min-width:0}.hero{padding:16px;background:linear-gradient(120deg,#182c75,#365fe2 60%,#7355d7);color:white;position:relative;overflow:hidden;border-radius:12px}.hero h1{font-size:clamp(18px,2.2vw,26px);line-height:1.2;margin:0 0 6px;max-width:500px}.hero p{margin:0 0 10px;color:#e4eaff;font-size:12px;max-width:550px}.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:3px 6px;border-radius:99px;font-size:10px;margin-bottom:8px}
+.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}.sectionHead h2{font-size:16px;margin:0}.sectionHead p{font-size:11px;margin:2px 0 0;color:var(--muted)}.chips{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.chip{background:#101d49;border:1px solid #263a78;padding:5px 8px;border-radius:99px;color:#eaf0ff;font-size:11px;cursor:pointer}.chip.active{background:#182b67;color:#fff;border-color:#3d65d7}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:12px;min-width:0;background:#0b1740;border:1px solid #1c2d65;border-radius:12px;box-shadow:var(--shadow);color:var(--text)}.newsCard{display:flex;flex-direction:column;gap:6px}.newsImg{width:100%;height:130px;object-fit:cover;border-radius:6px;margin-top:4px}.tag{display:inline-flex;align-self:flex-start;font-size:9px;font-weight:700;letter-spacing:.02em;border-radius:4px;padding:2px 5px;background:#1a2d6b;color:#b9ccff}.tag.green{background:#0d4b45;color:#a2ffe0}.tag.orange{background:#563a12;color:#ffdb91}
+.card h3{margin:0;font-size:14px;line-height:1.3}.card p{margin:0;color:var(--muted);font-size:11px;line-height:1.4}.meta{display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:10px;color:var(--muted);margin-top:auto;padding-top:2px}.cardActions{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
 
 /* Clean White Styling for News Section */
 #section-news .card, #homeNews .card{background:#ffffff!important;color:#111827!important;border:1px solid #e5e7eb!important}
 #section-news .card p, #homeNews .card p, #section-news .meta, #homeNews .meta{color:#4b5563!important}
 #section-news .card h3, #homeNews .card h3{color:#1f2937!important}
 
-.composer{padding:14px;margin-top:14px;background:#0b1740;border:1px solid #1c2d65;border-radius:14px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:10px;font-size:12px;resize:vertical;min-height:60px;margin:10px 0}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field{display:flex;flex-direction:column;gap:4px;margin:6px 0}.field label{font-size:11px;font-weight:700;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:8px;padding:8px;font-size:12px;width:100%;background:#101e4c;color:#f4f6ff}
-.footer{padding:20px 0;color:var(--muted);font-size:11px;text-align:center}.status{padding:8px 10px;border-radius:8px;background:#111f4b;color:#dce5ff;font-size:12px;margin:8px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}
+.composer{padding:12px;margin-top:10px;background:#0b1740;border:1px solid #1c2d65;border-radius:12px}.composer textarea{width:100%;border:1px solid #263a78;background:#101e4c;color:#f4f6ff;border-radius:8px;padding:8px;font-size:11px;resize:vertical;min-height:50px;margin:8px 0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:6px}.field{display:flex;flex-direction:column;gap:3px;margin:4px 0}.field label{font-size:10px;font-weight:700;color:#c2d0f0}.field input,.field textarea,.field select{border:1px solid #263a78;border-radius:6px;padding:6px;font-size:11px;width:100%;background:#101e4c;color:#f4f6ff}
+.footer{padding:16px 0;color:var(--muted);font-size:10px;text-align:center}.status{padding:6px 8px;border-radius:6px;background:#111f4b;color:#dce5ff;font-size:11px;margin:6px 0}.status.ok{background:#0b403b;color:#9bffe0}.status.err{background:#4b1c35;color:#ffc1d3}
 
-.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px}
-.modalbox{width:min(580px,100%);background:linear-gradient(145deg,#0c1947,#07102f);border:1px solid #2e458c;border-radius:18px;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.6);color:var(--text);max-height:85vh;overflow-y:auto}
-.modalbox h2{margin:0 0 4px;font-size:18px}.modalbox .field{margin:10px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}
+.modal{position:fixed;inset:0;z-index:30;background:rgba(1,5,20,.85);backdrop-filter:blur(6px);display:grid;place-items:center;padding:12px}
+.modalbox{width:min(540px,100%);background:linear-gradient(145deg,#0c1947,#07102f);border:1px solid #2e458c;border-radius:16px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.6);color:var(--text);max-height:85vh;overflow-y:auto}
+.modalbox h2{margin:0 0 4px;font-size:16px}.modalbox .field{margin:8px 0}.modalhead{display:flex;justify-content:space-between;align-items:center}
 
-.sideDrawer{position:fixed;top:0;right:-340px;width:320px;height:100vh;background:#091336;border-left:1px solid #1b2b60;box-shadow:-10px 0 30px rgba(0,0,0,.5);z-index:50;transition:right 0.3s ease;padding:20px;display:flex;flex-direction:column;overflow-y:auto}
+.sideDrawer{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:#091336;border-left:1px solid #1b2b60;box-shadow:-10px 0 30px rgba(0,0,0,.5);z-index:50;transition:right 0.3s ease;padding:16px;display:flex;flex-direction:column;overflow-y:auto}
 .sideDrawer.open{right:0}
-.drawerHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b2b60;padding-bottom:10px;margin-bottom:14px}
-.drawerHead h3{margin:0;font-size:16px}
+.drawerHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b2b60;padding-bottom:8px;margin-bottom:12px}
+.drawerHead h3{margin:0;font-size:15px}
 
-.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:12px;padding:14px;margin:10px 0}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:12px;background:#0b1740}
-.fab{position:fixed;bottom:70px;right:20px;width:48px;height:48px;background:linear-gradient(135deg,#2878ff,#8b45ff);color:white;border-radius:50%;display:grid;place-items:center;font-size:24px;box-shadow:0 4px 15px rgba(40,120,255,.4);cursor:pointer;z-index:25;transition:transform .2s}.fab:hover{transform:scale(1.08)}
-.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#050d2a;border-top:1px solid #1b2b60;justify-content:space-around;padding:6px 2px}
-.mobileNav button{font-size:10px;padding:4px 2px;background:transparent;color:#b7c5eb;display:flex;flex-direction:column;align-items:center;gap:1px}.mobileNav button.active{color:#8eabff}
-@media(max-width:900px){.topNavLinks{display:none}}
+.adminBox{border:1px solid #263a78;background:#0c1947;border-radius:10px;padding:12px;margin:8px 0}.empty{padding:16px;text-align:center;color:var(--muted);border:1px dashed #263a78;border-radius:10px;background:#0b1740}
+.fab{position:fixed;bottom:60px;right:16px;width:42px;height:42px;background:linear-gradient(135deg,#2878ff,#8b45ff);color:white;border-radius:50%;display:grid;place-items:center;font-size:22px;box-shadow:0 4px 12px rgba(40,120,255,.4);cursor:pointer;z-index:25;transition:transform .2s}.fab:hover{transform:scale(1.08)}
+.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:#050d2a;border-top:1px solid #1b2b60;justify-content:space-around;padding:4px 2px}
+.mobileNav button{font-size:9px;padding:3px 2px;background:transparent;color:#b7c5eb;display:flex;flex-direction:column;align-items:center;gap:1px}.mobileNav button.active{color:#8eabff}
+@media(max-width:950px){.topNavLinks{display:none}}
 @media(max-width:700px){.grid2{grid-template-columns:1fr}.fields{grid-template-columns:1fr}}
 </style>
 </head>
@@ -53,20 +53,20 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <div class="logo" onclick="showSection('home')"><div class="logoMark">S</div><span id="headerCompanyName">StarHubes</span></div>
     
     <div class="topNavLinks">
-      <button class="active" data-section="home" onclick="showSection('home')">🏠 Home (News + CA)</button>
-      <button data-section="study" onclick="showSection('study')">👥 Study &amp; Folder</button>
-      <button data-section="learning" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
-      <button data-section="books" onclick="showSection('books')">📚 Books &amp; PDFs</button>
-      <button data-section="news" onclick="showSection('news')">📰 News Feed</button>
+      <button class="active" data-section="home" onclick="showSection('home')">🏠 Home</button>
+      <button data-section="study" onclick="showSection('study')">👥 Study</button>
+      <button data-section="learning" onclick="showSection('learning')">🎓 Tests</button>
+      <button data-section="books" onclick="showSection('books')">📚 Books</button>
       <button data-section="apps" onclick="showSection('apps')">🎮 Game Store</button>
+      <button data-section="news" onclick="showSection('news')">📰 News</button>
       <button data-section="jobs" onclick="showSection('jobs')">💼 Jobs</button>
       <button data-section="community" onclick="showSection('community')">📍 Community</button>
     </div>
 
     <div class="search"><input id="searchInput" placeholder="खोजें..." oninput="filterVisible(this.value)"></div>
     <div class="topActions">
-      <button class="ghost small" onclick="openSettingsDrawer()">⚙️ Settings</button>
-      <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️ Admin Panel</button>
+      <button class="ghost small" onclick="openSettingsDrawer()">⚙️</button>
+      <button class="primary small hidden" id="adminPortalBtn" onclick="openAdminModal()" style="background:linear-gradient(110deg,#ffb020,#ff5252);">🛡️</button>
       <button class="primary small" id="loginBtn" onclick="openAuth()">Login</button>
       <button class="ghost small hidden" id="logoutBtn" onclick="doLogout()">Logout</button>
       <div class="avatar" id="userAvatar" onclick="openAuth()" title="Account">S</div>
@@ -76,7 +76,6 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 
 <div class="layout">
   <main class="main">
-    <!-- Home Section featuring News + Current Affairs -->
     <section id="section-home">
       <div class="hero">
         <span class="pill">LIVE NEWS • CURRENT AFFAIRS • STUDY HUB</span>
@@ -86,66 +85,65 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('study')">स्टडी फोल्डर</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('home')">📰 News &amp; Current Affairs</button>
+        <button class="chip active" onclick="showSection('home')">📰 News &amp; CA</button>
         <button class="chip" onclick="showSection('study')">👥 Study &amp; Folder</button>
         <button class="chip" onclick="showSection('learning')">🎓 Tests &amp; Quiz</button>
       </div>
-      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; लाइव करेंट अफेयर्स</h2><p>हर खबर और अपडेट बिल्कुल मुफ्त</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 ताज़ा खबरें &amp; लाइव करेंट अफेयर्स</h2><p>हर खबर और अपडेट बिल्कुल मुफ्त</p></div><button class="secondary small" onclick="refreshContent()">↻</button></div>
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
-    <!-- Study & Integrated Folder Section (Books & PDFs on top) -->
+    <!-- Study & Integrated Folder Section -->
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>बुक्स, पीडीएफ, टेस्ट और स्टडी रूम</p></div></div>
       
-      <!-- Top Priority inside Study Folder: Books & PDFs + Quiz -->
-      <div class="card" style="border:2px solid var(--brand); margin-bottom:16px;">
+      <div class="card" style="border:2px solid var(--brand); margin-bottom:14px;">
         <h3>📂 Integrated Study Folder (Books, PDFs &amp; Tests)</h3>
-        <p class="muted tiny">यहाँ आपकी सभी ई-बुक्स, पीडीएफ और ऑनलाइन टेस्ट सबसे ऊपर उपलब्ध हैं।</p>
+        <p class="muted tiny">यहाँ सभी ई-बुक्स, पीडीएफ और ऑनलाइन टेस्ट उपलब्ध हैं।</p>
         
-        <div style="display:flex; gap:6px; margin:10px 0; flex-wrap:wrap;">
-          <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स &amp; PDFs (सर्वोच्च)</button>
-          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 क्विज़ &amp; टेस्ट (ABCD)</button>
-          <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ लाइव करेंट अफेयर्स</button>
+        <div style="display:flex; gap:5px; margin:8px 0; flex-wrap:wrap;">
+          <button class="secondary small" onclick="switchStudyFolderTab('books')">📚 बुक्स</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('quiz')">🎓 टेस्ट (ABCD)</button>
+          <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ करेंट अफेयर्स</button>
         </div>
 
-        <div id="studyFolderContent" style="margin-top:12px;">
+        <div id="studyFolderContent" style="margin-top:10px;">
           <div class="empty">लोड हो रहा है...</div>
         </div>
       </div>
 
-      <div class="card" style="margin-bottom:12px;">
+      <div class="card" style="margin-bottom:10px;">
         <h3>➕ नया ग्रुप स्टडी रूम बनाएं</h3>
         <div class="fields">
           <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="Physics Class"></div>
           <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Physics"></div>
         </div>
-        <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
-        <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
-        <div id="roomStatus" class="status hidden" style="margin-top:6px;"></div>
+        <div class="field" style="margin-top:4px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
+        <button class="primary small" style="margin-top:6px;" onclick="createStudyRoom()">रूम बनाएं</button>
+        <div id="roomStatus" class="status hidden" style="margin-top:4px;"></div>
       </div>
       
       <div class="sectionHead"><div><h2>एक्टिव रूम्स</h2></div></div>
-      <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"></div>
+      <div id="studyRoomsList" class="grid2" style="margin-bottom:12px;"></div>
     </section>
 
     <!-- Learning & Exams Test Section (ABCD Options) -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ABCD ऑप्शन वाले ऑनलाइन टेस्ट दें</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
       
-      <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
-        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
+      <div class="card" style="margin-bottom:12px; background:#0c1947; border:1px solid #2e458c;">
+        <h3 style="margin-top:0; font-size:13px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
         <div class="fields">
           <div class="field">
-            <label>परीक्षा का नाम (Exam)</label>
+            <label>परीक्षा (Exam)</label>
             <select id="filterExam" onchange="loadLearningQuestions()">
-              <option value="">सभी परीक्षाएं (All Exams)</option>
+              <option value="">सभी परीक्षाएं</option>
             </select>
           </div>
           <div class="field">
             <label>विषय (Subject)</label>
             <select id="filterSubject" onchange="loadLearningQuestions()">
-              <option value="">सभी विषय (All Subjects)</option>
+              <option value="">सभी विषय</option>
             </select>
           </div>
         </div>
@@ -160,51 +158,50 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="allBooks" class="grid2"><div class="empty">कोई बुक नहीं है।</div></div>
     </section>
 
+    <!-- Game Store Section -->
+    <section id="section-apps" class="hidden">
+      <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <div>
+          <h2>🎮 StarHubes Game Store</h2>
+          <p>उपलब्ध गेम्स देखें और डाउनलोड करें</p>
+        </div>
+        <button class="primary small" onclick="toggleUploadForm()">🚀 + गेम अपलोड</button>
+      </div>
+
+      <div id="uploadCardContainer" class="card hidden" style="margin-bottom:12px; border:2px solid var(--brand);">
+        <h3>🚀 गेम अपलोड फॉर्म</h3>
+        
+        <div class="fields">
+          <div class="field"><label>यूजरनेम</label><input id="devUsername" placeholder="amit"></div>
+          <div class="field"><label>गेम का नाम</label><input id="appName" placeholder="Game Name"></div>
+        </div>
+
+        <div class="fields" style="margin-top:4px;">
+          <div class="field"><label>इमेज URL</label><input id="appImg" type="url" placeholder="https://..."></div>
+          <div class="field"><label>डाउनलोड लिंक</label><input id="appUrl" type="url" placeholder="https://..."></div>
+        </div>
+
+        <div class="field" style="margin-top:4px;"><label>विवरण</label><input id="appDesc" placeholder="मुख्य बातें..."></div>
+
+        <div style="display:flex; gap:4px; margin-top:8px;">
+          <button class="primary small" onclick="submitDeveloperApp()">सबमिट</button>
+          <button class="ghost small" onclick="toggleUploadForm()">रद्द करें</button>
+        </div>
+        <div id="uploadStatus" class="status hidden" style="margin-top:4px;"></div>
+      </div>
+
+      <div class="sectionHead" style="margin-top:6px;"><div><h2>📥 उपलब्ध गेम्स</h2></div></div>
+      <div id="marketplaceApps" class="grid2" style="margin-bottom:12px;"><div class="empty">कोई गेम नहीं है।</div></div>
+    </section>
+
     <!-- News & Current Affairs Section -->
     <section id="section-news" class="hidden">
-      <div class="sectionHead"><div><h2>📰 News &amp; Live Current Affairs</h2><p>दैनिक करेंट अफेयर्स और ताज़ा खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>📰 News &amp; Live Current Affairs</h2><p>दैनिक करेंट अफेयर्स और ताज़ा खबरें</p></div><button class="secondary small" onclick="refreshContent()">↻</button></div>
       <div id="allNews" class="grid2"><div class="empty">कोई खबर नहीं है।</div></div>
     </section>
 
-    <!-- Game Store Section -->
-    <section id="section-apps" class="hidden">
-      <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <div>
-          <h2>🎮 StarHubes Game Store</h2>
-          <p>उपलब्ध गेम्स सबसे पहले देखें और डाउनलोड करें</p>
-        </div>
-        <button class="primary small" onclick="toggleUploadForm()">🚀 + गेम अपलोड करें</button>
-      </div>
-
-      <div id="uploadCardContainer" class="card hidden" style="margin-bottom:16px; border:2px solid var(--brand);">
-        <h3>🚀 गेम अपलोड फॉर्म</h3>
-        <p class="muted tiny">यूजरनेम, गेम का नाम और लिंक दर्ज करें।</p>
-        
-        <div class="fields">
-          <div class="field"><label>यूजरनेम</label><input id="devUsername" placeholder="amit_prajapat"></div>
-          <div class="field"><label>गेम का नाम</label><input id="appName" placeholder="Action Game"></div>
-        </div>
-
-        <div class="fields" style="margin-top:6px;">
-          <div class="field"><label>गेम फोटो URL</label><input id="appImg" type="url" placeholder="https://..."></div>
-          <div class="field"><label>APK/डाउनलोड लिंक</label><input id="appUrl" type="url" placeholder="https://..."></div>
-        </div>
-
-        <div class="field" style="margin-top:6px;"><label>विवरण</label><input id="appDesc" placeholder="मुख्य बातें..."></div>
-
-        <div style="display:flex; gap:6px; margin-top:10px;">
-          <button class="primary small" onclick="submitDeveloperApp()">सबमिट करें</button>
-          <button class="ghost small" onclick="toggleUploadForm()">रद्द करें</button>
-        </div>
-        <div id="uploadStatus" class="status hidden" style="margin-top:6px;"></div>
-      </div>
-
-      <div class="sectionHead" style="margin-top:8px;"><div><h2>📥 उपलब्ध गेम्स</h2></div></div>
-      <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई गेम नहीं है।</div></div>
-    </section>
-
     <section id="section-jobs" class="hidden">
-      <div class="sectionHead"><div><h2>💼 Jobs &amp; Vacancies</h2><p>आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻ Refresh</button></div>
+      <div class="sectionHead"><div><h2>💼 Jobs &amp; Vacancies</h2><p>आवेदन लिंक</p></div><button class="secondary small" onclick="refreshContent()">↻</button></div>
       <div id="allJobs" class="grid2"><div class="empty">कोई जॉब नहीं है।</div></div>
     </section>
 
@@ -214,7 +211,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div class="field"><label>शीर्षक</label><input id="localTitle" placeholder="शीर्षक"></div>
         <div class="fields"><div class="field"><label>क्षेत्र</label><input id="localArea" placeholder="शहर"></div><div class="field"><label>श्रेणी</label><select id="localCategory"><option>Local News</option><option>Education</option></select></div></div>
         <div class="field"><label>विवरण</label><textarea id="localBody" placeholder="विवरण..."></textarea></div>
-        <button class="primary small" onclick="submitLocalNews()">भेजें</button><div id="localStatus" class="status hidden" style="margin-top:6px"></div>
+        <button class="primary small" onclick="submitLocalNews()">भेजें</button><div id="localStatus" class="status hidden" style="margin-top:4px"></div>
       </div>
       <div class="sectionHead"><div><h2>समुदाय खबरें</h2></div></div><div id="communityNews" class="grid2"></div>
     </section>
@@ -226,12 +223,13 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <!-- Floating Plus Button (+) for News Only -->
 <div class="fab" onclick="openCreateModal()" title="ताज़ा खबर डालें">+</div>
 
+<!-- Mobile Bottom Navigation (Includes Game Store & Study) -->
 <nav class="mobileNav">
   <button onclick="showSection('home')">🏠<span>Home</span></button>
-  <button onclick="showSection('news')">📰<span>News</span></button>
   <button onclick="showSection('study')">👥<span>Study</span></button>
   <button onclick="showSection('learning')">🎓<span>Tests</span></button>
-  <button onclick="showSection('books')">📚<span>Books</span></button>
+  <button onclick="showSection('apps')">🎮<span>Games</span></button>
+  <button onclick="showSection('news')">📰<span>News</span></button>
 </nav>
 
 <!-- ⚙️ Side Settings Drawer -->
@@ -241,22 +239,22 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     <button class="ghost small" onclick="closeSettingsDrawer()">✕</button>
   </div>
   <div class="field"><label>कंपनी का नाम</label><input id="settingsCompanyName" placeholder="StarHubes"></div>
-  <div class="field" style="margin-top:8px;"><label>कंपनी ईमेल</label><input id="settingsCompanyEmail" placeholder="support@starn.in"></div>
-  <div class="field" style="margin-top:8px;"><label>लॉगिन जीमेल</label><input id="settingsUserEmail" readonly style="opacity:0.7;"></div>
-  <button class="primary small" style="width:100%; margin-top:12px;" onclick="saveCompanySettings()">सुरक्षित करें</button>
-  <div id="settingsStatus" class="status hidden" style="margin-top:6px;"></div>
+  <div class="field" style="margin-top:6px;"><label>कंपनी ईमेल</label><input id="settingsCompanyEmail" placeholder="support@starn.in"></div>
+  <div class="field" style="margin-top:6px;"><label>लॉगिन जीमेल</label><input id="settingsUserEmail" readonly style="opacity:0.7;"></div>
+  <button class="primary small" style="width:100%; margin-top:10px;" onclick="saveCompanySettings()">सुरक्षित करें</button>
+  <div id="settingsStatus" class="status hidden" style="margin-top:4px;"></div>
 </div>
 
 <!-- 🛡️ Master Admin Panel Modal -->
 <div id="adminModal" class="modal hidden" onclick="if(event.target===this)closeAdminModal()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2>🛡️ Master Admin Panel</h2><p class="muted tiny">वेबसाइट का पूरा कंट्रोल और एडिटिंग</p></div>
+      <div><h2>🛡️ Master Admin Panel</h2><p class="muted tiny">वेबसाइट का पूरा कंट्रोल</p></div>
       <button class="ghost small" onclick="closeAdminModal()">✕</button>
     </div>
     
     <div class="adminBox">
-      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें (Add Content)</h3>
+      <h3 style="margin-top:0; font-size:13px; color:var(--green);">➕ नया कंटेंट जोड़ें</h3>
       <div class="fields">
         <div class="field">
           <label>प्रकार</label>
@@ -267,18 +265,17 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
             <option value="jobs">💼 जॉब वेकेंसी</option>
           </select>
         </div>
-        <div class="field"><label>श्रेणी / कैटेगरी</label><input id="adminCategory" placeholder="General"></div>
+        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="General"></div>
       </div>
 
       <div id="examSubjectBox" class="fields">
-        <div class="field"><label>परीक्षा का नाम (Exam)</label><input id="adminExamName" placeholder="SSC / NEET / UPSC"></div>
-        <div class="field"><label>विषय (Subject)</label><input id="adminSubjectName" placeholder="Physics / Mathematics"></div>
+        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="SSC / NEET"></div>
+        <div class="field"><label>विषय</label><input id="adminSubjectName" placeholder="Physics"></div>
       </div>
 
       <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
-      <div class="field"><label>विवरण / अतिरिक्त जानकारी</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
+      <div class="field"><label>विवरण</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
       
-      <!-- ABCD Options Inputs -->
       <div id="questionOptionsBox">
         <div class="fields">
           <div class="field"><label>ऑप्शन A</label><input id="optA" placeholder="विकल्प A"></div>
@@ -288,7 +285,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
           <div class="field"><label>ऑप्शन C</label><input id="optC" placeholder="विकल्प C"></div>
           <div class="field"><label>ऑप्शन D</label><input id="optD" placeholder="विकल्प D"></div>
         </div>
-        <div class="field"><label>सही उत्तर (Correct Option)</label><select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
+        <div class="field"><label>सही उत्तर</label><select id="correctOpt"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></div>
       </div>
 
       <div class="fields">
@@ -296,13 +293,13 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div class="field"><label>PDF/लिंक URL</label><input id="adminPdfUrl" type="url" placeholder="https://..."></div>
       </div>
 
-      <button class="primary small" style="width:100%; margin-top:10px;" onclick="adminPublishContent()">पब्लिश करें</button>
-      <div id="adminStatus" class="status hidden" style="margin-top:6px;"></div>
+      <button class="primary small" style="width:100%; margin-top:8px;" onclick="adminPublishContent()">पब्लिश करें</button>
+      <div id="adminStatus" class="status hidden" style="margin-top:4px;"></div>
     </div>
 
     <div class="adminBox">
-      <h3 style="margin-top:0; font-size:14px; color:var(--orange);">📋 सभी पब्लिश किए गए कंटेंट्स (Delete / Manage)</h3>
-      <div id="adminItemsList" style="max-height:160px; overflow-y:auto; font-size:12px;"></div>
+      <h3 style="margin-top:0; font-size:13px; color:var(--orange);">📋 मैनेज कंटेंट्स</h3>
+      <div id="adminItemsList" style="max-height:140px; overflow-y:auto; font-size:11px;"></div>
     </div>
   </div>
 </div>
@@ -311,7 +308,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <div id="createModal" class="modal hidden" onclick="if(event.target===this)closeCreateModal()">
   <div class="modalbox">
     <div class="modalhead">
-      <div><h2>📰 ताज़ा खबर / करेंट अफेयर्स साझा करें</h2><p class="muted tiny">पोस्ट पब्लिश करें</p></div>
+      <div><h2>📰 ताज़ा खबर / करेंट अफेयर्स</h2><p class="muted tiny">पोस्ट पब्लिश करें</p></div>
       <button class="ghost small" onclick="closeCreateModal()">✕</button>
     </div>
     
@@ -323,19 +320,19 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div class="field"><label>लिंक URL</label><input id="modalUrl" type="url" placeholder="https://..."></div>
     </div>
 
-    <button class="primary small" style="width:100%; margin-top:10px;" onclick="submitGlobalNewsPost()">पब्लिश करें</button>
-    <div id="modalStatus" class="status hidden" style="margin-top:6px;"></div>
+    <button class="primary small" style="width:100%; margin-top:8px;" onclick="submitGlobalNewsPost()">पब्लिश करें</button>
+    <div id="modalStatus" class="status hidden" style="margin-top:4px;"></div>
   </div>
 </div>
 
 <!-- Google Official Sign-In Modal -->
 <div id="authModal" class="modal hidden" onclick="if(event.target===this)closeAuth()">
-  <div class="modalbox" style="text-align:center; max-width:400px;">
+  <div class="modalbox" style="text-align:center; max-width:380px;">
     <div class="modalhead" style="text-align:left;">
-      <div><h2>Sign In to StarHubes</h2><p class="muted tiny">अपने असली गूगल अकाउंट से लॉगिन करें</p></div>
+      <div><h2>Sign In to StarHubes</h2><p class="muted tiny">गूगल अकाउंट से लॉगिन करें</p></div>
       <button class="ghost small" onclick="closeAuth()">✕</button>
     </div>
-    <div style="margin:20px 0; display:flex; justify-content:center;">
+    <div style="margin:16px 0; display:flex; justify-content:center;">
       <div id="g_id_onload"
          data-client_id="252279931857-haaacq7brrspb48g8kikt9mu8r24hanb.apps.googleusercontent.com"
          data-callback="handleCredentialResponse"
@@ -353,7 +350,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   </div>
 </div>
 
-<div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:40;max-width:90%;"></div>
+<div id="toast" class="status hidden" style="position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:40;max-width:90%;"></div>
 
 <script>
 // Supabase Configuration
@@ -387,7 +384,7 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.topNavLinks button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'study' ? 'study' : name === 'learning' ? 'tests' : name === 'books' ? 'books' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'study' ? 'study' : name === 'learning' ? 'tests' : name === 'apps' ? 'games' : name === 'news' ? 'news' : name)));
   
   if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('books'); }
   if (name === 'apps') loadMarketplaceApps();
@@ -592,9 +589,9 @@ async function loadAdminItemsList() {
   all.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
   if(!all.length) { target.innerHTML = 'कोई कंटेंट नहीं है।'; return; }
   target.innerHTML = all.map(x => `
-    <div style="padding:6px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
+    <div style="padding:4px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
       <div><span class="tag">${x._type.toUpperCase()}</span> <strong>${escapeHtml(x.title)}</strong></div>
-      <button class="danger small" style="padding:3px 8px; font-size:10px;" onclick="deleteAdminItem('${x._type}', '${x.id}')">हटाएं</button>
+      <button class="danger small" style="padding:2px 6px; font-size:9px;" onclick="deleteAdminItem('${x._type}', '${x.id}')">हटाएं</button>
     </div>
   `).join('');
 }
@@ -634,21 +631,21 @@ window.loadLearningQuestions = async () => {
   if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
   if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
 
-  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है। (एडमिन पैनल से टेस्ट जोड़ें)</div>'; return; }
+  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
-      <div style="display:flex; gap:6px; margin-bottom:6px;">
+      <div style="display:flex; gap:6px; margin-bottom:4px;">
         <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
         <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
       </div>
-      <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
+      <h3 style="margin-top:4px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
       ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
       <p>${escapeHtml(q.description)}</p>
       
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
-        ${(q.options || []).map((opt, i) => `<button class="ghost small" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
+        ${(q.options || []).map((opt, i) => `<button class="ghost small" style="text-align:left; padding:6px 8px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
       </div>
-      <p class="quizAnsResult" style="margin-top:8px; font-weight:700;"></p>
+      <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
     </div>
   `).join('');
 };
@@ -704,12 +701,12 @@ window.switchStudyFolderTab = async tab => {
     target.innerHTML = `<div class="grid2">${qs.map((q, idx) => `
       <div class="card" style="background:#07102f;">
         <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')} | ${escapeHtml(q.subjectName || 'Subject')}</span>
-        <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
+        <h3 style="margin-top:4px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
         <p>${escapeHtml(q.description)}</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px;">
           ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
         </div>
-        <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
+        <p class="quizAnsResult" style="margin-top:4px; font-weight:700;"></p>
       </div>
     `).join('')}</div>`;
   } else if(tab === 'ca') {
@@ -767,7 +764,7 @@ window.loadMarketplaceApps = async () => {
   const apps = await getDBAsync('marketplace_apps');
   if(!apps.length) { target.innerHTML = '<div class="empty">कोई गेम नहीं है।</div>'; return; }
   target.innerHTML = apps.map(app => `
-    <div class="card" style="display:flex; flex-direction:column; gap:8px; border-left:3px solid var(--brand);">
+    <div class="card" style="display:flex; flex-direction:column; gap:6px; border-left:3px solid var(--brand);">
       <span class="tag orange">👤 ${escapeHtml(app.username || 'Unknown')}</span>
       <h3>${escapeHtml(app.name)}</h3>
       ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="Game">` : ''}
@@ -816,7 +813,7 @@ window.loadStudyRooms = async () => {
       <span class="tag green">${escapeHtml(r.subject)}</span>
       <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)}</p>
-      <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}')">जॉइन करें</button>
+      <button class="primary small" style="margin-top:6px;" onclick="tryJoinRoom('${r.id}')">जॉइन करें</button>
     </div>
   `).join('');
 };
