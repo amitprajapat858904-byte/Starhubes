@@ -52,7 +52,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
     
     <div class="topNavLinks">
       <button class="active" data-section="home" onclick="showSection('home')">🏠 Home</button>
-      <button data-section="apps" onclick="showSection('apps')">📱 App Store</button>
+      <button data-section="apps" onclick="showSection('apps')">🎮 Game Store</button>
       <button data-section="news" onclick="showSection('news')">📰 News</button>
       <button data-section="jobs" onclick="showSection('jobs')">💼 Jobs</button>
       <button data-section="learning" onclick="showSection('learning')">🎓 Learning</button>
@@ -76,14 +76,14 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
   <main class="main">
     <section id="section-home">
       <div class="hero">
-        <span class="pill">FREE NEWS • APPS MARKETPLACE • STUDY HUB</span>
-        <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने ऐप्स अपलोड करें।</h1>
-        <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना ऐप स्टोर पर अपलोड करके कमाई करें।</p>
-        <button class="primary small" onclick="showSection('apps')">ऐप स्टोर खोलें →</button>
+        <span class="pill">FREE NEWS • GAME STORE • STUDY HUB</span>
+        <h1>ताज़ा खबरें हमेशा फ्री,<br>और अपने गेम अपलोड करें।</h1>
+        <p>बिना किसी रुकावट के खबरें पढ़ें, सरकारी नौकरियां देखें, और डेवलपर्स अपना गेम स्टोर पर अपलोड करके कमाई करें।</p>
+        <button class="primary small" onclick="showSection('apps')">गेम स्टोर खोलें →</button>
         <button class="ghost small" style="color:white;border-color:#ffffff66;margin-left:4px" onclick="showSection('news')">फ्री खबरें</button>
       </div>
       <div class="chips">
-        <button class="chip active" onclick="showSection('apps')">📱 App Store</button>
+        <button class="chip active" onclick="showSection('apps')">🎮 Game Store</button>
         <button class="chip" onclick="showSection('news')">📰 News Feed</button>
         <button class="chip" onclick="showSection('study')">👥 Group Study</button>
       </div>
@@ -91,27 +91,27 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
       <div id="homeNews" class="grid2"><div class="empty">अभी कोई सामग्री नहीं है।</div></div>
     </section>
 
-    <!-- App Store Section -->
+    <!-- Game Store Section -->
     <section id="section-apps" class="hidden">
       <div class="sectionHead" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div>
-          <h2>📱 StarHubes App Store</h2>
-          <p>उपलब्ध ऐप्स सबसे पहले देखें और डाउनलोड करें</p>
+          <h2>🎮 StarHubes Game Store</h2>
+          <p>उपलब्ध गेम्स सबसे पहले देखें और डाउनलोड करें</p>
         </div>
-        <button class="primary small" onclick="toggleUploadForm()">🚀 + ऐप अपलोड करें</button>
+        <button class="primary small" onclick="toggleUploadForm()">🚀 + गेम अपलोड करें</button>
       </div>
 
       <div id="uploadCardContainer" class="card hidden" style="margin-bottom:16px; border:2px solid var(--brand);">
-        <h3>🚀 ऐप अपलोड फॉर्म</h3>
-        <p class="muted tiny">यूजरनेम, ऐप का नाम और लिंक दर्ज करें।</p>
+        <h3>🚀 गेम अपलोड फॉर्म</h3>
+        <p class="muted tiny">यूजरनेम, गेम का नाम और लिंक दर्ज करें।</p>
         
         <div class="fields">
           <div class="field"><label>यूजरनेम</label><input id="devUsername" placeholder="amit_prajapat"></div>
-          <div class="field"><label>ऐप नाम</label><input id="appName" placeholder="Study App"></div>
+          <div class="field"><label>गेम का नाम</label><input id="appName" placeholder="Action Game"></div>
         </div>
 
         <div class="fields" style="margin-top:6px;">
-          <div class="field"><label>ऐप फोटो URL</label><input id="appImg" type="url" placeholder="https://..."></div>
+          <div class="field"><label>गेम फोटो URL</label><input id="appImg" type="url" placeholder="https://..."></div>
           <div class="field"><label>APK/डाउनलोड लिंक</label><input id="appUrl" type="url" placeholder="https://..."></div>
         </div>
 
@@ -124,8 +124,8 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
         <div id="uploadStatus" class="status hidden" style="margin-top:6px;"></div>
       </div>
 
-      <div class="sectionHead" style="margin-top:8px;"><div><h2>📥 उपलब्ध ऐप्स</h2></div></div>
-      <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई ऐप नहीं है।</div></div>
+      <div class="sectionHead" style="margin-top:8px;"><div><h2>📥 उपलब्ध गेम्स</h2></div></div>
+      <div id="marketplaceApps" class="grid2" style="margin-bottom:16px;"><div class="empty">कोई गेम नहीं है।</div></div>
     </section>
 
     <!-- News Section -->
@@ -187,7 +187,7 @@ header{position:sticky;top:0;z-index:10;background:rgba(5,13,42,.92);backdrop-fi
 <nav class="mobileNav">
   <button onclick="showSection('home')">🏠<span>Home</span></button>
   <button onclick="showSection('news')">📰<span>News</span></button>
-  <button onclick="showSection('apps')">📱<span>AppStore</span></button>
+  <button onclick="showSection('apps')">🎮<span>GameStore</span></button>
   <button onclick="showSection('jobs')">💼<span>Jobs</span></button>
   <button onclick="showSection('study')">👥<span>Study</span></button>
 </nav>
@@ -334,7 +334,7 @@ window.showSection = name => {
   if (target) target.classList.remove('hidden');
   
   document.querySelectorAll('.topNavLinks button').forEach(b => b.classList.toggle('active', b.dataset.section === name));
-  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'community' : name === 'apps' ? 'appstore' : name)));
+  document.querySelectorAll('.mobileNav button').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(name === 'home' ? 'home' : name === 'community' ? 'community' : name === 'apps' ? 'gamestore' : name)));
   
   if (name === 'study') loadStudyRooms();
   if (name === 'apps') loadMarketplaceApps();
@@ -607,12 +607,12 @@ window.submitDeveloperApp = () => {
   const url = safeUrl(el('appUrl').value.trim());
   const desc = el('appDesc').value.trim();
 
-  if(!name || !url) { setStatus('uploadStatus', 'ऐप नाम और लिंक भरें।', 'err'); return; }
+  if(!name || !url) { setStatus('uploadStatus', 'गेम का नाम और लिंक भरें।', 'err'); return; }
   
   const newApp = { id: 'app_' + Date.now(), username: username || currentUser.username, name, image, url, desc, downloads: 0, created_at: Date.now() };
   const apps = getDB('marketplace_apps'); apps.unshift(newApp); saveDB('marketplace_apps', apps);
   
-  setStatus('uploadStatus', 'ऐप सबमिट हो गया!', 'ok');
+  setStatus('uploadStatus', 'गेम सबमिट हो गया!', 'ok');
   el('devUsername').value = ''; el('appName').value = ''; el('appImg').value = ''; el('appUrl').value = ''; el('appDesc').value = '';
   toggleUploadForm(); loadMarketplaceApps();
 };
@@ -621,12 +621,12 @@ window.loadMarketplaceApps = () => {
   const target = el('marketplaceApps');
   if(!target) return;
   const apps = getDB('marketplace_apps');
-  if(!apps.length) { target.innerHTML = '<div class="empty">कोई ऐप नहीं है।</div>'; return; }
+  if(!apps.length) { target.innerHTML = '<div class="empty">कोई गेम नहीं है।</div>'; return; }
   target.innerHTML = apps.map(app => `
     <div class="card" style="display:flex; flex-direction:column; gap:8px; border-left:3px solid var(--brand);">
       <span class="tag orange">👤 ${escapeHtml(app.username || 'Unknown')}</span>
       <h3>${escapeHtml(app.name)}</h3>
-      ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="App">` : ''}
+      ${app.image ? `<img class="newsImg" src="${escapeHtml(app.image)}" alt="Game">` : ''}
       <p>${escapeHtml(app.desc || 'विवरण नहीं है।')}</p>
       <p class="tiny muted">📥 डाउनलोड: <strong style="color:var(--green);">${app.downloads || 0}</strong></p>
       <div class="cardActions"><a href="${safeUrl(app.url)}" target="_blank" rel="noopener noreferrer" onclick="incrementDownload('${app.id}')"><button class="primary small">डाउनलोड</button></a></div>
@@ -662,7 +662,7 @@ window.loadStudyRooms = () => {
   target.innerHTML = rooms.map(r => `
     <div class="card">
       <span class="tag green">${escapeHtml(r.subject)}</span>
-      ### ${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}
+      <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)}</p>
       <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}')">जॉइन करें</button>
     </div>
