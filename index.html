@@ -97,6 +97,33 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>बुक्स, पीडीएफ, टेस्ट और स्टडी रूम</p></div></div>
       
+      <!-- Active Study Room Workspace (Initially Hidden) -->
+      <div id="activeRoomWorkspace" class="card hidden" style="border:2px solid var(--green); margin-bottom:16px; background:#07102f;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1b2b60; padding-bottom:8px; margin-bottom:10px;">
+          <div>
+            <span class="tag green" id="activeRoomSubTag">Physics</span>
+            <h3 id="activeRoomTitleName" style="margin-top:4px;">Room Name</h3>
+          </div>
+          <button class="danger small" onclick="leaveActiveRoom()">रूम छोड़ें (Exit)</button>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <h4 style="margin:0 0 6px; font-size:13px;">💬 ग्रुप चैट (Group Discussion)</h4>
+            <div id="roomChatBox" style="background:#050d2a; border:1px solid #1c2d65; border-radius:8px; height:180px; overflow-y:auto; padding:8px; font-size:12px; margin-bottom:6px;"></div>
+            <div style="display:flex; gap:6px;">
+              <input id="roomChatInput" placeholder="संदेश लिखें..." style="flex:1; background:#101e4c; border:1px solid #263a78; border-radius:6px; padding:6px; color:#fff; font-size:12px;">
+              <button class="primary small" onclick="sendRoomMessage()">भेजें</button>
+            </div>
+          </div>
+
+          <div>
+            <h4 style="margin:0 0 6px; font-size:13px;">📝 शेयर्ड नोटपैड (Shared Notepad)</h4>
+            <textarea id="roomNotepad" placeholder="यहाँ महत्वपूर्ण नोट्स या फॉर्मूला लिखें..." oninput="updateRoomNotepad(this.value)" style="width:100%; height:210px; background:#101e4c; border:1px solid #263a78; border-radius:8px; padding:8px; color:#fff; font-size:12px; resize:vertical;"></textarea>
+          </div>
+        </div>
+      </div>
+
       <div class="card" style="border:2px solid var(--brand); margin-bottom:14px;">
         <h3>📂 Integrated Study Folder (Books, PDFs &amp; Tests)</h3>
         <p class="muted tiny">यहाँ सभी ई-बुक्स, पीडीएफ और ऑनलाइन टेस्ट उपलब्ध हैं।</p>
@@ -361,6 +388,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
+let currentActiveRoom = null;
 
 window.showToast = msg => {
   const t = el('toast');
@@ -501,7 +529,6 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
-// 🟢 Direct Live Supabase Fetch (Bypasses stale local cache)
 async function getDBAsync(key) {
   try {
     const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
@@ -509,16 +536,13 @@ async function getDBAsync(key) {
       return data;
     }
   } catch(e) {}
-  return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
+  return [];
 }
 
 async function saveDBAsync(key, item) {
   try {
     await _supabase.from(key).insert([item]);
   } catch(e) {}
-  let list = JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
-  list.unshift(item);
-  localStorage.setItem('starhubes_' + key, JSON.stringify(list));
 }
 
 window.refreshContent = async () => {
@@ -604,8 +628,6 @@ window.deleteAdminItem = async (type, id) => {
   try {
     await _supabase.from(type).delete().eq('id', id);
   } catch(e) {}
-  let list = JSON.parse(localStorage.getItem('starhubes_' + type) || '[]').filter(x => x.id !== id);
-  localStorage.setItem('starhubes_' + type, JSON.stringify(list));
   loadAdminItemsList();
   refreshContent();
   showToast('हटा दिया गया।');
@@ -787,7 +809,6 @@ window.incrementDownload = async appId => {
     try {
       await _supabase.from('marketplace_apps').update({ downloads: app.downloads }).eq('id', appId);
     } catch(e) {}
-    localStorage.setItem('starhubes_marketplace_apps', JSON.stringify(apps));
     loadMarketplaceApps(); 
   }
 };
@@ -817,14 +838,81 @@ window.loadStudyRooms = async () => {
       <span class="tag green">${escapeHtml(r.subject)}</span>
       <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)}</p>
-      <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}')">जॉइन करें</button>
+      <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}', '${escapeHtml(r.name)}', '${escapeHtml(r.subject)}')">जॉइन करें</button>
     </div>
   `).join('');
 };
 
-window.tryJoinRoom = roomId => {
-  if (!currentUser) { openAuth(); return; }
-  showToast('रूम जॉइन हो गया!');
+window.tryJoinRoom = (roomId, roomName, roomSubject) => {
+  if (!currentUser) { openAuth(); showToast('रूम जॉइन करने के लिए लॉगिन करें।'); return; }
+  currentActiveRoom = { id: roomId, name: roomName, subject: roomSubject };
+  
+  el('activeRoomTitleName').textContent = roomName;
+  el('activeRoomSubTag').textContent = roomSubject;
+  el('activeRoomWorkspace').classList.remove('hidden');
+  el('activeRoomWorkspace').scrollIntoView({ behavior: 'smooth' });
+  
+  loadRoomMessages();
+  showToast('स्टडी रूम खुल गया!');
+};
+
+window.leaveActiveRoom = () => {
+  currentActiveRoom = null;
+  el('activeRoomWorkspace').classList.add('hidden');
+  showToast('रूम से बाहर आ गए हैं।');
+};
+
+window.sendRoomMessage = async () => {
+  if(!currentActiveRoom || !currentUser) return;
+  const input = el('roomChatInput');
+  const text = input.value.trim();
+  if(!text) return;
+
+  const msg = { sender: currentUser.username, text, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) };
+  
+  let rooms = await getDBAsync('study_rooms');
+  const room = rooms.find(r => r.id === currentActiveRoom.id);
+  if(room) {
+    if(!room.messages) room.messages = [];
+    room.messages.push(msg);
+    try {
+      await _supabase.from('study_rooms').update({ messages: room.messages }).eq('id', room.id);
+    } catch(e) {}
+    localStorage.setItem('starhubes_study_rooms', JSON.stringify(rooms));
+  }
+  
+  input.value = '';
+  loadRoomMessages();
+};
+
+async function loadRoomMessages() {
+  if(!currentActiveRoom) return;
+  const chatBox = el('roomChatBox');
+  let rooms = await getDBAsync('study_rooms');
+  const room = rooms.find(r => r.id === currentActiveRoom.id);
+  if(!room || !room.messages || !room.messages.length) {
+    chatBox.innerHTML = '<div class="muted tiny" style="text-align:center; padding:20px;">अभी कोई मैसेज नहीं है। चर्चा शुरू करें!</div>';
+    return;
+  }
+  chatBox.innerHTML = room.messages.map(m => `
+    <div style="margin-bottom:6px; border-bottom:1px solid #14245c; padding-bottom:4px;">
+      <strong style="color:var(--brand);">${escapeHtml(m.sender)}:</strong> ${escapeHtml(m.text)}
+      <span class="tiny muted" style="float:right;">${escapeHtml(m.time)}</span>
+    </div>
+  `).join('');
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+window.updateRoomNotepad = async (val) => {
+  if(!currentActiveRoom) return;
+  let rooms = await getDBAsync('study_rooms');
+  const room = rooms.find(r => r.id === currentActiveRoom.id);
+  if(room) {
+    room.notepad = val;
+    try {
+      await _supabase.from('study_rooms').update({ notepad: val }).eq('id', room.id);
+    } catch(e) {}
+  }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
