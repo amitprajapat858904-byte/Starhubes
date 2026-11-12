@@ -504,12 +504,16 @@ function updateSession() {
 async function getDBAsync(key) {
   try {
     const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
-    if (!error && data) return data;
+    if (!error && data) {
+      localStorage.setItem('starhubes_' + key, JSON.stringify(data));
+      return data;
+    }
   } catch(e) {}
   return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]');
 }
 
 function getDB(key) { return JSON.parse(localStorage.getItem('starhubes_' + key) || '[]'); }
+
 async function saveDBAsync(key, item) {
   try {
     await _supabase.from(key).insert([item]);
@@ -575,7 +579,8 @@ window.adminPublishContent = async () => {
   el('adminExamName').value = ''; el('adminSubjectName').value = '';
   el('optA').value = ''; el('optB').value = ''; el('optC').value = ''; el('optD').value = '';
   loadAdminItemsList();
-  refreshContent();
+  await refreshContent();
+  showToast('सफलतापूर्वक लाइव कर दिया गया!');
 };
 
 async function loadAdminItemsList() {
