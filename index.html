@@ -920,6 +920,43 @@ document.addEventListener('DOMContentLoaded', () => {
   applyCompanyBranding();
   updateSession(); showSection('home');
 });
-</script>
+</scriptwindow.createStudyRoom = async () => {
+  if (!currentUser) { openAuth(); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
+  
+  const nameInput = el('roomName');
+  const subjInput = el('roomSubject');
+  const codeInput = el('roomCode');
+  
+  const name = nameInput ? nameInput.value.trim() : '';
+  const subject = subjInput ? subjInput.value.trim() : '';
+  const passcode = codeInput ? codeInput.value.trim() : '';
+  
+  if (!name) { 
+    setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err'); 
+    return; 
+  }
+  
+  const newRoom = { 
+    id: 'room_' + Date.now(), 
+    name: name, 
+    subject: subject || 'General', 
+    passcode: passcode || '', 
+    creator: currentUser.username, 
+    members: [currentUser.username], 
+    notepad: '', 
+    messages: [], 
+    created_at: new Date().toISOString() 
+  };
+  
+  await saveDBAsync('study_rooms', newRoom);
+  
+  if(nameInput) nameInput.value = ''; 
+  if(subjInput) subjInput.value = ''; 
+  if(codeInput) codeInput.value = '';
+  
+  setStatus('roomStatus', 'सफलतापूर्वक रूम बन गया!', 'ok'); 
+  loadStudyRooms();
+  showToast('नया स्टडी रूम तैयार है!');
+};>
 </body>
 </html>
