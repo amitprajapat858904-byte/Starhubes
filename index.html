@@ -147,7 +147,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
           <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="NEET Biology Discussion"></div>
           <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Biology"></div>
         </div>
-        <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
+        <div class="field" style="margin-top:6px;"><label>पासकोड (वैकल्पिक)</label><input id="roomCode" placeholder="1234"></div>
         <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
         <div id="roomStatus" class="status hidden" style="margin-top:6px;"></div>
       </div>
@@ -382,7 +382,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
 <div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:300;max-width:90%;"></div>
 
 <script>
-// Firebase Configuration (Real Config from Console)
+// Firebase Configuration (starhubes-305d7)
 const firebaseConfig = {
   apiKey: "AIzaSyB6EVOR_DV_-v1eAuU7WTilxw2sh6Fu4eE",
   authDomain: "starhubes-305d7.firebaseapp.com",
@@ -539,7 +539,6 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
-// Firebase Database Functions
 async function getDBAsync(key) {
   try {
     const snapshot = await db.collection(key).get();
@@ -871,18 +870,29 @@ window.loadStudyRooms = async () => {
   const target = el('studyRoomsList'); if (!target) return;
   const rooms = await getDBAsync('study_rooms');
   if (!rooms.length) { target.innerHTML = '<div class="empty">कोई एक्टिव रूम नहीं है।</div>'; return; }
+  
   target.innerHTML = rooms.map(r => `
     <div class="card">
       <span class="tag green">${escapeHtml(r.subject)}</span>
       <h3>${escapeHtml(r.name)} ${r.passcode ? '🔒' : ''}</h3>
       <p class="muted tiny">निर्माता: ${escapeHtml(r.creator)}</p>
-      <button class="primary small" style="margin-top:8px;" onclick="tryJoinRoom('${r.id}', '${escapeHtml(r.name)}', '${escapeHtml(r.subject)}')">जॉइन करें</button>
+      <button class="primary small" style="margin-top:8px;" onclick="promptJoinRoom('${r.id}', '${escapeHtml(r.name)}', '${escapeHtml(r.subject)}', '${escapeHtml(r.passcode || '')}')">जॉइन करें</button>
     </div>
   `).join('');
 };
 
-window.tryJoinRoom = (roomId, roomName, roomSubject) => {
+window.promptJoinRoom = (roomId, roomName, roomSubject, roomPasscode) => {
   if (!currentUser) { openAuth(); showToast('रूम जॉइन करने के लिए लॉगिन करें।'); return; }
+  
+  if (roomPasscode && roomPasscode.trim() !== '') {
+    const enteredCode = prompt('यह रूम पासवर्ड सुरक्षित है। कृपया पासकोड दर्ज करें:');
+    if (enteredCode === null) return; // Cancelled
+    if (enteredCode.trim() !== roomPasscode.trim()) {
+      showToast('❌ गलत पासकोड! रूम नहीं खुला।');
+      return;
+    }
+  }
+  
   currentActiveRoom = { id: roomId, name: roomName, subject: roomSubject };
   
   el('activeRoomTitleName').textContent = roomName;
@@ -891,7 +901,7 @@ window.tryJoinRoom = (roomId, roomName, roomSubject) => {
   el('activeRoomWorkspace').scrollIntoView({ behavior: 'smooth' });
   
   loadRoomMessages();
-  showToast('स्टडी रूम खुल गया!');
+  showToast('🔓 स्टडी रूम सफलतापूप्र्वक खुल गया!');
 };
 
 window.leaveActiveRoom = () => {
