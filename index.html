@@ -97,7 +97,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
     <section id="section-study" class="hidden">
       <div class="sectionHead"><div><h2>👥 Group Study &amp; Study Folder</h2><p>बुक्स, पीडीएफ, टेस्ट और स्टडी रूम</p></div></div>
       
-      <!-- Active Study Room Workspace (Initially Hidden) -->
+      <!-- Active Study Room Workspace -->
       <div id="activeRoomWorkspace" class="card hidden" style="border:2px solid var(--green); margin-bottom:16px; background:#07102f;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1b2b60; padding-bottom:8px; margin-bottom:10px;">
           <div>
@@ -296,8 +296,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       </div>
 
       <div id="examSubjectBox" class="fields">
-        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="SSC / NEET"></div>
-        <div class="field"><label>विषय</label><input id="adminSubjectName" placeholder="Physics"></div>
+        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="NEET / SSC"></div>
+        <div class="field"><label>विषय</label><input id="adminSubjectName" placeholder="Biology"></div>
       </div>
 
       <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
@@ -532,9 +532,7 @@ function updateSession() {
 async function getDBAsync(key) {
   try {
     const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
-    if (!error && data) {
-      return data;
-    }
+    if (!error && data) return data;
   } catch(e) {}
   return [];
 }
@@ -588,8 +586,8 @@ window.adminPublishContent = async () => {
 
   let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: new Date().toISOString() };
   if(type === 'questions') {
-    newItem.examName = el('adminExamName').value.trim() || 'General Exam';
-    newItem.subjectName = el('adminSubjectName').value.trim() || 'General Subject';
+    newItem.examName = el('adminExamName').value.trim() || 'NEET';
+    newItem.subjectName = el('adminSubjectName').value.trim() || 'Biology';
     newItem.options = [el('optA').value.trim(), el('optB').value.trim(), el('optC').value.trim(), el('optD').value.trim()];
     newItem.correct = el('correctOpt').value;
   }
@@ -819,14 +817,43 @@ function safeUrl(value) {
 }
 
 window.createStudyRoom = async () => {
-  if (!currentUser) { openAuth(); showToast('लॉगिन करें।'); return; }
-  const name = el('roomName').value.trim(); const subject = el('roomSubject').value.trim(); const passcode = el('roomCode').value.trim();
-  if (!name) { setStatus('roomStatus', 'रूम नाम भरें।', 'err'); return; }
-  const newRoom = { id: 'room_' + Date.now(), name, subject: subject || 'General', passcode: passcode || '', creator: currentUser.username, members: [currentUser.username], notepad: '', messages: [], created_at: new Date().toISOString() };
+  if (!currentUser) { openAuth(); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
+  
+  const nameInput = el('roomName');
+  const subjInput = el('roomSubject');
+  const codeInput = el('roomCode');
+  
+  const name = nameInput ? nameInput.value.trim() : '';
+  const subject = subjInput ? subjInput.value.trim() : '';
+  const passcode = codeInput ? codeInput.value.trim() : '';
+  
+  if (!name) { 
+    setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err'); 
+    showToast('रूम का नाम अनिवार्य है!');
+    return; 
+  }
+  
+  const newRoom = { 
+    id: 'room_' + Date.now(), 
+    name: name, 
+    subject: subject || 'General', 
+    passcode: passcode || '', 
+    creator: currentUser.username, 
+    members: [currentUser.username], 
+    notepad: '', 
+    messages: [], 
+    created_at: new Date().toISOString() 
+  };
   
   await saveDBAsync('study_rooms', newRoom);
-  el('roomName').value = ''; el('roomSubject').value = ''; el('roomCode').value = '';
-  setStatus('roomStatus', 'रूम बन गया!', 'ok'); loadStudyRooms();
+  
+  if(nameInput) nameInput.value = ''; 
+  if(subjInput) subjInput.value = ''; 
+  if(codeInput) codeInput.value = '';
+  
+  setStatus('roomStatus', 'सफलतापूर्वक रूम बन गया!', 'ok'); 
+  loadStudyRooms();
+  showToast('नया स्टडी रूम तैयार है!');
 };
 
 window.loadStudyRooms = async () => {
@@ -878,7 +905,6 @@ window.sendRoomMessage = async () => {
     try {
       await _supabase.from('study_rooms').update({ messages: room.messages }).eq('id', room.id);
     } catch(e) {}
-    localStorage.setItem('starhubes_study_rooms', JSON.stringify(rooms));
   }
   
   input.value = '';
@@ -920,43 +946,6 @@ document.addEventListener('DOMContentLoaded', () => {
   applyCompanyBranding();
   updateSession(); showSection('home');
 });
-</scriptwindow.createStudyRoom = async () => {
-  if (!currentUser) { openAuth(); showToast('रूम बनाने के लिए लॉगिन करें।'); return; }
-  
-  const nameInput = el('roomName');
-  const subjInput = el('roomSubject');
-  const codeInput = el('roomCode');
-  
-  const name = nameInput ? nameInput.value.trim() : '';
-  const subject = subjInput ? subjInput.value.trim() : '';
-  const passcode = codeInput ? codeInput.value.trim() : '';
-  
-  if (!name) { 
-    setStatus('roomStatus', 'कृपया रूम का नाम भरें।', 'err'); 
-    return; 
-  }
-  
-  const newRoom = { 
-    id: 'room_' + Date.now(), 
-    name: name, 
-    subject: subject || 'General', 
-    passcode: passcode || '', 
-    creator: currentUser.username, 
-    members: [currentUser.username], 
-    notepad: '', 
-    messages: [], 
-    created_at: new Date().toISOString() 
-  };
-  
-  await saveDBAsync('study_rooms', newRoom);
-  
-  if(nameInput) nameInput.value = ''; 
-  if(subjInput) subjInput.value = ''; 
-  if(codeInput) codeInput.value = '';
-  
-  setStatus('roomStatus', 'सफलतापूर्वक रूम बन गया!', 'ok'); 
-  loadStudyRooms();
-  showToast('नया स्टडी रूम तैयार है!');
-};>
+</script>
 </body>
 </html>
