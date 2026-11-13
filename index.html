@@ -382,14 +382,15 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
 <div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:300;max-width:90%;"></div>
 
 <script>
-// Firebase Configuration (starhubes-305d7)
+// Firebase Configuration (Real Config from Console)
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
+  apiKey: "AIzaSyB6EVOR_DV_-v1eAuU7WTilxw2sh6Fu4eE",
   authDomain: "starhubes-305d7.firebaseapp.com",
   projectId: "starhubes-305d7",
-  storageBucket: "starhubes-305d7.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  storageBucket: "starhubes-305d7.firebasestorage.app",
+  messagingSenderId: "626362076226",
+  appId: "1:626362076226:web:f80257e432ffadff01f1db",
+  measurementId: "G-7B06KD2QN0"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
@@ -538,7 +539,7 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
-// Firebase Database Functions (Safe fallback if index is missing)
+// Firebase Database Functions
 async function getDBAsync(key) {
   try {
     const snapshot = await db.collection(key).get();
@@ -665,7 +666,7 @@ window.loadLearningQuestions = async () => {
   if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
   if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
 
-  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है। (कृपया एडमिन पैनल से नीट प्रश्न जोड़ें)</div>'; return; }
+  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
       <div style="display:flex; gap:6px; margin-bottom:6px;">
@@ -922,3 +923,35 @@ window.sendRoomMessage = async () => {
 };
 
 async function loadRoomMessages() {
+  if(!currentActiveRoom) return;
+  const chatBox = el('roomChatBox');
+  let rooms = await getDBAsync('study_rooms');
+  const room = rooms.find(r => r.id === currentActiveRoom.id);
+  if(!room || !room.messages || !room.messages.length) {
+    chatBox.innerHTML = '<div class="muted tiny" style="text-align:center; padding:20px;">अभी कोई मैसेज नहीं है। चर्चा शुरू करें!</div>';
+    return;
+  }
+  chatBox.innerHTML = room.messages.map(m => `
+    <div style="margin-bottom:6px; border-bottom:1px solid #14245c; padding-bottom:4px;">
+      <strong style="color:var(--brand);">${escapeHtml(m.sender)}:</strong> ${escapeHtml(m.text)}
+      <span class="tiny muted" style="float:right;">${escapeHtml(m.time)}</span>
+    </div>
+  `).join('');
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+window.updateRoomNotepad = async (val) => {
+  if(!currentActiveRoom) return;
+  try {
+    await db.collection('study_rooms').doc(currentActiveRoom.id).update({ notepad: val });
+  } catch(e) {}
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = el('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+  applyCompanyBranding();
+  updateSession(); showSection('home');
+});
+</script>
+</body>
+</html>
