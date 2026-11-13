@@ -7,8 +7,10 @@
 <meta name="description" content="StarHubes: Study, Tests, Books, News, Game Store and Community.">
 <!-- Google Sign-In Official Script -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
-<!-- Supabase SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <style>
 :root{--bg:#050d2a;--card:#0c1740;--text:#f4f6ff;--muted:#a8b4da;--brand:#2878ff;--brand2:#8b45ff;--line:#1b2b60;--green:#16c784;--orange:#ffb020;--shadow:0 16px 40px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1a1457 0%,#07102f 42%,#040a20 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:8px 12px;font-weight:600;transition:all .2s ease}.primary{background:linear-gradient(110deg,#2878ff,#8748ff);color:white;box-shadow:0 2px 10px rgba(40,120,255,.3)}.primary:hover{opacity:.9;transform:translateY(-1px)}.secondary{background:linear-gradient(110deg,#2878ff,#8748ff);color:#fff}.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.danger{background:#fff0f0;color:#b42318}.small{padding:6px 10px;font-size:12px}.muted{color:var(--muted)}.tiny{font-size:11px}.hidden{display:none!important}
@@ -101,7 +103,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       <div id="activeRoomWorkspace" class="card hidden" style="border:2px solid var(--green); margin-bottom:16px; background:#07102f;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1b2b60; padding-bottom:8px; margin-bottom:10px;">
           <div>
-            <span class="tag green" id="activeRoomSubTag">Physics</span>
+            <span class="tag green" id="activeRoomSubTag">Biology</span>
             <h3 id="activeRoomTitleName" style="margin-top:4px;">Room Name</h3>
           </div>
           <button class="danger small" onclick="leaveActiveRoom()">रूम छोड़ें (Exit)</button>
@@ -142,8 +144,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       <div class="card" style="margin-bottom:12px;">
         <h3>➕ नया ग्रुप स्टडी रूम बनाएं</h3>
         <div class="fields">
-          <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="Physics Class"></div>
-          <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Physics"></div>
+          <div class="field"><label>रूम नाम</label><input id="roomName" placeholder="NEET Biology Discussion"></div>
+          <div class="field"><label>विषय</label><input id="roomSubject" placeholder="Biology"></div>
         </div>
         <div class="field" style="margin-top:6px;"><label>पासकोड</label><input id="roomCode" placeholder="1234"></div>
         <button class="primary small" style="margin-top:8px;" onclick="createStudyRoom()">रूम बनाएं</button>
@@ -156,7 +158,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
 
     <!-- Learning & Exams Test Section (ABCD Options) -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET Biology)</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
       
       <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
         <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
@@ -281,7 +283,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
     </div>
     
     <div class="adminBox">
-      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें</h3>
+      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें (NEET Questions)</h3>
       <div class="fields">
         <div class="field">
           <label>प्रकार</label>
@@ -292,15 +294,15 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
             <option value="jobs">💼 जॉब वेकेंसी</option>
           </select>
         </div>
-        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="General"></div>
+        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="NEET Biology"></div>
       </div>
 
       <div id="examSubjectBox" class="fields">
-        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="NEET / SSC"></div>
+        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="NEET"></div>
         <div class="field"><label>विषय</label><input id="adminSubjectName" placeholder="Biology"></div>
       </div>
 
-      <div class="field"><label>शीर्षक / प्रश्न</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
+      <div class="field"><label>प्रश्न / शीर्षक</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
       <div class="field"><label>विवरण</label><textarea id="adminDesc" placeholder="विवरण..."></textarea></div>
       
       <div id="questionOptionsBox">
@@ -380,10 +382,17 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
 <div id="toast" class="status hidden" style="position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:300;max-width:90%;"></div>
 
 <script>
-// Supabase Configuration
-const SUPABASE_URL = "https://lvcziemskchcojdebxyb.supabase.co";
-const SUPABASE_KEY = "sb_publishable_074d44kBooioY3TgLoJ1cw_N--wELLf";
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Firebase Configuration (starhubes-305d7)
+const firebaseConfig = {
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "starhubes-305d7.firebaseapp.com",
+  projectId: "starhubes-305d7",
+  storageBucket: "starhubes-305d7.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
@@ -529,17 +538,19 @@ function updateSession() {
   el('userAvatar').textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : 'S';
 }
 
+// Firebase Database Functions (Safe fallback if index is missing)
 async function getDBAsync(key) {
   try {
-    const { data, error } = await _supabase.from(key).select('*').order('created_at', { ascending: false });
-    if (!error && data) return data;
-  } catch(e) {}
-  return [];
+    const snapshot = await db.collection(key).get();
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch(e) {
+    return [];
+  }
 }
 
 async function saveDBAsync(key, item) {
   try {
-    await _supabase.from(key).insert([item]);
+    await db.collection(key).doc(item.id).set(item);
   } catch(e) {}
 }
 
@@ -612,7 +623,6 @@ async function loadAdminItemsList() {
     let items = await getDBAsync(t);
     items.forEach(x => all.push({ ...x, _type: t }));
   }
-  all.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
   if(!all.length) { target.innerHTML = 'कोई कंटेंट नहीं है।'; return; }
   target.innerHTML = all.map(x => `
     <div style="padding:6px 0; border-bottom:1px solid #1b2b60; display:flex; justify-content:space-between; align-items:center;">
@@ -624,7 +634,7 @@ async function loadAdminItemsList() {
 
 window.deleteAdminItem = async (type, id) => {
   try {
-    await _supabase.from(type).delete().eq('id', id);
+    await db.collection(type).doc(id).delete();
   } catch(e) {}
   loadAdminItemsList();
   refreshContent();
@@ -655,7 +665,7 @@ window.loadLearningQuestions = async () => {
   if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
   if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
 
-  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
+  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है। (कृपया एडमिन पैनल से नीट प्रश्न जोड़ें)</div>'; return; }
   target.innerHTML = qs.map((q, idx) => `
     <div class="card">
       <div style="display:flex; gap:6px; margin-bottom:6px;">
@@ -805,7 +815,7 @@ window.incrementDownload = async appId => {
   if(app) { 
     app.downloads = (app.downloads || 0) + 1; 
     try {
-      await _supabase.from('marketplace_apps').update({ downloads: app.downloads }).eq('id', appId);
+      await db.collection('marketplace_apps').doc(appId).update({ downloads: app.downloads });
     } catch(e) {}
     loadMarketplaceApps(); 
   }
@@ -903,7 +913,7 @@ window.sendRoomMessage = async () => {
     if(!room.messages) room.messages = [];
     room.messages.push(msg);
     try {
-      await _supabase.from('study_rooms').update({ messages: room.messages }).eq('id', room.id);
+      await db.collection('study_rooms').doc(room.id).update({ messages: room.messages });
     } catch(e) {}
   }
   
@@ -912,40 +922,3 @@ window.sendRoomMessage = async () => {
 };
 
 async function loadRoomMessages() {
-  if(!currentActiveRoom) return;
-  const chatBox = el('roomChatBox');
-  let rooms = await getDBAsync('study_rooms');
-  const room = rooms.find(r => r.id === currentActiveRoom.id);
-  if(!room || !room.messages || !room.messages.length) {
-    chatBox.innerHTML = '<div class="muted tiny" style="text-align:center; padding:20px;">अभी कोई मैसेज नहीं है। चर्चा शुरू करें!</div>';
-    return;
-  }
-  chatBox.innerHTML = room.messages.map(m => `
-    <div style="margin-bottom:6px; border-bottom:1px solid #14245c; padding-bottom:4px;">
-      <strong style="color:var(--brand);">${escapeHtml(m.sender)}:</strong> ${escapeHtml(m.text)}
-      <span class="tiny muted" style="float:right;">${escapeHtml(m.time)}</span>
-    </div>
-  `).join('');
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-window.updateRoomNotepad = async (val) => {
-  if(!currentActiveRoom) return;
-  let rooms = await getDBAsync('study_rooms');
-  const room = rooms.find(r => r.id === currentActiveRoom.id);
-  if(room) {
-    room.notepad = val;
-    try {
-      await _supabase.from('study_rooms').update({ notepad: val }).eq('id', room.id);
-    } catch(e) {}
-  }
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-  const yearEl = el('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
-  applyCompanyBranding();
-  updateSession(); showSection('home');
-});
-</script>
-</body>
-</html>
