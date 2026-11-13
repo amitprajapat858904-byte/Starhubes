@@ -886,7 +886,7 @@ window.promptJoinRoom = (roomId, roomName, roomSubject, roomPasscode) => {
   
   if (roomPasscode && roomPasscode.trim() !== '') {
     const enteredCode = prompt('यह रूम पासवर्ड सुरक्षित है। कृपया पासकोड दर्ज करें:');
-    if (enteredCode === null) return; // Cancelled
+    if (enteredCode === null) return;
     if (enteredCode.trim() !== roomPasscode.trim()) {
       showToast('❌ गलत पासकोड! रूम नहीं खुला।');
       return;
@@ -957,10 +957,266 @@ window.updateRoomNotepad = async (val) => {
   } catch(e) {}
 };
 
+// Auto Upload Allen NEET Questions (1 to 22) on load
+async function autoUploadAllenQuestions() {
+  const allenQuestions = [
+    {
+      id: 'allen_rep_1',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 1: उल्वेधन (Amniocentesis) है —',
+      description: 'सही विकल्प चुनें:',
+      options: ['गर्भवती स्त्री के तरलों के रासायनिक संघटन का विश्लेषण', 'गर्भवती स्त्री से allantoic fluid का निकालना', 'एक पात्र निदान', 'गुणसूत्रिय असामान्यताओं की पहचान के लिये amniotic fluid से metaphase गुणसूत्रों का अध्ययन'],
+      correct: 'D',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_2',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 2: निम्नलिखित में से वह कौन सी एक चीज है जिसे पात्र निषेचन की विधि में फैलोपियन नलिका में स्थानांतरित किया जाता है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['केवल zygote (युग्मज)', 'केवल भ्रूण जो 8-कोशिका अवस्था तक का हो', 'युग्मज अथवा 8-कोशिका अवस्था तक का आरंभिक भ्रूण-दोनों में से कोई भी', '32-कोशिका अवस्था का भ्रूण'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_3',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 3: परखनली शिशु (test tube baby) कार्यक्रम में निम्नलिखित में से किस एक तकनीक का इस्तेमाल किया जाता है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['युग्मक अंतः फैलोपियन स्थानान्तरण (GIFT)', 'युग्मज अंतः फैलोपियन स्थानान्तरण (ZIFT)', 'अंतः कोशिकाद्रव्यी शुक्राणु इन्जेक्सन (ICSI)', 'अंतः गर्भाशयवी वीर्यसेचन (IUI)'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_4',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 4: एमनियोसेंटेसिस (उल्वेधन) का अनुमतिप्राप्त उपयोग किसके लिए किया जा सकता है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['किसी आनुवंशिक अपसामान्य्ता का पता लगाने के लिए', 'अजन्मे बच्चे का लिंग पता लगाने के लिए', 'कृत्रिम वीर्यसेचन के लिए', 'भ्रूण को किसी सरोगेट (परगरभजननी) माँ के गर्भाशय में स्थानांतरित करने के लिए'],
+      correct: 'A',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_5',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 5: Tubectomy विधि रोकने में सहायक होती है —',
+      description: 'सही विकल्प चुनें:',
+      options: ['अंडे के निर्माण को', 'भ्रूण परिवर्धन को', 'निषेचन को', 'सहवास को'],
+      correct: 'A',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_6',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 6: Vasectomy विधि है —',
+      description: 'सही विकल्प चुनें:',
+      options: ['अंडवाहिनी को काट देना', 'शुक्रवाहक को काट देना', 'जनसंख्या वृद्धि का एक कारक', 'उपर्युक्त में से कोई नहीं'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_7',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 7: IUD का एक उदाहरण है —',
+      description: 'सही विकल्प चुनें:',
+      options: ['शुक्रवाहक उच्छेदन', 'CuT', 'Condom', 'ये सभी'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_8',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 8: गर्भनिरोधक विधि का/के उदाहरण हैं —',
+      description: 'सही विकल्प चुनें:',
+      options: ['Condom, गर्भाशय ग्रीवा टोपी, diaphragm', 'IUD', 'गोली', 'उपर्युक्त सभी'],
+      correct: 'D',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_9',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 9: एक गर्भनिरोधक गोली में होता है —',
+      description: 'सही विकल्प चुनें:',
+      options: ['Progesterone तथा estrogen', 'शुक्राणुनाशक रसायन', 'रसायन, जिनके कारण गर्भपात हो जाता है', 'रसायन, जो अंडाणु के निषेचन को रोकते हैं'],
+      correct: 'A',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_10',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 10: एक परिवर्धनशील गर्भ में उल्वेधन (एमनियोसेंटेसिस) द्वारा निम्नलिखित में से किसकी पहचान नहीं की जा सकती?',
+      description: 'सही विकल्प चुनें:',
+      options: ['पीलिया (जॉन्डिस)', 'क्लाइनफेल्टर सिंड्रोम', 'गर्भ का लिंग', 'डाउन सिंड्रोम'],
+      correct: 'A',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_11',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 11: कृत्रिम वीर्यसेचन से आपका क्या तात्पर्य है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['स्वस्थ दाता के शुक्राणुओं को सीधे ही अंडाशय के भीतर डाल देना।', 'किसी स्वस्थ दाता के शुक्राणुओं को ऐसे परखनली में स्थानांतरित कर देना जिसमें अंडाणु मौजूद हों।', 'पति के शुक्राणुओं को ऐसी परखनली में स्थानांतरित कर देना जिसमें अंडाणु मौजूद हों।', 'स्वस्थ दाता के शुक्राणुओं को कृत्रिम तरीके से सीधे ही योनि के भीतर डाल देना।'],
+      correct: 'A',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_12',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 12: एक गर्भनिरोधक गोली अंडोत्सर्ग को रोकती है -',
+      description: 'सही विकल्प चुनें:',
+      options: ['फैलोपियन नलिका को अवरुद्ध करके', 'FSH तथा LH के स्रवण को मन्द करके', 'FSH तथा LH के स्रवण को उत्तेजित करके', 'मोचित अंडाणु के तुरन्त विघटन द्वारा'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_13',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 13: उल्थवेधन का उपयोग निदान में किया जाता है -',
+      description: 'सही विकल्प चुनें:',
+      options: ['हृदय के रोगों के', 'मस्तिष्क के रोगों के', 'भ्रूण में आनुवंशिक रोगों के', 'उपर्युक्त सभी'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_14',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 14: मौखिक गर्भनिरोधकों का सबसे महत्वपूर्ण घटक है -',
+      description: 'सही विकल्प चुनें:',
+      options: ['प्रोजेस्टोजन', 'LH', 'प्रोजेस्ट्रोन', 'FSH'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_15',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 15: जनसंख्या नियंत्रण का एक उपाय "tubectomy" किस पर उपयोग की जाती है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['पुरुषों एवं स्त्रियों दोनों पर', 'केवल पुरुषों पर', 'केवल स्त्रियों पर', 'केवल गर्भवती स्त्रियों पर'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_16',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 16: निम्न में से क्या एक पुरुषों से संबंधित है?',
+      description: 'सही विकल्प चुनें:',
+      options: ['IUD', 'Tubectomy', 'Vasectomy', 'उपरोक्त में से कोई नहीं'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_17',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 17: आर्तव चक्र के कौन से दिनों में निषेचन के अवसर बहुत अधिक रहते हैं?',
+      description: 'सही विकल्प चुनें:',
+      options: ['प्रथम पाँच दिनों में', 'अंतिम सात दिनों में', '10वें से 17वें दिन', '1 और (2) दोनों'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_18',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 18: कॉलम मिलान (गर्भनिरोधक और कार्य विधि) -',
+      description: 'सही मिलान पहचानें:',
+      options: ['A-(c), B-(d), C-(a), D-(b)', 'A-(b), B-(c), C-(a), D-(d)', 'A-(c), B-(a), C-(d), D-(b)', 'A-(d), B-(a), C-(b), D-(c)'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_19',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 19: परिवार नियोजन कार्यक्रम भारत में शुरू किया गया था -',
+      description: 'सही वर्ष चुनें:',
+      options: ['1947 में', '1952 में', '1977 में', '1955 में'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_20',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 20: "Saheli" जो स्त्रियों के लिए एक गर्भनिरोधक गोली है, उपयोग की जाती है -',
+      description: 'सही विकल्प चुनें:',
+      options: ['दैनिक रूप से', 'साप्ताहिक रूप से', 'तैमार्मिक रूप से', 'मासिक रूप से'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_21',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 21: Test tube baby का मतलब उस शिशु से है जिसका -',
+      description: 'सही कथन चुनें:',
+      options: ['परिवर्धन परखनली में होता है', 'परिवर्धन ऊतक संवर्धन विधि से होता है', 'अंडे का निषेचन बाहर और उसका प्रारंभिक भ्रूण का अंतरोपण गर्भाशय में होता है', 'परिवर्धन अनिषेचित अंडे से होता है'],
+      correct: 'C',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'allen_rep_22',
+      examName: 'NEET',
+      subjectName: 'BIOLOGY',
+      title: 'प्रश्न 22: CuT का कार्य है -',
+      description: 'सही विकल्प चुनें:',
+      options: ['अंडोत्सर्ग रोकना', 'निषेचन रोकना', 'कारकपुटि का अंतरोपण रोकना', 'युग्मकमन जनन को रोकना'],
+      correct: 'B',
+      category: 'neet',
+      created_at: new Date().toISOString()
+    }
+  ];
+
+  for (let q of allenQuestions) {
+    try {
+      await db.collection('questions').doc(q.id).set(q, { merge: true });
+    } catch(e) {}
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = el('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
   applyCompanyBranding();
-  updateSession(); showSection('home');
+  updateSession(); 
+  showSection('home');
+  autoUploadAllenQuestions();
 });
 </script>
 </body>
