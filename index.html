@@ -156,29 +156,29 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"><div class="empty">लोड हो रहा है...</div></div>
     </section>
 
-    <!-- Learning & Exams Test Section (ABCD Options) -->
+    <!-- Learning & Exams Test Section (ABCD Options - Filter Required) -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET Biology)</h2><p>परीक्षा और विषय के आधार पर ऑनलाइन टेस्ट दें</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET Biology)</h2><p>प्रश्न देखने के लिए पहले परीक्षा और विषय चुनें</p></div></div>
       
       <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
-        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें</h3>
+        <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें (Required)</h3>
         <div class="fields">
           <div class="field">
             <label>परीक्षा (Exam)</label>
             <select id="filterExam" onchange="loadLearningQuestions()">
-              <option value="">सभी परीक्षाएं</option>
+              <option value="">-- परीक्षा चुनें --</option>
             </select>
           </div>
           <div class="field">
             <label>विषय (Subject)</label>
             <select id="filterSubject" onchange="loadLearningQuestions()">
-              <option value="">सभी विषय</option>
+              <option value="">-- विषय चुनें --</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div id="learningQuestionsList" class="grid2"><div class="empty">लोड हो रहा है...</div></div>
+      <div id="learningQuestionsList" class="grid2"><div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से 'परीक्षा' और 'विषय' चुनें, तभी प्रश्न दिखाई देंगे।</div></div>
     </section>
 
     <!-- Books & PDFs Section -->
@@ -399,6 +399,7 @@ const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 let currentActiveRoom = null;
+let activeQuestionTimers = [];
 
 window.showToast = msg => {
   const t = el('toast');
@@ -460,6 +461,10 @@ window.checkSubscriptionAndOpen = (tabName) => {
 };
 
 window.showSection = name => {
+  // Clear any running question timers when changing sections
+  activeQuestionTimers.forEach(t => clearInterval(t));
+  activeQuestionTimers = [];
+
   document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
   const target = el('section-' + name);
   if (target) target.classList.remove('hidden');
@@ -469,7 +474,7 @@ window.showSection = name => {
   
   if (name === 'study') { loadStudyRooms(); switchStudyFolderTab('books'); }
   if (name === 'apps') loadMarketplaceApps();
-  if (name === 'learning') { populateExamSubjectFilters(); loadLearningQuestions(); }
+  if (name === 'learning') { populateExamSubjectFilters(); }
   if (name === 'books') loadBooksList();
   refreshContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -603,7 +608,6 @@ window.refreshContent = async () => {
   renderCards(el('homeNews'), news, 'news');
   renderCards(el('allNews'), news, 'news');
   renderCards(el('allJobs'), jobs, 'jobs');
-  loadLearningQuestions();
   loadBooksList();
   loadMarketplaceApps();
 };
@@ -693,44 +697,102 @@ async function populateExamSubjectFilters() {
   const exams = [...new Set(qs.map(q => q.examName).filter(Boolean))];
   const subjects = [...new Set(qs.map(q => q.subjectName).filter(Boolean))];
 
-  examSelect.innerHTML = '<option value="">सभी परीक्षाएं</option>' + exams.map(e => `<option value="${e}">${e}</option>`).join('');
-  subjSelect.innerHTML = '<option value="">सभी विषय</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+  examSelect.innerHTML = '<option value="">-- परीक्षा चुनें --</option>' + exams.map(e => `<option value="${e}">${e}</option>`).join('');
+  subjSelect.innerHTML = '<option value="">-- विषय चुनें --</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
 }
 
+// Learning Section: Only load questions when both Exam & Subject are selected by user
 window.loadLearningQuestions = async () => {
+  // Clear any existing timers first
+  activeQuestionTimers.forEach(t => clearInterval(t));
+  activeQuestionTimers = [];
+
   const target = el('learningQuestionsList');
   if(!target) return;
-  let qs = await getDBAsync('questions');
-  
+
   const selectedExam = el('filterExam') ? el('filterExam').value : '';
   const selectedSubj = el('filterSubject') ? el('filterSubject').value : '';
 
-  if(selectedExam) qs = qs.filter(q => q.examName === selectedExam);
-  if(selectedSubj) qs = qs.filter(q => q.subjectName === selectedSubj);
+  // Requirement: Do NOT show questions until exam and subject are chosen
+  if(!selectedExam || !selectedSubj) {
+    target.innerHTML = '<div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से ' + (!selectedExam ? 'परीक्षा' : 'विषय') + ' चुनें, तभी प्रश्न दिखाई देंगे।</div>';
+    return;
+  }
 
-  if(!qs.length) { target.innerHTML = '<div class="empty">इस परीक्षा/विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; return; }
+  let qs = await getDBAsync('questions');
+  qs = qs.filter(q => q.examName === selectedExam && q.subjectName === selectedSubj);
+
+  if(!qs.length) { 
+    target.innerHTML = '<div class="empty">चयनित परीक्षा और विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; 
+    return; 
+  }
+
   target.innerHTML = qs.map((q, idx) => `
-    <div class="card">
-      <div style="display:flex; gap:6px; margin-bottom:6px;">
-        <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
-        <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
+    <div class="card" id="qCard_${idx}">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <div style="display:flex; gap:6px;">
+          <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
+          <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
+        </div>
+        <span class="tag" style="background:#4b1c35; color:#ffc1d3;" id="timer_${idx}">⏳ 45s</span>
       </div>
       <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
       ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
       <p>${escapeHtml(q.description)}</p>
       
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
-        ${(q.options || []).map((opt, i) => `<button class="ghost small" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
+        ${(q.options || []).map((opt, i) => `<button class="ghost small optBtn_${idx}" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}', ${idx})"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
       </div>
-      <p class="quizAnsResult" style="margin-top:8px; font-weight:700;"></p>
+      <p class="quizAnsResult" id="result_${idx}" style="margin-top:8px; font-weight:700;"></p>
     </div>
   `).join('');
+
+  // Start 45-second timer for each rendered question card
+  qs.forEach((q, idx) => {
+    startQuestionTimer(idx, q.correct);
+  });
 };
 
-window.checkUserAnswer = (btn, chosen, correct) => {
+function startQuestionTimer(idx, correctAns) {
+  let timeLeft = 45;
+  const timerEl = el(`timer_${idx}`);
+  const cardEl = el(`qCard_${idx}`);
+  
+  if(!timerEl || !cardEl) return;
+
+  const timerInterval = setInterval(() => {
+    timeLeft--;
+    if(timerEl) timerEl.textContent = `⏳ ${timeLeft}s`;
+
+    if(timeLeft <= 0) {
+      clearInterval(timerInterval);
+      if(timerEl) timerEl.textContent = `⌛ समय समाप्त!`;
+      
+      // Lock options and show correct answer if time runs out
+      const buttons = cardEl.querySelectorAll(`.optBtn_${idx}`);
+      buttons.forEach(b => {
+        b.disabled = true;
+        if(b.innerText.trim().startsWith(correctAns + '.')) {
+          b.style.background = '#0d4b45';
+        }
+      });
+
+      const resultEl = el(`result_${idx}`);
+      if(resultEl && !resultEl.textContent) {
+        resultEl.textContent = `⏰ समय खत्म हो गया! सही उत्तर: ${correctAns}`;
+        resultEl.style.color = 'var(--orange)';
+      }
+    }
+  }, 1000);
+
+  activeQuestionTimers.push(timerInterval);
+}
+
+window.checkUserAnswer = (btn, chosen, correct, idx) => {
   const parent = btn.parentElement.parentElement;
   const resultEl = parent.querySelector('.quizAnsResult');
   parent.querySelectorAll('button').forEach(b => b.disabled = true);
+  
   if(chosen === correct) {
     resultEl.textContent = '🎉 सही उत्तर!';
     resultEl.style.color = 'var(--green)';
@@ -773,19 +835,8 @@ window.switchStudyFolderTab = async tab => {
       </div>
     `).join('')}</div>`;
   } else if(tab === 'quiz') {
-    const qs = await getDBAsync('questions');
-    if(!qs.length) { target.innerHTML = '<div class="empty">कोई क्विज़ प्रश्न उपलब्ध नहीं है।</div>'; return; }
-    target.innerHTML = `<div class="grid2">${qs.map((q, idx) => `
-      <div class="card" style="background:#07102f;">
-        <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')} | ${escapeHtml(q.subjectName || 'Subject')}</span>
-        <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
-        <p>${escapeHtml(q.description)}</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
-          ${(q.options || []).map((opt, i) => `<button class="ghost small" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}')"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
-        </div>
-        <p class="quizAnsResult" style="margin-top:6px; font-weight:700;"></p>
-      </div>
-    `).join('')}</div>`;
+    // Switch user directly to the Learning section where filter dropdowns are present
+    showSection('learning');
   } else if(tab === 'ca') {
     const news = await getDBAsync('news');
     if(!news.length) { target.innerHTML = '<div class="empty">कोई लाइव करेंट अफेयर्स उपलब्ध नहीं है।</div>'; return; }
