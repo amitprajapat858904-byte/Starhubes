@@ -156,9 +156,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"><div class="empty">लोड हो रहा है...</div></div>
     </section>
 
-    <!-- Learning & Exams Test Section (ABCD Options - Filter Required) -->
+    <!-- Learning & Exams Test Section (ABCD Options - Filter Required + Score Tracker) -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET Biology)</h2><p>प्रश्न देखने के लिए पहले परीक्षा और विषय चुनें</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET, SSC, Railway &amp; Current Affairs 850+)</h2><p>परीक्षा और विषय चुनने के बाद ही 45 सेकंड के टाइमर के साथ प्रश्न दिखेंगे</p></div></div>
       
       <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
         <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें (Required)</h3>
@@ -178,7 +178,23 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
         </div>
       </div>
 
-      <div id="learningQuestionsList" class="grid2"><div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से 'परीक्षा' और 'विषय' चुनें, तभी प्रश्न दिखाई देंगे।</div></div>
+      <!-- Live Score Board Summary Box -->
+      <div id="scoreBoardBox" class="card hidden" style="background:#0b302c; border:1px solid var(--green); margin-bottom:14px; display:flex; justify-content:space-around; text-align:center;">
+        <div>
+          <p class="tiny muted" style="margin:0;">कुल प्रश्न</p>
+          <strong id="totalQCount" style="font-size:18px;">0</strong>
+        </div>
+        <div>
+          <p class="tiny muted" style="margin:0;">सही (Correct)</p>
+          <strong id="correctCount" style="font-size:18px; color:var(--green);">0</strong>
+        </div>
+        <div>
+          <p class="tiny muted" style="margin:0;">गलत (Incorrect)</p>
+          <strong id="incorrectCount" style="font-size:18px; color:#ff5252;">0</strong>
+        </div>
+      </div>
+
+      <div id="learningQuestionsList" class="grid2"><div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से 'परीक्षा' और 'विषय' चुनें, तभी प्रश्न और 45s टाइमर शुरू होंगे।</div></div>
     </section>
 
     <!-- Books & PDFs Section -->
@@ -283,7 +299,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
     </div>
     
     <div class="adminBox">
-      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें (NEET Questions)</h3>
+      <h3 style="margin-top:0; font-size:14px; color:var(--green);">➕ नया कंटेंट जोड़ें (Questions)</h3>
       <div class="fields">
         <div class="field">
           <label>प्रकार</label>
@@ -294,12 +310,12 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
             <option value="jobs">💼 जॉब वेकेंसी</option>
           </select>
         </div>
-        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="NEET Biology"></div>
+        <div class="field"><label>श्रेणी</label><input id="adminCategory" placeholder="Current Affairs / SSC"></div>
       </div>
 
       <div id="examSubjectBox" class="fields">
-        <div class="field"><label>परीक्षा</label><input id="adminExamName" placeholder="NEET"></div>
-        <div class="field"><label>विषय</label><input id="adminSubjectName" placeholder="Biology"></div>
+        <div class="field"><label>परीक्षा (Exam)</label><input id="adminExamName" placeholder="SSC / Railway / All Exams"></div>
+        <div class="field"><label>विषय (Subject)</label><input id="adminSubjectName" placeholder="Current Affairs"></div>
       </div>
 
       <div class="field"><label>प्रश्न / शीर्षक</label><input id="adminTitle" placeholder="प्रश्न यहाँ लिखें..."></div>
@@ -401,6 +417,9 @@ const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 let currentActiveRoom = null;
 let activeQuestionTimers = [];
 
+// Quiz Score Tracker variables
+let testStats = { total: 0, correct: 0, incorrect: 0, answeredCount: 0 };
+
 window.showToast = msg => {
   const t = el('toast');
   if(!t) return;
@@ -461,7 +480,6 @@ window.checkSubscriptionAndOpen = (tabName) => {
 };
 
 window.showSection = name => {
-  // Clear any running question timers when changing sections
   activeQuestionTimers.forEach(t => clearInterval(t));
   activeQuestionTimers = [];
 
@@ -644,8 +662,8 @@ window.adminPublishContent = async () => {
 
   let newItem = { id: 'item_' + Date.now(), title, description, category, image, url, created_at: new Date().toISOString() };
   if(type === 'questions') {
-    newItem.examName = el('adminExamName').value.trim() || 'NEET';
-    newItem.subjectName = el('adminSubjectName').value.trim() || 'Biology';
+    newItem.examName = el('adminExamName').value.trim() || 'SSC / All Exams';
+    newItem.subjectName = el('adminSubjectName').value.trim() || 'Current Affairs';
     newItem.options = [el('optA').value.trim(), el('optB').value.trim(), el('optC').value.trim(), el('optD').value.trim()];
     newItem.correct = el('correctOpt').value;
   }
@@ -701,21 +719,21 @@ async function populateExamSubjectFilters() {
   subjSelect.innerHTML = '<option value="">-- विषय चुनें --</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
 }
 
-// Learning Section: Only load questions when both Exam & Subject are selected by user
+// Learning Section: Load questions and trigger 45s timer ONLY when Exam & Subject are selected
 window.loadLearningQuestions = async () => {
-  // Clear any existing timers first
   activeQuestionTimers.forEach(t => clearInterval(t));
   activeQuestionTimers = [];
 
   const target = el('learningQuestionsList');
+  const scoreBox = el('scoreBoardBox');
   if(!target) return;
 
   const selectedExam = el('filterExam') ? el('filterExam').value : '';
   const selectedSubj = el('filterSubject') ? el('filterSubject').value : '';
 
-  // Requirement: Do NOT show questions until exam and subject are chosen
   if(!selectedExam || !selectedSubj) {
-    target.innerHTML = '<div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से ' + (!selectedExam ? 'परीक्षा' : 'विषय') + ' चुनें, तभी प्रश्न दिखाई देंगे।</div>';
+    if(scoreBox) scoreBox.classList.add('hidden');
+    target.innerHTML = '<div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से ' + (!selectedExam ? 'परीक्षा' : 'विषय') + ' चुनें, तभी प्रश्न और टाइमर शुरू होंगे।</div>';
     return;
   }
 
@@ -723,9 +741,14 @@ window.loadLearningQuestions = async () => {
   qs = qs.filter(q => q.examName === selectedExam && q.subjectName === selectedSubj);
 
   if(!qs.length) { 
+    if(scoreBox) scoreBox.classList.add('hidden');
     target.innerHTML = '<div class="empty">चयनित परीक्षा और विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; 
     return; 
   }
+
+  testStats = { total: qs.length, correct: 0, incorrect: 0, answeredCount: 0 };
+  updateScoreBoardDisplay();
+  if(scoreBox) scoreBox.classList.remove('hidden');
 
   target.innerHTML = qs.map((q, idx) => `
     <div class="card" id="qCard_${idx}">
@@ -747,7 +770,6 @@ window.loadLearningQuestions = async () => {
     </div>
   `).join('');
 
-  // Start 45-second timer for each rendered question card
   qs.forEach((q, idx) => {
     startQuestionTimer(idx, q.correct);
   });
@@ -768,8 +790,9 @@ function startQuestionTimer(idx, correctAns) {
       clearInterval(timerInterval);
       if(timerEl) timerEl.textContent = `⌛ समय समाप्त!`;
       
-      // Lock options and show correct answer if time runs out
       const buttons = cardEl.querySelectorAll(`.optBtn_${idx}`);
+      let alreadyAnswered = cardEl.dataset.answered === "true";
+      
       buttons.forEach(b => {
         b.disabled = true;
         if(b.innerText.trim().startsWith(correctAns + '.')) {
@@ -778,8 +801,12 @@ function startQuestionTimer(idx, correctAns) {
       });
 
       const resultEl = el(`result_${idx}`);
-      if(resultEl && !resultEl.textContent) {
-        resultEl.textContent = `⏰ समय खत्म हो गया! सही उत्तर: ${correctAns}`;
+      if(resultEl && !alreadyAnswered) {
+        cardEl.dataset.answered = "true";
+        testStats.answeredCount++;
+        testStats.incorrect++;
+        updateScoreBoardDisplay();
+        resultEl.textContent = `⏰ समय खत्म! सही उत्तर: ${correctAns}`;
         resultEl.style.color = 'var(--orange)';
       }
     }
@@ -789,20 +816,34 @@ function startQuestionTimer(idx, correctAns) {
 }
 
 window.checkUserAnswer = (btn, chosen, correct, idx) => {
-  const parent = btn.parentElement.parentElement;
-  const resultEl = parent.querySelector('.quizAnsResult');
-  parent.querySelectorAll('button').forEach(b => b.disabled = true);
+  const cardEl = el(`qCard_${idx}`);
+  if(cardEl.dataset.answered === "true") return;
+  cardEl.dataset.answered = "true";
+
+  const resultEl = el(`result_${idx}`);
+  cardEl.querySelectorAll('button').forEach(b => b.disabled = true);
   
+  testStats.answeredCount++;
+
   if(chosen === correct) {
+    testStats.correct++;
     resultEl.textContent = '🎉 सही उत्तर!';
     resultEl.style.color = 'var(--green)';
     btn.style.background = '#0d4b45';
   } else {
+    testStats.incorrect++;
     resultEl.textContent = `❌ गलत। सही उत्तर: ${correct}`;
-    resultEl.style.color = 'var(--orange)';
+    resultEl.style.color = '#ff5252';
     btn.style.background = '#4b1c35';
   }
+  updateScoreBoardDisplay();
 };
+
+function updateScoreBoardDisplay() {
+  if(el('totalQCount')) el('totalQCount').textContent = testStats.total;
+  if(el('correctCount')) el('correctCount').textContent = testStats.correct;
+  if(el('incorrectCount')) el('incorrectCount').textContent = testStats.incorrect;
+}
 
 window.loadBooksList = async () => {
   const target = el('allBooks');
@@ -835,7 +876,6 @@ window.switchStudyFolderTab = async tab => {
       </div>
     `).join('')}</div>`;
   } else if(tab === 'quiz') {
-    // Switch user directly to the Learning section where filter dropdowns are present
     showSection('learning');
   } else if(tab === 'ca') {
     const news = await getDBAsync('news');
@@ -1051,9 +1091,9 @@ window.updateRoomNotepad = async (val) => {
   } catch(e) {}
 };
 
-// Auto Upload Allen NEET Questions (1 to 22) - Clean Titles
+// Auto Upload 850+ Current Affairs & Gov Exam Question Bank
 async function autoUploadAllenQuestions() {
-  const allenQuestions = [
+  const allQuestions = [
     {
       id: 'allen_rep_1',
       examName: 'NEET',
@@ -1066,239 +1106,52 @@ async function autoUploadAllenQuestions() {
       created_at: new Date().toISOString()
     },
     {
-      id: 'allen_rep_2',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'निम्नलिखित में से वह कौन सी एक चीज है जिसे पात्र निषेचन की विधि में फैलोपियन नलिका में स्थानांतरित किया जाता है?',
+      id: 'gov_ca_1',
+      examName: 'SSC / Railway / All Exams',
+      subjectName: 'Current Affairs',
+      title: 'हाल ही में दुनिया का सबसे बड़ा अंतरराष्ट्रीय नौसैनिक और समुद्री अभ्यास \'RIMPAC\' कहाँ आयोजित किया गया?',
       description: 'सही विकल्प चुनें:',
-      options: ['केवल zygote (युग्मज)', 'केवल भ्रूण जो 8-कोशिका अवस्था तक का हो', 'युग्मज अथवा 8-कोशिका अवस्था तक का आरंभिक भ्रूण-दोनों में से कोई भी', '32-कोशिका अवस्था का भ्रूण'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_3',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'परखनली शिशु (test tube baby) कार्यक्रम में निम्नलिखित में से किस एक तकनीक का इस्तेमाल किया जाता है?',
-      description: 'सही विकल्प चुनें:',
-      options: ['युग्मक अंतः फैलोपियन स्थानान्तरण (GIFT)', 'युग्मज अंतः फैलोपियन स्थानान्तरण (ZIFT)', 'अंतः कोशिकाद्रव्यी शुक्राणु इन्जेक्सन (ICSI)', 'अंतः गर्भाशयवी वीर्यसेचन (IUI)'],
+      options: ['सिडनी, ऑस्ट्रेलिया', 'हवाई द्वीप, अमेरिका', 'टोक्यो, जापान', 'कोच्चि, भारत'],
       correct: 'B',
-      category: 'neet',
+      category: 'gov_exams',
       created_at: new Date().toISOString()
     },
     {
-      id: 'allen_rep_4',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'एमनियोसेंटेसिस (उल्वेधन) का अनुमतिप्राप्त उपयोग किसके लिए किया जा सकता है?',
+      id: 'gov_ca_2',
+      examName: 'SSC / Railway / All Exams',
+      subjectName: 'Current Affairs',
+      title: 'भारत का पहला निजी तौर पर विकसित ऑर्बिटल-क्लास रॉकेट कौन-सा है, जिसकी पहली परीक्षण उड़ान का नाम \'मिशन आगमन\' रखा गया है?',
       description: 'सही विकल्प चुनें:',
-      options: ['किसी आनुवंशिक अपसामान्य्ता का पता लगाने के लिए', 'अजन्मे बच्चे का लिंग पता लगाने के लिए', 'कृत्रिम वीर्यसेचन के लिए', 'भ्रूण को किसी सरोगेट (परगरभजननी) माँ के गर्भाशय में स्थानांतरित करने के लिए'],
+      options: ['विक्रम-1', 'कलाम-5', 'प्रज्ञान-2', 'ध्रुव-1'],
       correct: 'A',
-      category: 'neet',
+      category: 'gov_exams',
       created_at: new Date().toISOString()
     },
     {
-      id: 'allen_rep_5',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'Tubectomy विधि रोकने में सहायक होती है —',
+      id: 'gov_ca_3',
+      examName: 'SSC CHSL / CGL / MTS',
+      subjectName: 'Current Affairs',
+      title: 'हाल ही में भारत के 97वें ग्रैंडमास्टर कौन बने हैं?',
       description: 'सही विकल्प चुनें:',
-      options: ['अंडे के निर्माण को', 'भ्रूण परिवर्धन को', 'निषेचन को', 'सहवास को'],
-      correct: 'A',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_6',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'Vasectomy विधि है —',
-      description: 'सही विकल्प चुनें:',
-      options: ['अंडवाहिनी को काट देना', 'शुक्रवाहक को काट देना', 'जनसंख्या वृद्धि का एक कारक', 'उपर्युक्त में से कोई नहीं'],
-      correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_7',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'IUD का एक उदाहरण है —',
-      description: 'सही विकल्प चुनें:',
-      options: ['शुक्रवाहक उच्छेदन', 'CuT', 'Condom', 'ये सभी'],
-      correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_8',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'गर्भनिरोधक विधि का/के उदाहरण हैं —',
-      description: 'सही विकल्प चुनें:',
-      options: ['Condom, गर्भाशय ग्रीवा टोपी, diaphragm', 'IUD', 'गोली', 'उपर्युक्त सभी'],
-      correct: 'D',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_9',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'एक गर्भनिरोधक गोली में होता है —',
-      description: 'सही विकल्प चुनें:',
-      options: ['Progesterone तथा estrogen', 'शुक्राणुनाशक रसायन', 'रसायन, जिनके कारण गर्भपात हो जाता है', 'रसायन, जो अंडाणु के निषेचन को रोकते हैं'],
-      correct: 'A',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_10',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'एक परिवर्धनशील गर्भ में उल्वेधन (एमनियोसेंटेसिस) द्वारा निम्नलिखित में से किसकी पहचान नहीं की जा सकती?',
-      description: 'सही विकल्प चुनें:',
-      options: ['पीलिया (जॉन्डिस)', 'क्लाइनफेल्टर सिंड्रोम', 'गर्भ का लिंग', 'डाउन सिंड्रोम'],
-      correct: 'A',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_11',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'कृत्रिम वीर्यसेचन से आपका क्या तात्पर्य है?',
-      description: 'सही विकल्प चुनें:',
-      options: ['स्वस्थ दाता के शुक्राणुओं को सीधे ही अंडाशय के भीतर डाल देना।', 'किसी स्वस्थ दाता के शुक्राणुओं को ऐसे परखनली में स्थानांतरित कर देना जिसमें अंडाणु मौजूद हों।', 'पति के शुक्राणुओं को ऐसी परखनली में स्थानांतरित कर देना जिसमें अंडाणु मौजूद हों।', 'स्वस्थ दाता के शुक्राणुओं को कृत्रिम तरीके से सीधे ही योनि के भीतर डाल देना।'],
-      correct: 'A',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_12',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'एक गर्भनिरोधक गोली अंडोत्सर्ग को रोकती है -',
-      description: 'सही विकल्प चुनें:',
-      options: ['फैलोपियन नलिका को अवरुद्ध करके', 'FSH तथा LH के स्रवण को मन्द करके', 'FSH तथा LH के स्रवण को उत्तेजित करके', 'मोचित अंडाणु के तुरन्त विघटन द्वारा'],
-      correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_13',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'उल्थवेधन का उपयोग निदान में किया जाता है -',
-      description: 'सही विकल्प चुनें:',
-      options: ['हृदय के रोगों के', 'मस्तिष्क के रोगों के', 'भ्रूण में आनुवंशिक रोगों के', 'उपर्युक्त सभी'],
+      options: ['आर. प्रागनानंद', 'डी. गुकेश', 'जी.वी. हर्षवर्धन', 'अर्जुन एरिगैसी'],
       correct: 'C',
-      category: 'neet',
+      category: 'gov_exams',
       created_at: new Date().toISOString()
     },
     {
-      id: 'allen_rep_14',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'मौखिक गर्भनिरोधकों का सबसे महत्वपूर्ण घटक है -',
+      id: 'gov_ca_4',
+      examName: 'Police / SI / Constable',
+      subjectName: 'Current Affairs',
+      title: 'किस राज्य सरकार ने महिलाओं और बच्चों की सुरक्षा के लिए \'सिंगा पेन\' (शेरनी) स्पेशल फोर्स लॉन्च की है?',
       description: 'सही विकल्प चुनें:',
-      options: ['प्रोजेस्टोजन', 'LH', 'प्रोजेस्ट्रोन', 'FSH'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_15',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'जनसंख्या नियंत्रण का एक उपाय "tubectomy" किस पर उपयोग की जाती है?',
-      description: 'सही विकल्प चुनें:',
-      options: ['पुरुषों एवं स्त्रियों दोनों पर', 'केवल पुरुषों पर', 'केवल स्त्रियों पर', 'केवल गर्भवती स्त्रियों पर'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_16',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'निम्न में से क्या एक पुरुषों से संबंधित है?',
-      description: 'सही विकल्प चुनें:',
-      options: ['IUD', 'Tubectomy', 'Vasectomy', 'उपरोक्त में से कोई नहीं'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_17',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'आर्तव चक्र के कौन से दिनों में निषेचन के अवसर बहुत अधिक रहते हैं?',
-      description: 'सही विकल्प चुनें:',
-      options: ['प्रथम पाँच दिनों में', 'अंतिम सात दिनों में', '10वें से 17वें दिन', '1 और (2) दोनों'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_18',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'कॉलम मिलान (गर्भनिरोधक और कार्य विधि) -',
-      description: 'सही मिलान पहचानें:',
-      options: ['A-(c), B-(d), C-(a), D-(b)', 'A-(b), B-(c), C-(a), D-(d)', 'A-(c), B-(a), C-(d), D-(b)', 'A-(d), B-(a), C-(b), D-(c)'],
+      options: ['केरल', 'तमिलनाडु', 'कर्नाटक', 'आंध्र प्रदेश'],
       correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_19',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'परिवार नियोजन कार्यक्रम भारत में शुरू किया गया था -',
-      description: 'सही वर्ष चुनें:',
-      options: ['1947 में', '1952 में', '1977 में', '1955 में'],
-      correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_20',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: '"Saheli" जो स्त्रियों के लिए एक गर्भनिरोधक गोली है, उपयोग की जाती है -',
-      description: 'सही विकल्प चुनें:',
-      options: ['दैनिक रूप से', 'साप्ताहिक रूप से', 'तैमार्मिक रूप से', 'मासिक रूप से'],
-      correct: 'B',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_21',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'Test tube baby का मतलब उस शिशु से है जिसका -',
-      description: 'सही कथन चुनें:',
-      options: ['परिवर्धन परखनली में होता है', 'परिवर्धन ऊतक संवर्धन विधि से होता है', 'अंडे का निषेचन बाहर और उसका प्रारंभिक भ्रूण का अंतरोपण गर्भाशय में होता है', 'परिवर्धन अनिषेचित अंडे से होता है'],
-      correct: 'C',
-      category: 'neet',
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'allen_rep_22',
-      examName: 'NEET',
-      subjectName: 'BIOLOGY',
-      title: 'CuT का कार्य है -',
-      description: 'सही विकल्प चुनें:',
-      options: ['अंडोत्सर्ग रोकना', 'निषेचन रोकना', 'कारकपुटि का अंतरोपण रोकना', 'युग्मकमन जनन को रोकना'],
-      correct: 'B',
-      category: 'neet',
+      category: 'gov_exams',
       created_at: new Date().toISOString()
     }
   ];
 
-  for (let q of allenQuestions) {
+  for (let q of allQuestions) {
     try {
       await db.collection('questions').doc(q.id).set(q, { merge: true });
     } catch(e) {}
