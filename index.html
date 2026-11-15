@@ -156,22 +156,22 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
       <div id="studyRoomsList" class="grid2" style="margin-bottom:16px;"><div class="empty">लोड हो रहा है...</div></div>
     </section>
 
-    <!-- Learning & Exams Test Section (ABCD Options - Filter Required + Score Tracker + Active Timer) -->
+    <!-- Learning & Exams Test Section (ABCD Options - Filter Required + Score Tracker + Sequential Timers) -->
     <section id="section-learning" class="hidden">
-      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests (NEET, SSC, Railway &amp; Current Affairs 850+)</h2><p>परीक्षा और विषय चुनने के बाद ही प्रत्येक प्रश्न के लिए अलग 45 सेकंड टाइमर के साथ प्रश्न दिखेंगे</p></div></div>
+      <div class="sectionHead"><div><h2>🎓 Learning &amp; Exams Tests</h2><p>एक बार में केवल एक प्रश्न का टाइमर चालू होगा। एक प्रश्न हल करने के बाद स्वतः अगले प्रश्न पर जा सकते हैं।</p></div></div>
       
       <div class="card" style="margin-bottom:14px; background:#0c1947; border:1px solid #2e458c;">
         <h3 style="margin-top:0; font-size:14px; color:var(--orange);">🔍 परीक्षा और विषय चुनें (Required)</h3>
         <div class="fields">
           <div class="field">
             <label>परीक्षा (Exam)</label>
-            <select id="filterExam" onchange="loadLearningQuestions()">
+            <select id="filterExam" onchange="startQuizSession()">
               <option value="">-- परीक्षा चुनें --</option>
             </select>
           </div>
           <div class="field">
             <label>विषय (Subject)</label>
-            <select id="filterSubject" onchange="loadLearningQuestions()">
+            <select id="filterSubject" onchange="startQuizSession()">
               <option value="">-- विषय चुनें --</option>
             </select>
           </div>
@@ -194,7 +194,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
         </div>
       </div>
 
-      <div id="learningQuestionsList" class="grid2"><div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से 'परीक्षा' और 'विषय' चुनें, तभी प्रश्न और 45s टाइमर शुरू होंगे।</div></div>
+      <!-- Sequential Single Question Container -->
+      <div id="quizQuestionBox" class="card hidden"></div>
+      
+      <div id="learningQuestionsList"><div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से 'परीक्षा' और 'विषय' चुनें, तभी क्विज़ और टाइमर शुरू होंगे।</div></div>
     </section>
 
     <!-- Books & PDFs Section -->
@@ -415,10 +418,12 @@ const el = id => document.getElementById(id);
 let currentUser = JSON.parse(localStorage.getItem('starhubes_user') || 'null');
 const MASTER_ADMIN_EMAIL = "amitprajapat858904@gmail.com";
 let currentActiveRoom = null;
-let activeQuestionTimers = [];
 
-// Quiz Score Tracker variables
-let testStats = { total: 0, correct: 0, incorrect: 0, answeredCount: 0 };
+// Sequential Quiz State Variables
+let activeQuizQuestions = [];
+let currentQuizIndex = 0;
+let currentQuestionTimer = null;
+let quizStats = { total: 0, correct: 0, incorrect: 0 };
 
 window.showToast = msg => {
   const t = el('toast');
@@ -480,8 +485,7 @@ window.checkSubscriptionAndOpen = (tabName) => {
 };
 
 window.showSection = name => {
-  activeQuestionTimers.forEach(t => clearInterval(t));
-  activeQuestionTimers = [];
+  if(currentQuestionTimer) clearInterval(currentQuestionTimer);
 
   document.querySelectorAll("main section[id^='section-']").forEach(s => s.classList.add('hidden'));
   const target = el('section-' + name);
@@ -719,142 +723,169 @@ async function populateExamSubjectFilters() {
   subjSelect.innerHTML = '<option value="">-- विषय चुनें --</option>' + subjects.map(s => `<option value="${s}">${s}</option>`).join('');
 }
 
-// Learning Section: Load questions and trigger 45s timer ONLY when Exam & Subject are selected
-window.loadLearningQuestions = async () => {
-  activeQuestionTimers.forEach(t => clearInterval(t));
-  activeQuestionTimers = [];
+// ==========================================
+// SEQUENTIAL QUIZ ENGINE (एक-एक करके प्रश्न और टाइमर)
+// ==========================================
+window.startQuizSession = async () => {
+  if(currentQuestionTimer) clearInterval(currentQuestionTimer);
 
-  const target = el('learningQuestionsList');
+  const targetList = el('learningQuestionsList');
   const scoreBox = el('scoreBoardBox');
-  if(!target) return;
+  const qBox = el('quizQuestionBox');
+  if(!targetList) return;
 
   const selectedExam = el('filterExam') ? el('filterExam').value : '';
   const selectedSubj = el('filterSubject') ? el('filterSubject').value : '';
 
   if(!selectedExam || !selectedSubj) {
     if(scoreBox) scoreBox.classList.add('hidden');
-    target.innerHTML = '<div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से ' + (!selectedExam ? 'परीक्षा' : 'विषय') + ' चुनें, तभी प्रश्न और टाइमर शुरू होंगे।</div>';
+    if(qBox) qBox.classList.add('hidden');
+    targetList.innerHTML = '<div class="empty">कृपया ऊपर दिए गए ड्रॉपडाउन से ' + (!selectedExam ? 'परीक्षा' : 'विषय') + ' चुनें, तभी क्विज़ शुरू होगी।</div>';
     return;
   }
 
   let qs = await getDBAsync('questions');
-  qs = qs.filter(q => q.examName === selectedExam && q.subjectName === selectedSubj);
+  activeQuizQuestions = qs.filter(q => q.examName === selectedExam && q.subjectName === selectedSubj);
 
-  if(!qs.length) { 
+  if(!activeQuizQuestions.length) { 
     if(scoreBox) scoreBox.classList.add('hidden');
-    target.innerHTML = '<div class="empty">चयनित परीक्षा और विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; 
+    if(qBox) qBox.classList.add('hidden');
+    targetList.innerHTML = '<div class="empty">चयनित परीक्षा और विषय के लिए कोई प्रश्न उपलब्ध नहीं है।</div>'; 
     return; 
   }
 
-  testStats = { total: qs.length, correct: 0, incorrect: 0, answeredCount: 0 };
+  currentQuizIndex = 0;
+  quizStats = { total: activeQuizQuestions.length, correct: 0, incorrect: 0 };
   updateScoreBoardDisplay();
+
   if(scoreBox) scoreBox.classList.remove('hidden');
+  if(qBox) qBox.classList.remove('hidden');
+  targetList.innerHTML = '';
 
-  target.innerHTML = qs.map((q, idx) => `
-    <div class="card" id="qCard_${idx}">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <div style="display:flex; gap:6px;">
-          <span class="tag green">🎯 ${escapeHtml(q.examName || 'Exam')}</span>
-          <span class="tag orange">📖 ${escapeHtml(q.subjectName || 'Subject')}</span>
-        </div>
-        <span class="tag" style="background:#4b1c35; color:#ffc1d3;" id="timer_${idx}">⏳ 45s</span>
-      </div>
-      <h3 style="margin-top:6px;">प्र. ${idx+1}: ${escapeHtml(q.title)}</h3>
-      ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
-      <p>${escapeHtml(q.description)}</p>
-      
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
-        ${(q.options || []).map((opt, i) => `<button class="ghost small optBtn_${idx}" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="checkUserAnswer(this, '${String.fromCharCode(65+i)}', '${q.correct}', ${idx})"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
-      </div>
-      <p class="quizAnsResult" id="result_${idx}" style="margin-top:8px; font-weight:700;"></p>
-    </div>
-  `).join('');
-
-  qs.forEach((q, idx) => {
-    startQuestionTimer(idx, q.correct);
-  });
+  renderCurrentQuizQuestion();
 };
 
-function startQuestionTimer(idx, correctAns) {
-  let timeLeft = 45;
-  const timerEl = el(`timer_${idx}`);
-  const cardEl = el(`qCard_${idx}`);
+function renderCurrentQuizQuestion() {
+  if(currentQuestionTimer) clearInterval(currentQuestionTimer);
+
+  const qBox = el('quizQuestionBox');
+  if(!qBox) return;
+
+  if(currentQuizIndex >= activeQuizQuestions.length) {
+    qBox.innerHTML = `
+      <div style="text-align:center; padding:20px;">
+        <h3 style="color:var(--green); font-size:20px;">🎉 क्विज़ समाप्त हो गई!</h3>
+        <p>कुल प्रश्न: ${quizStats.total} | सही: ${quizStats.correct} | गलत: ${quizStats.incorrect}</p>
+        <button class="primary small" style="margin-top:10px;" onclick="startQuizSession()">पुनः प्रयास करें</button>
+      </div>
+    `;
+    return;
+  }
+
+  const q = activeQuizQuestions[currentQuizIndex];
   
-  if(!timerEl || !cardEl) return;
+  qBox.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <div style="display:flex; gap:6px;">
+        <span class="tag green">🎯 प्रश्न ${currentQuizIndex + 1} / ${activeQuizQuestions.length}</span>
+      </div>
+      <span class="tag" style="background:#4b1c35; color:#ffc1d3;" id="singleQuestionTimer">⏳ 45s</span>
+    </div>
+    <h3 style="margin-top:6px;">${escapeHtml(q.title)}</h3>
+    ${q.image ? `<img class="newsImg" src="${q.image}" alt="Img">` : ''}
+    <p>${escapeHtml(q.description)}</p>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;" id="optionsGrid">
+      ${(q.options || []).map((opt, i) => `<button class="ghost small" style="text-align:left; padding:8px 10px; border:1px solid #2b458c;" onclick="handleQuizAnswer('${String.fromCharCode(65+i)}', '${q.correct}', this)"><strong>${String.fromCharCode(65+i)}.</strong> ${escapeHtml(opt)}</button>`).join('')}
+    </div>
+    <p id="singleQuizResult" style="margin-top:10px; font-weight:700;"></p>
+    <div id="nextQuestionBtnBox" style="margin-top:12px; display:none;">
+      <button class="primary small" onclick="moveToNextQuizQuestion()">अगला प्रश्न →</button>
+    </div>
+  `;
 
-  const timerInterval = setInterval(() => {
-    if(cardEl.dataset.answered === "true") {
-      clearInterval(timerInterval);
-      return;
-    }
+  startSingleQuestionTimer(q.correct);
+}
 
+function startSingleQuestionTimer(correctOption) {
+  let timeLeft = 45;
+  const timerEl = el('singleQuestionTimer');
+  if(!timerEl) return;
+
+  currentQuestionTimer = setInterval(() => {
     timeLeft--;
     if(timerEl) timerEl.textContent = `⏳ ${timeLeft}s`;
 
     if(timeLeft <= 0) {
-      clearInterval(timerInterval);
+      clearInterval(currentQuestionTimer);
       if(timerEl) timerEl.textContent = `⌛ समय समाप्त!`;
       
-      const buttons = cardEl.querySelectorAll(`.optBtn_${idx}`);
-      let alreadyAnswered = cardEl.dataset.answered === "true";
-      
+      quizStats.incorrect++;
+      updateScoreBoardDisplay();
+
+      // Disable all option buttons and highlight correct answer
+      const buttons = document.querySelectorAll('#optionsGrid button');
       buttons.forEach(b => {
         b.disabled = true;
-        if(b.innerText.trim().startsWith(correctAns + '.')) {
+        if(b.innerText.trim().startsWith(correctOption + '.')) {
           b.style.background = '#0d4b45';
         }
       });
 
-      const resultEl = el(`result_${idx}`);
-      if(resultEl && !alreadyAnswered) {
-        cardEl.dataset.answered = "true";
-        testStats.answeredCount++;
-        testStats.incorrect++;
-        updateScoreBoardDisplay();
-        resultEl.textContent = `⏰ समय खत्म! सही उत्तर: ${correctAns}`;
-        resultEl.style.color = 'var(--orange)';
+      const resEl = el('singleQuizResult');
+      if(resEl) {
+        resEl.textContent = `⏰ समय खत्म! सही उत्तर था: ${correctOption}`;
+        resEl.style.color = 'var(--orange)';
       }
+      
+      if(el('nextQuestionBtnBox')) el('nextQuestionBtnBox').style.display = 'block';
     }
   }, 1000);
-
-  activeQuestionTimers.push(timerInterval);
 }
 
-window.checkUserAnswer = (btn, chosen, correct, idx) => {
-  const cardEl = el(`qCard_${idx}`);
-  if(cardEl.dataset.answered === "true") return;
-  cardEl.dataset.answered = "true";
+window.handleQuizAnswer = (chosen, correct, btn) => {
+  if(currentQuestionTimer) clearInterval(currentQuestionTimer);
 
-  const timerEl = el(`timer_${idx}`);
-  if(timerEl) {
-    timerEl.textContent = `✓ उत्तर दिया गया`;
-    timerEl.style.background = '#0d4b45';
-    timerEl.style.color = '#a2ffe0';
-  }
+  const buttons = document.querySelectorAll('#optionsGrid button');
+  buttons.forEach(b => b.disabled = true);
 
-  const resultEl = el(`result_${idx}`);
-  cardEl.querySelectorAll('button').forEach(b => b.disabled = true);
-  
-  testStats.answeredCount++;
+  const resEl = el('singleQuizResult');
 
   if(chosen === correct) {
-    testStats.correct++;
-    resultEl.textContent = '🎉 सही उत्तर!';
-    resultEl.style.color = 'var(--green)';
+    quizStats.correct++;
+    if(resEl) {
+      resEl.textContent = '🎉 सही उत्तर!';
+      resEl.style.color = 'var(--green)';
+    }
     btn.style.background = '#0d4b45';
   } else {
-    testStats.incorrect++;
-    resultEl.textContent = `❌ गलत। सही उत्तर: ${correct}`;
-    resultEl.style.color = '#ff5252';
+    quizStats.incorrect++;
+    if(resEl) {
+      resEl.textContent = `❌ गलत। सही उत्तर: ${correct}`;
+      resEl.style.color = '#ff5252';
+    }
     btn.style.background = '#4b1c35';
+    // Highlight correct button
+    buttons.forEach(b => {
+      if(b.innerText.trim().startsWith(correct + '.')) {
+        b.style.background = '#0d4b45';
+      }
+    });
   }
+
   updateScoreBoardDisplay();
+  if(el('nextQuestionBtnBox')) el('nextQuestionBtnBox').style.display = 'block';
+};
+
+window.moveToNextQuizQuestion = () => {
+  currentQuizIndex++;
+  renderCurrentQuizQuestion();
 };
 
 function updateScoreBoardDisplay() {
-  if(el('totalQCount')) el('totalQCount').textContent = testStats.total;
-  if(el('correctCount')) el('correctCount').textContent = testStats.correct;
-  if(el('incorrectCount')) el('incorrectCount').textContent = testStats.incorrect;
+  if(el('totalQCount')) el('totalQCount').textContent = quizStats.total;
+  if(el('correctCount')) el('correctCount').textContent = quizStats.correct;
+  if(el('incorrectCount')) el('incorrectCount').textContent = quizStats.incorrect;
 }
 
 window.loadBooksList = async () => {
@@ -1028,7 +1059,7 @@ window.loadStudyRooms = async () => {
 };
 
 window.promptJoinRoom = (roomId, roomName, roomSubject, roomPasscode) => {
-  if (!currentUser) { openAuth(); showToast('रूम जॉइन करने के लिए लॉगिन करें। समय समाप्त या अनधिकृत एक्सेस।'); return; }
+  if (!currentUser) { openAuth(); showToast('रूम जॉइन करने के लिए लॉगिन करें।'); return; }
   
   if (roomPasscode && roomPasscode.trim() !== '') {
     const enteredCode = prompt('यह रूम पासवर्ड सुरक्षित है। कृपया पासकोड दर्ज करें:');
