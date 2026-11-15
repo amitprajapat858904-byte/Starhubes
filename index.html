@@ -1140,9 +1140,7 @@ async function autoUploadAllenQuestions() {
       correct: 'A',
       category: 'gov_exams',
       created_at: new Date().toISOString()
-    },// StarHubes: Uploading Questions 1 to 85 from Current Affairs PDF
-async function uploadFirst85CurrentAffairs() {
-  const questions1to85 = [
+    }
     {
       id: 'ca_85_1',
       examName: 'SSC / Railway / All Exams',
@@ -3444,21 +3442,7 @@ async function uploadCurrentAffairs86to209() {
       correct: 'B',
       category: 'current_affairs',
       created_at: new Date().toISOString()
-    }
-  ];
-
-  console.log("Uploading Questions 86 to 209 to Firebase...");
-  for (let q of questions86to209) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question ID: " + q.id, err);
-    }
-  }
-  alert("प्रश्न 86 से 209 तक सफलतापर्वक [StarHubes](https://starhubes.pages.dev/) डेटाबेस में अपलोड हो गए हैं!");
-} // StarHubes: Uploading Questions 210 to 367 from Current Affairs PDF Part 3
-async function uploadCurrentAffairs210to367() {
-  const questions210to367 = [
+  }'
     {
       id: 'ca_q_210',
       examName: 'SSC / Railway / All Exams',
@@ -5197,20 +5181,6 @@ async function uploadCurrentAffairs210to367() {
       category: 'current_affairs',
       created_at: new Date().toISOString()
     }
-  ];
-
-  console.log("Uploading Questions 210 to 367 to Firebase...");
-  for (let q of questions210to367) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question ID: " + q.id, err);
-    }
-  }
-  alert("प्रश्न 210 से 367 तक सफलतापर्वक [StarHubes](https://starhubes.pages.dev/) डेटाबेस में अपलोड हो गए हैं!");
-}// StarHubes: Uploading Questions 368 to 534 from Current Affairs PDF Part 4
-async function uploadCurrentAffairs368to534() {
-  const questions368to534 = [
     {
       id: 'ca_q_368',
       examName: 'SSC / Railway / All Exams',
@@ -7048,20 +7018,6 @@ async function uploadCurrentAffairs368to534() {
       category: 'current_affairs',
       created_at: new Date().toISOString()
     }
-  ];
-
-  console.log("Uploading Questions 368 to 534 to Firebase...");
-  for (let q of questions368to534) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question ID: " + q.id, err);
-    }
-  }
-  alert("प्रश्न 368 से 534 तक सफलतापर्वक [StarHubes](https://starhubes.pages.dev/) डेटाबेस में अपलोड हो गए हैं!");
-}// StarHubes: Uploading Questions 535 to 697 from Current Affairs PDF Part 5
-async function uploadCurrentAffairs535to697() {
-  const questions535to697 = [
     {
       id: 'ca_q_535',
       examName: 'SSC / Railway / All Exams',
@@ -8854,9 +8810,7 @@ async function uploadCurrentAffairs535to697() {
       correct: 'A',
       category: 'current_affairs',
       created_at: new Date().toISOString()
-    }// StarHubes: Uploading Questions 698 to 850 from Current Affairs PDF Part 6
-async function uploadCurrentAffairs698to850() {
-  const questions698to850 = [
+    }
     {
       id: 'ca_q_698',
       examName: 'SSC / Railway / All Exams',
@@ -10540,41 +10494,6 @@ async function uploadCurrentAffairs698to850() {
       category: 'current_affairs',
       created_at: new Date().toISOString()
     }
-  ];
-
-  console.log("Uploading Questions 698 to 850 to Firebase...");
-  for (let q of questions698to850) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question ID: " + q.id, err);
-    }
-  }
-  alert("प्रश्न 698 से 850 तक सफलतापूर्वक [StarHubes](https://starhubes.pages.dev/) डेटाबेस में अपलोड हो गए हैं!");
-}
-  ];
-
-  console.log("Uploading Questions 535 to 697 to Firebase...");
-  for (let q of questions535to697) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question ID: " + q.id, err);
-    }
-  }
-  alert("प्रश्न 535 से 697 तक सफलतापूर्वक [StarHubes](https://starhubes.pages.dev/) डेटाबेस में अपलोड हो गए हैं!");
-} ];
-
-  console.log("Uploading 85 Current Affairs Questions to Firebase...");
-  for (let q of questions1to85) {
-    try {
-      await db.collection('questions').doc(q.id).set(q, { merge: true });
-    } catch (err) {
-      console.error("Error uploading question: " + q.id, err);
-    }
-  }
-  alert("सफलतापूर्वक सभी 85 करंट अफेयर्स प्रश्न डेटाबेस में अपलोड हो गए हैं!");
-}
     {
       id: 'gov_ca_3',
       examName: 'SSC CHSL / CGL / MTS',
