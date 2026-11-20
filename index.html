@@ -136,6 +136,22 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
           <button class="secondary small" onclick="switchStudyFolderTab('ca')">⚡ करेंट अफेयर्स</button>
         </div>
 
+        <!-- Subject: Physics — Vectors (DPP 02) -->
+        <div class="card" style="background:#07102f; border-left:4px solid var(--brand); margin-bottom:12px;">
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span class="tag">Subject: Physics</span>
+            <span class="tag green">NEET Physics</span>
+            <span class="tag orange">Class 11 Science</span>
+          </div>
+          <h3>सदिश (Vectors — DPP 02)</h3>
+          <p class="tiny muted" style="margin-top:4px;">29 संशोधित प्रश्न, नए सही उत्तर, विस्तृत हल और उत्तर कुंजी सहित।</p>
+          <div class="cardActions">
+            <a href="vector-dpp-02.html" target="_blank" rel="noopener noreferrer">
+              <button class="primary small">DPP 02 खोलें →</button>
+            </a>
+          </div>
+        </div>
+
         <div id="studyFolderContent" style="margin-top:10px;">
           <div class="empty">लोड हो रहा है...</div>
         </div>
@@ -203,6 +219,20 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,13,42,.95);backdrop-f
     <!-- Books & PDFs Section -->
     <section id="section-books" class="hidden">
       <div class="sectionHead"><div><h2>📚 Books &amp; PDFs</h2><p>ई-बुक्स और स्टडी मटेरियल</p></div></div>
+      <div class="card" style="border-left:4px solid var(--brand); margin-bottom:14px;">
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+          <span class="tag">Subject: Physics</span>
+          <span class="tag green">NEET Physics</span>
+          <span class="tag orange">Class 11 Science</span>
+        </div>
+        <h3>सदिश (Vectors — DPP 02)</h3>
+        <p class="tiny muted" style="margin-top:4px;">29 संशोधित प्रश्न, नए सही उत्तर, विस्तृत हल और उत्तर कुंजी सहित।</p>
+        <div class="cardActions">
+          <a href="vector-dpp-02.html" target="_blank" rel="noopener noreferrer">
+            <button class="primary small">DPP 02 खोलें →</button>
+          </a>
+        </div>
+      </div>
       <div id="allBooks" class="grid2"><div class="empty">लोड हो रहा है...</div></div>
     </section>
 
@@ -823,7 +853,6 @@ function startSingleQuestionTimer(correctOption) {
       quizStats.incorrect++;
       updateScoreBoardDisplay();
 
-      // Disable all option buttons and highlight correct answer
       const buttons = document.querySelectorAll('#optionsGrid button');
       buttons.forEach(b => {
         b.disabled = true;
@@ -865,7 +894,6 @@ window.handleQuizAnswer = (chosen, correct, btn) => {
       resEl.style.color = '#ff5252';
     }
     btn.style.background = '#4b1c35';
-    // Highlight correct button
     buttons.forEach(b => {
       if(b.innerText.trim().startsWith(correct + '.')) {
         b.style.background = '#0d4b45';
@@ -892,7 +920,7 @@ window.loadBooksList = async () => {
   const target = el('allBooks');
   if(!target) return;
   const books = await getDBAsync('books');
-  if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक उपलब्ध नहीं है।</div>'; return; }
+  if(!books.length) { target.innerHTML = '<div class="empty">कोई अतिरिक्त बुक उपलब्ध नहीं है।</div>'; return; }
   target.innerHTML = books.map(b => `
     <div class="card">
       <span class="tag green">${escapeHtml(b.category)}</span>
@@ -909,7 +937,7 @@ window.switchStudyFolderTab = async tab => {
   if(!target) return;
   if(tab === 'books') {
     const books = await getDBAsync('books');
-    if(!books.length) { target.innerHTML = '<div class="empty">कोई बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
+    if(!books.length) { target.innerHTML = '<div class="empty">कोई अतिरिक्त बुक/पीडीएफ उपलब्ध नहीं है।</div>'; return; }
     target.innerHTML = `<div class="grid2">${books.map(b => `
       <div class="card" style="background:#07102f;">
         <span class="tag green">${escapeHtml(b.category)}</span>
